@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrecisionCAD | Engineering & 3D Modeling Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1E40AF',
+                        secondary: '#1F2937',
+                        accent: '#3B82F6',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(30, 64, 175, 0.9) 0%, rgba(59, 130, 246, 0.8) 100%);
+        }
+        .portfolio-item {
+            transition: all 0.3s ease;
+        }
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #3B82F6;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover:after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-800">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="#" class="flex-shrink-0 flex items-center">
+                        <i class="fas fa-cube text-2xl text-primary mr-2"></i>
+                        <span class="text-xl font-bold text-secondary">Precision<span class="text-primary">CAD</span></span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="nav-link text-secondary px-3 py-2 text-sm font-medium">Home</a>
+                    <a href="#about" class="nav-link text-secondary px-3 py-2 text-sm font-medium">About</a>
+                    <a href="#services" class="nav-link text-secondary px-3 py-2 text-sm font-medium">Services</a>
+                    <a href="#portfolio" class="nav-link text-secondary px-3 py-2 text-sm font-medium">Portfolio</a>
+                    <a href="#contact" class="nav-link text-secondary px-3 py-2 text-sm font-medium">Contact</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-500 hover:text-gray-900 focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Home</a>
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">About</a>
+                <a href="#services" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Services</a>
+                <a href="#portfolio" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Portfolio</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+            <div class="md:flex items-center">
+                <div class="md:w-1/2 mb-12 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">3D Engineering & CAD Modeling Services</h1>
+                    <p class="text-xl mb-8 text-gray-100">Precision engineering solutions for product development, from concept to production-ready designs.</p>
+                    <div class="flex space-x-4">
+                        <a href="#contact" class="bg-white text-primary px-6 py-3 rounded-md font-semibold hover:bg-gray-100 transition duration-300">Get a Quote</a>
+                        <a href="#services" class="border-2 border-white text-white px-6 py-3 rounded-md font-semibold hover:bg-white hover:text-primary transition duration-300">Our Services</a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="3D Modeling" class="rounded-lg shadow-2xl max-w-full h-auto">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="bg-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-secondary mb-4">About Our Team</h2>
+                <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+                <p class="text-gray-600 max-w-3xl mx-auto">We are a team of passionate engineers and designers dedicated to transforming ideas into precise, manufacturable designs.</p>
+            </div>
+            <div class="md:flex md:space-x-8">
+                <div class="md:w-1/2 mb-8 md:mb-0">
+                    <h3 class="text-2xl font-semibold text-secondary mb-4">Our Expertise</h3>
+                    <p class="text-gray-600 mb-6">With over 15 years of combined experience in mechanical engineering and product design, our team specializes in creating detailed 3D models, technical drawings, and prototypes for a wide range of industries.</p>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <i class="fas fa-check-circle text-primary"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-gray-600">Expertise in SolidWorks, Autodesk Inventor, and Solid Edge</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <i class="fas fa-check-circle text-primary"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-gray-600">DFM (Design for Manufacturing) focused approach</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <i class="fas fa-check-circle text-primary"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-gray-600">Prototyping and production support services</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+                    <div class="bg-gray-50 p-8 rounded-lg shadow-sm">
+                        <h3 class="text-2xl font-semibold text-secondary mb-4">Why Choose Us</h3>
+                        <div class="space-y-6">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-primary text-white">
+                                        <i class="fas fa-bolt"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-medium text-secondary">Fast Turnaround</h4>
+                                    <p class="mt-2 text-gray-600">We deliver high-quality CAD models and drawings within tight deadlines.</p>
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-primary text-white">
+                                        <i class="fas fa-cogs"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-medium text-secondary">Technical Excellence</h4>
+                                    <p class="mt-2 text-gray-600">Our engineers stay updated with the latest CAD technologies and manufacturing techniques.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="bg-gray-50 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-secondary mb-4">Our Services</h2>
+                <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+                <p class="text-gray-600 max-w-3xl mx-auto">Comprehensive CAD and engineering solutions tailored to your product development needs.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-white p-8 rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                    <div class="flex items-center justify-center h-16 w-16 rounded-md bg-primary text-white mb-6">
+                        <i class="fas fa-cube text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-secondary mb-3">3D CAD Modeling</h3>
+                    <p class="text-gray-600">Precision 3D modeling services for parts and assemblies using industry-leading CAD software including SolidWorks, Inventor, and Solid Edge.</p>
+                </div>
+                <!-- Service 2 -->
+                <div class="bg-white p-8 rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                    <div class="flex items-center justify-center h-16 w-16 rounded-md bg-primary text-white mb-6">
+                        <i class="fas fa-pencil-ruler text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-secondary mb-3">Technical Drawing</h3>
+                    <p class="text-gray-600">Production-ready technical drawings with GD&T (Geometric Dimensioning and Tolerancing) following ASME Y14.5 standards.</p>
+                </div>
+                <!-- Service 3 -->
+                <div class="bg-white p-8 rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                    <div class="flex items-center justify-center h-16 w-16 rounded-md bg-primary text-white mb-6">
+                        <i class="fas fa-industry text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-secondary mb-3">Prototyping Support</h3>
+                    <p class="text-gray-600">Design optimization for various prototyping methods including 3D printing, CNC machining, and injection molding.</p>
+                </div>
+                <!-- Service 4 -->
+                <div class="bg-white p-8 rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                    <div class="flex items-center justify-center h-16 w-16 rounded-md bg-primary text-white mb-6">
+                        <i class="fas fa-project-diagram text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-secondary mb-3">Assembly Design</h3>
+                    <p class="text-gray-600">Complex assembly design with motion studies, interference checks, and BOM (Bill of Materials) generation.</p>
+                </div>
+                <!-- Service 5 -->
+                <div class="bg-white p-8 rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                    <div class="flex items-center justify-center h-16 w-16 rounded-md bg-primary text-white mb-6">
+                        <i class="fas fa-undo text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-secondary mb-3">Reverse Engineering</h3>
+                    <p class="text-gray-600">3D scanning and CAD recreation of existing parts with dimensional verification and material analysis.</p>
+                </div>
+                <!-- Service 6 -->
+                <div class="bg-white p-8 rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                    <div class="flex items-center justify-center h-16 w-16 rounded-md bg-primary text-white mb-6">
+                        <i class="fas fa-tools text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-secondary mb-3">Design Optimization</h3>
+                    <p class="text-gray-600">DFM (Design for Manufacturing) analysis to reduce production costs while maintaining product functionality.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="bg-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-secondary mb-4">Our Portfolio</h2>
+                <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+                <p class="text-gray-600 max-w-3xl mx-auto">Explore our recent projects showcasing our engineering and design capabilities.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="portfolio-item bg-white rounded-lg overflow-hidden shadow-md">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Industrial Gearbox" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-secondary mb-2">Industrial Gearbox</h3>
+                        <p class="text-gray-600 mb-4">Complete redesign of a heavy-duty gearbox with 20% weight reduction while maintaining torque capacity.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">SolidWorks</span>
+                            <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">FEA</span>
+                            <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">DFM</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div class="portfolio-item bg-white rounded-lg overflow-hidden shadow-md">
+                    <img src="https://images.unsplash.com/photo-1581093057306-e1127b719a0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80" alt="Medical Device" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-secondary mb-2">Medical Device Enclosure</h3>
+                        <p class="text-gray-600 mb-4">Ergonomic design for a portable medical device meeting FDA requirements and IP67 rating.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">Inventor</span>
+                            <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">Plastics</span>
+                            <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">Mold Flow</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 3 -->
+                <div class="portfolio-item bg-white rounded-lg overflow-hidden shadow-md">
+                    <img src="https://images.unsplash.com/photo-1581094271901-8022df4466f9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Robotic Arm" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-secondary mb-2">Robotic Arm Assembly</h3>
+                        <p class="text-gray-600 mb-4">6-axis robotic arm design with integrated cable management and harmonic drive systems.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">Solid Edge</span>
+                            <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">Motion Study</span>
+                            <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">Tolerance Analysis</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <a href="#contact" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-primary hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    Request More Examples
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="bg-gray-50 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-secondary mb-4">Client Testimonials</h2>
+                <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+                <p class="text-gray-600 max-w-3xl mx-auto">What our clients say about our engineering and design services.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-white p-8 rounded-lg shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-quote-left text-gray-300 text-2xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-gray-600">"PrecisionCAD delivered exceptional 3D models for our new product line. Their attention to detail and understanding of manufacturing constraints saved us significant time and cost in production."</p>
+                        </div>
+                    </div>
+                    <div class="mt-6 flex items-center">
+                        <div class="flex-shrink-0">
+                            <div class="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center">
+                                <i class="fas fa-user text-gray-500"></i>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="text-sm font-medium text-secondary">Sarah Johnson</h4>
+                            <p class="text-sm text-gray-500">Product Manager, TechSolutions Inc.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimonial 2 -->
+                <div class="bg-white p-8 rounded-lg shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-quote-left text-gray-300 text-2xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-gray-600">"The reverse engineering service was outstanding. They accurately captured our legacy part and improved the design for modern manufacturing methods while maintaining functionality."</p>
+                        </div>
+                    </div>
+                    <div class="mt-6 flex items-center">
+                        <div class="flex-shrink-0">
+                            <div class="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center">
+                                <i class="fas fa-user text-gray-500"></i>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="text-sm font-medium text-secondary">Michael Chen</h4>
+                            <p class="text-sm text-gray-500">Engineering Director, Industrial Systems Co.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimonial 3 -->
+                <div class="bg-white p-8 rounded-lg shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-quote-left text-gray-300 text-2xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-gray-600">"Their technical drawings are impeccable. The GD&T application was perfect, and our manufacturing partners had zero questions during production - a rare occurrence in our industry."</p>
+                        </div>
+                    </div>
+                    <div class="mt-6 flex items-center">
+                        <div class="flex-shrink-0">
+                            <div class="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center">
+                                <i class="fas fa-user text-gray-500"></i>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="text-sm font-medium text-secondary">David Wilson</h4>
+                            <p class="text-sm text-gray-500">CTO, Advanced Components Ltd.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="bg-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-secondary mb-4">Get In Touch</h2>
+                <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+                <p class="text-gray-600 max-w-3xl mx-auto">Ready to discuss your project? Contact us for a free consultation.</p>
+            </div>
+            <div class="md:flex md:space-x-8">
+                <div class="md:w-1/2 mb-8 md:mb-0">
+                    <form class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                            <input type="text" id="name" name="name" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                            <input type="email" id="email" name="email" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary">
+                        </div>
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-gray-700">Phone (Optional)</label>
+                            <input type="tel" id="phone" name="phone" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary">
+                        </div>
+                        <div>
+                            <label for="service" class="block text-sm font-medium text-gray-700">Service Needed</label>
+                            <select id="service" name="service" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary">
+                                <option>3D CAD Modeling</option>
+                                <option>Technical Drawings</option>
+                                <option>Assembly Design</option>
+                                <option>Prototyping Support</option>
+                                <option>Reverse Engineering</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-700">Project Details</label>
+                            <textarea id="message" name="message" rows="4" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary"></textarea>
+                        </div>
+                        <div>
+                            <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                Submit Inquiry
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="md:w-1/2">
+                    <div class="bg-gray-50 p-8 rounded-lg h-full">
+                        <h3 class="text-xl font-semibold text-secondary mb-6">Contact Information</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-envelope text-primary text-xl"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-medium text-secondary">Email</h4>
+                                    <p class="mt-1 text-gray-600">contact@precisioncad.com</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-phone-alt text-primary text-xl"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-medium text-secondary">Phone</h4>
+                                    <p class="mt-1 text-gray-600">+1 (555) 123-4567</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-map-marker-alt text-primary text-xl"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-medium text-secondary">Office</h4>
+                                    <p class="mt-1 text-gray-600">123 Engineering Drive<br>Tech Park, CA 90210</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-clock text-primary text-xl"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-medium text-secondary">Hours</h4>
+                                    <p class="mt-1 text-gray-600">Monday - Friday: 9AM - 6PM<br>Saturday - Sunday: Closed</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-8">
+                            <h4 class="text-lg font-medium text-secondary mb-4">Follow Us</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 hover:bg-primary hover:text-white transition duration-300">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="#" class="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 hover:bg-primary hover:text-white transition duration-300">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="#" class="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 hover:bg-primary hover:text-white transition duration-300">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="#" class="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 hover:bg-primary hover:text-white transition duration-300">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-secondary text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="md:flex md:justify-between md:items-center">
+                <div class="mb-8 md:mb-0">
+                    <a href="#" class="flex items-center">
+                        <i class="fas fa-cube text-2xl text-primary mr-2"></i>
+                        <span class="text-xl font-bold text-white">Precision<span class="text-primary">CAD</span></span>
+                    </a>
+                    <p class="mt-4 text-gray-300 max-w-md">Engineering excellence through precision CAD modeling and design solutions.</p>
+                </div>
+                <div class="grid grid-cols-2 gap-8 md:grid-cols-3">
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase mb-4">Services</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-300 hover:text-white">3D Modeling</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white">Technical Drawing</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white">Prototyping</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white">Reverse Engineering</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase mb-4">Company</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#about" class="text-gray-300 hover:text-white">About Us</a></li>
+                            <li><a href="#portfolio" class="text-gray-300 hover:text-white">Portfolio</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white">Careers</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white">Blog</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase mb-4">Legal</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-300 hover:text-white">Privacy Policy</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white">Terms of Service</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white">Cookie Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 pt-8 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-300 text-sm">© 2023 PrecisionCAD. All rights reserved.</p>
+                <div class="mt-4 md:mt-0">
+                    <a href="#" class="text-gray-300 hover:text-white text-sm mr-4">Privacy</a>
+                    <a href="#" class="text-gray-300 hover:text-white text-sm mr-4">Terms</a>
+                    <a href="#" class="text-gray-300 hover:text-white text-sm">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+
+        // Form submission handling
+        const contactForm = document.querySelector('form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Here you would typically send the form data to a server
+                alert('Thank you for your inquiry! We will contact you soon.');
+                this.reset();
+            });
+        }
+    </script>
+</body>
+</html>
