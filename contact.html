@@ -1,9 +1,9 @@
 <section id="contact" class="bg-white py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
-            <h2 class="text-3xl font-bold text-secondary mb-4">Get In Touch</h2>
+            <h2 class="text-3xl font-bold text-secondary mb-4" data-i18n="contact.title">Get In Touch</h2>
             <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
-            <p class="text-gray-600 max-w-3xl mx-auto">Ready to discuss your project? Contact us for a free consultation.</p>
+            <p class="text-gray-600 max-w-3xl mx-auto" data-i18n="contact.desc">Ready to discuss your project? Contact us for a free consultation.</p>
         </div>
         <div class="md:flex md:space-x-8">
             <div class="md:w-1/2 mb-8 md:mb-0">
@@ -14,33 +14,33 @@
                         <input type="text" id="website" name="website" autocomplete="off">
                     </div>
                     <div>
-                        <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-                        <input type="text" id="name" name="name" required autocomplete="name" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary">
+                        <label for="name" class="block text-sm font-medium text-gray-700" data-i18n="contact.name">Name</label>
+                        <input type="text" id="name" name="name" required autocomplete="name" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary" data-i18n-placeholder="contact.name">
                     </div>
                     <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                        <input type="email" id="email" name="email" required autocomplete="email" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary">
+                        <label for="email" class="block text-sm font-medium text-gray-700" data-i18n="contact.email">Email</label>
+                        <input type="email" id="email" name="email" required autocomplete="email" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary" data-i18n-placeholder="contact.email">
                     </div>
                     <div>
-                        <label for="phone" class="block text-sm font-medium text-gray-700">Phone (Optional)</label>
-                        <input type="tel" id="phone" name="phone" autocomplete="tel" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary">
+                        <label for="phone" class="block text-sm font-medium text-gray-700" data-i18n="contact.phone">Phone (Optional)</label>
+                        <input type="tel" id="phone" name="phone" autocomplete="tel" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary" data-i18n-placeholder="contact.phone">
                     </div>
                     <div>
-                        <label for="service" class="block text-sm font-medium text-gray-700">Service Needed</label>
+                        <label for="service" class="block text-sm font-medium text-gray-700" data-i18n="contact.service">Service Needed</label>
                         <select id="service" name="service" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary">
-                            <option>3D CAD Modeling</option>
-                            <option>Technical Drawings</option>
-                            <option>Prototyping Support</option>
-                            <option>Design Optimization</option>
-                            <option>Other</option>
+                            <option data-i18n="contact.services.modeling">3D CAD Modeling</option>
+                            <option data-i18n="contact.services.drawing">Technical Drawings</option>
+                            <option data-i18n="contact.services.prototyping">Prototyping Support</option>
+                            <option data-i18n="contact.services.optimization">Design Optimization</option>
+                            <option data-i18n="contact.services.other">Other</option>
                         </select>
                     </div>
                     <div>
-                        <label for="message" class="block text-sm font-medium text-gray-700">Project Details</label>
-                        <textarea id="message" name="message" rows="4" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary"></textarea>
+                        <label for="message" class="block text-sm font-medium text-gray-700" data-i18n="contact.details">Project Details</label>
+                        <textarea id="message" name="message" rows="4" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary" data-i18n-placeholder="contact.details"></textarea>
                     </div>
                     <div>
-                        <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-700 hover:bg-blue-800 focus:outline-none">
+                        <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary" data-i18n="contact.submit">
                             Submit Inquiry
                         </button>
                     </div>
@@ -49,14 +49,14 @@
             </div>
             <div class="md:w-1/2">
                 <div class="bg-gray-50 p-8 rounded-lg h-full">
-                    <h3 class="text-xl font-semibold text-secondary mb-6">Contact Information</h3>
+                    <h3 class="text-xl font-semibold text-secondary mb-6" data-i18n="contact.info_title">Contact Information</h3>
                     <div class="space-y-6">
                         <div class="flex items-start">
                             <div class="flex-shrink-0">
                                 <i class="fas fa-envelope text-primary text-xl"></i>
                             </div>
                             <div class="ml-4">
-                                <h4 class="text-lg font-medium text-secondary">Email</h4>
+                                <h4 class="text-lg font-medium text-secondary" data-i18n="contact.email">Email</h4>
                                 <p class="mt-1 text-gray-600">rp@customitsupport.com</p>
                             </div>
                         </div>
@@ -65,7 +65,7 @@
                                 <i class="fas fa-phone-alt text-primary text-xl"></i>
                             </div>
                             <div class="ml-4">
-                                <h4 class="text-lg font-medium text-secondary">Phone</h4>
+                                <h4 class="text-lg font-medium text-secondary" data-i18n="contact.phone">Phone</h4>
                                 <p class="mt-1 text-gray-600">+31645485890</p>
                             </div>
                         </div>
@@ -74,7 +74,7 @@
                                 <i class="fas fa-map-marker-alt text-primary text-xl"></i>
                             </div>
                             <div class="ml-4">
-                                <h4 class="text-lg font-medium text-secondary">Office</h4>
+                                <h4 class="text-lg font-medium text-secondary" data-i18n="contact.office">Office</h4>
                                 <p class="mt-1 text-gray-600">Biesboschweg,<br>Lage Zwaluwe, North Brabant</p>
                             </div>
                         </div>
@@ -83,13 +83,13 @@
                                 <i class="fas fa-clock text-primary text-xl"></i>
                             </div>
                             <div class="ml-4">
-                                <h4 class="text-lg font-medium text-secondary">Hours</h4>
-                                <p class="mt-1 text-gray-600">Monday - Friday: 9AM - 6PM<br>Saturday - Sunday: Closed</p>
+                                <h4 class="text-lg font-medium text-secondary" data-i18n="contact.hours">Hours</h4>
+                                <p class="mt-1 text-gray-600" data-i18n="contact.hours_desc">Monday - Friday: 9AM - 6PM<br>Saturday - Sunday: Closed</p>
                             </div>
                         </div>
                     </div>
                     <div class="mt-8">
-                        <h4 class="text-lg font-medium text-secondary mb-4">Follow Us</h4>
+                        <h4 class="text-lg font-medium text-secondary mb-4" data-i18n="contact.follow">Follow Us</h4>
                         <div class="flex space-x-4">
                             <a href="#" class="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 hover:bg-primary hover:text-white transition duration-300">
                                 <i class="fab fa-linkedin-in"></i>
