@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Include header.html content directly or use server-side includes/build tools -->
-    <!-- If you're using a static site, copy the contents of header.html here instead of this include. -->
-    <!--#include file="header.html" -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrecisionCAD | 3D Engineering & CAD Modeling</title>
+    <!-- TailwindCSS CDN for styling -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons (optional, for service/about icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Favicon (optional) -->
+    <link rel="icon" type="image/png" href="favicon.png">
 </head>
-<body class="font-sans antialiased text-gray-800">
+<body class="font-sans antialiased text-gray-800 bg-white">
 
     <!-- Navigation bar -->
     <div id="nav-placeholder"></div>
@@ -33,5 +39,7 @@
 
     <!-- Main JavaScript to dynamically load all partials and handle form/menu logic -->
     <script src="main.js"></script>
+    <!-- EmailJS for contact form (only needed if not imported in the partial) -->
+    <!-- <script src="https://cdn.emailjs.com/dist/email.min.js"></script> -->
 </body>
 </html>
