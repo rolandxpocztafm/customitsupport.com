@@ -1,7 +1,6 @@
 // main.js
-// Dynamically loads partial HTML files into placeholders, handles responsive mobile menu, EmailJS contact form, and i18n translation
+// Dynamically loads partial HTML files into placeholders, handles responsive mobile menu, EmailJS contact form, and robust i18n translation
 
-// List of placeholders and corresponding files
 const includes = [
   { id: "nav-placeholder", file: "nav.html" },
   { id: "hero-placeholder", file: "hero.html" },
@@ -13,49 +12,78 @@ const includes = [
   { id: "footer-placeholder", file: "footer.html" }
 ];
 
-// Utility: Load locales and initialize i18n
-function loadLocalesAndInit(lang = "en") {
-  Promise.all([
-    fetch("locales/en.json").then(r => r.json()),
-    fetch("locales/nl.json").then(r => r.json())
+// Hold loaded translations
+let translations = { en: null, nl: null };
+
+// 1. Load locales before any i18n usage
+function fetchLocales() {
+  return Promise.all([
+    fetch("locales/en.json").then(r => r.json()).catch(() => ({})),
+    fetch("locales/nl.json").then(r => r.json()).catch(() => ({}))
   ]).then(([en, nl]) => {
+    translations.en = en;
+    translations.nl = nl;
+  });
+}
+
+// 2. Init i18next after locales loaded
+function initI18n(lang = "en") {
+  return new Promise(resolve => {
     i18next.init({
       lng: lang,
+      fallbackLng: 'en',
+      debug: false,
       resources: {
-        en: { translation: en },
-        nl: { translation: nl }
-      }
-    }, function () {
-      localizeContent();
+        en: { translation: translations.en },
+        nl: { translation: translations.nl }
+      },
+      returnNull: false,
+      returnEmptyString: false,
+      parseMissingKeyHandler: function(key) { return key; }
+    }, function() {
+      resolve();
     });
   });
 }
 
-// Utility: Localize all content currently in DOM
+// 3. Localize all content in DOM
 function localizeContent() {
-  // Replace text content for elements with data-i18n
+  // Elements with data-i18n
   document.querySelectorAll("[data-i18n]").forEach(el => {
     const key = el.getAttribute("data-i18n");
-    const value = i18next.t(key);
+    let value = i18next.t(key);
+    // fallback: show key if missing
+    if (!value || value === key) value = translations.en?.[key.split('.').shift()] || key;
     if (el.tagName === "INPUT" || el.tagName === "TEXTAREA") {
-      // For input fields, set placeholder if applicable
-      if (el.hasAttribute("data-i18n-placeholder")) {
-        el.placeholder = value;
-      }
+      if (el.hasAttribute("data-i18n-placeholder")) el.placeholder = value;
     } else if (el.tagName === "OPTION") {
       el.textContent = value;
     } else {
       el.innerHTML = value;
     }
   });
-  // Replace placeholder for inputs/textareas with data-i18n-placeholder
+  // Placeholder fields
   document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
     const key = el.getAttribute("data-i18n-placeholder");
-    el.placeholder = i18next.t(key);
+    let value = i18next.t(key);
+    if (!value || value === key) value = translations.en?.[key.split('.').shift()] || key;
+    el.placeholder = value;
   });
 }
 
-// Function to load a partial into a placeholder div
+// 4. Language switcher for desktop and mobile
+function initLanguageSwitcher() {
+  function switchLang(lang) {
+    i18next.changeLanguage(lang, localizeContent);
+    localStorage.setItem("lang", lang);
+  }
+  document.body.addEventListener("click", function (e) {
+    if (e.target.id === "lang-en" || e.target.id === "lang-en-mobile") switchLang("en");
+    if (e.target.id === "lang-nl" || e.target.id === "lang-nl-mobile") switchLang("nl");
+  });
+}
+
+// 5. Load partials, then localize
 function loadPartial(id, file) {
   fetch(file)
     .then(response => {
@@ -66,7 +94,6 @@ function loadPartial(id, file) {
       document.getElementById(id).innerHTML = html;
       if (id === "nav-placeholder") initMobileMenu();
       if (id === "contact-placeholder") initContactForm();
-      // Always localize after loading new partial
       localizeContent();
     })
     .catch(err => {
@@ -74,22 +101,21 @@ function loadPartial(id, file) {
     });
 }
 
-// Load all partials after DOM is ready
+// 6. DOM ready: load everything in order
 document.addEventListener("DOMContentLoaded", () => {
-  includes.forEach(inc => {
-    if (document.getElementById(inc.id)) {
-      loadPartial(inc.id, inc.file);
-    }
-  });
-
-  // Initialize i18n and language switcher after a short delay to allow nav to load
-  setTimeout(() => {
-    loadLocalesAndInit(localStorage.getItem("lang") || "en");
+  fetchLocales().then(() => {
+    // Use saved language or EN
+    const lang = localStorage.getItem("lang") || "en";
+    return initI18n(lang);
+  }).then(() => {
+    includes.forEach(inc => {
+      if (document.getElementById(inc.id)) loadPartial(inc.id, inc.file);
+    });
     initLanguageSwitcher();
-  }, 300);
+  });
 });
 
-// Responsive mobile menu toggle logic
+// 7. Mobile menu logic
 function initMobileMenu() {
   const menuButton = document.getElementById("mobile-menu-button");
   const mobileMenu = document.getElementById("mobile-menu");
@@ -97,7 +123,6 @@ function initMobileMenu() {
     menuButton.addEventListener("click", () => {
       mobileMenu.classList.toggle("hidden");
     });
-    // Close menu on link click (improves UX)
     mobileMenu.querySelectorAll("a").forEach(link => {
       link.addEventListener("click", () => {
         mobileMenu.classList.add("hidden");
@@ -106,14 +131,12 @@ function initMobileMenu() {
   }
 }
 
-// Contact form submission logic with honeypot spam protection
+// 8. Contact form logic
 function initContactForm() {
   let form = document.getElementById("contact-form");
   if (!form) {
     const contactSection = document.getElementById("contact-placeholder");
-    if (contactSection) {
-      form = contactSection.querySelector("form");
-    }
+    if (contactSection) form = contactSection.querySelector("form");
   }
   let formMsg = document.getElementById("form-message");
   if (!formMsg && form) {
@@ -130,12 +153,10 @@ function initContactForm() {
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
-
     if (form.website && form.website.value) {
       form.reset();
       return;
     }
-
     if (typeof emailjs !== "undefined" && typeof emailjs.sendForm === "function") {
       emailjs.sendForm('service_m13t0ho', 'template_zatfyzn', this)
         .then(() => {
@@ -169,22 +190,6 @@ function initContactForm() {
         alert(i18next.t("contact.sent"));
       }
       this.reset();
-    }
-  });
-}
-
-// Language switcher logic for nav and mobile
-function initLanguageSwitcher() {
-  function switchLang(lang) {
-    i18next.changeLanguage(lang, localizeContent);
-    localStorage.setItem("lang", lang);
-  }
-  document.body.addEventListener("click", function (e) {
-    if (e.target.id === "lang-en" || e.target.id === "lang-en-mobile") {
-      switchLang("en");
-    }
-    if (e.target.id === "lang-nl" || e.target.id === "lang-nl-mobile") {
-      switchLang("nl");
     }
   });
 }
