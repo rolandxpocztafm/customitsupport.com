@@ -1,0 +1,62 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "portfolio": "Portfolio",
+    "contact": "Contact"
+  },
+  "hero": {
+    "headline": "Precision engineering solutions for product development, from concept to production-ready designs."
+  },
+  "about": {
+    "title": "About Our Team",
+    "expertise_title": "Our Expertise",
+    "why_choose_title": "Why Choose Us",
+    "fast_turnaround": "Fast Turnaround",
+    "fast_turnaround_desc": "We deliver high-quality CAD models and drawings within tight deadlines.",
+    "technical_excellence": "Technical Excellence",
+    "technical_excellence_desc": "Our engineers stay updated with the latest CAD technologies and manufacturing techniques."
+  },
+  "services": {
+    "title": "Our Services",
+    "desc": "Comprehensive CAD and engineering solutions tailored to your product development needs.",
+    "modeling": "3D CAD Modeling",
+    "modeling_desc": "Precision 3D modeling services for parts and assemblies using industry-leading CAD software including SolidWorks, Inventor, and Solid Edge.",
+    "drawing": "Technical Drawing",
+    "drawing_desc": "Production-ready technical drawings with GD&T (Geometric Dimensioning and Tolerancing) following ISO standards.",
+    "prototyping": "Prototyping Support",
+    "prototyping_desc": "Design optimization for various prototyping methods including 3D printing, CNC machining, and injection molding."
+  },
+  "contact": {
+    "title": "Get In Touch",
+    "desc": "Ready to discuss your project? Contact us for a free consultation.",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone (Optional)",
+    "service": "Service Needed",
+    "services": {
+      "modeling": "3D CAD Modeling",
+      "drawing": "Technical Drawings",
+      "prototyping": "Prototyping Support",
+      "optimization": "Design Optimization",
+      "other": "Other"
+    },
+    "details": "Project Details",
+    "submit": "Submit Inquiry",
+    "sent": "Thank you for your inquiry! We will contact you soon.",
+    "failed": "There was an error sending your message. Please try again later."
+  },
+  "footer": {
+    "company": "Company",
+    "about_us": "About Us",
+    "portfolio": "Portfolio",
+    "careers": "Careers",
+    "blog": "Blog",
+    "legal": "Legal",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "cookie": "Cookie Policy",
+    "copyright": "© 2023 PrecisionCAD. All rights reserved."
+  }
+}

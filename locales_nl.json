@@ -1,0 +1,62 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "Over Ons",
+    "services": "Diensten",
+    "portfolio": "Portfolio",
+    "contact": "Contact"
+  },
+  "hero": {
+    "headline": "Precisie-engineering oplossingen voor productontwikkeling, van concept tot productieklare ontwerpen."
+  },
+  "about": {
+    "title": "Over Ons Team",
+    "expertise_title": "Onze Expertise",
+    "why_choose_title": "Waarom voor ons kiezen",
+    "fast_turnaround": "Snelle Levering",
+    "fast_turnaround_desc": "Wij leveren hoogwaardige CAD-modellen en tekeningen binnen strakke deadlines.",
+    "technical_excellence": "Technische Uitmuntendheid",
+    "technical_excellence_desc": "Onze ingenieurs blijven op de hoogte van de nieuwste CAD-technologieën en productietechnieken."
+  },
+  "services": {
+    "title": "Onze Diensten",
+    "desc": "Uitgebreide CAD- en engineeringoplossingen op maat voor uw productontwikkeling.",
+    "modeling": "3D CAD Modelleren",
+    "modeling_desc": "Nauwkeurige 3D-modelleringsservices voor onderdelen en samenstellingen met toonaangevende CAD-software zoals SolidWorks, Inventor en Solid Edge.",
+    "drawing": "Technische Tekening",
+    "drawing_desc": "Productieklare technische tekeningen met GD&T (Geometrische Maattoleranties) volgens ISO-normen.",
+    "prototyping": "Prototyping Ondersteuning",
+    "prototyping_desc": "Ontwerpoptimalisatie voor diverse prototypingmethoden zoals 3D-printen, CNC-bewerking en spuitgieten."
+  },
+  "contact": {
+    "title": "Neem Contact Op",
+    "desc": "Klaar om uw project te bespreken? Neem contact op voor een gratis consult.",
+    "name": "Naam",
+    "email": "E-mail",
+    "phone": "Telefoon (optioneel)",
+    "service": "Gewenste Dienst",
+    "services": {
+      "modeling": "3D CAD Modelleren",
+      "drawing": "Technische Tekeningen",
+      "prototyping": "Prototyping Ondersteuning",
+      "optimization": "Ontwerpoptimalisatie",
+      "other": "Anders"
+    },
+    "details": "Projectdetails",
+    "submit": "Verstuur aanvraag",
+    "sent": "Bedankt voor uw aanvraag! We nemen spoedig contact met u op.",
+    "failed": "Er is een fout opgetreden bij het verzenden van uw bericht. Probeer het later opnieuw."
+  },
+  "footer": {
+    "company": "Bedrijf",
+    "about_us": "Over Ons",
+    "portfolio": "Portfolio",
+    "careers": "Vacatures",
+    "blog": "Blog",
+    "legal": "Juridisch",
+    "privacy": "Privacybeleid",
+    "terms": "Gebruiksvoorwaarden",
+    "cookie": "Cookiebeleid",
+    "copyright": "© 2023 PrecisionCAD. Alle rechten voorbehouden."
+  }
+}
