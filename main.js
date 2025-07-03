@@ -1,5 +1,5 @@
 // main.js
-// Dynamically loads partial HTML files into placeholders and handles the responsive mobile menu
+// Dynamically loads partial HTML files into placeholders and handles the responsive mobile menu and EmailJS contact form
 
 // List of placeholders and corresponding files
 const includes = [
@@ -56,29 +56,69 @@ function initMobileMenu() {
   }
 }
 
-// Contact form submission logic
+// Contact form submission logic (from original_index.html)
 function initContactForm() {
-  const form = document.getElementById("contact-form");
-  const formMsg = document.getElementById("form-message");
+  // Support both "form" and "#contact-form" for backward compatibility
+  let form = document.getElementById("contact-form");
+  if (!form) {
+    // fallback: first form in contact-placeholder section
+    const contactSection = document.getElementById("contact-placeholder");
+    if (contactSection) {
+      form = contactSection.querySelector("form");
+    }
+  }
+  // Message area for responses
+  let formMsg = document.getElementById("form-message");
+  if (!formMsg && form) {
+    // If not present, create a temporary one
+    formMsg = document.createElement("div");
+    formMsg.id = "form-message";
+    formMsg.className = "text-center text-green-600 text-sm mt-4 hidden";
+    form.appendChild(formMsg);
+  }
   if (!form) return;
+
+  // EmailJS init (must match original_index.html)
+  if (typeof emailjs !== "undefined" && typeof emailjs.init === "function") {
+    emailjs.init('4z9M06el79Z_xG-M-'); // <-- Replace with your EmailJS Public Key if different
+  }
+
   form.addEventListener("submit", function (e) {
     e.preventDefault();
-    // Example: EmailJS userID/service/template or other integration
-    if (typeof emailjs !== "undefined") {
-      emailjs.sendForm('service_m13t0ho', 'template_zatfyzn', this, '4z9M06el79Z_xG-M-')
+    if (typeof emailjs !== "undefined" && typeof emailjs.sendForm === "function") {
+      emailjs.sendForm('service_m13t0ho', 'template_zatfyzn', this)
         .then(() => {
-          formMsg.textContent = "Thank you! Your message has been sent.";
-          formMsg.classList.remove("hidden");
-          form.reset();
-        }, () => {
-          formMsg.textContent = "An error occurred. Please try again later.";
-          formMsg.classList.remove("hidden");
+          if (formMsg) {
+            formMsg.textContent = "Thank you for your inquiry! We will contact you soon.";
+            formMsg.classList.remove("hidden");
+            formMsg.classList.add("text-green-700");
+          } else {
+            alert("Thank you for your inquiry! We will contact you soon.");
+          }
+          this.reset();
+        }, (error) => {
+          if (formMsg) {
+            formMsg.textContent = "There was an error sending your message. Please try again later.";
+            formMsg.classList.remove("hidden");
+            formMsg.classList.remove("text-green-700");
+            formMsg.classList.add("text-red-700");
+          } else {
+            alert("There was an error sending your message. Please try again later.");
+          }
+          if (window.console && console.error) {
+            console.error('EmailJS Error:', error);
+          }
         });
     } else {
-      // Fallback: Just show a fake success
-      formMsg.textContent = "Thank you! Your message has been sent (demo mode).";
-      formMsg.classList.remove("hidden");
-      form.reset();
+      // Fallback: show fake success message
+      if (formMsg) {
+        formMsg.textContent = "Thank you! Your message has been sent (demo mode).";
+        formMsg.classList.remove("hidden");
+        formMsg.classList.add("text-green-700");
+      } else {
+        alert("Thank you! Your message has been sent (demo mode).");
+      }
+      this.reset();
     }
   });
 }
