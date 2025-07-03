@@ -1,5 +1,5 @@
 // main.js
-// Dynamically loads partial HTML files into placeholders and handles the responsive mobile menu and EmailJS contact form
+// Dynamically loads partial HTML files into placeholders and handles the responsive mobile menu and EmailJS contact form with honeypot spam protection
 
 // List of placeholders and corresponding files
 const includes = [
@@ -56,7 +56,7 @@ function initMobileMenu() {
   }
 }
 
-// Contact form submission logic (from original_index.html)
+// Contact form submission logic with honeypot spam protection
 function initContactForm() {
   // Support both "form" and "#contact-form" for backward compatibility
   let form = document.getElementById("contact-form");
@@ -67,10 +67,8 @@ function initContactForm() {
       form = contactSection.querySelector("form");
     }
   }
-  // Message area for responses
   let formMsg = document.getElementById("form-message");
   if (!formMsg && form) {
-    // If not present, create a temporary one
     formMsg = document.createElement("div");
     formMsg.id = "form-message";
     formMsg.className = "text-center text-green-600 text-sm mt-4 hidden";
@@ -78,13 +76,20 @@ function initContactForm() {
   }
   if (!form) return;
 
-  // EmailJS init (must match original_index.html)
   if (typeof emailjs !== "undefined" && typeof emailjs.init === "function") {
-    emailjs.init('4z9M06el79Z_xG-M-'); // <-- Replace with your EmailJS Public Key if different
+    emailjs.init('4z9M06el79Z_xG-M-'); // Replace with your EmailJS Public Key if different
   }
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
+
+    // Honeypot check: if the hidden "website" field is filled, silently abort as spam
+    if (form.website && form.website.value) {
+      // Optionally, you could show an error or just do nothing (bots won't know)
+      form.reset();
+      return;
+    }
+
     if (typeof emailjs !== "undefined" && typeof emailjs.sendForm === "function") {
       emailjs.sendForm('service_m13t0ho', 'template_zatfyzn', this)
         .then(() => {
