@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial"></script>
+
+    <script>
+         // Explicitly register required chart.js components
+         Chart.register(
+             Chart.FinancialController,
+             Chart.CandlestickController,
+             Chart.elements.CandlestickElement,
+             Chart.scales.TimeScale,
+             Chart.scales.LinearScale,
+             Chart.plugins.Legend,
+             Chart.plugins.Tooltip             
+         );
+    </script>
+
+    <style>
+        body.dark-mode { background-color: #121212; color: #f0f0f0; }
+        .panel { margin-bottom: 1em; }
+        .chart-container { max-height: 200px; margin-bottom: 1em; }
+        .collapsible { cursor: pointer; }
+        .collapsed + .content { display: none; }
+    </style>
+</head>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const ctx = document.getElementById('btcCandleChart').getContext('2d');
+
+    fetch('/live_candles/btc')
+        .then(response => response.json())
+        .then(data => {
+            const chartData = {
+                datasets: [{
+                    label: 'BTC/USDT',
+                    data: data.map(c => ({
+                        x: new Date(c[0]),
+                        o: c[1],
+                        h: c[2],
+                        l: c[3],
+                        c: c[4]
+                    })),
+                    borderColor: 'orange',
+                    backgroundColor: 'rgba(255, 165, 0, 0.2)'
+                }]
+            };
+
+            new Chart(ctx, {
+                type: 'candlestick',
+                data: chartData,
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            type: 'time',
+                            time: {
+                                unit: 'minute'
+                            },
+                            adapters: {
+                                date: window.dateFns
+                            }
+                        },
+                        y: {
+                            beginAtZero: false
+                        }
+                    }
+                }
+            });
+        });
+});
+</script>
+
+
+
+
+
+
+<body>
+<div class="container py-4">
+    <h1 class="mb-4">Dashboard</h1>
+    <button class="btn btn-secondary mb-3" onclick="toggleDarkMode()">Toggle Dark/Light Mode</button>
+
+    <form method="POST" action="/toggle_bot">
+        <div class="alert alert-info">Bot Status:
+            <strong class="{{ 'text-success' if bot_running else 'text-danger' }}">
+                {{ 'Running ✅' if bot_running else 'Stopped ⛔' }}
+            </strong>
+            <button class="btn btn-sm btn-outline-primary ms-2" type="submit">
+                {{ '🛑 Pause Bot' if bot_running else '▶️ Resume Bot' }}
+            </button>
+        </div>
+    </form>
+
+    <form method="POST" action="/print_confidences">
+            <button class="btn btn-outline-warning btn-sm mt-2">📤 Print Confidences to Terminal</button>
+    </form>
+
+    <form method="POST" action="/test_confidence_log" class="d-inline">
+         <button class="btn btn-sm btn-outline-warning">🧪 Test Confidence Log</button>
+    </form>
+
+
+    <div class="alert alert-warning">
+        <strong>Live Confidence Levels:</strong>
+        <div class="d-flex flex-wrap gap-3 mt-2">
+             <div class="border rounded p-2 bg-light text-dark">
+                 <strong>BTC</strong><br>{{ confidence_labels[-1] if confidence_labels else '' }}<br><span class="text-primary">{{ btc_confidences[-1] if btc_confidences else 'N/A' }}</span>
+             </div>
+             <div class="border rounded p-2 bg-light text-dark">
+                  <strong>ETH</strong><br>{{ confidence_labels[-1] if confidence_labels else '' }}<br><span class="text-success">{{ eth_confidences[-1] if eth_confidences else 'N/A' }}</span>
+             </div>
+         <div class="border rounded p-2 bg-light text-dark">
+             <strong>BNB</strong><br>{{ confidence_labels[-1] if confidence_labels else '' }}<br><span class="text-warning">{{ bnb_confidences[-1] if bnb_confidences else 'N/A' }}</span>
+         </div>
+          <div class="border rounded p-2 bg-light text-dark">
+             <strong>SOL</strong><br>{{ confidence_labels[-1] if confidence_labels else '' }}<br><span class="text-danger">{{ sol_confidences[-1] if sol_confidences else 'N/A' }}</span>
+          </div>
+    </div>
+
+   
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="main-tab" data-bs-toggle="tab" data-bs-target="#main" type="button" role="tab">Main</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="model-tab" data-bs-toggle="tab" data-bs-target="#model" type="button" role="tab">Model History</button>
+        </li>
+    </ul>
+    <div class="tab-content mt-3">
+        <div class="tab-pane fade show active" id="main" role="tabpanel">
+            <div class="row">
+                <div class="col-md-6 chart-container"><canvas id="btcChart"></canvas></div>
+                <div class="col-md-6 chart-container"><canvas id="ethChart"></canvas></div>
+                <div class="col-md-6 chart-container"><canvas id="bnbChart"></canvas></div>
+                <div class="col-md-6 chart-container"><canvas id="solChart"></canvas></div>
+            </div>
+
+
+
+            <div class="panel">
+                <h3>Open Positions</h3>
+                <input class="form-control mb-2" id="positionSearch" placeholder="Search positions..." onkeyup="filterTable('positionsTable', this.value)">
+                <table class="table table-sm table-bordered" id="positionsTable">
+                    <thead><tr><th>Symbol</th><th>Entry</th><th>Size</th><th>PnL</th><th>Action</th></tr></thead>
+                    <tbody>
+                    {% for pos in open_positions %}
+                        <tr>
+                            <td>{{ pos.symbol }}</td>
+                            <td>{{ pos.entry }}</td>
+                            <td>{{ pos.size }}</td>
+                            <td>{{ pos.pnl }}</td>
+                            <td><form method="POST" action="/close_position">
+                                <input type="hidden" name="symbol" value="{{ pos.symbol }}">
+                                <button class="btn btn-sm btn-danger">Close</button>
+                            </form></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="panel">
+                <h3>Trade History</h3>
+                <input class="form-control mb-2" id="tradeSearch" placeholder="Search trades..." onkeyup="filterTable('tradeTable', this.value)">
+                <table class="table table-sm table-bordered" id="tradeTable">
+                    <thead><tr><th>Time</th><th>Pair</th><th>Side</th><th>Amount</th><th>Entry</th><th>Exit</th><th>PnL</th></tr></thead>
+                    <tbody>
+                    {% for trade in trade_history %}
+                        <tr><td>{{ trade.time }}</td><td>{{ trade.pair }}</td><td>{{ trade.side }}</td><td>{{ trade.amount }}</td><td>{{ trade.entry }}</td><td>{{ trade.exit }}</td><td>{{ trade.pnl }}</td></tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+
+        <div class="tab-pane fade" id="model" role="tabpanel">
+            <div class="panel">
+                <button class="btn btn-info collapsible" onclick="toggleCollapse(this)">Model Training History (Last 16)</button>
+                <div class="content">
+                    <table class="table table-sm table-bordered">
+                        <thead><tr><th>Model</th><th>Accuracy</th><th>Samples</th><th>Time</th></tr></thead>
+                        <tbody>
+                        {% for model in training_history[:16] %}
+                            <tr><td>{{ model.name }}</td><td>{{ model.accuracy }}</td><td>{{ model.samples }}</td><td>{{ model.timestamp }}</td></tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+}
+function toggleCollapse(button) {
+    button.classList.toggle('collapsed');
+    const content = button.nextElementSibling;
+    content.style.display = content.style.display === 'none' ? '' : 'none';
+}
+function filterTable(tableId, query) {
+    const rows = document.querySelectorAll(`#${tableId} tbody tr`);
+    rows.forEach(row => {
+        row.style.display = row.innerText.toLowerCase().includes(query.toLowerCase()) ? '' : 'none';
+    });
+}
+function drawChart(id, label, values, color) {
+    new Chart(document.getElementById(id), {
+        type: 'line',
+        data: {
+            labels: [...Array(values.length).keys()],
+            datasets: [{ label, data: values.slice(-5), borderColor: color, fill: false }]
+        },
+        options: { responsive: true, scales: { y: { beginAtZero: false } } }
+    });
+}
+
+// Replace line chart with candlestick chart
+async function loadBTCCandles() {
+    try {
+        const res = await fetch('https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=5m&limit=100');
+        const data = await res.json();
+
+        const candles = data.map(item => ({
+            x: new Date(item[0]),
+            o: parseFloat(item[1]),
+            h: parseFloat(item[2]),
+            l: parseFloat(item[3]),
+            c: parseFloat(item[4])
+        }));
+
+        const closes = candles.map(c => c.c);
+        const highs = candles.map(c => c.h);
+        const lows = candles.map(c => c.l);
+
+        const rsi = [];
+        const macd = [];
+        let gain = 0, loss = 0;
+        for (let i = 1; i < closes.length; i++) {
+            const change = closes[i] - closes[i - 1];
+            gain = change > 0 ? change : 0;
+            loss = change < 0 ? -change : 0;
+            rsi.push(100 - (100 / (1 + (gain / (loss || 1)))));
+            macd.push((closes[i] - closes[i - 12]) || 0);
+        }
+
+        new Chart(document.getElementById('btcCandleChart'), {
+            type: 'candlestick',
+            data: {
+                datasets: [{ label: 'BTC/USDT', data: candles }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: { type: 'time', time: { tooltipFormat: 'MMM DD HH:mm' } },
+                    y: { beginAtZero: false }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('macdChart'), {
+            type: 'line',
+            data: { labels: [...Array(macd.length).keys()], datasets: [{ label: 'MACD', data: macd, borderColor: 'red' }] },
+            options: { responsive: true, scales: { y: { beginAtZero: false } } }
+        });
+
+        new Chart(document.getElementById('rsiChart'), {
+            type: 'line',
+            data: { labels: [...Array(rsi.length).keys()], datasets: [{ label: 'RSI', data: rsi, borderColor: 'blue' }] },
+            options: { responsive: true, scales: { y: { beginAtZero: false, max: 100 } } }
+        });
+    } catch (e) {
+        console.error("Failed to load BTC candles:", e);
+    }
+}
+loadBTCCandles();
+setInterval(loadBTCCandles, 60000);
+
+// Update live BTC price
+
+
+async function updatePrices() {
+    const pairs = ['BTCUSDT', 'ETHUSDT', 'BNBUSDT', 'SOLUSDT'];
+    for (let pair of pairs) {
+        try {
+            const res = await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${pair}`);
+            const data = await res.json();            
+            const map = {
+                 BTCUSDT: 'btcLivePrice',
+                 ETHUSDT: 'ethLivePrice',
+                 BNBUSDT: 'bnbLivePrice',
+                 SOLUSDT: 'solLivePrice'
+             };
+            const id = map[pair];
+             if (id) {
+                 document.getElementById(id).innerText = '$' + price;
+            }
+        } catch (e) {
+            document.getElementById(pair.toLowerCase() + 'LivePrice').innerText = 'Error';
+        }
+    }
+}
+setInterval(updatePrices, 5000);
+updatePrices();
+
+
+
+
+// Confidence charts
+
+drawChart('btcChart', 'BTC Confidence', {{ btc_confidences|safe }}, 'orange');
+drawChart('ethChart', 'ETH Confidence', {{ eth_confidences|safe }}, 'blue');
+drawChart('bnbChart', 'BNB Confidence', {{ bnb_confidences|safe }}, 'green');
+drawChart('solChart', 'SOL Confidence', {{ sol_confidences|safe }}, 'purple');
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
