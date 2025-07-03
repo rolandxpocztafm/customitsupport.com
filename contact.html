@@ -1,60 +1,130 @@
-<section id="contact" class="bg-white py-16">
-  <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-10">
-      <h2 class="text-3xl font-bold text-secondary mb-4">Contact Us</h2>
-      <div class="w-20 h-1 bg-blue-600 mx-auto mb-6"></div>
-      <p class="text-gray-600 max-w-2xl mx-auto">
-        Please fill out the form below and we will get back to you as soon as possible.
-      </p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Custom IT Support</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1E40AF',
+                        secondary: '#1F2937',
+                        accent: '#3B82F6',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans antialiased text-gray-800 bg-gray-50">
+    <div class="min-h-screen flex items-center justify-center">
+        <div class="bg-white rounded-lg shadow-lg p-8 max-w-lg w-full">
+            <div class="mb-8 text-center">
+                <h2 class="text-3xl font-bold text-secondary mb-2">Get In Touch</h2>
+                <div class="w-20 h-1 bg-primary mx-auto mb-4"></div>
+                <p class="text-gray-600">Ready to discuss your project? Contact us for a free consultation.</p>
+            </div>
+            <form class="space-y-6">
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                    <input type="text" id="name" name="name" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary" required>
+                </div>
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                    <input type="email" id="email" name="email" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary" required>
+                </div>
+                <div>
+                    <label for="phone" class="block text-sm font-medium text-gray-700">Phone (Optional)</label>
+                    <input type="tel" id="phone" name="phone" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary">
+                </div>
+                <div>
+                    <label for="service" class="block text-sm font-medium text-gray-700">Service Needed</label>
+                    <select id="service" name="service" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary" required>
+                        <option>3D CAD Modeling</option>
+                        <option>Technical Drawings</option>
+                        <option>Assembly Design</option>
+                        <option>Prototyping Support</option>
+                        <option>Reverse Engineering</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="message" class="block text-sm font-medium text-gray-700">Project Details</label>
+                    <textarea id="message" name="message" rows="4" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary" required></textarea>
+                </div>
+                <div>
+                    <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition duration-300">
+                        Submit Inquiry
+                    </button>
+                </div>
+            </form>
+            <div class="mt-8">
+                <h3 class="text-lg font-medium text-secondary mb-4">Contact Information</h3>
+                <div class="space-y-4 text-gray-600 text-sm">
+                    <div class="flex items-center">
+                        <i class="fas fa-envelope text-primary text-xl mr-3"></i>
+                        <span>rp@customitsupport.com</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-phone-alt text-primary text-xl mr-3"></i>
+                        <span>+31645485890</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-map-marker-alt text-primary text-xl mr-3"></i>
+                        <span>123 Engineering Drive, Tech Park, CA 90210</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-clock text-primary text-xl mr-3"></i>
+                        <span>Monday - Friday: 9AM - 6PM | Saturday - Sunday: Closed</span>
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <h4 class="text-sm font-medium text-secondary mb-2">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 hover:bg-primary hover:text-white transition duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 hover:bg-primary hover:text-white transition duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 hover:bg-primary hover:text-white transition duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 hover:bg-primary hover:text-white transition duration-300">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <form id="contact-form" class="space-y-6 bg-gray-50 p-8 rounded-lg shadow" autocomplete="off">
-      <div>
-        <label for="user_name" class="block text-sm font-medium text-gray-700">Name</label>
-        <input type="text" id="user_name" name="user_name" required
-          class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-600 focus:border-blue-600" />
-      </div>
-      <div>
-        <label for="user_email" class="block text-sm font-medium text-gray-700">Email</label>
-        <input type="email" id="user_email" name="user_email" required
-          class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-600 focus:border-blue-600" />
-      </div>
-      <div>
-        <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
-        <textarea id="message" name="message" rows="4" required
-          class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-600 focus:border-blue-600"></textarea>
-      </div>
-      <button type="submit"
-        class="w-full py-3 px-4 rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 transition-colors">
-        Send Message
-      </button>
-      <p id="form-message" class="text-center mt-4 font-medium hidden"></p>
-    </form>
-  </div>
-</section>
+    <!-- EmailJS library and form handling script -->
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        // Initialize EmailJS (replace with your actual public key if needed)
+        (function(){
+            emailjs.init('4z9M06el79Z_xG-M-'); // <-- Replace with your EmailJS Public Key
+        })();
 
-<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    emailjs.init('4z9M06el79Z_xG-M-');
-
-    const contactForm = document.getElementById('contact-form');
-    const formMsg = document.getElementById('form-message');
-
-    contactForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-      formMsg.textContent = '';
-      formMsg.classList.add('hidden');
-      emailjs.sendForm('service_m13t0ho', 'template_zatfyzn', contactForm)
-        .then(function () {
-          formMsg.textContent = "Thank you for your message! We'll get back to you soon.";
-          formMsg.className = "text-green-600 text-center mt-4 font-medium";
-          contactForm.reset();
-        }, function (error) {
-          formMsg.textContent = "Sorry, there was an error sending your message. Please try again later.";
-          formMsg.className = "text-red-600 text-center mt-4 font-medium";
-          console.error('EmailJS Error:', error);
-        });
-      formMsg.classList.remove('hidden');
-    });
-  });
-</script>
+        // Form submission handling with EmailJS
+        const contactForm = document.querySelector('form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                emailjs.sendForm('service_m13t0ho', 'template_zatfyzn', this)
+                    .then(() => {
+                        alert('Thank you for your inquiry! We will contact you soon.');
+                        this.reset();
+                    }, (error) => {
+                        alert('There was an error sending your message. Please try again later.');
+                        console.error('EmailJS Error:', error);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
