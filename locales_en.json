@@ -11,7 +11,12 @@
   },
   "about": {
     "title": "About Our Team",
+    "desc": "We are a team of passionate engineers and designers dedicated to transforming ideas into precise, manufacturable designs.",
     "expertise_title": "Our Expertise",
+    "expertise_desc": "With over 15 years of combined experience in mechanical engineering and product design, our team specializes in creating detailed 3D models, technical drawings, and production-ready documentation.",
+    "expertise_1": "Expertise in SolidWorks, Autodesk Inventor, and Solid Edge",
+    "expertise_2": "DFM (Design for Manufacturing) focused approach",
+    "expertise_3": "Prototyping and production support services",
     "why_choose_title": "Why Choose Us",
     "fast_turnaround": "Fast Turnaround",
     "fast_turnaround_desc": "We deliver high-quality CAD models and drawings within tight deadlines.",
@@ -45,9 +50,17 @@
     "details": "Project Details",
     "submit": "Submit Inquiry",
     "sent": "Thank you for your inquiry! We will contact you soon.",
-    "failed": "There was an error sending your message. Please try again later."
+    "failed": "There was an error sending your message. Please try again later.",
+    "info_title": "Contact Information",
+    "office": "Office",
+    "hours": "Hours",
+    "hours_desc": "Monday - Friday: 9AM - 6PM<br>Saturday - Sunday: Closed",
+    "follow": "Follow Us"
   },
   "footer": {
+    "desc": "Engineering excellence through precision CAD modeling and design solutions.",
+    "services_title": "Services",
+    "reverse_engineering": "Reverse Engineering",
     "company": "Company",
     "about_us": "About Us",
     "portfolio": "Portfolio",
