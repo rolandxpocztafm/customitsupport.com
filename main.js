@@ -1,5 +1,5 @@
 // main.js
-// Dynamically loads partial HTML files into placeholders and handles the responsive mobile menu and EmailJS contact form with honeypot spam protection
+// Dynamically loads partial HTML files into placeholders, handles responsive mobile menu, EmailJS contact form, and i18n translation
 
 // List of placeholders and corresponding files
 const includes = [
@@ -13,6 +13,48 @@ const includes = [
   { id: "footer-placeholder", file: "footer.html" }
 ];
 
+// Utility: Load locales and initialize i18n
+function loadLocalesAndInit(lang = "en") {
+  Promise.all([
+    fetch("locales/en.json").then(r => r.json()),
+    fetch("locales/nl.json").then(r => r.json())
+  ]).then(([en, nl]) => {
+    i18next.init({
+      lng: lang,
+      resources: {
+        en: { translation: en },
+        nl: { translation: nl }
+      }
+    }, function () {
+      localizeContent();
+    });
+  });
+}
+
+// Utility: Localize all content currently in DOM
+function localizeContent() {
+  // Replace text content for elements with data-i18n
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.getAttribute("data-i18n");
+    const value = i18next.t(key);
+    if (el.tagName === "INPUT" || el.tagName === "TEXTAREA") {
+      // For input fields, set placeholder if applicable
+      if (el.hasAttribute("data-i18n-placeholder")) {
+        el.placeholder = value;
+      }
+    } else if (el.tagName === "OPTION") {
+      el.textContent = value;
+    } else {
+      el.innerHTML = value;
+    }
+  });
+  // Replace placeholder for inputs/textareas with data-i18n-placeholder
+  document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+    const key = el.getAttribute("data-i18n-placeholder");
+    el.placeholder = i18next.t(key);
+  });
+}
+
 // Function to load a partial into a placeholder div
 function loadPartial(id, file) {
   fetch(file)
@@ -24,6 +66,8 @@ function loadPartial(id, file) {
       document.getElementById(id).innerHTML = html;
       if (id === "nav-placeholder") initMobileMenu();
       if (id === "contact-placeholder") initContactForm();
+      // Always localize after loading new partial
+      localizeContent();
     })
     .catch(err => {
       document.getElementById(id).innerHTML = `<div style="color:red;">Error loading ${file}</div>`;
@@ -37,6 +81,12 @@ document.addEventListener("DOMContentLoaded", () => {
       loadPartial(inc.id, inc.file);
     }
   });
+
+  // Initialize i18n and language switcher after a short delay to allow nav to load
+  setTimeout(() => {
+    loadLocalesAndInit(localStorage.getItem("lang") || "en");
+    initLanguageSwitcher();
+  }, 300);
 });
 
 // Responsive mobile menu toggle logic
@@ -58,10 +108,8 @@ function initMobileMenu() {
 
 // Contact form submission logic with honeypot spam protection
 function initContactForm() {
-  // Support both "form" and "#contact-form" for backward compatibility
   let form = document.getElementById("contact-form");
   if (!form) {
-    // fallback: first form in contact-placeholder section
     const contactSection = document.getElementById("contact-placeholder");
     if (contactSection) {
       form = contactSection.querySelector("form");
@@ -77,15 +125,13 @@ function initContactForm() {
   if (!form) return;
 
   if (typeof emailjs !== "undefined" && typeof emailjs.init === "function") {
-    emailjs.init('4z9M06el79Z_xG-M-'); // Replace with your EmailJS Public Key if different
+    emailjs.init('4z9M06el79Z_xG-M-');
   }
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    // Honeypot check: if the hidden "website" field is filled, silently abort as spam
     if (form.website && form.website.value) {
-      // Optionally, you could show an error or just do nothing (bots won't know)
       form.reset();
       return;
     }
@@ -94,36 +140,51 @@ function initContactForm() {
       emailjs.sendForm('service_m13t0ho', 'template_zatfyzn', this)
         .then(() => {
           if (formMsg) {
-            formMsg.textContent = "Thank you for your inquiry! We will contact you soon.";
+            formMsg.textContent = i18next.t("contact.sent");
             formMsg.classList.remove("hidden");
             formMsg.classList.add("text-green-700");
           } else {
-            alert("Thank you for your inquiry! We will contact you soon.");
+            alert(i18next.t("contact.sent"));
           }
           this.reset();
         }, (error) => {
           if (formMsg) {
-            formMsg.textContent = "There was an error sending your message. Please try again later.";
+            formMsg.textContent = i18next.t("contact.failed");
             formMsg.classList.remove("hidden");
             formMsg.classList.remove("text-green-700");
             formMsg.classList.add("text-red-700");
           } else {
-            alert("There was an error sending your message. Please try again later.");
+            alert(i18next.t("contact.failed"));
           }
           if (window.console && console.error) {
             console.error('EmailJS Error:', error);
           }
         });
     } else {
-      // Fallback: show fake success message
       if (formMsg) {
-        formMsg.textContent = "Thank you! Your message has been sent (demo mode).";
+        formMsg.textContent = i18next.t("contact.sent");
         formMsg.classList.remove("hidden");
         formMsg.classList.add("text-green-700");
       } else {
-        alert("Thank you! Your message has been sent (demo mode).");
+        alert(i18next.t("contact.sent"));
       }
       this.reset();
+    }
+  });
+}
+
+// Language switcher logic for nav and mobile
+function initLanguageSwitcher() {
+  function switchLang(lang) {
+    i18next.changeLanguage(lang, localizeContent);
+    localStorage.setItem("lang", lang);
+  }
+  document.body.addEventListener("click", function (e) {
+    if (e.target.id === "lang-en" || e.target.id === "lang-en-mobile") {
+      switchLang("en");
+    }
+    if (e.target.id === "lang-nl" || e.target.id === "lang-nl-mobile") {
+      switchLang("nl");
     }
   });
 }
