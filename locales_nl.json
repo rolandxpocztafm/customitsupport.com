@@ -11,7 +11,12 @@
   },
   "about": {
     "title": "Over Ons Team",
+    "desc": "Wij zijn een team van gepassioneerde ingenieurs en ontwerpers die zich inzetten om ideeën om te zetten in nauwkeurige, produceerbare ontwerpen.",
     "expertise_title": "Onze Expertise",
+    "expertise_desc": "Met meer dan 15 jaar gecombineerde ervaring in werktuigbouwkunde en productontwerp, specialiseren wij ons in het maken van gedetailleerde 3D-modellen, technische tekeningen en productiedocumentatie.",
+    "expertise_1": "Expertise in SolidWorks, Autodesk Inventor en Solid Edge",
+    "expertise_2": "DFM (Design for Manufacturing) gerichte aanpak",
+    "expertise_3": "Prototyping- en productieondersteunende diensten",
     "why_choose_title": "Waarom voor ons kiezen",
     "fast_turnaround": "Snelle Levering",
     "fast_turnaround_desc": "Wij leveren hoogwaardige CAD-modellen en tekeningen binnen strakke deadlines.",
@@ -45,9 +50,17 @@
     "details": "Projectdetails",
     "submit": "Verstuur aanvraag",
     "sent": "Bedankt voor uw aanvraag! We nemen spoedig contact met u op.",
-    "failed": "Er is een fout opgetreden bij het verzenden van uw bericht. Probeer het later opnieuw."
+    "failed": "Er is een fout opgetreden bij het verzenden van uw bericht. Probeer het later opnieuw.",
+    "info_title": "Contactgegevens",
+    "office": "Kantoor",
+    "hours": "Openingstijden",
+    "hours_desc": "Maandag - Vrijdag: 9:00 - 18:00<br>Zaterdag - Zondag: Gesloten",
+    "follow": "Volg ons"
   },
   "footer": {
+    "desc": "Technische uitmuntendheid door precisie CAD-modellering en ontwerpoplossingen.",
+    "services_title": "Diensten",
+    "reverse_engineering": "Reverse Engineering",
     "company": "Bedrijf",
     "about_us": "Over Ons",
     "portfolio": "Portfolio",
@@ -57,6 +70,6 @@
     "privacy": "Privacybeleid",
     "terms": "Gebruiksvoorwaarden",
     "cookie": "Cookiebeleid",
-    "copyright": "© 2023 PrecisionCAD. Alle rechten voorbehouden."
+    "copyright": "© 2025 Custom IT Support. Alle rechten voorbehouden."
   }
 }
