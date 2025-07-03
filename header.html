@@ -1,48 +1,45 @@
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PrecisionCAD | Engineering & 3D Modeling Services</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#1E40AF',
-                        secondary: '#1F2937',
-                        accent: '#3B82F6',
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        .hero-gradient {
-            background: linear-gradient(135deg, rgba(30, 64, 175, 0.9) 0%, rgba(59, 130, 246, 0.8) 100%);
-        }
-        .portfolio-item {
-            transition: all 0.3s ease;
-        }
-        .portfolio-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-        .nav-link {
-            position: relative;
-        }
-        .nav-link:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background-color: #3B82F6;
-            transition: width 0.3s ease;
-        }
-        .nav-link:hover:after {
-            width: 100%;
-        }
-    </style>
-</head>
+<!-- Navigation Bar -->
+<nav class="bg-white shadow-sm fixed top-0 left-0 w-full z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+            <!-- Logo -->
+            <div class="flex-shrink-0 flex items-center">
+                <a href="#hero">
+                    <img class="h-9 w-auto" src="logo.png" alt="PrecisionCAD Logo" />
+                </a>
+                <span class="ml-2 font-bold text-xl text-gray-900">PrecisionCAD</span>
+            </div>
+            <!-- Desktop Menu -->
+            <div class="hidden md:block">
+                <div class="ml-10 flex items-baseline space-x-8">
+                    <a href="#hero" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                    <a href="#about" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium">About</a>
+                    <a href="#services" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium">Services</a>
+                    <a href="#portfolio" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium">Portfolio</a>
+                    <a href="#contact" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                </div>
+            </div>
+            <!-- Mobile menu button -->
+            <div class="md:hidden flex items-center">
+                <button id="mobile-menu-button" class="text-gray-700 hover:text-primary focus:outline-none focus:text-primary">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100">
+        <div class="px-2 pt-2 pb-3 space-y-1">
+            <a href="#hero" class="block text-gray-700 hover:text-primary px-3 py-2 rounded-md text-base font-medium">Home</a>
+            <a href="#about" class="block text-gray-700 hover:text-primary px-3 py-2 rounded-md text-base font-medium">About</a>
+            <a href="#services" class="block text-gray-700 hover:text-primary px-3 py-2 rounded-md text-base font-medium">Services</a>
+            <a href="#portfolio" class="block text-gray-700 hover:text-primary px-3 py-2 rounded-md text-base font-medium">Portfolio</a>
+            <a href="#contact" class="block text-gray-700 hover:text-primary px-3 py-2 rounded-md text-base font-medium">Contact</a>
+        </div>
+    </div>
+</nav>
+<!-- Spacer for fixed nav -->
+<div class="h-16"></div>
