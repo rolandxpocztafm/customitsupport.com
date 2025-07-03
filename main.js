@@ -63,9 +63,9 @@ function initContactForm() {
   if (!form) return;
   form.addEventListener("submit", function (e) {
     e.preventDefault();
-    // Example: Replace with your EmailJS userID/service/template or other integration
+    // Example: EmailJS userID/service/template or other integration
     if (typeof emailjs !== "undefined") {
-      emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this, 'YOUR_USER_ID')
+      emailjs.sendForm('service_m13t0ho', 'template_zatfyzn', this, '4z9M06el79Z_xG-M-')
         .then(() => {
           formMsg.textContent = "Thank you! Your message has been sent.";
           formMsg.classList.remove("hidden");
