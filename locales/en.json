@@ -1,4 +1,3 @@
-```json
 {
   "nav": {
     "home": "Home",
@@ -116,4 +115,3 @@
     "crypto_verify_required": "Please agree to ID verification for crypto payments."
   }
 }
-```
