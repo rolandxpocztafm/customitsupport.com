@@ -4,194 +4,273 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crypto Mining Shop - Custom IT Support</title>
-    <meta name="description" content="Buy crypto mining hardware in Netherlands. ASIC miners, GPU rigs, accessories. Fast NL shipping.">
-    <style>
-        body { font-family: Arial, sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px; }
-        h1, h3 { color: #333; }
-        ul { list-style-type: disc; margin-left: 20px; }
-        .product { margin-bottom: 30px; }
-        .filters { display: flex; gap: 20px; margin-bottom: 20px; }
-        .form-group { margin-bottom: 15px; }
-        button { background-color: #007bff; color: white; padding: 10px 20px; border: none; cursor: pointer; }
-        button:hover { background-color: #0056b3; }
-        .auth-section { margin-top: 40px; border-top: 1px solid #ccc; padding-top: 20px; }
-    </style>
-    <!-- Ecwid script (replace '12345' with your Ecwid store ID after signup) -->
-    <script data-cfasync="false" src="https://app.ecwid.com/script.js?12345" charset="utf-8"></script>
+    <meta name="description" content="Buy ASIC miners, GPU rigs, and accessories in the Netherlands. Efficient crypto mining hardware with expert IT support for EU customers.">
+    <meta name="keywords" content="buy crypto miner Netherlands, ASIC miner EU, Antminer S21 price, GPU mining rig, crypto mining accessories">
+    <!-- Tailwind CSS (assumed in your site; adjust CDN if needed) -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Snipcart for Cart/Checkout -->
+    <script src="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.js"></script>
+    <meta name="snipcart:config" content='{"currency":"EUR","rules":["block-checkout-under-18"],"templatesUrl":"https://cdn.snipcart.com/themes/v3.0.31/default/locale/en.json"}'>
+    <div hidden id="snipcart" data-api-key="YOUR_SNIPCART_KEY" data-config-additional-fields='[{"name":"crypto_verify","type":"checkbox","label":"Crypto Payment - Verify Age/ID (AML)","required":false}]'></div>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+    <!-- Stripe for Fiat Payments -->
+    <script src="https://js.stripe.com/v3/"></script>
 </head>
-<body>
-    <h1>Crypto Mining Hardware</h1>
-    <p>Energy-efficient miners for EU hobbyists and businesses. Fast NL shipping from Lage Zwaluwe.</p>
+<body class="bg-gray-50">
+    <!-- Navigation (include nav.html via SSI or JS) -->
+    <div id="nav-placeholder"></div>
 
-    <!-- Filters -->
-    <div class="filters">
-        <div>
-            <h4>All Categories</h4>
-            <ul>
-                <li>ASIC Miners</li>
-                <li>GPU Rigs</li>
-                <li>Accessories</li>
-            </ul>
-        </div>
-        <div>
-            <h4>All Prices</h4>
-            <ul>
-                <li>Under €1,000</li>
-                <li>€1,000 - €5,000</li>
-                <li>Over €5,000</li>
-            </ul>
-        </div>
-        <div>
-            <h4>All Hashrates</h4>
-            <ul>
-                <li>Low (&lt;100 TH/s)</li>
-                <li>High (&gt;100 TH/s)</li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- Products with Ecwid Cart -->
-    <div class="products">
-        <div class="product">
-            <h3>Bitmain Antminer S21</h3>
-            <ul>
-                <li>Hashrate: 200 TH/s</li>
-                <li>Power: 3500W (17.5 J/TH)</li>
-                <li>Noise: 76 dB</li>
-            </ul>
-            <p>€3,250 incl. BTW</p>
-            <!-- Ecwid cart button (product ID set in Ecwid dashboard) -->
-            <div class="ecwid-product" data-product-id="antminer-s21"></div>
-            <p>Bundle: +€150 for IT Setup Consultation</p>
-        </div>
-
-        <div class="product">
-            <h3>MicroBT Whatsminer M60</h3>
-            <ul>
-                <li>Hashrate: 172 TH/s</li>
-                <li>Power: 3422W (19.9 J/TH)</li>
-                <li>Noise: 75 dB</li>
-            </ul>
-            <p>€4,300 incl. BTW</p>
-            <div class="ecwid-product" data-product-id="whatsminer-m60"></div>
-        </div>
-
-        <div class="product">
-            <h3>6x RTX 4070 GPU Rig</h3>
-            <ul>
-                <li>Hashrate: ~300 MH/s (ETH equiv.)</li>
-                <li>Power: 1800W</li>
-                <li>Noise: 65 dB</li>
-            </ul>
-            <p>€4,500 incl. BTW</p>
-            <div class="ecwid-product" data-product-id="gpu-rig"></div>
-        </div>
-
-        <div class="product">
-            <h3>1600W 80+ Gold PSU</h3>
-            <ul>
-                <li>Efficiency: 92%</li>
-                <li>Connectors: 12x PCIe</li>
-                <li>For: Multi-GPU setups</li>
-            </ul>
-            <p>€250 incl. BTW</p>
-            <div class="ecwid-product" data-product-id="psu"></div>
-        </div>
-
-        <div class="product">
-            <h3>Custom Cooling Fan (120mm)</h3>
-            <ul>
-                <li>RPM: 6000</li>
-                <li>Noise: 50 dB</li>
-                <li>3D-Printed Enclosure Option</li>
-            </ul>
-            <p>€120 incl. BTW</p>
-            <div class="ecwid-product" data-product-id="cooling-fan"></div>
-            <p>Bundle: +€150 for 1-hr IT Setup Consultation</p>
-        </div>
-    </div>
-
-    <!-- Register Section -->
-    <div class="auth-section">
-        <h3>Register</h3>
-        <form action="/register" method="POST">
-            <div class="form-group">
-                <label for="reg-fullname">Full Name</label>
-                <input type="text" id="reg-fullname" name="fullname" required>
+    <!-- Shop Section -->
+    <section id="shop" class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-bold text-gray-900 mb-4" data-i18n="shop.title">Crypto Mining Hardware</h1>
+                <p class="text-xl text-gray-600" data-i18n="shop.desc">Energy-efficient miners for EU hobbyists and businesses. Fast NL shipping from Lage Zwaluwe.</p>
             </div>
-            <div class="form-group">
-                <label for="reg-email">Email</label>
-                <input type="email" id="reg-email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="reg-password">Password</label>
-                <input type="password" id="reg-password" name="password" required>
-            </div>
-            <button type="submit">Register</button>
-        </form>
-    </div>
-
-    <!-- Login Section -->
-    <div class="auth-section">
-        <h3>Login</h3>
-        <form action="/login" method="POST">
-            <div class="form-group">
-                <label for="login-email">Email</label>
-                <input type="email" id="login-email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="login-password">Password</label>
-                <input type="password" id="login-password" name="password" required>
-            </div>
-            <button type="submit">Login</button>
-        </form>
-    </div>
-
-    <!-- Checkout Section -->
-    <div class="auth-section">
-        <h3>Checkout</h3>
-        <!-- Ecwid checkout widget -->
-        <div id="my-store-12345"></div>
-        <script>
-            Ecwid.init();
-        </script>
-        <form action="/checkout" method="POST">
-            <div class="form-group">
-                <label for="checkout-fullname">Full Name</label>
-                <input type="text" id="checkout-fullname" name="fullname" required>
-            </div>
-            <div class="form-group">
-                <label for="checkout-email">Email</label>
-                <input type="email" id="checkout-email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="checkout-address">Shipping Address (NL/EU)</label>
-                <textarea id="checkout-address" name="address" required></textarea>
-            </div>
-            <div class="form-group">
-                <label>Payment Method</label>
-                <select name="payment_method">
-                    <option value="mollie">Credit Card / iDEAL (Mollie)</option>
-                    <option value="crypto">Crypto (BTC/ETH - ID Verification Required)</option>
+            <!-- Filters -->
+            <div class="mb-8 flex flex-wrap gap-4 justify-center">
+                <select id="filter-cat" class="px-4 py-2 border rounded-md focus:ring-2 focus:ring-primary" onchange="filterProducts()">
+                    <option value="">All Categories</option>
+                    <option value="asic">ASIC Miners</option>
+                    <option value="gpu">GPU Rigs</option>
+                    <option value="accessories">Accessories</option>
+                </select>
+                <select id="filter-price" class="px-4 py-2 border rounded-md focus:ring-2 focus:ring-primary" onchange="filterProducts()">
+                    <option value="">All Prices</option>
+                    <option value="0-1000">Under €1,000</option>
+                    <option value="1000-5000">€1,000 - €5,000</option>
+                    <option value="5000+">Over €5,000</option>
+                </select>
+                <select id="filter-hash" class="px-4 py-2 border rounded-md focus:ring-2 focus:ring-primary" onchange="filterProducts()">
+                    <option value="">All Hashrates</option>
+                    <option value="low">Low (<100 TH/s)</option>
+                    <option value="high">High (>100 TH/s)</option>
                 </select>
             </div>
-            <div class="form-group">
-                <input type="checkbox" id="crypto-verification" name="crypto_verification">
-                <label for="crypto-verification">I agree to provide ID verification for crypto payment (AML/KYC)</label>
+            <!-- Product Grid -->
+            <div id="product-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Product 1: Antminer S21 -->
+                <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition" data-category="asic" data-price="3250" data-hash="high">
+                    <img src="antminer-s21.jpg" alt="Bitmain Antminer S21" class="w-full h-48 object-cover rounded mb-4" loading="lazy">
+                    <h3 class="text-xl font-semibold mb-2">Bitmain Antminer S21</h3>
+                    <ul class="text-sm text-gray-600 mb-4 space-y-1">
+                        <li>Hashrate: 200 TH/s</li>
+                        <li>Power: 3500W (17.5 J/TH)</li>
+                        <li>Noise: 76 dB</li>
+                    </ul>
+                    <div class="text-2xl font-bold text-green-600 mb-4">€3,250 incl. BTW</div>
+                    <button class="snipcart-add-item w-full bg-primary text-white py-2 rounded hover:bg-primary-dark mb-2"
+                            data-item-id="antminer-s21" data-item-price="3250" data-item-url="/shop.html" data-item-name="Bitmain Antminer S21" data-item-description="High-efficiency Bitcoin miner. 2-year warranty.">
+                        Add to Cart
+                    </button>
+                    <a href="/product-antminer-s21.html" class="block text-center text-primary underline">View Details</a>
+                    <p class="text-xs text-gray-500 mt-2">Bundle: +€150 for IT Setup Consultation</p>
+                </div>
+                <!-- Product 2: Whatsminer M60 -->
+                <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition" data-category="asic" data-price="4300" data-hash="high">
+                    <img src="whatsminer-m60.jpg" alt="MicroBT Whatsminer M60" class="w-full h-48 object-cover rounded mb-4" loading="lazy">
+                    <h3 class="text-xl font-semibold mb-2">MicroBT Whatsminer M60</h3>
+                    <ul class="text-sm text-gray-600 mb-4 space-y-1">
+                        <li>Hashrate: 172 TH/s</li>
+                        <li>Power: 3422W (19.9 J/TH)</li>
+                        <li>Noise: 75 dB</li>
+                    </ul>
+                    <div class="text-2xl font-bold text-green-600 mb-4">€4,300 incl. BTW</div>
+                    <button class="snipcart-add-item w-full bg-primary text-white py-2 rounded hover:bg-primary-dark mb-2"
+                            data-item-id="whatsminer-m60" data-item-price="4300" data-item-url="/shop.html" data-item-name="MicroBT Whatsminer M60" data-item-description="Reliable air-cooled ASIC. 2-year warranty.">
+                        Add to Cart
+                    </button>
+                    <a href="/product-whatsminer-m60.html" class="block text-center text-primary underline">View Details</a>
+                </div>
+                <!-- Product 3: GPU Rig -->
+                <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition" data-category="gpu" data-price="4500" data-hash="medium">
+                    <img src="gpu-rig.jpg" alt="Pre-built GPU Mining Rig" class="w-full h-48 object-cover rounded mb-4" loading="lazy">
+                    <h3 class="text-xl font-semibold mb-2">6x RTX 4070 GPU Rig</h3>
+                    <ul class="text-sm text-gray-600 mb-4 space-y-1">
+                        <li>Hashrate: ~300 MH/s (ETH equiv.)</li>
+                        <li>Power: 1800W</li>
+                        <li>Noise: 65 dB</li>
+                    </ul>
+                    <div class="text-2xl font-bold text-green-600 mb-4">€4,500 incl. BTW</div>
+                    <button class="snipcart-add-item w-full bg-primary text-white py-2 rounded hover:bg-primary-dark mb-2"
+                            data-item-id="gpu-rig" data-item-price="4500" data-item-url="/shop.html" data-item-name="6x RTX 4070 GPU Rig" data-item-description="Versatile for multiple coins. 1-year warranty.">
+                        Add to Cart
+                    </button>
+                    <a href="/product-gpu-rig.html" class="block text-center text-primary underline">View Details</a>
+                </div>
+                <!-- Product 4: PSU -->
+                <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition" data-category="accessories" data-price="250" data-hash="low">
+                    <img src="psu.jpg" alt="1600W 80+ Gold Power Supply" class="w-full h-48 object-cover rounded mb-4" loading="lazy">
+                    <h3 class="text-xl font-semibold mb-2">1600W 80+ Gold PSU</h3>
+                    <ul class="text-sm text-gray-600 mb-4 space-y-1">
+                        <li>Efficiency: 92%</li>
+                        <li>Connectors: 12x PCIe</li>
+                        <li>For: Multi-GPU setups</li>
+                    </ul>
+                    <div class="text-2xl font-bold text-green-600 mb-4">€250 incl. BTW</div>
+                    <button class="snipcart-add-item w-full bg-primary text-white py-2 rounded hover:bg-primary-dark mb-2"
+                            data-item-id="psu-1600w" data-item-price="250" data-item-url="/shop.html" data-item-name="1600W 80+ Gold PSU" data-item-description="Reliable power for rigs. 1-year warranty.">
+                        Add to Cart
+                    </button>
+                    <a href="/product-psu.html" class="block text-center text-primary underline">View Details</a>
+                </div>
+                <!-- Product 5: Cooling Fan -->
+                <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition" data-category="accessories" data-price="120" data-hash="low">
+                    <img src="cooling-fan.jpg" alt="Custom 3D-Printed Cooling Fan" class="w-full h-48 object-cover rounded mb-4" loading="lazy">
+                    <h3 class="text-xl font-semibold mb-2">Custom Cooling Fan (120mm)</h3>
+                    <ul class="text-sm text-gray-600 mb-4 space-y-1">
+                        <li>RPM: 6000</li>
+                        <li>Noise: 50 dB</li>
+                        <li>3D-Printed Enclosure Option</li>
+                    </ul>
+                    <div class="text-2xl font-bold text-green-600 mb-4">€120 incl. BTW</div>
+                    <button class="snipcart-add-item w-full bg-primary text-white py-2 rounded hover:bg-primary-dark mb-2"
+                            data-item-id="cooling-fan" data-item-price="120" data-item-url="/shop.html" data-item-name="Custom Cooling Fan" data-item-description="Engineered for quiet operation. 1-year warranty."
+                            data-item-custom1-name="Bundle IT Setup" data-item-custom1-type="checkbox" data-item-custom1-price="150">
+                        Add to Cart
+                    </button>
+                    <a href="/product-cooling-fan.html" class="block text-center text-primary underline">View Details</a>
+                    <p class="text-xs text-gray-500 mt-2">Bundle: +€150 for 1-hr IT Setup Consultation</p>
+                </div>
             </div>
-            <div class="form-group">
-                <input type="checkbox" id="gdpr-consent" name="gdpr_consent" required>
-                <label for="gdpr-consent">I consent to data collection per GDPR. <a href="/privacy-policy">Privacy Policy</a></label>
-            </div>
-            <button type="submit">Complete Order</button>
-        </form>
-        <p>Prices include 21% NL VAT. Invoice provided. Ships in 3-5 days EU-wide (€75/unit) or free NL pickup.</p>
-        <p>Mining profitability depends on market conditions; consult a financial advisor. MiCA compliant.</p>
-    </div>
+        </div>
+    </section>
 
-    <!-- Consultation Link -->
-    <div>
-        <p>Need setup help? <a href="/consultation">Book IT Consultation</a></p>
-    </div>
+    <!-- Checkout Section -->
+    <section id="checkout" class="py-16 bg-gray-50 hidden">
+        <div class="max-w-md mx-auto px-4 sm:px-6 lg:px-8 bg-white p-8 rounded-lg shadow-sm">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Checkout</h2>
+            <!-- Cart Summary -->
+            <div id="cart-items" class="mb-6">
+                <div class="snipcart-items"></div>
+                <div class="snipcart-total text-lg font-semibold text-gray-900 mt-4"></div>
+            </div>
+            <!-- Checkout Form -->
+            <form id="checkout-form" class="space-y-4">
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                    <input type="text" id="name" required class="w-full border border-gray-300 p-2 rounded-md focus:ring-2 focus:ring-primary" placeholder="John Doe">
+                </div>
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                    <input type="email" id="email" required class="w-full border border-gray-300 p-2 rounded-md focus:ring-2 focus:ring-primary" placeholder="john@example.com">
+                </div>
+                <div>
+                    <label for="address" class="block text-sm font-medium text-gray-700">Shipping Address (NL/EU)</label>
+                    <input type="text" id="address" required class="w-full border border-gray-300 p-2 rounded-md focus:ring-2 focus:ring-primary" placeholder="Biesboschweg, Lage Zwaluwe">
+                </div>
+                <div>
+                    <label for="payment-method" class="block text-sm font-medium text-gray-700">Payment Method</label>
+                    <select id="payment-method" class="w-full border border-gray-300 p-2 rounded-md focus:ring-2 focus:ring-primary">
+                        <option value="fiat">Credit Card (Stripe/Mollie)</option>
+                        <option value="crypto">Crypto (BTC/ETH - ID Verification Required)</option>
+                    </select>
+                </div>
+                <div id="crypto-verify-section" class="hidden">
+                    <label class="flex items-center">
+                        <input type="checkbox" id="crypto-verify" class="mr-2"> I agree to provide ID verification for crypto payment (AML/KYC)
+                    </label>
+                </div>
+                <div class="flex items-center">
+                    <input type="checkbox" id="gdpr-consent" required class="mr-2">
+                    <label for="gdpr-consent" class="text-sm text-gray-600">I consent to data collection per GDPR. <a href="/privacy.html" class="text-primary underline">Privacy Policy</a></label>
+                </div>
+                <button type="submit" class="w-full bg-primary text-white py-3 rounded-md hover:bg-primary-dark transition">Complete Order</button>
+                <p class="text-xs text-gray-500 mt-4">Prices include 21% NL VAT. Invoice provided. Ships in 3-5 days EU-wide (€75/unit) or free NL pickup.</p>
+                <p class="text-xs text-red-500 mt-2" data-i18n="mica.disclaimer">Mining profitability depends on market conditions; consult a financial advisor. MiCA compliant.</p>
+            </form>
+            <!-- Cross-Promotion -->
+            <div class="mt-6 text-sm">
+                <p>Need setup help? <a href="#contact" class="text-primary underline">Book IT Consultation</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (include footer.html via SSI or JS) -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // Filter Products
+        function filterProducts() {
+            const cat = document.getElementById('filter-cat').value;
+            const price = document.getElementById('filter-price').value;
+            const hash = document.getElementById('filter-hash').value;
+            const products = document.querySelectorAll('#product-grid > div');
+            products.forEach(p => {
+                let show = true;
+                if (cat && !p.dataset.category.includes(cat)) show = false;
+                if (price) {
+                    const pPrice = parseInt(p.dataset.price);
+                    const [min, max] = price.split('-').map(n => parseInt(n) || Infinity);
+                    if (pPrice < min || pPrice > max) show = false;
+                }
+                if (hash && p.dataset.hash !== hash) show = false;
+                p.style.display = show ? 'block' : 'none';
+            });
+        }
+
+        // Toggle Checkout
+        document.addEventListener('snipcart.ready', () => {
+            Snipcart.events.on('cart.opened', () => {
+                document.getElementById('shop').classList.add('hidden');
+                document.getElementById('checkout').classList.remove('hidden');
+            });
+            Snipcart.events.on('cart.closed', () => {
+                document.getElementById('shop').classList.remove('hidden');
+                document.getElementById('checkout').classList.add('hidden');
+            });
+        });
+
+        // Payment Method Toggle
+        document.getElementById('payment-method').addEventListener('change', (e) => {
+            document.getElementById('crypto-verify-section').classList.toggle('hidden', e.target.value !== 'crypto');
+        });
+
+        // Checkout Form Submission
+        document.getElementById('checkout-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const paymentMethod = document.getElementById('payment-method').value;
+            const customer = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                address: document.getElementById('address').value
+            };
+
+            if (paymentMethod === 'fiat') {
+                // Stripe Payment
+                const stripe = Stripe('YOUR_STRIPE_KEY');
+                const { error, paymentIntent } = await stripe.createPaymentIntent({
+                    amount: Snipcart.store.getState().cart.total * 100,
+                    currency: 'eur',
+                    metadata: { customer }
+                });
+                if (!error) {
+                    window.location.href = '/order-confirmation.html';
+                }
+            } else {
+                // Crypto Payment (CoinPayments)
+                if (document.getElementById('crypto-verify').checked) {
+                    // Redirect to Sumsub for KYC or CoinPayments
+                    window.location.href = `https://api.coinpayments.net/?key=YOUR_COINPAYMENTS_KEY&amount=${Snipcart.store.getState().cart.total}&currency=EUR`;
+                } else {
+                    alert('Please agree to ID verification for crypto payments.');
+                }
+            }
+        });
+
+        // i18n Placeholder (adjust based on your existing i18n setup)
+        const translations = {
+            en: { 'shop.title': 'Crypto Mining Hardware', 'shop.desc': 'Energy-efficient miners...', 'mica.disclaimer': 'Mining profitability depends...' },
+            nl: { 'shop.title': 'Crypto Mijnbouw Hardware', 'shop.desc': 'Energiezuinige miners...', 'mica.disclaimer': 'Mijnbouw winstgevendheid hangt af...' }
+        };
+        // Apply translations based on lang button clicks (from nav.html)
+    </script>
 </body>
 </html>
