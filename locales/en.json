@@ -4,10 +4,13 @@
     "about": "About",
     "services": "Services",
     "portfolio": "Portfolio",
-    "contact": "Contact"
+    "contact": "Contact",
+    "shop": "Shop"
   },
   "hero": {
-    "headline": "Precision engineering solutions for product development, from concept to production-ready designs."
+    "headline": "Precision engineering solutions for product development, from concept to production-ready designs.",
+    "shop_promo": "Explore Our Crypto Mining Shop",
+    "shop_promo_desc": "High-efficiency ASIC miners, GPU rigs, and accessories with expert IT support."
   },
   "about": {
     "title": "About Our Team",
@@ -70,6 +73,45 @@
     "privacy": "Privacy Policy",
     "terms": "Terms of Service",
     "cookie": "Cookie Policy",
-    "copyright": "© 2023 PrecisionCAD. All rights reserved."
+    "copyright": "© 2025 Custom IT Support. All rights reserved."
+  },
+  "shop": {
+    "title": "Crypto Mining Hardware",
+    "desc": "Energy-efficient miners for EU hobbyists and businesses. Fast NL shipping from Lage Zwaluwe.",
+    "categories": {
+      "asic": "ASIC Miners",
+      "gpu": "GPU Rigs",
+      "accessories": "Accessories"
+    },
+    "filters": {
+      "all_categories": "All Categories",
+      "all_prices": "All Prices",
+      "under_1000": "Under €1,000",
+      "1000_5000": "€1,000 - €5,000",
+      "over_5000": "Over €5,000",
+      "all_hashrates": "All Hashrates",
+      "low_hash": "Low (<100 TH/s)",
+      "high_hash": "High (>100 TH/s)"
+    },
+    "add_to_cart": "Add to Cart",
+    "view_details": "View Details",
+    "bundle_it": "Bundle: +€150 for 1-hr IT Setup Consultation",
+    "mica_disclaimer": "Mining profitability depends on market conditions; consult a financial advisor. MiCA compliant."
+  },
+  "checkout": {
+    "title": "Checkout",
+    "name": "Full Name",
+    "email": "Email",
+    "address": "Shipping Address (NL/EU)",
+    "payment_method": "Payment Method",
+    "fiat_option": "Credit Card (Stripe/Mollie)",
+    "crypto_option": "Crypto (BTC/ETH - ID Verification Required)",
+    "crypto_verify": "I agree to provide ID verification for crypto payment (AML/KYC)",
+    "gdpr_consent": "I consent to data collection per GDPR.",
+    "submit": "Complete Order",
+    "vat_notice": "Prices include 21% NL VAT. Invoice provided. Ships in 3-5 days EU-wide (€75/unit) or free NL pickup.",
+    "success": "Order placed successfully! You'll receive a confirmation soon.",
+    "failed": "Error processing your order. Please try again.",
+    "crypto_verify_required": "Please agree to ID verification for crypto payments."
   }
 }
