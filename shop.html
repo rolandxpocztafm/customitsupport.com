@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Mining Shop - Custom IT Support</title>
+    <meta name="description" content="Buy ASIC miners, GPU rigs in Netherlands. Efficient crypto hardware with IT support.">
+    <!-- Google Analytics: Add GA4 script here -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'GA_MEASUREMENT_ID');</script>
+    <!-- Snipcart script as above -->
+</head>
+<body class="bg-gray-50">
+    <!-- Include nav.html here via SSI or JS -->
+    <section id="shop" class="py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-bold text-gray-900 mb-4" data-i18n="shop.title">Crypto Mining Hardware</h1>
+                <p class="text-xl text-gray-600" data-i18n="shop.desc">Energy-efficient miners for EU hobbyists. Fast NL shipping from Lage Zwaluwe.</p>
+            </div>
+            <!-- Filters -->
+            <div class="mb-8 flex flex-wrap gap-4 justify-center">
+                <select id="filter-cat" class="px-4 py-2 border rounded" onchange="filterProducts()">
+                    <option value="">All Categories</option>
+                    <option value="asic">ASIC Miners</option>
+                    <option value="gpu">GPU Rigs</option>
+                    <option value="accessories">Accessories</option>
+                </select>
+                <select id="filter-price" class="px-4 py-2 border rounded" onchange="filterProducts()">
+                    <option value="">All Prices</option>
+                    <option value="0-1000">Under €1,000</option>
+                    <option value="1000-5000">€1,000 - €5,000</option>
+                </select>
+                <select id="filter-hash" class="px-4 py-2 border rounded" onchange="filterProducts()">
+                    <option value="">All Hashrates</option>
+                    <option value="low">Low (<100 TH/s)</option>
+                    <option value="high">High (>100 TH/s)</option>
+                </select>
+            </div>
+            <!-- Product Grid -->
+            <div id="product-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Product 1: Antminer S21 -->
+                <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition" data-category="asic" data-price="3250" data-hash="high">
+                    <img src="antminer-s21.jpg" alt="Bitmain Antminer S21" class="w-full h-48 object-cover rounded mb-4" loading="lazy">
+                    <h3 class="text-xl font-semibold mb-2">Bitmain Antminer S21</h3>
+                    <ul class="text-sm text-gray-600 mb-4 space-y-1">
+                        <li>Hashrate: 200 TH/s</li>
+                        <li>Power: 3500W (17.5 J/TH)</li>
+                        <li>Noise: 76 dB</li>
+                    </ul>
+                    <div class="text-2xl font-bold text-green-600 mb-4">€3,250 incl. BTW</div>
+                    <button class="snipcart-add-item w-full bg-primary text-white py-2 rounded hover:bg-primary-dark mb-2"
+                            data-item-id="antminer-s21" data-item-price="3250" data-item-url="/shop.html" data-item-name="Bitmain Antminer S21" data-item-description="High-efficiency Bitcoin miner.">
+                        Add to Cart
+                    </button>
+                    <a href="/product-antminer-s21.html" class="block text-center text-primary underline">View Details</a>
+                </div>
+                <!-- Product 2: Whatsminer M60 -->
+                <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition" data-category="asic" data-price="4300" data-hash="high">
+                    <img src="whatsminer-m60.jpg" alt="MicroBT Whatsminer M60" class="w-full h-48 object-cover rounded mb-4" loading="lazy">
+                    <h3 class="text-xl font-semibold mb-2">MicroBT Whatsminer M60</h3>
+                    <ul class="text-sm text-gray-600 mb-4 space-y-1">
+                        <li>Hashrate: 172 TH/s</li>
+                        <li>Power: 3422W (19.9 J/TH)</li>
+                        <li>Noise: 75 dB</li>
+                    </ul>
+                    <div class="text-2xl font-bold text-green-600 mb-4">€4,300 incl. BTW</div>
+                    <button class="snipcart-add-item w-full bg-primary text-white py-2 rounded hover:bg-primary-dark mb-2"
+                            data-item-id="whatsminer-m60" data-item-price="4300" data-item-url="/shop.html" data-item-name="MicroBT Whatsminer M60" data-item-description="Reliable air-cooled ASIC.">
+                        Add to Cart
+                    </button>
+                    <a href="/product-whatsminer-m60.html" class="block text-center text-primary underline">View Details</a>
+                </div>
+                <!-- Product 3: GPU Rig (Pre-built 6x RTX 4070) -->
+                <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition" data-category="gpu" data-price="4500" data-hash="medium">
+                    <img src="gpu-rig.jpg" alt="Pre-built GPU Mining Rig" class="w-full h-48 object-cover rounded mb-4" loading="lazy">
+                    <h3 class="text-xl font-semibold mb-2">6x RTX 4070 GPU Rig</h3>
+                    <ul class="text-sm text-gray-600 mb-4 space-y-1">
+                        <li>Hashrate: ~300 MH/s (ETH equiv.)</li>
+                        <li>Power: 1800W</li>
+                        <li>Noise: 65 dB</li>
+                    </ul>
+                    <div class="text-2xl font-bold text-green-600 mb-4">€4,500 incl. BTW</div>
+                    <button class="snipcart-add-item w-full bg-primary text-white py-2 rounded hover:bg-primary-dark mb-2"
+                            data-item-id="gpu-rig" data-item-price="4500" data-item-url="/shop.html" data-item-name="6x RTX 4070 GPU Rig" data-item-description="Versatile for multiple coins.">
+                        Add to Cart
+                    </button>
+                    <a href="/product-gpu-rig.html" class="block text-center text-primary underline">View Details</a>
+                </div>
+                <!-- Product 4: 80+ Gold PSU (1600W) -->
+                <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition" data-category="accessories" data-price="250" data-hash="low">
+                    <img src="psu.jpg" alt="1600W 80+ Gold Power Supply" class="w-full h-48 object-cover rounded mb-4" loading="lazy">
+                    <h3 class="text-xl font-semibold mb-2">1600W 80+ Gold PSU</h3>
+                    <ul class="text-sm text-gray-600 mb-4 space-y-1">
+                        <li>Efficiency: 92%</li>
+                        <li>Connectors: 12x PCIe</li>
+                        <li>For: Multi-GPU setups</li>
+                    </ul>
+                    <div class="text-2xl font-bold text-green-600 mb-4">€250 incl. BTW</div>
+                    <button class="snipcart-add-item w-full bg-primary text-white py-2 rounded hover:bg-primary-dark mb-2"
+                            data-item-id="psu-1600w" data-item-price="250" data-item-url="/shop.html" data-item-name="1600W 80+ Gold PSU" data-item-description="Reliable power for rigs.">
+                        Add to Cart
+                    </button>
+                    <a href="/product-psu.html" class="block text-center text-primary underline">View Details</a>
+                </div>
+                <!-- Product 5: Custom Cooling Fan -->
+                <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition" data-category="accessories" data-price="120" data-hash="low">
+                    <img src="cooling-fan.jpg" alt="Custom 3D-Printed Cooling Fan" class="w-full h-48 object-cover rounded mb-4" loading="lazy">
+                    <h3 class="text-xl font-semibold mb-2">Custom Cooling Fan (120mm)</h3>
+                    <ul class="text-sm text-gray-600 mb-4 space-y-1">
+                        <li>RPM: 6000</li>
+                        <li>Noise: 50 dB</li>
+                        <li>3D-Printed Enclosure Option</li>
+                    </ul>
+                    <div class="text-2xl font-bold text-green-600 mb-4">€120 incl. BTW</div>
+                    <button class="snipcart-add-item w-full bg-primary text-white py-2 rounded hover:bg-primary-dark mb-2"
+                            data-item-id="cooling-fan" data-item-price="120" data-item-url="/shop.html" data-item-name="Custom Cooling Fan" data-item-description="Engineered for quiet operation.">
+                        Add to Cart
+                    </button>
+                    <a href="/product-cooling-fan.html" class="block text-center text-primary underline">View Details</a>
+                    <p class="text-xs text-gray-500 mt-2">Bundle: +€150 for 1-hr IT Setup Consultation</p>
+                </div>
+                <!-- Add more products similarly -->
+            </div>
+            <!-- Cart Summary -->
+            <div id="snipcart-summary" class="mt-8 p-4 bg-white rounded-lg shadow"></div>
+        </div>
+    </section>
+    <!-- Include footer.html -->
+
+    <script>
+        // Filter Function
+        function filterProducts() {
+            const cat = document.getElementById('filter-cat').value;
+            const price = document.getElementById('filter-price').value;
+            const hash = document.getElementById('filter-hash').value;
+            const products = document.querySelectorAll('#product-grid > div');
+            products.forEach(p => {
+                let show = true;
+                if (cat && !p.dataset.category.includes(cat)) show = false;
+                if (price) {
+                    const pPrice = parseInt(p.dataset.price);
+                    const [min, max] = price.split('-').map(n => parseInt(n) || 0);
+                    if (pPrice < min || pPrice > max) show = false;
+                }
+                if (hash && p.dataset.hash !== hash) show = false;
+                p.style.display = show ? 'block' : 'none';
+            });
+        }
+    </script>
+    <!-- i18n JS if needed -->
+</body>
+</html>
