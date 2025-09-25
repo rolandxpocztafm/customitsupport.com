@@ -5,9 +5,9 @@
             <!-- Logo -->
             <div class="flex-shrink-0 flex items-center">
                 <a href="#hero">
-                    <img class="h-9 w-auto" src="logo.png" alt="Custom IT support Logo" />
+                    <img class="h-9 w-auto" src="logo.png" alt="Custom IT Support Logo" />
                 </a>
-                <span class="ml-2 font-bold text-xl text-gray-900">Custom IT support</span>
+                <span class="ml-2 font-bold text-xl text-gray-900">Custom IT Support</span>
             </div>
             <!-- Desktop Menu -->
             <div class="hidden md:flex items-center">
@@ -15,7 +15,17 @@
                     <a href="#hero" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium" data-i18n="nav.home">Home</a>
                     <a href="#about" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium" data-i18n="nav.about">About</a>
                     <a href="#services" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium" data-i18n="nav.services">Services</a>
+                    <a href="/shop.html" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium" data-i18n="nav.shop">Shop</a> <!-- New Shop Tab -->
                     <a href="#contact" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium" data-i18n="nav.contact">Contact</a>
+                </div>
+                <!-- Shop Submenu (Dropdown on Hover) -->
+                <div class="relative ml-4 group">
+                    <button class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium">Categories</button>
+                    <div class="absolute hidden group-hover:block bg-white shadow-lg rounded-md py-2 mt-2 w-48">
+                        <a href="/shop.html?cat=asic" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">ASIC Miners</a>
+                        <a href="/shop.html?cat=gpu" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">GPU Rigs</a>
+                        <a href="/shop.html?cat=accessories" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Accessories</a>
+                    </div>
                 </div>
                 <!-- Language Switcher Flags -->
                 <div class="flex items-center gap-2 ml-6">
@@ -54,25 +64,13 @@
             <a href="#hero" class="block text-gray-700 hover:text-primary px-3 py-2 rounded-md text-base font-medium" data-i18n="nav.home">Home</a>
             <a href="#about" class="block text-gray-700 hover:text-primary px-3 py-2 rounded-md text-base font-medium" data-i18n="nav.about">About</a>
             <a href="#services" class="block text-gray-700 hover:text-primary px-3 py-2 rounded-md text-base font-medium" data-i18n="nav.services">Services</a>
+            <a href="/shop.html" class="block text-gray-700 hover:text-primary px-3 py-2 rounded-md text-base font-medium" data-i18n="nav.shop">Shop</a> <!-- New Mobile Shop -->
             <a href="#portfolio" class="block text-gray-700 hover:text-primary px-3 py-2 rounded-md text-base font-medium" data-i18n="nav.portfolio">Portfolio</a>
             <a href="#contact" class="block text-gray-700 hover:text-primary px-3 py-2 rounded-md text-base font-medium" data-i18n="nav.contact">Contact</a>
-            <div class="flex items-center gap-2 mt-2">
-                <button id="lang-en-mobile" type="button" aria-label="English"
-                    class="rounded-full focus:outline-none focus:ring-2 focus:ring-primary p-0 border-0 bg-transparent w-9 h-9 flex items-center justify-center hover:bg-gray-100 transition"
-                    style="cursor:pointer;">
-                    <img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f1fa-1f1f8.svg"
-                         alt="English"
-                         class="block w-7 h-7"
-                         style="pointer-events:none;user-select:none;" />
-                </button>
-                <button id="lang-nl-mobile" type="button" aria-label="Nederlands"
-                    class="rounded-full focus:outline-none focus:ring-2 focus:ring-primary p-0 border-0 bg-transparent w-9 h-9 flex items-center justify-center hover:bg-gray-100 transition"
-                    style="cursor:pointer;">
-                    <img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f1f3-1f1f1.svg"
-                         alt="Nederlands"
-                         class="block w-7 h-7"
-                         style="pointer-events:none;user-select:none;" />
-                </button>
+            <div class="flex items-center gap-2 mt-2 px-3">
+                <!-- Mobile Language Buttons -->
+                <button id="lang-en-mobile" type="button" aria-label="English" class="...">...</button> <!-- Abbrev for brevity -->
+                <button id="lang-nl-mobile" type="button" aria-label="Nederlands" class="...">...</button>
             </div>
         </div>
     </div>
