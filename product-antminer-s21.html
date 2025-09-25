@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta/SEO as in shop.html; Keywords: "buy Antminer S21 Netherlands" -->
+    <title>Bitmain Antminer S21 - €3,250 | Custom IT Support</title>
+</head>
+<body>
+    <!-- Nav -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col lg:flex-row gap-8">
+            <!-- Images -->
+            <div class="lg:w-1/2">
+                <img src="antminer-s21-front.jpg" alt="Antminer S21 Front" class="w-full h-64 object-cover rounded mb-4" loading="lazy">
+                <img src="antminer-s21-side.jpg" alt="Antminer S21 Side" class="w-full h-32 object-cover rounded" loading="lazy">
+                <img src="antminer-s21-ports.jpg" alt="Antminer S21 Ports" class="w-full h-32 object-cover rounded" loading="lazy">
+            </div>
+            <!-- Details -->
+            <div class="lg:w-1/2">
+                <h1 class="text-3xl font-bold mb-4">Bitmain Antminer S21</h1>
+                <div class="text-3xl font-bold text-green-600 mb-6">€3,250 incl. BTW</div>
+                <ul class="text-gray-600 mb-6 space-y-2">
+                    <li><strong>Hashrate:</strong> 200 TH/s</li>
+                    <li><strong>Power Consumption:</strong> 3500W (17.5 J/TH)</li>
+                    <li><strong>Noise Level:</strong> 76 dB</li>
+                    <li><strong>Warranty:</strong> 2 Years</li>
+                    <li><strong>Shipping:</strong> €75 EU-wide (Free NL pickup in Lage Zwaluwe)</li>
+                </ul>
+                <div class="mb-6 p-4 bg-gray-50 rounded">
+                    <h3>ROI Calculator</h3>
+                    <input type="number" id="elec-cost" placeholder="Electricity €/kWh (default 0.15)" value="0.15" class="border p-2 mb-2 w-full">
+                    <input type="number" id="btc-price" placeholder="BTC Price €" value="60000" class="border p-2 mb-2 w-full">
+                    <button onclick="calculateROI()" class="bg-primary text-white px-4 py-2 rounded">Calculate</button>
+                    <p id="roi-result" class="mt-2 font-bold"></p>
+                </div>
+                <button class="snipcart-add-item w-full bg-primary text-white py-3 rounded mb-4 text-lg"
+                        data-item-id="antminer-s21" data-item-price="3250" data-item-name="Bitmain Antminer S21">
+                    Add to Cart
+                </button>
+                <button class="w-full bg-green-600 text-white py-3 rounded">Buy Now</button>
+                <div class="mt-6 text-sm">
+                    <p class="text-red-500" data-i18n="mica.disclaimer">Mining profitability depends on market conditions; consult a financial advisor. MiCA compliant.</p>
+                    <a href="#contact" class="text-primary underline">Need setup? Book IT Consultation (+€150 bundle)</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function calculateROI() {
+            const elec = parseFloat(document.getElementById('elec-cost').value);
+            const btc = parseFloat(document.getElementById('btc-price').value);
+            const hashrate = 200; // TH/s
+            const power = 3500 / 1000; // kW
+            const dailyRev = (hashrate * 10.04 / 60000) * btc; // Approx daily USD rev, adjusted
+            const dailyCost = power * 24 * elec;
+            const monthlyProfit = (dailyRev - dailyCost) * 30;
+            document.getElementById('roi-result').textContent = `Est. Monthly Profit: €${monthlyProfit.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
