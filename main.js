@@ -1,4 +1,3 @@
-```javascript
 // main.js
 // Dynamically loads partial HTML files into placeholders, handles responsive mobile menu, EmailJS contact form, Snipcart checkout, and robust i18n translation
 
@@ -288,4 +287,3 @@ function initCheckoutForm() {
     }
   });
 }
-```
