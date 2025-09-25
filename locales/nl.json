@@ -1,13 +1,17 @@
+```json
 {
   "nav": {
     "home": "Home",
     "about": "Over Ons",
     "services": "Diensten",
     "portfolio": "Portfolio",
-    "contact": "Contact"
+    "contact": "Contact",
+    "shop": "Winkel"
   },
   "hero": {
-    "headline": "Precisie-engineering oplossingen voor productontwikkeling, van concept tot productieklare ontwerpen."
+    "headline": "Precisie-engineering oplossingen voor productontwikkeling, van concept tot productieklare ontwerpen.",
+    "shop_promo": "Ontdek Onze Crypto Mijnbouw Winkel",
+    "shop_promo_desc": "Hoogefficiënte ASIC-miners, GPU-rigs en accessoires met deskundige IT-ondersteuning."
   },
   "about": {
     "title": "Over Ons Team",
@@ -71,5 +75,45 @@
     "terms": "Gebruiksvoorwaarden",
     "cookie": "Cookiebeleid",
     "copyright": "© 2025 Custom IT Support. Alle rechten voorbehouden."
+  },
+  "shop": {
+    "title": "Crypto Mijnbouw Hardware",
+    "desc": "Energiezuinige miners voor EU-hobbyisten en bedrijven. Snelle NL-verzending vanuit Lage Zwaluwe.",
+    "categories": {
+      "asic": "ASIC Miners",
+      "gpu": "GPU Rigs",
+      "accessories": "Accessoires"
+    },
+    "filters": {
+      "all_categories": "Alle Categorieën",
+      "all_prices": "Alle Prijzen",
+      "under_1000": "Onder €1.000",
+      "1000_5000": "€1.000 - €5.000",
+      "over_5000": "Boven €5.000",
+      "all_hashrates": "Alle Hashrates",
+      "low_hash": "Laag (<100 TH/s)",
+      "high_hash": "Hoog (>100 TH/s)"
+    },
+    "add_to_cart": "Toevoegen aan Winkelwagen",
+    "view_details": "Bekijk Details",
+    "bundle_it": "Bundel: +€150 voor 1-uur IT Setup Consult",
+    "mica_disclaimer": "Mijnbouw winstgevendheid hangt af van marktomstandigheden; raadpleeg een financieel adviseur. MiCA-conform."
+  },
+  "checkout": {
+    "title": "Afrekenen",
+    "name": "Volledige Naam",
+    "email": "E-mail",
+    "address": "Verzendadres (NL/EU)",
+    "payment_method": "Betaalmethode",
+    "fiat_option": "Creditcard (Stripe/Mollie)",
+    "crypto_option": "Crypto (BTC/ETH - ID-verificatie vereist)",
+    "crypto_verify": "Ik ga akkoord met ID-verificatie voor crypto betaling (AML/KYC)",
+    "gdpr_consent": "Ik ga akkoord met gegevensverzameling conform GDPR.",
+    "submit": "Bestelling Voltooien",
+    "vat_notice": "Prijzen inclusief 21% NL BTW. Factuur verstrekt. Verzending in 3-5 dagen EU-breed (€75/unit) of gratis NL ophalen.",
+    "success": "Bestelling succesvol geplaatst! U ontvangt spoedig een bevestiging.",
+    "failed": "Fout bij het verwerken van uw bestelling. Probeer opnieuw.",
+    "crypto_verify_required": "Ga akkoord met ID-verificatie voor crypto betalingen."
   }
 }
+```
