@@ -10,7 +10,7 @@ const includes = [
   { id: "testimonials-placeholder", file: "testimonials.html" },
   { id: "contact-placeholder", file: "contact.html" },
   { id: "footer-placeholder", file: "footer.html" },
-  { id: "shop-placeholder", file: "shop.html" } // Added shop partial
+  { id: "shop-placeholder", file: "shop.html" }
 ];
 
 // Hold loaded translations
@@ -49,21 +49,21 @@ function initI18n(lang = "en") {
 
 // 3. Localize all content in DOM
 function localizeContent() {
-  // Elements with data-i18n
   document.querySelectorAll("[data-i18n]").forEach(el => {
-    const key = el.getAttribute("data-i18n");
+    const key = el.getAttribute("data-i18n").replace("[title]", "");
     let value = i18next.t(key);
-    // Fallback: show key if missing
     if (!value || value === key) value = translations.en?.[key.split('.').shift()] || key;
     if (el.tagName === "INPUT" || el.tagName === "TEXTAREA") {
       if (el.hasAttribute("data-i18n-placeholder")) el.placeholder = value;
     } else if (el.tagName === "OPTION") {
       el.textContent = value;
+    } else if (el.getAttribute("data-i18n").startsWith("[title]")) {
+      el.setAttribute("title", value);
+      el.textContent = value;
     } else {
       el.innerHTML = value;
     }
   });
-  // Placeholder fields
   document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
     const key = el.getAttribute("data-i18n-placeholder");
     let value = i18next.t(key);
@@ -75,7 +75,12 @@ function localizeContent() {
 // 4. Language switcher for desktop and mobile
 function initLanguageSwitcher() {
   function switchLang(lang) {
-    i18next.changeLanguage(lang, localizeContent);
+    i18next.changeLanguage(lang, () => {
+      localizeContent();
+      if (document.getElementById('shop') && !document.getElementById('shop').classList.contains('hidden')) {
+        Snipcart.events.emit('cart.refresh');
+      }
+    });
     localStorage.setItem("lang", lang);
   }
   document.body.addEventListener("click", function (e) {
@@ -95,7 +100,7 @@ function loadPartial(id, file) {
       document.getElementById(id).innerHTML = html;
       if (id === "nav-placeholder") initMobileMenu();
       if (id === "contact-placeholder") initContactForm();
-      if (id === "shop-placeholder") initCheckoutForm(); // Initialize shop checkout
+      if (id === "shop-placeholder") initCheckoutForm();
       localizeContent();
     })
     .catch(err => {
@@ -113,6 +118,9 @@ document.addEventListener("DOMContentLoaded", () => {
       if (document.getElementById(inc.id)) loadPartial(inc.id, inc.file);
     });
     initLanguageSwitcher();
+    if (window.location.pathname.includes('shop.html')) {
+      localizeContent();
+    }
   });
 });
 
@@ -129,6 +137,13 @@ function initMobileMenu() {
         mobileMenu.classList.add("hidden");
       });
     });
+    // Ensure language switcher is visible in mobile menu
+    const langSwitchers = mobileMenu.querySelectorAll("#lang-en-mobile, #lang-nl-mobile");
+    if (langSwitchers.length > 0) {
+      langSwitchers.forEach(switcher => {
+        switcher.classList.remove("hidden");
+      });
+    }
   }
 }
 
@@ -211,7 +226,6 @@ function initCheckoutForm() {
   }
   if (!form) return;
 
-  // Toggle crypto verification field
   const paymentMethod = document.getElementById("payment-method");
   const cryptoVerifySection = document.getElementById("crypto-verify-section");
   if (paymentMethod && cryptoVerifySection) {
@@ -220,12 +234,11 @@ function initCheckoutForm() {
     });
   }
 
-  // Snipcart cart toggle
   if (typeof Snipcart !== "undefined") {
     Snipcart.events.on('cart.opened', () => {
       document.getElementById('shop').classList.add('hidden');
       document.getElementById('checkout').classList.remove('hidden');
-      localizeContent(); // Reapply translations
+      localizeContent();
     });
     Snipcart.events.on('cart.closed', () => {
       document.getElementById('shop').classList.remove('hidden');
@@ -233,7 +246,6 @@ function initCheckoutForm() {
     });
   }
 
-  // Form submission
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
     const paymentMethod = document.getElementById("payment-method").value;
@@ -268,7 +280,6 @@ function initCheckoutForm() {
     } else if (paymentMethod === "crypto") {
       if (document.getElementById("crypto-verify").checked) {
         try {
-          // Placeholder for CoinPayments redirect
           window.location.href = `https://api.coinpayments.net/?key=YOUR_COINPAYMENTS_KEY&amount=${Snipcart.store.getState().cart.total}&currency=EUR`;
         } catch (error) {
           if (formMsg) {
