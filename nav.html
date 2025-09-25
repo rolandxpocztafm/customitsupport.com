@@ -1,70 +1,40 @@
-<!-- Navigation Bar -->
-<nav class="bg-white shadow-sm fixed top-0 left-0 w-full z-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-16">
-            <!-- Logo -->
-            <div class="flex-shrink-0 flex items-center">
-                <a href="#hero">
-                    <img class="h-9 w-auto" src="logo.png" alt="Custom IT Support Logo" />
-                </a>
-                <span class="ml-2 font-bold text-xl text-gray-900">Custom IT Support</span>
-            </div>
-            <!-- Desktop Menu -->
-            <div class="hidden md:flex items-center">
-                <div class="ml-10 flex items-baseline space-x-8">
-                    <a href="#hero" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium" data-i18n="nav.home">Home</a>
-                    <a href="#about" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium" data-i18n="nav.about">About</a>
-                    <a href="#services" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium" data-i18n="nav.services">Services</a>
-                    <a href="/shop.html" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium" data-i18n="nav.shop">Shop</a> <!-- New Shop Tab -->
-                    <a href="#contact" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium" data-i18n="nav.contact">Contact</a>
-                </div>
-                <!-- Language Switcher Flags -->
-                <div class="flex items-center gap-2 ml-6">
-                    <button id="lang-en" type="button" aria-label="English"
-                        class="rounded-full focus:outline-none focus:ring-2 focus:ring-primary p-0 border-0 bg-transparent w-9 h-9 flex items-center justify-center hover:bg-gray-100 transition"
-                        style="cursor:pointer;">
-                        <img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f1fa-1f1f8.svg"
-                             alt="English"
-                             class="block w-7 h-7"
-                             style="pointer-events:none;user-select:none;" />
-                    </button>
-                    <button id="lang-nl" type="button" aria-label="Nederlands"
-                        class="rounded-full focus:outline-none focus:ring-2 focus:ring-primary p-0 border-0 bg-transparent w-9 h-9 flex items-center justify-center hover:bg-gray-100 transition"
-                        style="cursor:pointer;">
-                        <img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f1f3-1f1f1.svg"
-                             alt="Nederlands"
-                             class="block w-7 h-7"
-                             style="pointer-events:none;user-select:none;" />
-                    </button>
-                </div>
-            </div>
-            <!-- Mobile menu button -->
-            <div class="md:hidden flex items-center">
-                <button id="mobile-menu-button" class="text-gray-700 hover:text-primary focus:outline-none focus:text-primary">
-                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M4 6h16M4 12h16M4 18h16"/>
-                    </svg>
-                </button>
-            </div>
-        </div>
+<nav class="bg-gray-800 p-4">
+  <div class="max-w-7xl mx-auto flex justify-between items-center">
+    <a href="/" class="text-white font-bold text-xl">Custom IT Support</a>
+    <div class="hidden md:flex space-x-4">
+      <a href="/" class="text-white hover:text-gray-300" data-i18n="nav.home">Home</a>
+      <a href="#about" class="text-white hover:text-gray-300" data-i18n="nav.about">About</a>
+      <a href="#services" class="text-white hover:text-gray-300" data-i18n="nav.services">Services</a>
+      <a href="#portfolio" class="text-white hover:text-gray-300" data-i18n="nav.portfolio">Portfolio</a>
+      <a href="#contact" class="text-white hover:text-gray-300" data-i18n="nav.contact">Contact</a>
+      <a href="/shop.html" class="text-white hover:text-gray-300" data-i18n="nav.shop">Shop</a>
+      <a id="lang-en" class="text-white hover:text-gray-300 flex items-center" href="#">
+        <img src="https://flagcdn.com/16x12/gb.png" alt="English" class="mr-1"> EN
+      </a>
+      <a id="lang-nl" class="text-white hover:text-gray-300 flex items-center" href="#">
+        <img src="https://flagcdn.com/16x12/nl.png" alt="Dutch" class="mr-1"> NL
+      </a>
     </div>
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100">
-        <div class="px-2 pt-2 pb-3 space-y-1">
-            <a href="#hero" class="block text-gray-700 hover:text-primary px-3 py-2 rounded-md text-base font-medium" data-i18n="nav.home">Home</a>
-            <a href="#about" class="block text-gray-700 hover:text-primary px-3 py-2 rounded-md text-base font-medium" data-i18n="nav.about">About</a>
-            <a href="#services" class="block text-gray-700 hover:text-primary px-3 py-2 rounded-md text-base font-medium" data-i18n="nav.services">Services</a>
-            <a href="/shop.html" class="block text-gray-700 hover:text-primary px-3 py-2 rounded-md text-base font-medium" data-i18n="nav.shop">Shop</a> <!-- New Mobile Shop -->
-            <a href="#portfolio" class="block text-gray-700 hover:text-primary px-3 py-2 rounded-md text-base font-medium" data-i18n="nav.portfolio">Portfolio</a>
-            <a href="#contact" class="block text-gray-700 hover:text-primary px-3 py-2 rounded-md text-base font-medium" data-i18n="nav.contact">Contact</a>
-            <div class="flex items-center gap-2 mt-2 px-3">
-                <!-- Mobile Language Buttons -->
-                <button id="lang-en-mobile" type="button" aria-label="English" class="...">...</button> <!-- Abbrev for brevity -->
-                <button id="lang-nl-mobile" type="button" aria-label="Nederlands" class="...">...</button>
-            </div>
-        </div>
+    <div class="md:hidden">
+      <button id="mobile-menu-button" class="text-white focus:outline-none">
+        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
+      </button>
     </div>
+  </div>
+  <div id="mobile-menu" class="md:hidden hidden bg-gray-800 text-white p-4 space-y-2">
+    <a href="/" class="block hover:text-gray-300" data-i18n="nav.home">Home</a>
+    <a href="#about" class="block hover:text-gray-300" data-i18n="nav.about">About</a>
+    <a href="#services" class="block hover:text-gray-300" data-i18n="nav.services">Services</a>
+    <a href="#portfolio" class="block hover:text-gray-300" data-i18n="nav.portfolio">Portfolio</a>
+    <a href="#contact" class="block hover:text-gray-300" data-i18n="nav.contact">Contact</a>
+    <a href="/shop.html" class="block hover:text-gray-300" data-i18n="nav.shop">Shop</a>
+    <a id="lang-en-mobile" class="block hover:text-gray-300 flex items-center" href="#">
+      <img src="https://flagcdn.com/16x12/gb.png" alt="English" class="mr-1"> EN
+    </a>
+    <a id="lang-nl-mobile" class="block hover:text-gray-300 flex items-center" href="#">
+      <img src="https://flagcdn.com/16x12/nl.png" alt="Dutch" class="mr-1"> NL
+    </a>
+  </div>
 </nav>
-<!-- Spacer for fixed nav -->
-<div class="h-16"></div>
