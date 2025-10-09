@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Fluminer T3",
+    "price": 2300,
+    "link": "https://www.mollie.com"
+  },
+  {
+    "name": "Fluminer L2",
+    "price": 700,
+    "link": "https://www.stripe.com"
+  }
+]
