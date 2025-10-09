@@ -1,8 +1,0 @@
-{
-    "products": [
-        {"id": 1, "name": "Laptop", "price": 999.99, "image": "laptop.jpg"},
-        {"id": 2, "name": "Mouse", "price": 29.99, "image": "mouse.jpg"}
-    ],
-    "settings": {"site_name": "Custom IT Support Shop", "tax_rate": 0.1},
-    "users": [{"username": "admin", "password": "hashed_password"}]
-}
