@@ -3,307 +3,529 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop - Custom IT Support</title>
-    <!-- Tailwind CSS (assuming index.html uses it) -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <!-- Font Awesome for icons, as used in services.html -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <!-- Snipcart styles for shop functionality -->
-    <link rel="preconnect" href="https://app.snipcart.com">
-    <link rel="preconnect" href="https://cdn.snipcart.com">
-    <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.css" />
-    <!-- Main JavaScript for dynamic loading and functionality -->
-    <script src="main.js" defer></script>
-    <!-- Snipcart script -->
-    <script async src="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.js"></script>
+    <title>CryptoMine Haven - Professional Mining Hardware</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        }
+        
+        .product-card {
+            transition: all 0.3s ease;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: #3b82f6;
+        }
+        
+        .profitability-calculator {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
 </head>
-<body class="bg-white">
-    <!-- Nav placeholder (loads nav.html, same as index.html) -->
+<body>
+    <!-- Navigation Placeholder -->
     <div id="nav-placeholder"></div>
 
-    <!-- Hero section from original shop.html -->
-    <section class="py-12 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 class="text-3xl font-bold text-gray-900" data-i18n="shop.title">Crypto Mining Hardware</h1>
-            <p class="mt-2 text-gray-600" data-i18n="shop.subtitle">Professional-grade ASIC miners, GPU rigs, and accessories with EU support</p>
+    <!-- Hero Section -->
+    <section class="gradient-bg py-20">
+        <div class="container mx-auto px-6 md:px-12 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 text-white">Professional Crypto Mining Hardware</h1>
+            <p class="text-xl md:text-2xl text-blue-200 mb-10">High-performance ASIC miners, GPU rigs, and accessories with EU support and 2-year warranty</p>
+            <div class="flex justify-center space-x-4">
+                <a href="#products" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition duration-300">
+                    Browse Products
+                </a>
+                <a href="#calculator" class="bg-gray-700 hover:bg-gray-600 text-white px-8 py-3 rounded-lg font-medium transition duration-300">
+                    Profit Calculator
+                </a>
+            </div>
         </div>
     </section>
 
-    <!-- Categories navigation from original shop.html -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <nav class="flex space-x-4">
-            <a href="#asic" class="text-gray-600 hover:text-gray-900 font-medium" data-i18n="shop.categories.asic">ASIC Miners</a>
-            <a href="#gpu" class="text-gray-600 hover:text-gray-900 font-medium" data-i18n="shop.categories.gpu">GPU Rigs</a>
-            <a href="#accessories" class="text-gray-600 hover:text-gray-900 font-medium" data-i18n="shop.categories.accessories">Accessories</a>
-            <a href="#bundles" class="text-gray-600 hover:text-gray-900 font-medium" data-i18n="shop.categories.bundles">IT Support Bundles</a>
-        </nav>
-    </section>
-
-    <!-- ASIC Miners section -->
-    <section id="asic" class="py-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-2xl font-bold text-gray-900 mb-4" data-i18n="shop.asic">ASIC Miners</h2>
-            <div class="mb-4">
-                <label class="mr-2" data-i18n="shop.sort">Sort by</label>
-                <select class="border rounded p-1">
-                    <option data-i18n="shop.sort.price_low">Price: Low to High</option>
-                    <option data-i18n="shop.sort.price_high">Price: High to Low</option>
-                    <option data-i18n="shop.sort.hashrate">Hashrate</option>
-                    <option data-i18n="shop.sort.efficiency">Efficiency</option>
-                </select>
-            </div>
-            <div class="grid md:grid-cols-3 gap-6">
-                <!-- Fluminer L2 -->
-                <div class="bg-white p-4 rounded-lg shadow-sm">
-                    <img src="..." alt="Fluminer L2" class="w-full h-48 object-cover rounded">
-                    <h3 class="text-lg font-semibold mt-2">Fluminer L2</h3>
-                    <p class="text-gray-600">1.2 GH/s • 230 J/GH • Ultra-Quiet for LTC/DOGE</p>
-                    <p class="text-gray-900 font-bold mt-2">€828 incl. BTW</p>
-                    <button class="snipcart-add-item mt-2 bg-primary text-white px-4 py-2 rounded hover:bg-primary-dark"
-                            data-item-id="fluminer-l2"
-                            data-item-price="828"
-                            data-item-url="/shop.html"
-                            data-item-name="Fluminer L2"
-                            data-i18n="shop.add_to_cart">Add to cart</button>
-                    <span class="block mt-2 text-sm text-green-600">Home-Friendly & Efficient</span>
+    <!-- Features Section -->
+    <section class="py-16 bg-slate-900">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="text-center p-6 rounded-lg">
+                    <div class="flex justify-center mb-4">
+                        <i data-feather="shield" class="w-12 h-12 text-blue-500"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">2-Year Warranty</h3>
+                    <p class="text-slate-300">All miners come with extended warranty coverage</p>
                 </div>
-                <!-- Fluminer T3 -->
-                <div class="bg-white p-4 rounded-lg shadow-sm">
-                    <img src="..." alt="Fluminer T3" class="w-full h-48 object-cover rounded">
-                    <h3 class="text-lg font-semibold mt-2">Fluminer T3</h3>
-                    <p class="text-gray-600">115 TH/s • 14.78 J/TH • 50 dB for BTC</p>
-                    <p class="text-gray-900 font-bold mt-2">€1,699 incl. BTW</p>
-                    <button class="snipcart-add-item mt-2 bg-primary text-white px-4 py-2 rounded hover:bg-primary-dark"
-                            data-item-id="fluminer-t3"
-                            data-item-price="1699"
-                            data-item-url="/shop.html"
-                            data-item-name="Fluminer T3"
-                            data-i18n="shop.add_to_cart">Add to cart</button>
-                    <span class="block mt-2 text-sm text-green-600">Silent Bitcoin Mining</span>
+                <div class="text-center p-6 rounded-lg">
+                    <div class="flex justify-center mb-4">
+                        <i data-feather="truck" class="w-12 h-12 text-blue-500"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Fast EU Shipping</h3>
+                    <p class="text-slate-300">Delivery within 3-5 business days</p>
+                </div>
+                <div class="text-center p-6 rounded-lg">
+                    <div class="flex justify-center mb-4">
+                        <i data-feather="headphones" class="w-12 h-12 text-blue-500"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Dedicated Support</h3>
+                    <p class="text-slate-300">Technical assistance for setup and optimization</p>
+                </div>
+                <div class="text-center p-6 rounded-lg">
+                    <div class="flex justify-center mb-4">
+                        <i data-feather="check-circle" class="w-12 h-12 text-blue-500"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">MiCA Compliant</h3>
+                    <p class="text-slate-300">Full compliance with EU regulations</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- GPU Mining Rigs section -->
-    <section id="gpu" class="py-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-2xl font-bold text-gray-900 mb-4" data-i18n="shop.gpu">GPU Mining Rigs</h2>
-            <div class="mb-4">
-                <label class="mr-2" data-i18n="shop.sort">Sort by</label>
-                <select class="border rounded p-1">
-                    <option data-i18n="shop.sort.price_low">Price: Low to High</option>
-                    <option data-i18n="shop.sort.price_high">Price: High to Low</option>
-                    <option data-i18n="shop.sort.hashrate">Hashrate</option>
-                    <option data-i18n="shop.sort.gpu_count">GPU Count</option>
-                </select>
-            </div>
-            <div class="grid md:grid-cols-3 gap-6">
-                <!-- NVIDIA RTX 3080 Rig -->
-                <div class="bg-white p-4 rounded-lg shadow-sm">
-                    <img src="..." alt="NVIDIA RTX 3080 Rig" class="w-full h-48 object-cover rounded">
-                    <h3 class="text-lg font-semibold mt-2">NVIDIA RTX 3080 Rig (6x)</h3>
-                    <p class="text-gray-600">600 MH/s • 1200W • ETH/ETC/RVN</p>
-                    <p class="text-gray-900 font-bold mt-2">€4,999 incl. BTW</p>
-                    <button class="snipcart-add-item mt-2 bg-primary text-white px-4 py-2 rounded hover:bg-primary-dark"
-                            data-item-id="nvidia-rtx-3080-rig"
-                            data-item-price="4999"
-                            data-item-url="/shop.html"
-                            data-item-name="NVIDIA RTX 3080 Rig (6x)"
-                            data-i18n="shop.add_to_cart">Add to cart</button>
+    <!-- Products Section -->
+    <section id="products" class="py-16">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-12 text-center">Our Mining Products</h2>
+            
+            <!-- ASIC Miners -->
+            <div class="mb-16">
+                <h3 class="text-2xl font-semibold mb-8 flex items-center">
+                    <i data-feather="cpu" class="mr-2"></i> ASIC Miners
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Fluminer L2 -->
+                    <div class="product-card rounded-lg overflow-hidden p-6">
+                        <div class="flex justify-center mb-6">
+                            <img src="http://static.photos/technology/640x360/1" alt="Fluminer L2" class="rounded-lg h-48 object-cover">
+                        </div>
+                        <h4 class="text-xl font-bold mb-2">Fluminer L2</h4>
+                        <p class="text-slate-300 mb-4">1.2 GH/s Scrypt algorithm for LTC/DOGE</p>
+                        <ul class="mb-6 space-y-2">
+                            <li class="flex items-center">
+                                <i data-feather="zap" class="w-4 h-4 mr-2 text-blue-400"></i>
+                                <span>230 J/GH energy efficiency</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-feather="volume" class="w-4 h-4 mr-2 text-blue-400"></i>
+                                <span>Ultra-quiet operation</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-feather="clock" class="w-4 h-4 mr-2 text-blue-400"></i>
+                                <span>2-year warranty</span>
+                            </li>
+                        </ul>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold">€828</span>
+                            <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition duration-300">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Fluminer T3 -->
+                    <div class="product-card rounded-lg overflow-hidden p-6">
+                        <div class="flex justify-center mb-6">
+                            <img src="http://static.photos/technology/640x360/2" alt="Fluminer T3" class="rounded-lg h-48 object-cover">
+                        </div>
+                        <h4 class="text-xl font-bold mb-2">Fluminer T3</h4>
+                        <p class="text-slate-300 mb-4">115 TH/s SHA-256 algorithm for BTC</p>
+                        <ul class="mb-6 space-y-2">
+                            <li class="flex items-center">
+                                <i data-feather="zap" class="w-4 h-4 mr-2 text-blue-400"></i>
+                                <span>14.78 J/TH energy efficiency</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-feather="volume" class="w-4 h-4 mr-2 text-blue-400"></i>
+                                <span>50 dB noise level</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-feather="clock" class="w-4 h-4 mr-2 text-blue-400"></i>
+                                <span>2-year warranty</span>
+                            </li>
+                        </ul>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold">€1,699</span>
+                            <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition duration-300">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- ASIC Bundle -->
+                    <div class="product-card rounded-lg overflow-hidden p-6">
+                        <div class="flex justify-center mb-6">
+                            <img src="http://static.photos/technology/640x360/3" alt="ASIC Bundle" class="rounded-lg h-48 object-cover">
+                        </div>
+                        <h4 class="text-xl font-bold mb-2">Fluminer T3 + Custom Cooling</h4>
+                        <p class="text-slate-300 mb-4">Optimized Bitcoin mining bundle</p>
+                        <ul class="mb-6 space-y-2">
+                            <li class="flex items-center">
+                                <i data-feather="cpu" class="w-4 h-4 mr-2 text-blue-400"></i>
+                                <span>Fluminer T3 115 TH/s</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-feather="wind" class="w-4 h-4 mr-2 text-blue-400"></i>
+                                <span>3D printed cooling solution</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-feather="dollar-sign" class="w-4 h-4 mr-2 text-blue-400"></i>
+                                <span>Special bundle price</span>
+                            </li>
+                        </ul>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold">€1,799</span>
+                            <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition duration-300">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <!-- AMD RX 6800 XT Rig -->
-                <div class="bg-white p-4 rounded-lg shadow-sm">
-                    <img src="..." alt="AMD RX 6800 XT Rig" class="w-full h-48 object-cover rounded">
-                    <h3 class="text-lg font-semibold mt-2">AMD RX 6800 XT Rig (8x)</h3>
-                    <p class="text-gray-600">512 MH/s • 1600W • ETH/ETC/RVN</p>
-                    <p class="text-gray-900 font-bold mt-2">€5,499 incl. BTW</p>
-                    <button class="snipcart-add-item mt-2 bg-primary text-white px-4 py-2 rounded hover:bg-primary-dark"
-                            data-item-id="amd-rx-6800-xt-rig"
-                            data-item-price="5499"
-                            data-item-url="/shop.html"
-                            data-item-name="AMD RX 6800 XT Rig (8x)"
-                            data-i18n="shop.add_to_cart">Add to cart</button>
+            </div>
+            
+            <!-- GPU Rigs -->
+            <div class="mb-16">
+                <h3 class="text-2xl font-semibold mb-8 flex items-center">
+                    <i data-feather="box" class="mr-2"></i> GPU Mining Rigs
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- NVIDIA Rig -->
+                    <div class="product-card rounded-lg overflow-hidden p-6">
+                        <div class="flex justify-center mb-6">
+                            <img src="http://static.photos/technology/640x360/4" alt="NVIDIA Rig" class="rounded-lg h-48 object-cover">
+                        </div>
+                        <h4 class="text-xl font-bold mb-2">NVIDIA RTX 3080 Rig (6x)</h4>
+                        <p class="text-slate-300 mb-4">600 MH/s for ETH/ETC/RVN</p>
+                        <ul class="mb-6 space-y-2">
+                            <li class="flex items-center">
+                                <i data-feather="zap" class="w-4 h-4 mr-2 text-blue-400"></i>
+                                <span>1200W power consumption</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-feather="cpu" class="w-4 h-4 mr-2 text-blue-400"></i>
+                                <span>6x RTX 3080 GPUs</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-feather="clock" class="w-4 h-4 mr-2 text-blue-400"></i>
+                                <span>2-year warranty</span>
+                            </li>
+                        </ul>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold">€4,999</span>
+                            <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition duration-300">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- AMD Rig -->
+                    <div class="product-card rounded-lg overflow-hidden p-6">
+                        <div class="flex justify-center mb-6">
+                            <img src="http://static.photos/technology/640x360/5" alt="AMD Rig" class="rounded-lg h-48 object-cover">
+                        </div>
+                        <h4 class="text-xl font-bold mb-2">AMD RX 6800 XT Rig (8x)</h4>
+                        <p class="text-slate-300 mb-4">512 MH/s for ETH/ETC/RVN</p>
+                        <ul class="mb-6 space-y-2">
+                            <li class="flex items-center">
+                                <i data-feather="zap" class="w-4 h-4 mr-2 text-blue-400"></i>
+                                <span>1600W power consumption</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-feather="cpu" class="w-4 h-4 mr-2 text-blue-400"></i>
+                                <span>8x RX 6800 XT GPUs</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-feather="clock" class="w-4 h-4 mr-2 text-blue-400"></i>
+                                <span>2-year warranty</span>
+                            </li>
+                        </ul>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold">€5,499</span>
+                            <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition duration-300">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Accessories -->
+            <div>
+                <h3 class="text-2xl font-semibold mb-8 flex items-center">
+                    <i data-feather="tool" class="mr-2"></i> Mining Accessories
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="product-card rounded-lg overflow-hidden p-6">
+                        <div class="flex justify-center mb-4">
+                            <i data-feather="battery" class="w-12 h-12 text-blue-500"></i>
+                        </div>
+                        <h4 class="text-lg font-bold mb-2">2000W 80+ Gold PSU</h4>
+                        <p class="text-slate-300 mb-4">For ASIC miners</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold">€249</span>
+                            <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1 rounded-lg transition duration-300 text-sm">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-card rounded-lg overflow-hidden p-6">
+                        <div class="flex justify-center mb-4">
+                            <i data-feather="cpu" class="w-12 h-12 text-blue-500"></i>
+                        </div>
+                        <h4 class="text-lg font-bold mb-2">8-GPU Mining Frame</h4>
+                        <p class="text-slate-300 mb-4">Aluminum construction</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold">€129</span>
+                            <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1 rounded-lg transition duration-300 text-sm">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-card rounded-lg overflow-hidden p-6">
+                        <div class="flex justify-center mb-4">
+                            <i data-feather="wind" class="w-12 h-12 text-blue-500"></i>
+                        </div>
+                        <h4 class="text-lg font-bold mb-2">Silent Cooling Fan</h4>
+                        <p class="text-slate-300 mb-4">120mm, 18 dB</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold">€39</span>
+                            <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1 rounded-lg transition duration-300 text-sm">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-card rounded-lg overflow-hidden p-6">
+                        <div class="flex justify-center mb-4">
+                            <i data-feather="package" class="w-12 h-12 text-blue-500"></i>
+                        </div>
+                        <h4 class="text-lg font-bold mb-2">Custom 3D Printed Case</h4>
+                        <p class="text-slate-300 mb-4">For Fluminer L2/T3</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold">€89</span>
+                            <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1 rounded-lg transition duration-300 text-sm">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Accessories section -->
-    <section id="accessories" class="py-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-2xl font-bold text-gray-900 mb-4" data-i18n="shop.accessories">Accessories</h2>
-            <div class="mb-4">
-                <label class="mr-2" data-i18n="shop.sort">Sort by</label>
-                <select class="border rounded p-1">
-                    <option data-i18n="shop.sort.price_low">Price: Low to High</option>
-                    <option data-i18n="shop.sort.price_high">Price: High to Low</option>
-                    <option data-i18n="shop.sort.popularity">Popularity</option>
-                </select>
-            </div>
-            <div class="grid md:grid-cols-3 gap-6">
-                <!-- 2000W PSU -->
-                <div class="bg-white p-4 rounded-lg shadow-sm">
-                    <img src="..." alt="2000W 80+ Gold PSU" class="w-full h-48 object-cover rounded">
-                    <h3 class="text-lg font-semibold mt-2">2000W 80+ Gold PSU</h3>
-                    <p class="text-gray-600">For ASIC miners</p>
-                    <p class="text-gray-900 font-bold mt-2">€249 incl. BTW</p>
-                    <button class="snipcart-add-item mt-2 bg-primary text-white px-4 py-2 rounded hover:bg-primary-dark"
-                            data-item-id="2000w-psu"
-                            data-item-price="249"
-                            data-item-url="/shop.html"
-                            data-item-name="2000W 80+ Gold PSU"
-                            data-i18n="shop.add_to_cart">Add to cart</button>
-                </div>
-                <!-- 8-GPU Mining Frame -->
-                <div class="bg-white p-4 rounded-lg shadow-sm">
-                    <img src="..." alt="8-GPU Mining Frame" class="w-full h-48 object-cover rounded">
-                    <h3 class="text-lg font-semibold mt-2">8-GPU Mining Frame</h3>
-                    <p class="text-gray-600">Aluminum construction</p>
-                    <p class="text-gray-900 font-bold mt-2">€129 incl. BTW</p>
-                    <button class="snipcart-add-item mt-2 bg-primary text-white px-4 py-2 rounded hover:bg-primary-dark"
-                            data-item-id="8-gpu-frame"
-                            data-item-price="129"
-                            data-item-url="/shop.html"
-                            data-item-name="8-GPU Mining Frame"
-                            data-i18n="shop.add_to_cart">Add to cart</button>
-                </div>
-                <!-- Silent Cooling Fan -->
-                <div class="bg-white p-4 rounded-lg shadow-sm">
-                    <img src="..." alt="Silent Cooling Fan" class="w-full h-48 object-cover rounded">
-                    <h3 class="text-lg font-semibold mt-2">Silent Cooling Fan</h3>
-                    <p class="text-gray-600">120mm • 18 dB</p>
-                    <p class="text-gray-900 font-bold mt-2">€39 incl. BTW</p>
-                    <button class="snipcart-add-item mt-2 bg-primary text-white px-4 py-2 rounded hover:bg-primary-dark"
-                            data-item-id="silent-cooling-fan"
-                            data-item-price="39"
-                            data-item-url="/shop.html"
-                            data-item-name="Silent Cooling Fan"
-                            data-i18n="shop.add_to_cart">Add to cart</button>
-                </div>
-                <!-- Custom 3D Printed Case -->
-                <div class="bg-white p-4 rounded-lg shadow-sm">
-                    <img src="..." alt="Custom 3D Printed Case" class="w-full h-48 object-cover rounded">
-                    <h3 class="text-lg font-semibold mt-2">Custom 3D Printed Case</h3>
-                    <p class="text-gray-600">For Fluminer L2/T3</p>
-                    <p class="text-gray-900 font-bold mt-2">€89 incl. BTW</p>
-                    <button class="snipcart-add-item mt-2 bg-primary text-white px-4 py-2 rounded hover:bg-primary-dark"
-                            data-item-id="3d-printed-case"
-                            data-item-price="89"
-                            data-item-url="/shop.html"
-                            data-item-name="Custom 3D Printed Case"
-                            data-i18n="shop.add_to_cart">Add to cart</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- IT Support Bundles section -->
-    <section id="bundles" class="py-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-2xl font-bold text-gray-900 mb-4" data-i18n="shop.bundles">IT Support Bundles</h2>
-            <div class="grid md:grid-cols-3 gap-6">
-                <!-- Fluminer L2 + Setup Support -->
-                <div class="bg-white p-4 rounded-lg shadow-sm">
-                    <img src="..." alt="Fluminer L2 + Setup Support" class="w-full h-48 object-cover rounded">
-                    <h3 class="text-lg font-semibold mt-2">Fluminer L2 + Setup Support</h3>
-                    <p class="text-gray-600">2-hour remote setup assistance</p>
-                    <p class="text-gray-900 font-bold mt-2">€928 incl. BTW</p>
-                    <button class="snipcart-add-item mt-2 bg-primary text-white px-4 py-2 rounded hover:bg-primary-dark"
-                            data-item-id="fluminer-l2-bundle"
-                            data-item-price="928"
-                            data-item-url="/shop.html"
-                            data-item-name="Fluminer L2 + Setup Support"
-                            data-i18n="shop.add_to_cart">Add to cart</button>
-                </div>
-                <!-- Fluminer T3 + Custom Cooling -->
-                <div class="bg-white p-4 rounded-lg shadow-sm">
-                    <img src="..." alt="Fluminer T3 + Custom Cooling" class="w-full h-48 object-cover rounded">
-                    <h3 class="text-lg font-semibold mt-2">Fluminer T3 + Custom Cooling</h3>
-                    <p class="text-gray-600">3D printed cooling solution</p>
-                    <p class="text-gray-900 font-bold mt-2">€1,799 incl. BTW</p>
-                    <button class="snipcart-add-item mt-2 bg-primary text-white px-4 py-2 rounded hover:bg-primary-dark"
-                            data-item-id="fluminer-t3-cooling"
-                            data-item-price="1799"
-                            data-item-url="/shop.html"
-                            data-item-name="Fluminer T3 + Custom Cooling"
-                            data-i18n="shop.add_to_cart">Add to cart</button>
+    <!-- Profitability Calculator -->
+    <section id="calculator" class="py-16 bg-slate-900">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto profitability-calculator rounded-xl p-8">
+                <h2 class="text-3xl font-bold mb-8 text-center">Mining Profitability Calculator</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <div class="mb-6">
+                            <label for="miner-select" class="block text-sm font-medium mb-2">Select Miner</label>
+                            <select id="miner-select" class="w-full p-3 rounded-lg bg-slate-800 border border-slate-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                <option value="">-- Select a Miner --</option>
+                                <option value="l2">Fluminer L2 (1.2 GH/s Scrypt)</option>
+                                <option value="t3">Fluminer T3 (115 TH/s SHA-256)</option>
+                                <option value="nvidia">NVIDIA RTX 3080 Rig (600 MH/s)</option>
+                                <option value="amd">AMD RX 6800 XT Rig (512 MH/s)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="coin-select" class="block text-sm font-medium mb-2">Select Coin</label>
+                            <select id="coin-select" class="w-full p-3 rounded-lg bg-slate-800 border border-slate-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                <option value="">-- Select a Coin --</option>
+                                <option value="btc">Bitcoin (BTC)</option>
+                                <option value="ltc">Litecoin (LTC)</option>
+                                <option value="doge">Dogecoin (DOGE)</option>
+                                <option value="eth">Ethereum (ETH)</option>
+                                <option value="etc">Ethereum Classic (ETC)</option>
+                                <option value="rvn">Ravencoin (RVN)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="electricity-cost" class="block text-sm font-medium mb-2">Electricity Cost (€/kWh)</label>
+                            <input type="number" id="electricity-cost" value="0.15" step="0.01" min="0" class="w-full p-3 rounded-lg bg-slate-800 border border-slate-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        
+                        <button id="calculate-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium transition duration-300">
+                            Calculate Profitability
+                        </button>
+                    </div>
+                    
+                    <div>
+                        <div class="bg-slate-800 rounded-lg p-6">
+                            <h3 class="text-xl font-semibold mb-4">Estimated Results</h3>
+                            <div class="space-y-4">
+                                <div class="flex justify-between">
+                                    <span class="text-slate-300">Daily Revenue:</span>
+                                    <span id="daily-revenue" class="font-medium">€0.00</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-300">Daily Electricity Cost:</span>
+                                    <span id="daily-cost" class="font-medium">€0.00</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-300">Daily Profit:</span>
+                                    <span id="daily-profit" class="font-medium">€0.00</span>
+                                </div>
+                                <div class="border-t border-slate-700 my-3"></div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-300">Monthly Profit:</span>
+                                    <span id="monthly-profit" class="font-medium">€0.00</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-300">ROI Period:</span>
+                                    <span id="roi-period" class="font-medium">0 months</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 text-sm text-slate-400">
+                            <p>Note: These are estimates based on current network difficulty and market conditions. Actual results may vary significantly.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Profitability Calculator section -->
-    <section class="py-8 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-2xl font-bold text-gray-900 mb-4" data-i18n="shop.calculator">Profitability Calculator</h2>
-            <form id="profit-calc" class="grid md:grid-cols-2 gap-4">
-                <input type="number" placeholder="Hashrate (TH/s or GH/s)" class="border rounded p-2" data-i18n-placeholder="shop.calculator.hashrate">
-                <input type="number" placeholder="Power Consumption (W)" class="border rounded p-2" data-i18n-placeholder="shop.calculator.power">
-                <input type="number" placeholder="Electricity Cost (€/kWh)" class="border rounded p-2" data-i18n-placeholder="shop.calculator.electricity">
-                <input type="number" placeholder="BTC/LTC/DOGE Price (€)" class="border rounded p-2" data-i18n-placeholder="shop.calculator.btc_price">
-                <button class="bg-primary text-white px-4 py-2 rounded hover:bg-primary-dark" data-i18n="shop.calculator.calculate">Calculate</button>
-            </form>
-            <div class="mt-4">
-                <h3 class="text-lg font-semibold" data-i18n="shop.calculator.results">Estimated Monthly Profit</h3>
-                <p><span data-i18n="shop.calculator.revenue">Revenue:</span> €1,250</p>
-                <p><span data-i18n="shop.calculator.cost">Electricity Cost:</span> €324</p>
-                <p><span data-i18n="shop.calculator.profit">Profit:</span> €926</p>
-                <p><span data-i18n="shop.calculator.roi">ROI (Months):</span> 2.7</p>
-                <p class="text-sm text-gray-500 mt-2" data-i18n="shop.calculator.disclaimer">* Estimates based on current network difficulty. Actual results may vary.</p>
+    <!-- Disclaimer Section -->
+    <section class="py-12 bg-slate-950">
+        <div class="container mx-auto px-6 max-w-4xl text-center">
+            <div class="flex justify-center mb-4">
+                <i data-feather="alert-triangle" class="w-8 h-8 text-yellow-500"></i>
             </div>
+            <h3 class="text-xl font-semibold mb-4">Important Notice</h3>
+            <p class="text-slate-400 mb-6">
+                Cryptocurrency mining carries risks due to market volatility and network difficulty changes. 
+                The profitability calculator provides estimates only. Past performance is not indicative of future results. 
+                Consult with a financial advisor before making any investment decisions.
+            </p>
+            <p class="text-slate-400">
+                All sales comply with the EU's Markets in Crypto-Assets (MiCA) regulation. 
+                Custom IT Support is not responsible for mining rewards or cryptocurrency market fluctuations.
+            </p>
         </div>
     </section>
 
-    <!-- Features section -->
-    <section class="py-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-3 gap-6">
-            <div class="bg-white p-6 rounded-lg shadow-sm text-center">
-                <i class="fas fa-shield-alt text-3xl text-primary mb-4"></i>
-                <h3 class="text-lg font-semibold" data-i18n="shop.features.warranty">2-Year Warranty</h3>
-                <p class="text-gray-600" data-i18n="shop.features.warranty_desc">All miners come with extended warranty coverage for peace of mind.</p>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow-sm text-center">
-                <i class="fas fa-shipping-fast text-3xl text-primary mb-4"></i>
-                <h3 class="text-lg font-semibold" data-i18n="shop.features.shipping">Fast EU Shipping</h3>
-                <p class="text-gray-600" data-i18n="shop.features.shipping_desc">Delivery within 3-5 business days across the European Union.</p>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow-sm text-center">
-                <i class="fas fa-headset text-3xl text-primary mb-4"></i>
-                <h3 class="text-lg font-semibold" data-i18n="shop.features.support">Technical Support</h3>
-                <p class="text-gray-600" data-i18n="shop.features.support_desc">Dedicated support team available to help with setup and optimization.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- MiCA Compliance Notice -->
-    <section class="py-8 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-white p-6 rounded-lg shadow-sm">
-                <i class="fas fa-info-circle text-2xl text-primary mb-4"></i>
-                <h3 class="text-lg font-semibold" data-i18n="shop.compliance.title">MiCA Compliance Notice</h3>
-                <p class="text-gray-600" data-i18n="shop.compliance.desc">
-                    Our crypto mining hardware sales comply with the EU's Markets in Crypto-Assets (MiCA) regulation. 
-                    Mining profitability depends on market conditions; consult a financial advisor before investing. 
-                    <a href="#" class="text-primary hover:underline" data-i18n="shop.compliance.learn_more">Learn more about our compliance.</a>
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer placeholder (loads footer.html, same as index.html) -->
+    <!-- Footer Placeholder -->
     <div id="footer-placeholder"></div>
 
-    <!-- Snipcart cart -->
-    <div hidden id="snipcart" data-api-key="YOUR_SNIPCART_KEY" data-config-modal-style="side"></div>
-
-    <!-- Initialize checkout form -->
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            if (typeof initCheckoutForm === "function") {
-                initCheckoutForm();
+        // Load navigation and footer
+        fetch('../nav.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('nav-placeholder').innerHTML = data);
+        
+        fetch('../footer.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('footer-placeholder').innerHTML = data);
+        
+        // Initialize feather icons
+        feather.replace();
+        
+        // Profitability calculator logic
+        document.getElementById('calculate-btn').addEventListener('click', function() {
+            const minerSelect = document.getElementById('miner-select').value;
+            const coinSelect = document.getElementById('coin-select').value;
+            const electricityCost = parseFloat(document.getElementById('electricity-cost').value);
+            
+            if (!minerSelect || !coinSelect || isNaN(electricityCost)) {
+                alert('Please fill in all fields with valid values');
+                return;
+            }
+            
+            // These values would normally come from an API based on current market conditions
+            let hashrate, powerUsage, currentPrice;
+            
+            // Simplified example calculations (in a real app, these would be dynamic)
+            if (minerSelect === 'l2') {
+                hashrate = 1.2; // GH/s
+                powerUsage = 230 * hashrate; // W
+                
+                if (coinSelect === 'ltc') {
+                    currentPrice = 70; // Example LTC price in €
+                    // Very simplified calculation - in reality would use API
+                    const dailyReward = hashrate * 0.02; // Example value
+                    const dailyRevenue = dailyReward * currentPrice;
+                    const dailyCost = (powerUsage * 24 / 1000) * electricityCost;
+                    updateResults(dailyRevenue, dailyCost);
+                } else if (coinSelect === 'doge') {
+                    currentPrice = 0.15; // Example DOGE price in €
+                    const dailyReward = hashrate * 5000; // Example value
+                    const dailyRevenue = dailyReward * currentPrice;
+                    const dailyCost = (powerUsage * 24 / 1000) * electricityCost;
+                    updateResults(dailyRevenue, dailyCost);
+                }
+            } else if (minerSelect === 't3') {
+                hashrate = 115; // TH/s
+                powerUsage = 14.78 * hashrate; // W
+                
+                if (coinSelect === 'btc') {
+                    currentPrice = 50000; // Example BTC price in €
+                    const dailyReward = hashrate * 0.00001; // Example value
+                    const dailyRevenue = dailyReward * currentPrice;
+                    const dailyCost = (powerUsage * 24 / 1000) * electricityCost;
+                    updateResults(dailyRevenue, dailyCost);
+                }
+            } else if (minerSelect === 'nvidia') {
+                hashrate = 600; // MH/s
+                powerUsage = 1200; // W
+                
+                if (coinSelect === 'eth' || coinSelect === 'etc') {
+                    currentPrice = coinSelect === 'eth' ? 3000 : 30; // Example prices
+                    const dailyReward = hashrate * 0.0001; // Example value
+                    const dailyRevenue = dailyReward * currentPrice;
+                    const dailyCost = (powerUsage * 24 / 1000) * electricityCost;
+                    updateResults(dailyRevenue, dailyCost);
+                }
+            } else if (minerSelect === 'amd') {
+                hashrate = 512; // MH/s
+                powerUsage = 1600; // W
+                
+                if (coinSelect === 'eth' || coinSelect === 'etc' || coinSelect === 'rvn') {
+                    currentPrice = coinSelect === 'eth' ? 3000 : 
+                                  coinSelect === 'etc' ? 30 : 0.05; // Example prices
+                    const dailyReward = hashrate * 0.0001; // Example value
+                    const dailyRevenue = dailyReward * currentPrice;
+                    const dailyCost = (powerUsage * 24 / 1000) * electricityCost;
+                    updateResults(dailyRevenue, dailyCost);
+                }
             }
         });
+        
+        function updateResults(dailyRevenue, dailyCost) {
+            const dailyProfit = dailyRevenue - dailyCost;
+            const monthlyProfit = dailyProfit * 30;
+            
+            // Simple ROI calculation (would need miner price in real implementation)
+            let roiPeriod = 'N/A';
+            if (dailyProfit > 0) {
+                const minerPrice = 1699; // Example for T3
+                roiPeriod = Math.ceil(minerPrice / (dailyProfit * 30)) + ' months';
+            }
+            
+            document.getElementById('daily-revenue').textContent = '€' + dailyRevenue.toFixed(2);
+            document.getElementById('daily-cost').textContent = '€' + dailyCost.toFixed(2);
+            document.getElementById('daily-profit').textContent = '€' + dailyProfit.toFixed(2);
+            document.getElementById('monthly-profit').textContent = '€' + monthlyProfit.toFixed(2);
+            document.getElementById('roi-period').textContent = roiPeriod;
+        }
     </script>
 </body>
 </html>
