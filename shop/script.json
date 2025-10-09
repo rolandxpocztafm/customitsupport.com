@@ -1,16 +1,21 @@
-fetch('products.json')
-  .then(res => res.json())
-  .then(products => {
-    const container = document.getElementById('products');
-    products.forEach(p => {
-      const card = document.createElement('div');
-      card.className = 'product';
-      card.innerHTML = `
-        <h3>${p.name}</h3>
-        <p>€${p.price}</p>
-        <a href="${p.link}" target="_blank">Buy Now</a>
-      `;
-      container.appendChild(card);
-    });
-  })
-  .catch(err => console.error('Error loading products:', err));
+const products = [
+  { name: "Fluminer T3", price: 2300, link: "https://www.mollie.com" },
+  { name: "Fluminer L2", price: 700, link: "https://www.stripe.com" }
+];
+
+const container = document.getElementById('products');
+
+if (container) {
+  products.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'product';
+    card.innerHTML = `
+      <h3>${p.name}</h3>
+      <p>€${p.price}</p>
+      <a href="${p.link}" target="_blank">Buy Now</a>
+    `;
+    container.appendChild(card);
+  });
+} else {
+  console.error("Error: #products container not found");
+}
