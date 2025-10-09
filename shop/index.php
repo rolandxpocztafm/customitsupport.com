@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+     <html lang="en">
+     <head>
+         <meta charset="UTF-8">
+         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <title>Shop - Custom IT Support</title>
+         <link rel="stylesheet" href="/shop/config.css">
+         <link rel="stylesheet" href="/shop/shop.css">
+         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     </head>
+     <body>
+         <header>
+             <h1>Custom IT Support Shop</h1>
+             <nav>
+                 <a href="https://customitsupport.com">Home</a>
+                 <a href="/shop">Shop</a>
+                 <a href="/shop/cart.php">Cart</a>
+                 <a href="/shop/login.php">Login</a>
+             </nav>
+         </header>
+         <main>
+             <h2>Our Products</h2>
+             <div class="product-list">
+                 <?php
+                 $data = json_decode(file_get_contents('data.json'), true);
+                 foreach ($data['products'] as $product) {
+                     echo "<div class='product'>
+                           <img src='/shop/images/{$product['image']}' alt='{$product['name']}'>
+                           <h3 class='editable' data-id='{$product['id']}'>{$product['name']}</h3>
+                           <p>\${$product['price']}</p>
+                           <button>Add to Cart</button>
+                           </div>";
+                 }
+                 ?>
+             </div>
+         </main>
+         <footer>
+             <p>&copy; 2025 Custom IT Support</p>
+         </footer>
+         <script>
+             $('.editable').click(function() {
+                 let id = $(this).data('id');
+                 let value = $(this).text();
+                 $(this).html(`<input type='text' value='${value}' onblur='saveField(${id}, this.value)'>`);
+             });
+             function saveField(id, value) {
+                 $.post('/shop/save.php', {id: id, name: value}, function() {
+                     location.reload();
+                 });
+             }
+         </script>
+     </body>
+     </html>
