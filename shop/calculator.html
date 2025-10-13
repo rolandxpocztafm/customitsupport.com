@@ -11,7 +11,7 @@
     label{display:block;font-size:13px;margin-bottom:6px}
     input,select{width:100%;padding:8px;border-radius:6px;border:1px solid #ddd}
     .card{padding:12px;border-radius:10px;background:#f8f8fb;border:1px solid #eee}
-    .row{display:flex;gap:10px}
+    .row{display:flex;gap:10px;flex-wrap:wrap}
     .big{font-weight:700;font-size:18px}
     .muted{color:#666;font-size:13px}
     footer{margin-top:18px;font-size:12px;color:#666}
@@ -109,11 +109,15 @@
 
   async function fetchBlockReward(){
     try{
-      const r = await fetch('https://mempool.space/api/v1/mining/block/height/latest');
+      const r = await fetch('https://mempool.space/api/v1/blocks');
       const j = await r.json();
-      blockReward = j.reward / 1e8; // satoshi → BTC
-      el('blockReward').value = blockReward.toFixed(8);
-      out.rewardLive.textContent = blockReward.toFixed(8);
+      if (Array.isArray(j) && j.length > 0 && j[0].reward) {
+        blockReward = j[0].reward / 1e8; // satoshi → BTC
+        el('blockReward').value = blockReward.toFixed(8);
+        out.rewardLive.textContent = blockReward.toFixed(8);
+      } else {
+        throw new Error('Invalid response');
+      }
     }catch(e){ out.rewardLive.textContent = 'error'; }
   }
 
