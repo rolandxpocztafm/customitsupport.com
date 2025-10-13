@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fluminer L1 Pro - Custom IT Support Mining</title>
+    <title>Fluminer T3 - Custom IT Support Mining</title>
     <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/feather-icons"></script>
@@ -55,38 +55,72 @@
     <section class="py-16 gradient-bg">
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <!-- Product Image Slider -->
-                <div class="flex justify-center">
-                    <div class="relative w-full max-w-lg">
-                        <!-- Slider Container -->
-                        <div class="overflow-hidden rounded-lg">
-                            <div id="image-slider" class="flex transition-transform duration-300 ease-in-out">
-                                <img src="http://static.photos/technology/640x360/1" alt="Fluminer L1 Pro - Front View" class="w-full flex-shrink-0">
-                        </div>
-                        
-                        <!-- Navigation Buttons -->
-                        <button id="prev-btn" class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 transition duration-300">
-                            <i data-feather="chevron-left" class="w-5 h-5"></i>
-                        </button>
-                        <button id="next-btn" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 transition duration-300">
-                            <i data-feather="chevron-right" class="w-5 h-5"></i>
-                        </button>
-                        <!-- Dots Indicator -->
-                        <div class="flex justify-center space-x-2 mt-4">
-                            <button class="dot-indicator w-3 h-3 bg-blue-400 rounded-full"></button>
-                        <button class="dot-indicator w-3 h-3 bg-slate-600 rounded-full"></button>
-                            <button class="dot-indicator w-3 h-3 bg-slate-600 rounded-full"></button>
-                            <button class="dot-indicator w-3 h-3 bg-slate-600 rounded-full"></button>
-                        </div>
+
+
+
+
+
+
+                
+
+
+                
+               <!-- Product Image Slider -->
+<div class="flex justify-center">
+  <div id="slider" class="relative w-full max-w-lg">
+    <img id="slider-image" src="photos/Flumier_L2.png" alt="Fluminer L2" class="rounded-lg w-full max-w-lg">
+    <button id="prev-btn" class="absolute left-0 top-1/2 transform -translate-y-1/2 text-3xl text-white bg-transparent px-0 py-0 focus:outline-none">&#8592;</button>
+    <button id="next-btn" class="absolute right-0 top-1/2 transform -translate-y-1/2 text-3xl text-white bg-transparent px-0 py-0 focus:outline-none">&#8594;</button>
+  </div>
 </div>
-                </div>
-<!-- Product Information -->
+<script>
+  const images = [
+    'photos/Flumier_L2.png',
+    'photos/Flumier_L2 Front.jpg',
+    'photos/Flumier_L2 Sideview.jpg',
+    'photos/Flumier_L2 Backview.jpg'
+  ];
+  let index = 0;
+  const sliderImage = document.getElementById('slider-image');
+  const prevBtn = document.getElementById('prev-btn');
+  const nextBtn = document.getElementById('next-btn');
+
+  prevBtn.addEventListener('click', () => {
+    index = (index === 0) ? images.length - 1 : index - 1;
+    sliderImage.src = images[index];
+  });
+
+  nextBtn.addEventListener('click', () => {
+    index = (index === images.length - 1) ? 0 : index + 1;
+    sliderImage.src = images[index];
+  });
+
+  // Automatic scroll every 3 seconds
+  setInterval(() => {
+    index = (index === images.length - 1) ? 0 : index + 1;
+    sliderImage.src = images[index];
+  }, 3000);
+</script>
+
+
+
+
+
+
+                
+
+
+
+
+
+                
+                <!-- Product Information -->
                 <div class="product-card rounded-lg p-8">
-                    <h1 class="text-4xl font-bold mb-4">Fluminer L1 Pro</h1>
-                    <p class="text-xl text-blue-200 mb-6">6 GH/s SHA-256 algorithm for BTC</p>
+                    <h1 class="text-4xl font-bold mb-4">Fluminer T3</h1>
+                    <p class="text-xl text-blue-200 mb-6">115 TH/s SHA-256 algorithm for BTC</p>
                     
                     <div class="mb-6">
-                        <span class="text-3xl font-bold text-white">€2,500</span>
+                        <span class="text-3xl font-bold text-white">€2,200</span>
                     </div>
                     
                     <div class="mb-8">
@@ -94,7 +128,7 @@
                         <ul class="space-y-3">
                             <li class="flex items-center">
                                 <i data-feather="zap" class="w-5 h-5 mr-3 text-blue-400"></i>
-                                <span><strong>Hash Rate:</strong> 6 GH/s</span>
+                                <span><strong>Hash Rate:</strong> 115 TH/s</span>
                             </li>
                             <li class="flex items-center">
                                 <i data-feather="cpu" class="w-5 h-5 mr-3 text-blue-400"></i>
@@ -102,15 +136,15 @@
                             </li>
                             <li class="flex items-center">
                                 <i data-feather="battery" class="w-5 h-5 mr-3 text-blue-400"></i>
-                                <span><strong>Power Consumption:</strong> 1400W</span>
+                                <span><strong>Power Consumption:</strong> 1700W</span>
                             </li>
                             <li class="flex items-center">
                                 <i data-feather="volume" class="w-5 h-5 mr-3 text-blue-400"></i>
-                                <span><strong>Noise Level:</strong> ≤ 45dB</span>
+                                <span><strong>Noise Level:</strong> 40-55 dB</span>
                             </li>
                             <li class="flex items-center">
                                 <i data-feather="clock" class="w-5 h-5 mr-3 text-blue-400"></i>
-                                <span><strong>Warranty:</strong> 6 months</span>
+                                <span><strong>Warranty:</strong> 1 year</span>
                             </li>
                         </ul>
                     </div>
@@ -118,36 +152,6 @@
                     <button class="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-lg font-medium transition duration-300 text-lg">
                                 Complete Purchase
                             </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="py-16 bg-slate-900">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold mb-12 text-center">Product Features</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                <div class="product-card rounded-lg p-6">
-                    <i data-feather="zap" class="w-12 h-12 text-blue-500 mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-3">High Performance</h3>
-                    <p class="text-slate-300">Optimized for Bitcoin mining with 6 GH/s hash rate capability.</p>
-                </div>
-                <div class="product-card rounded-lg p-6">
-                    <i data-feather="shield" class="w-12 h-12 text-blue-500 mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-3">Energy Efficient</h3>
-                    <p class="text-slate-300">Advanced power management system for optimal efficiency.</p>
-                </div>
-                <div class="product-card rounded-lg p-6">
-                    <i data-feather="settings" class="w-12 h-12 text-blue-500 mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-3">Easy Setup</h3>
-                    <p class="text-slate-300">Plug-and-play design with web interface for easy configuration.</p>
-                </div>
-                <div class="product-card rounded-lg p-6">
-                    <i data-feather="truck" class="w-12 h-12 text-blue-500 mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-3">EU Support</h3>
-                    <p class="text-slate-300">Dedicated technical support team based in the European Union.</p>
                 </div>
             </div>
         </div>
@@ -191,65 +195,9 @@
             </div>
         </div>
     </footer>
+
     <script>
         feather.replace();
-        // Image slider functionality
-        const images = [
-            "https://huggingface.co/spaces/rolandx/cryptomine-haven-professional-mining-hardware/resolve/main/images/Flumier_L1 horizontal.png",
-            "https://huggingface.co/spaces/rolandx/cryptomine-haven-professional-mining-hardware/resolve/main/images/Flumier_L1.png",
-            "https://huggingface.co/spaces/rolandx/cryptomine-haven-professional-mining-hardware/resolve/main/images/Flumier_L1 front.png",
-            "https://huggingface.co/spaces/rolandx/cryptomine-haven-professional-mining-hardware/resolve/main/images/Flumier_L1 back.png"
-        ];
-const slider = document.getElementById('image-slider');
-        const prevBtn = document.getElementById('prev-btn');
-        const nextBtn = document.getElementById('next-btn');
-        const dots = document.querySelectorAll('.dot-indicator');
-        
-        let currentIndex = 0;
-        // Initialize slider with first image
-        updateSlider();
-function updateSlider() {
-            slider.innerHTML = '';
-            images.forEach((image, index) => {
-                const img = document.createElement('img');
-                img.src = image;
-                img.alt = `Fluminer L1 Pro - View ${index + 1}`;
-            img.className = 'w-full flex-shrink-0';
-                slider.appendChild(img);
-            });
-            
-            slider.style.transform = `translateX(-${currentIndex * 100}%)';
-            
-            // Update dots
-            dots.forEach((dot, index) => {
-                dot.className = `dot-indicator w-3 h-3 rounded-full ${index === currentIndex ? 'bg-blue-400' : 'bg-slate-600'}`;
-            });
-        }
-function nextSlide() {
-            currentIndex = (currentIndex + 1) % images.length;
-            updateSlider();
-        }
-        
-        function prevSlide() {
-            currentIndex = (currentIndex - 1 + images.length) % images.length;
-            updateSlider();
-        }
-        
-        function goToSlide(index) {
-            currentIndex = index;
-            updateSlider();
-        }
-        
-        // Event listeners
-        nextBtn.addEventListener('click', nextSlide);
-        prevBtn.addEventListener('click', prevSlide);
-        
-        // Auto-slide every 5 seconds
-        setInterval(nextSlide, 5000);
-        // Add click events to dots
-        dots.forEach((dot, index) => {
-            dot.addEventListener('click', () => goToSlide(index));
-        });
-</script>
+    </script>
 </body>
 </html>
