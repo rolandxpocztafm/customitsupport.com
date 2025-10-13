@@ -57,7 +57,10 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
                 <!-- Product Image -->
                 <div class="flex justify-center">
-                    <!-- Product Image Slider -->
+
+
+                    
+<!-- Product Image Slider -->
 <div class="flex justify-center">
   <div id="slider" class="relative w-full max-w-lg">
     <img id="slider-image" src="photos/Flumier_L2.png" alt="Fluminer L2" class="rounded-lg w-full max-w-lg">
@@ -86,7 +89,16 @@
     index = (index === images.length - 1) ? 0 : index + 1;
     sliderImage.src = images[index];
   });
+
+  // Automatic scrolling every 3 seconds
+  setInterval(() => {
+    index = (index === images.length - 1) ? 0 : index + 1;
+    sliderImage.src = images[index];
+  }, 3000);
 </script>
+
+
+                    
 
                 </div>
                 
