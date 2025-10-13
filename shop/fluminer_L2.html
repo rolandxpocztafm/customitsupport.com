@@ -57,7 +57,37 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
                 <!-- Product Image -->
                 <div class="flex justify-center">
-                    <img src="http://static.photos/technology/640x360/2" alt="Fluminer L2" class="rounded-lg w-full max-w-lg">
+                    <!-- Product Image Slider -->
+<div class="flex justify-center">
+  <div id="slider" class="relative w-full max-w-lg">
+    <img id="slider-image" src="photos/Flumier_L2.png" alt="Fluminer L2" class="rounded-lg w-full max-w-lg">
+    <button id="prev-btn" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white px-2 py-1 rounded-l">Prev</button>
+    <button id="next-btn" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white px-2 py-1 rounded-r">Next</button>
+  </div>
+</div>
+<script>
+  const images = [
+    'photos/Flumier_L2.png',
+    'photos/Flumier_L2 Front.jpg',
+    'photos/Flumier_L2 Sideview.jpg',
+    'photos/Flumier_L2 Backview.jpg'
+  ];
+  let index = 0;
+  const sliderImage = document.getElementById('slider-image');
+  const prevBtn = document.getElementById('prev-btn');
+  const nextBtn = document.getElementById('next-btn');
+
+  prevBtn.addEventListener('click', () => {
+    index = (index === 0) ? images.length - 1 : index - 1;
+    sliderImage.src = images[index];
+  });
+
+  nextBtn.addEventListener('click', () => {
+    index = (index === images.length - 1) ? 0 : index + 1;
+    sliderImage.src = images[index];
+  });
+</script>
+
                 </div>
                 
                 <!-- Product Information -->
