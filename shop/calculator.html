@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>Profitability calculator (fixed block reward)</title>
+  <title>Profitability calculator (with debug & block reward fallback)</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <style>
     body{font-family:system-ui,Segoe UI,Roboto,Arial;max-width:920px;margin:28px auto;padding:18px}
@@ -19,7 +19,7 @@
   </style>
 </head>
 <body>
-  <h1>Miner profitability calculator (live block reward)</h1>
+  <h1>Miner profitability (debug) </h1>
 
   <div class="grid">
     <div class="card">
@@ -74,7 +74,7 @@
   </div>
 
   <footer>
-    Data: Coingecko (price), Blockchain.info (difficulty), Blockchair (block reward fallback)  
+    Debug mode: check console logs for errors and responses.
   </footer>
 
 <script>
@@ -97,11 +97,19 @@
 
   async function fetchPrice(){
     try {
-      const r = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd,eur');
+      const url = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd,eur';
+      console.log('fetchPrice url', url);
+      const r = await fetch(url);
+      console.log('fetchPrice status', r.status);
       const j = await r.json();
-      priceData = j.bitcoin;
-      const cur = el('currency').value;
-      out.btcPrice.textContent = (cur === 'usd' ? priceData.usd : priceData.eur).toLocaleString(undefined, { maximumFractionDigits:2 });
+      console.log('fetchPrice json', j);
+      if (j.bitcoin) {
+        priceData = j.bitcoin;
+        const cur = el('currency').value;
+        out.btcPrice.textContent = (cur === 'usd' ? priceData.usd : priceData.eur).toLocaleString(undefined, { maximumFractionDigits:2 });
+      } else {
+        throw new Error('no bitcoin field');
+      }
     } catch (e) {
       console.error('fetchPrice error', e);
       out.btcPrice.textContent = 'error';
@@ -110,4 +118,12 @@
 
   async function fetchDifficulty(){
     try {
-      const r = await fetch('https://blockchain.info/q/getdifficulty
+      const url = 'https://blockchain.info/q/getdifficulty';
+      console.log('fetchDifficulty url', url);
+      const r = await fetch(url);
+      console.log('fetchDifficulty status', r.status);
+      const txt = await r.text();
+      console.log('fetchDifficulty text', txt);
+      difficulty = parseFloat(txt);
+      if (!isNaN(difficulty)) {
+        out.difficulty.textContent = difficulty.toLocaleString(undefined, {
