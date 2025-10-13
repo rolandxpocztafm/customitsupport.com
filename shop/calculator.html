@@ -19,24 +19,24 @@
   </style>
 </head>
 <body>
-  <h1>Miner profitability calculator (static)</h1>
+  <h1>Miner profitability calculator (live data)</h1>
 
   <div class="grid">
     <div class="card">
       <label>Hashrate (TH/s)</label>
-      <input id="hashTh" type="number" value="100" step="0.1" />
+      <input id="hashTh" type="number" value="115" step="0.1" />
 
       <label style="margin-top:10px">Power (W)</label>
-      <input id="powerW" type="number" value="3000" step="1" />
+      <input id="powerW" type="number" value="1700" step="1" />
 
       <label style="margin-top:10px">Pool fee (%)</label>
       <input id="poolFee" type="number" value="1.0" step="0.1" />
 
       <label style="margin-top:10px">Electricity (€/kWh)</label>
-      <input id="elec" type="number" value="0.22" step="0.01" />
+      <input id="elec" type="number" value="0.05" step="0.01" />
 
-      <label style="margin-top:10px">Block reward (BTC)</label>
-      <input id="blockReward" type="number" value="6.25" step="0.0001" />
+      <label style="margin-top:10px">Block reward (BTC, live)</label>
+      <input id="blockReward" type="number" value="0" step="0.0001" readonly />
 
       <label style="margin-top:10px">Currency</label>
       <select id="currency">
@@ -55,6 +55,10 @@
           <div class="muted">Network difficulty</div>
           <div id="difficulty" class="big">—</div>
         </div>
+        <div>
+          <div class="muted">Block reward</div>
+          <div id="rewardLive" class="big">—</div>
+        </div>
       </div>
 
       <hr style="margin:12px 0">
@@ -70,56 +74,58 @@
   </div>
 
   <footer>
-    Live data sources: Coingecko (price) and blockchain.info (difficulty). This is client-side only.
+    Live data: Coingecko (price), Blockchain.info (difficulty), Mempool.space (block reward). Client-side only.
   </footer>
 
 <script>
 (async function(){
   const el = id => document.getElementById(id);
-  const inputs = ['hashTh','powerW','poolFee','elec','blockReward','currency'].map(id=>el(id));
-  const out = {btcPrice:el('btcPrice'), difficulty:el('difficulty'),
+  const inputs = ['hashTh','powerW','poolFee','elec','currency'].map(id=>el(id));
+  const out = {btcPrice:el('btcPrice'), difficulty:el('difficulty'), rewardLive:el('rewardLive'),
                btcDay:el('btcDay'), revDay:el('revDay'), elecDay:el('elecDay'), profitDay:el('profitDay')};
 
   let priceData = {usd:0,eur:0};
   let difficulty = 0;
+  let blockReward = 0;
 
   async function fetchPrice(){
     try{
-      const cur = el('currency').value;
-      // Coingecko simple price: returns {bitcoin:{usd:...,eur:...}}
       const r = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd,eur');
       const j = await r.json();
-      priceData.usd = j.bitcoin.usd;
-      priceData.eur = j.bitcoin.eur;
+      priceData = j.bitcoin;
+      const cur = el('currency').value;
       out.btcPrice.textContent = (cur === 'usd' ? priceData.usd : priceData.eur).toLocaleString(undefined,{maximumFractionDigits:2});
-    }catch(e){
-      out.btcPrice.textContent = 'error';
-    }
+    }catch(e){ out.btcPrice.textContent = 'error'; }
   }
 
   async function fetchDifficulty(){
     try{
-      // blockchain.info endpoint: returns plain number
       const r = await fetch('https://blockchain.info/q/getdifficulty');
       const txt = await r.text();
       difficulty = parseFloat(txt);
       out.difficulty.textContent = difficulty.toLocaleString(undefined,{maximumFractionDigits:0});
-    }catch(e){
-      out.difficulty.textContent = 'error';
-    }
+    }catch(e){ out.difficulty.textContent = 'error'; }
+  }
+
+  async function fetchBlockReward(){
+    try{
+      const r = await fetch('https://mempool.space/api/v1/mining/block/height/latest');
+      const j = await r.json();
+      blockReward = j.reward / 1e8; // satoshi → BTC
+      el('blockReward').value = blockReward.toFixed(8);
+      out.rewardLive.textContent = blockReward.toFixed(8);
+    }catch(e){ out.rewardLive.textContent = 'error'; }
   }
 
   function compute(){
-    // inputs
     const hashTh = parseFloat(el('hashTh').value) || 0;
-    const minerHs = hashTh * 1e12; // TH/s -> H/s
+    const minerHs = hashTh * 1e12;
     const powerW = parseFloat(el('powerW').value) || 0;
     const poolFee = (parseFloat(el('poolFee').value)||0)/100;
     const elec = parseFloat(el('elec').value) || 0;
-    const blockReward = parseFloat(el('blockReward').value) || 6.25;
     const cur = el('currency').value;
 
-    if(!difficulty || !priceData.usd){ 
+    if(!difficulty || !priceData.usd || !blockReward){
       out.btcDay.textContent = '—';
       out.revDay.textContent = '—';
       out.elecDay.textContent = '—';
@@ -127,7 +133,6 @@
       return;
     }
 
-    // BTC/day formula: minerHs * 86400 * blockReward / (difficulty * 2^32)
     const btcPerDay = minerHs * 86400 * blockReward / (difficulty * Math.pow(2,32));
     const price = (cur === 'usd' ? priceData.usd : priceData.eur);
     const revenueDay = btcPerDay * price;
@@ -140,19 +145,18 @@
     out.profitDay.textContent = profitDay.toLocaleString(undefined,{maximumFractionDigits:2});
   }
 
-  // wire inputs
   inputs.forEach(i => i.addEventListener('input', compute));
   el('currency').addEventListener('change', () => { fetchPrice().then(compute); });
 
-  // initial fetch and periodic refresh
   await fetchPrice();
   await fetchDifficulty();
+  await fetchBlockReward();
   compute();
 
-  // refresh price often, difficulty less often
-  setInterval(fetchPrice, 30_000); // price every 30s
-  setInterval(fetchDifficulty, 5 * 60_000); // difficulty every 5 min
-  setInterval(compute, 5_000);
+  setInterval(fetchPrice, 30000);
+  setInterval(fetchDifficulty, 5*60000);
+  setInterval(fetchBlockReward, 10*60000);
+  setInterval(compute, 5000);
 })();
 </script>
 </body>
