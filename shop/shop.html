@@ -356,25 +356,19 @@
                             <label for="miner-select" class="block text-sm font-medium mb-2">Select Miner</label>
                             <select id="miner-select" class="w-full p-3 rounded-lg bg-slate-800 border border-slate-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                                 <option value="">-- Select a Miner --</option>
-                                <option value="l2">Fluminer L2 (1.2 GH/s Scrypt)</option>
-                                <option value="t3">Fluminer T3 (115 TH/s SHA-256)</option>
-                                <option value="nvidia">NVIDIA RTX 3080 Rig (600 MH/s)</option>
-                                <option value="amd">AMD RX 6800 XT Rig (512 MH/s)</option>
+                                <option value="t3" data-hashrate="115" data-power="3200" data-price="1699">Fluminer T3 (115 TH/s, 3200W)</option>
+                                <option value="l2" data-hashrate="1.2" data-power="650" data-price="828">Fluminer L2 (1.2 GH/s, 650W)</option>
+                                <option value="l1pro" data-hashrate="0.8" data-power="450" data-price="599">Fluminer L1 Pro (0.8 GH/s, 450W)</option>
                             </select>
-                        </div>
+</div>
                         
                         <div class="mb-6">
                             <label for="coin-select" class="block text-sm font-medium mb-2">Select Coin</label>
                             <select id="coin-select" class="w-full p-3 rounded-lg bg-slate-800 border border-slate-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                                 <option value="">-- Select a Coin --</option>
-                                <option value="btc">Bitcoin (BTC)</option>
-                                <option value="ltc">Litecoin (LTC)</option>
-                                <option value="doge">Dogecoin (DOGE)</option>
-                                <option value="eth">Ethereum (ETH)</option>
-                                <option value="etc">Ethereum Classic (ETC)</option>
-                                <option value="rvn">Ravencoin (RVN)</option>
+                                <!-- Options will be populated by JavaScript -->
                             </select>
-                        </div>
+</div>
                         
                         <div class="mb-6">
                             <label for="electricity-cost" class="block text-sm font-medium mb-2">Electricity Cost (€/kWh)</label>
@@ -483,86 +477,99 @@
 <script>
 // Initialize feather icons
         feather.replace();
-        
-        // Profitability calculator logic
-        document.getElementById('calculate-btn').addEventListener('click', function() {
-            const minerSelect = document.getElementById('miner-select').value;
-            const coinSelect = document.getElementById('coin-select').value;
+        // Miner data is now static in HTML select options
+        // Update coins based on selected miner
+        function updateCoins(minerType) {
+            const coinSelect = document.getElementById('coin-select');
+            coinSelect.innerHTML = '<option value="">-- Select a Coin --</option>';
+            
+            const coins = {
+                't3': [
+                    {id: 'bitcoin', name: 'Bitcoin', symbol: 'BTC'}
+                ],
+                'l2': [
+                    {id: 'litecoin', name: 'Litecoin', symbol: 'LTC'},
+                    {id: 'dogecoin', name: 'Dogecoin', symbol: 'DOGE'}
+                ],
+                'l1pro': [
+                    {id: 'litecoin', name: 'Litecoin', symbol: 'LTC'},
+                    {id: 'dogecoin', name: 'Dogecoin', symbol: 'DOGE'},
+                    {id: 'bella-protocol', name: 'Bella Protocol', symbol: 'BEL'}
+                ]
+            };
+
+            // Add coins based on miner type
+            coins[minerType].forEach(coin => {
+                const option = document.createElement('option');
+                option.value = coin.id;
+                option.textContent = `${coin.name} (${coin.symbol.toUpperCase()})`;
+                coinSelect.appendChild(option);
+            });
+        }
+
+        // Fetch current coin price
+        async function fetchCoinPrice(coinId) {
+            try {
+                const response = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${coinId}&vs_currencies=eur`);
+                const data = await response.json();
+                return data[coinId].eur;
+            } catch (error) {
+                console.error('Error fetching coin price:', error);
+                return 0;
+            }
+        }
+
+        // Initialize data
+        document.getElementById('miner-select').addEventListener('change', function() {
+            if (this.value) {
+                updateCoins(this.value);
+            }
+        });
+// Profitability calculator logic
+        document.getElementById('calculate-btn').addEventListener('click', async function() {
+            const minerSelect = document.getElementById('miner-select');
+            const coinSelect = document.getElementById('coin-select');
             const electricityCost = parseFloat(document.getElementById('electricity-cost').value);
             
-            if (!minerSelect || !coinSelect || isNaN(electricityCost)) {
+            if (!minerSelect.value || !coinSelect.value || isNaN(electricityCost)) {
                 alert('Please fill in all fields with valid values');
                 return;
             }
             
-            // These values would normally come from an API based on current market conditions
-            let hashrate, powerUsage, currentPrice;
+            const selectedMiner = minerSelect.options[minerSelect.selectedIndex];
+            const coinId = coinSelect.value;
+            const currentPrice = await fetchCoinPrice(coinId);
             
-            // Simplified example calculations (in a real app, these would be dynamic)
-            if (minerSelect === 'l2') {
-                hashrate = 1.2; // GH/s
-                powerUsage = 230 * hashrate; // W
-                
-                if (coinSelect === 'ltc') {
-                    currentPrice = 70; // Example LTC price in €
-                    // Very simplified calculation - in reality would use API
-                    const dailyReward = hashrate * 0.02; // Example value
-                    const dailyRevenue = dailyReward * currentPrice;
-                    const dailyCost = (powerUsage * 24 / 1000) * electricityCost;
-                    updateResults(dailyRevenue, dailyCost);
-                } else if (coinSelect === 'doge') {
-                    currentPrice = 0.15; // Example DOGE price in €
-                    const dailyReward = hashrate * 5000; // Example value
-                    const dailyRevenue = dailyReward * currentPrice;
-                    const dailyCost = (powerUsage * 24 / 1000) * electricityCost;
-                    updateResults(dailyRevenue, dailyCost);
-                }
-            } else if (minerSelect === 't3') {
-                hashrate = 115; // TH/s
-                powerUsage = 14.78 * hashrate; // W
-                
-                if (coinSelect === 'btc') {
-                    currentPrice = 50000; // Example BTC price in €
-                    const dailyReward = hashrate * 0.00001; // Example value
-                    const dailyRevenue = dailyReward * currentPrice;
-                    const dailyCost = (powerUsage * 24 / 1000) * electricityCost;
-                    updateResults(dailyRevenue, dailyCost);
-                }
-            } else if (minerSelect === 'nvidia') {
-                hashrate = 600; // MH/s
-                powerUsage = 1200; // W
-                
-                if (coinSelect === 'eth' || coinSelect === 'etc') {
-                    currentPrice = coinSelect === 'eth' ? 3000 : 30; // Example prices
-                    const dailyReward = hashrate * 0.0001; // Example value
-                    const dailyRevenue = dailyReward * currentPrice;
-                    const dailyCost = (powerUsage * 24 / 1000) * electricityCost;
-                    updateResults(dailyRevenue, dailyCost);
-                }
-            } else if (minerSelect === 'amd') {
-                hashrate = 512; // MH/s
-                powerUsage = 1600; // W
-                
-                if (coinSelect === 'eth' || coinSelect === 'etc' || coinSelect === 'rvn') {
-                    currentPrice = coinSelect === 'eth' ? 3000 : 
-                                  coinSelect === 'etc' ? 30 : 0.05; // Example prices
-                    const dailyReward = hashrate * 0.0001; // Example value
-                    const dailyRevenue = dailyReward * currentPrice;
-                    const dailyCost = (powerUsage * 24 / 1000) * electricityCost;
-                    updateResults(dailyRevenue, dailyCost);
-                }
+            const hashrate = parseFloat(selectedMiner.dataset.hashrate);
+            const powerUsage = parseFloat(selectedMiner.dataset.power);
+if (!hashrate || !powerUsage || !currentPrice) {
+                alert('Could not get required data for calculation');
+                return;
             }
-        });
-        
+            // More accurate calculation based on miner type
+            let dailyReward;
+            if (minerSelect.value === 't3') {
+                // BTC mining estimate (TH/s to BTC/day)
+                dailyReward = hashrate * 0.0000065; 
+            } else {
+                // LTC/DOGE mining estimate (GH/s to coins/day)
+                dailyReward = hashrate * 0.015;
+            }
+const dailyRevenue = dailyReward * currentPrice;
+            const dailyCost = (powerUsage * 24 / 1000) * electricityCost;
+            updateResults(dailyRevenue, dailyCost);
+});
         function updateResults(dailyRevenue, dailyCost) {
-            const dailyProfit = dailyRevenue - dailyCost;
+            // Prevent negative values in case of calculation errors
+            dailyRevenue = Math.max(0, dailyRevenue);
+            dailyCost = Math.max(0, dailyCost);
+const dailyProfit = dailyRevenue - dailyCost;
             const monthlyProfit = dailyProfit * 30;
-            
-            // Simple ROI calculation (would need miner price in real implementation)
+            // ROI calculation based on actual miner price
             let roiPeriod = 'N/A';
             if (dailyProfit > 0) {
-                const minerPrice = 1699; // Example for T3
-                roiPeriod = Math.ceil(minerPrice / (dailyProfit * 30)) + ' months';
+                const minerPrice = parseFloat(selectedMiner.dataset.price);
+roiPeriod = Math.ceil(minerPrice / (dailyProfit * 30)) + ' months';
             }
             
             document.getElementById('daily-revenue').textContent = '€' + dailyRevenue.toFixed(2);
