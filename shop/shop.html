@@ -356,18 +356,17 @@
                             <label for="miner-select" class="block text-sm font-medium mb-2">Select Miner</label>
                             <select id="miner-select" class="w-full p-3 rounded-lg bg-slate-800 border border-slate-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                                 <option value="">-- Select a Miner --</option>
-                                <option value="t3" data-hashrate="115" data-power="3200" data-price="1699">Fluminer T3 (115 TH/s, 3200W)</option>
-                                <option value="l2" data-hashrate="1.2" data-power="650" data-price="828">Fluminer L2 (1.2 GH/s, 650W)</option>
-                                <option value="l1pro" data-hashrate="0.8" data-power="450" data-price="599">Fluminer L1 Pro (0.8 GH/s, 450W)</option>
-                            </select>
+<option value="t3" data-hashrate="115" data-power="1700" data-price="1699" data-algorithm="sha256">Fluminer T3 (115 TH/s, 1700W, SHA-256)</option>
+<option value="l2" data-hashrate="1.2" data-power="650" data-price="828" data-algorithm="scrypt">Fluminer L2 (1.2 GH/s, 650W, Scrypt)</option>
+<option value="l1pro" data-hashrate="0.8" data-power="450" data-price="599" data-algorithm="sha256">Fluminer L1 Pro (0.8 GH/s, 450W, SHA-256)</option>
+</select>
 </div>
                         
                         <div class="mb-6">
                             <label for="coin-select" class="block text-sm font-medium mb-2">Select Coin</label>
-                            <select id="coin-select" class="w-full p-3 rounded-lg bg-slate-800 border border-slate-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                                <option value="">-- Select a Coin --</option>
-                                <!-- Options will be populated by JavaScript -->
-                            </select>
+                            <select id="coin-select" class="w-full p-3 rounded-lg bg-slate-800 border border-slate-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500" disabled>
+                                <option value="">-- Select a Miner first --</option>
+</select>
 </div>
                         
                         <div class="mb-6">
@@ -477,37 +476,22 @@
 <script>
 // Initialize feather icons
         feather.replace();
-        // Miner data is now static in HTML select options
-        // Update coins based on selected miner
-        function updateCoins(minerType) {
+        // Filter coins based on miner algorithm
+        function filterCoins(minerType) {
             const coinSelect = document.getElementById('coin-select');
-            coinSelect.innerHTML = '<option value="">-- Select a Coin --</option>';
+            const algorithm = minerType === 't3' ? 'sha256' : 'scrypt';
             
-            const coins = {
-                't3': [
-                    {id: 'bitcoin', name: 'Bitcoin', symbol: 'BTC'}
-                ],
-                'l2': [
-                    {id: 'litecoin', name: 'Litecoin', symbol: 'LTC'},
-                    {id: 'dogecoin', name: 'Dogecoin', symbol: 'DOGE'}
-                ],
-                'l1pro': [
-                    {id: 'litecoin', name: 'Litecoin', symbol: 'LTC'},
-                    {id: 'dogecoin', name: 'Dogecoin', symbol: 'DOGE'},
-                    {id: 'bella-protocol', name: 'Bella Protocol', symbol: 'BEL'}
-                ]
-            };
-
-            // Add coins based on miner type
-            coins[minerType].forEach(coin => {
-                const option = document.createElement('option');
-                option.value = coin.id;
-                option.textContent = `${coin.name} (${coin.symbol.toUpperCase()})`;
-                coinSelect.appendChild(option);
-            });
+            for (let i = 0; i < coinSelect.options.length; i++) {
+                const option = coinSelect.options[i];
+                if (option.value === '') continue;
+                
+                const showOption = option.dataset.algorithm === algorithm;
+                option.disabled = !showOption;
+                option.hidden = !showOption;
+            }
+            coinSelect.value = '';
         }
-
-        // Fetch current coin price
+// Fetch current coin price
         async function fetchCoinPrice(coinId) {
             try {
                 const response = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${coinId}&vs_currencies=eur`);
@@ -518,66 +502,94 @@
                 return 0;
             }
         }
-
-        // Initialize data
+        // Initialize event listeners
         document.getElementById('miner-select').addEventListener('change', function() {
+            const coinSelect = document.getElementById('coin-select');
             if (this.value) {
-                updateCoins(this.value);
+                filterCoins(this.value);
+                coinSelect.disabled = false;
+            } else {
+                coinSelect.value = '';
+                coinSelect.disabled = true;
             }
         });
 // Profitability calculator logic
-        document.getElementById('calculate-btn').addEventListener('click', async function() {
-            const minerSelect = document.getElementById('miner-select');
-            const coinSelect = document.getElementById('coin-select');
-            const electricityCost = parseFloat(document.getElementById('electricity-cost').value);
-            
-            if (!minerSelect.value || !coinSelect.value || isNaN(electricityCost)) {
-                alert('Please fill in all fields with valid values');
-                return;
-            }
-            
-            const selectedMiner = minerSelect.options[minerSelect.selectedIndex];
-            const coinId = coinSelect.value;
-            const currentPrice = await fetchCoinPrice(coinId);
-            
-            const hashrate = parseFloat(selectedMiner.dataset.hashrate);
-            const powerUsage = parseFloat(selectedMiner.dataset.power);
-if (!hashrate || !powerUsage || !currentPrice) {
-                alert('Could not get required data for calculation');
-                return;
-            }
-            // More accurate calculation based on miner type
-            let dailyReward;
-            if (minerSelect.value === 't3') {
-                // BTC mining estimate (TH/s to BTC/day)
-                dailyReward = hashrate * 0.0000065; 
-            } else {
-                // LTC/DOGE mining estimate (GH/s to coins/day)
-                dailyReward = hashrate * 0.015;
-            }
-const dailyRevenue = dailyReward * currentPrice;
-            const dailyCost = (powerUsage * 24 / 1000) * electricityCost;
-            updateResults(dailyRevenue, dailyCost);
+document.getElementById('calculate-btn').addEventListener('click', async function() {
+    const minerSelect = document.getElementById('miner-select');
+    const coinSelect = document.getElementById('coin-select');
+    const electricityCost = parseFloat(document.getElementById('electricity-cost').value);
+    
+    if (!minerSelect.value || !coinSelect.value || isNaN(electricityCost)) {
+        alert('Please fill in all fields with valid values');
+        return;
+    }
+    const selectedMiner = minerSelect.options[minerSelect.selectedIndex];
+    const coinId = coinSelect.value;
+    const currentPrice = await fetchCoinPrice(coinId);
+    
+    const hashrate = parseFloat(selectedMiner.dataset.hashrate);
+    const powerUsage = parseFloat(selectedMiner.dataset.power);
+    const minerPrice = parseFloat(selectedMiner.dataset.price);
+    
+    if (!hashrate || !powerUsage || !currentPrice) {
+        alert('Could not get required data for calculation');
+        return;
+    }
+    
+    // Get reward rate from coin option
+    const selectedCoin = coinSelect.options[coinSelect.selectedIndex];
+    const rewardRate = parseFloat(selectedCoin.dataset.rewardRate || '0');
+    const dailyReward = hashrate * rewardRate;
+    const dailyRevenue = dailyReward * currentPrice;
+const dailyCost = (powerUsage * 24 / 1000) * electricityCost;
+    updateResults(dailyRevenue, dailyCost, minerPrice);
 });
-        function updateResults(dailyRevenue, dailyCost) {
-            // Prevent negative values in case of calculation errors
-            dailyRevenue = Math.max(0, dailyRevenue);
-            dailyCost = Math.max(0, dailyCost);
-const dailyProfit = dailyRevenue - dailyCost;
-            const monthlyProfit = dailyProfit * 30;
-            // ROI calculation based on actual miner price
-            let roiPeriod = 'N/A';
-            if (dailyProfit > 0) {
-                const minerPrice = parseFloat(selectedMiner.dataset.price);
-roiPeriod = Math.ceil(minerPrice / (dailyProfit * 30)) + ' months';
-            }
-            
-            document.getElementById('daily-revenue').textContent = '€' + dailyRevenue.toFixed(2);
+
+function updateResults(dailyRevenue, dailyCost, minerPrice) {
+    // Prevent negative values in case of calculation errors
+    dailyRevenue = Math.max(0, dailyRevenue);
+    dailyCost = Math.max(0, dailyCost);
+    
+    const dailyProfit = dailyRevenue - dailyCost;
+    const monthlyProfit = dailyProfit * 30;
+    
+    // ROI calculation
+    let roiPeriod = 'Not profitable';
+    if (dailyProfit > 0) {
+        roiPeriod = Math.ceil(minerPrice / (dailyProfit * 30)) + ' months';
+    }
+    document.getElementById('daily-revenue').textContent = '€' + dailyRevenue.toFixed(2);
+    document.getElementById('daily-cost').textContent = '€' + dailyCost.toFixed(2);
+    document.getElementById('daily-profit').textContent = '€' + dailyProfit.toFixed(2);
+    document.getElementById('monthly-profit').textContent = '€' + monthlyProfit.toFixed(2);
+    document.getElementById('roi-period').textContent = roiPeriod;
+}
+document.getElementById('daily-revenue').textContent = '€' + dailyRevenue.toFixed(2);
             document.getElementById('daily-cost').textContent = '€' + dailyCost.toFixed(2);
             document.getElementById('daily-profit').textContent = '€' + dailyProfit.toFixed(2);
             document.getElementById('monthly-profit').textContent = '€' + monthlyProfit.toFixed(2);
             document.getElementById('roi-period').textContent = roiPeriod;
+    // Filter coins based on miner algorithm
+    function filterCoins(minerType) {
+        const coinSelect = document.getElementById('coin-select');
+        const algorithm = minerType === 't3' || minerType === 'l1pro' ? 'sha256' : 'scrypt';
+        
+        // Clear previous options
+        coinSelect.innerHTML = '<option value="">-- Select a Coin --</option>';
+
+        // Add coins based on algorithm
+        if (algorithm === 'sha256') {
+            coinSelect.innerHTML += `
+                <option value="bitcoin" data-algorithm="sha256" data-reward-rate="0.0000065">Bitcoin (BTC)</option>
+            `;
+        } else { // scrypt algorithm
+            coinSelect.innerHTML += `
+                <option value="litecoin" data-algorithm="scrypt" data-reward-rate="0.015">Litecoin (LTC)</option>
+                <option value="dogecoin" data-algorithm="scrypt" data-reward-rate="0.015">Dogecoin (DOGE)</option>
+                <option value="bella-protocol" data-algorithm="scrypt" data-reward-rate="0.02">Bella Protocol (BEL)</option>
+            `;
         }
-    </script>
+    }
+</script>
 </body>
 </html>
