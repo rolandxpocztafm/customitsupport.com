@@ -55,10 +55,68 @@
     <section class="py-16 gradient-bg">
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+
+
+
+
+
+
+
+
+
+                
                 <!-- Product Image -->
-                <div class="flex justify-center">
-                    <img src="http://static.photos/technology/640x360/3" alt="Fluminer T3" class="rounded-lg w-full max-w-lg">
-                </div>
+<div class="flex justify-center">
+  <div id="slider-T3" class="relative w-full max-w-lg">
+    <img id="slider-image-T3" src="photos/Fluminer_T3.png" alt="Fluminer T3" class="rounded-lg w-full max-w-lg">
+    <button id="prev-btn-T3" class="absolute left-0 top-1/2 transform -translate-y-1/2 text-3xl text-white bg-transparent px-0 py-0 focus:outline-none">&#8592;</button>
+    <button id="next-btn-T3" class="absolute right-0 top-1/2 transform -translate-y-1/2 text-3xl text-white bg-transparent px-0 py-0 focus:outline-none">&#8594;</button>
+  </div>
+</div>
+<script>
+  const imagesT3 = [
+    'photos/Fluminer_T3.png',
+    'photos/Fluminer_T3 BTC LOGO.png'
+  ];
+  let indexT3 = 0;
+  const sliderImageT3 = document.getElementById('slider-image-T3');
+  const prevBtnT3 = document.getElementById('prev-btn-T3');
+  const nextBtnT3 = document.getElementById('next-btn-T3');
+
+  prevBtnT3.addEventListener('click', () => {
+    indexT3 = (indexT3 === 0) ? imagesT3.length - 1 : indexT3 - 1;
+    sliderImageT3.src = imagesT3[indexT3];
+  });
+
+  nextBtnT3.addEventListener('click', () => {
+    indexT3 = (indexT3 === imagesT3.length - 1) ? 0 : indexT3 + 1;
+    sliderImageT3.src = imagesT3[indexT3];
+  });
+
+  setInterval(() => {
+    indexT3 = (indexT3 === imagesT3.length - 1) ? 0 : indexT3 + 1;
+    sliderImageT3.src = imagesT3[indexT3];
+  }, 3000);
+</script>
+
+
+
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 
                 <!-- Product Information -->
                 <div class="product-card rounded-lg p-8">
