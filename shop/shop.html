@@ -159,7 +159,7 @@
                         </ul>
                         <div class="flex justify-between items-center">
                             <span class="text-2xl font-bold">€700</span>
-                            <button onclick="openPaymentPopup('Fluminer L2', 700)" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition duration-300">
+                            <button onclick="openPaymentDialog('Fluminer L2', 700)" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition duration-300">
                                 Buy Now
                             </button>
 </div>
@@ -415,89 +415,121 @@
         </div>
     </section>
 <!-- Footer -->
-    <footer class="bg-slate-950 border-t border-slate-700 py-12">
-        <div class="container mx-auto px-6">
+    <footer style="background-color: var(--card-dark); border-top: 1px solid var(--border-dark); margin-top: 80px;">
+        <div class="container mx-auto px-4 py-12">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
-                    <h4 class="text-lg font-semibold mb-4">Custom IT Support Mining</h4>
-                    <p class="text-slate-400">Professional crypto mining hardware with EU support and warranty.</p>
+                    <h3 class="font-bold text-lg mb-4">Custom IT Support</h3>
+                    <p class="text-gray-400 text-sm">
+                        Professional crypto mining hardware and IT solutions for the European Union.
+                    </p>
                 </div>
-<div>
-                    <h4 class="text-lg font-semibold mb-4">Products</h4>
-                    <ul class="space-y-2 text-slate-400">
-                        <li><a href="#products" class="hover:text-white transition duration-300">ASIC Miners</a></li>
-                        <li><a href="#products" class="hover:text-white transition duration-300">GPU Rigs</a></li>
-                        <li><a href="#products" class="hover:text-white transition duration-300">Accessories</a></li>
+                <div>
+                    <h4 class="font-semibold mb-4">Services</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li>ASIC Miners</li>
+                        <li>GPU Mining Rigs</li>
+                        <li>IT Support</li>
+                        <li>Custom Solutions</li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-lg font-semibold mb-4">Support</h4>
-                    <ul class="space-y-2 text-slate-400">
-                        <li><a href="#" class="hover:text-white transition duration-300">Contact</a></li>
-                        <li><a href="#" class="hover:text-white transition duration-300">Warranty</a></li>
-                        <li><a href="#" class="hover:text-white transition duration-300">Shipping</a></li>
+                    <h4 class="font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li>About Us</li>
+                        <li>Shipping Info</li>
+                        <li>Warranty</li>
+                        <li>MiCA Compliance</li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-lg font-semibold mb-4">Legal</h4>
-                    <ul class="space-y-2 text-slate-400">
-                        <li><a href="#" class="hover:text-white transition duration-300">Terms</a></li>
-                        <li><a href="#" class="hover:text-white transition duration-300">Privacy</a></li>
-                        <li><a href="#" class="hover:text-white transition duration-300">MiCA Compliance</a></li>
-                    </ul>
+                    <h4 class="font-semibold mb-4">Contact</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-center gap-2 text-gray-400">
+                            <i data-feather="mail" style="width: 16px; height: 16px;"></i>
+                            rp@customitsupport.com
+                        </li>
+                        <li class="flex items-center gap-2 text-gray-400">
+                                <i data-feather="phone" style="width: 16px; height: 16px;"></i>
+                            +31 645485890
+                        </li>
+                        <li class="flex items-center gap-2 text-gray-400">
+                                <i data-feather="map-pin" style="width: 16px; height: 16px;"></i>
+                            Zevenbergschen Hoek, Netherlands
+                        </li>
+</ul>
                 </div>
             </div>
-            <div class="border-t border-slate-700 mt-8 pt-8 text-center text-slate-400">
-                    <p>&copy; 2024 Custom IT Support Mining. All rights reserved.</p>
-</div>
+            <div style="border-top: 1px solid var(--border-dark); margin-top: 32px; padding-top: 32px;" class="text-center text-sm text-gray-400">
+                <p>© 2025 Custom IT Support. All rights reserved.</p>
+                <p class="mt-2">
+                    Crypto mining involves risk. All sales comply with EU MiCA regulations. Consult a financial advisor before investing.
+                </p>
             </div>
         </div>
     </footer>
-
-    <!-- Payment Popup Modal -->
-    <div id="payment-popup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <!-- Payment Dialog Modal -->
+    <div id="payment-dialog" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
         <div class="bg-slate-800 rounded-xl p-8 max-w-md w-full mx-4">
             <div class="flex justify-between items-center mb-6">
-                <h3 class="text-xl font-bold">Select Payment Method</h3>
-                <button onclick="closePaymentPopup()" class="text-slate-400 hover:text-white">
-                    <i data-feather="x" class="w-6 h-6"></i>
+                <h3 class="text-2xl font-bold">Choose Payment Method</h3>
+                <button onclick="closePaymentDialog()" class="text-slate-400 hover:text-white">
+                <i data-feather="x" class="w-6 h-6"></i>
             </div>
-            <div class="space-y-4">
-                <a href="www.ideal.nl" target="_blank" class="flex items-center justify-between p-4 bg-slate-700 rounded-lg hover:bg-slate-600 transition duration-300">
-                        <div class="flex items-center">
-                            <i data-feather="credit-card" class="w-6 h-6 mr-3 text-blue-400"></i>
-                        <span>iDEAL</span>
-                    </a>
-                    <a href="www.banktransfer.nl" target="_blank" class="flex items-center justify-between p-4 bg-slate-700 rounded-lg hover:bg-slate-600 transition duration-300">
-                        <div class="flex items-center">
-                            <i data-feather="dollar-sign" class="w-6 h-6 mr-3 text-blue-400"></i>
-                        <span>Bank Transfer</span>
-                    </a>
-                    <a href="cash.html" class="flex items-center justify-between p-4 bg-slate-700 rounded-lg hover:bg-slate-600 transition duration-300">
-                        <div class="flex items-center">
-                            <i data-feather="map-pin" class="w-6 h-6 mr-3 text-blue-400"></i>
-                        <span>Cash (Pickup at Location)</span>
-                    </a>
-            </div>
+            <p class="text-slate-400 mb-6">Select your preferred payment option for the Fluminer L2</p>
+            
+            <div class="space-y-3">
+                <button onclick="handlePaymentMethod('iDEAL')" class="w-full border border-slate-600 rounded-lg p-4 flex items-center justify-start gap-4 hover:bg-blue-600/10 hover:border-blue-500/50 transition duration-300">
+                <div class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center">
+                    <i data-feather="credit-card" class="w-6 h-6 text-blue-500"></i>
+                </div>
+                <div class="text-left">
+                    <div class="font-semibold text-base">iDEAL Payment</div>
+                    <div class="text-sm text-slate-400">Instant Dutch bank transfer</div>
+                </div>
+            </button>
+
+            <button onclick="handlePaymentMethod('Bank Transfer')" class="w-full border border-slate-600 rounded-lg p-4 flex items-center justify-start gap-4 hover:bg-blue-600/10 hover:border-blue-500/50 transition duration-300">
+                <div class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center">
+                    <i data-feather="building" class="w-6 h-6 text-blue-500"></i>
+                </div>
+                <div class="text-left">
+                    <div class="font-semibold text-base">Bank Transfer</div>
+                    <div class="text-sm text-slate-400">Direct wire transfer</div>
+                </div>
+            </button>
+
+            <button onclick="handlePaymentMethod('Cash')" class="w-full border border-slate-600 rounded-lg p-4 flex items-center justify-start gap-4 hover:bg-blue-600/10 hover:border-blue-500/50 transition duration-300">
+                <div class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center">
+                    <i data-feather="dollar-sign" class="w-6 h-6 text-blue-500"></i>
+                </div>
+                <div class="text-left">
+                    <div class="font-semibold text-base">Cash Payment</div>
+                    <div class="text-sm text-slate-400">Pay in person</div>
+                </div>
+            </button>
         </div>
     </div>
-
 <script>
 // Initialize feather icons
         feather.replace();
         
-        // Payment Popup Functions
-        function openPaymentPopup(productName, price) {
-            document.getElementById('payment-popup').classList.remove('hidden');
+        // Payment Dialog Functions
+        function openPaymentDialog(productName, price) {
+            document.getElementById('payment-dialog').classList.remove('hidden');
             document.body.style.overflow = 'hidden';
         }
         
-        function closePaymentPopup() {
-            document.getElementById('payment-popup').classList.add('hidden');
+        function closePaymentDialog() {
+            document.getElementById('payment-dialog').classList.add('hidden');
             document.body.style.overflow = 'auto';
         }
         
-        // Filter coins based on miner algorithm
+        function handlePaymentMethod(method) {
+            alert(`${method} payment selected\nYou will be contacted with payment details shortly.`);
+            closePaymentDialog();
+        }
+// Filter coins based on miner algorithm
         function filterCoins(minerType) {
             const coinSelect = document.getElementById('coin-select');
             const algorithm = minerType === 't3' ? 'sha256' : 'scrypt';
