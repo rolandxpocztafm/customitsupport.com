@@ -146,25 +146,25 @@
                         <ul class="mb-6 space-y-2">
                             <li class="flex items-center">
                                 <i data-feather="zap" class="w-4 h-4 mr-2 text-blue-400"></i>
-                                <span>650W power consumption</span>
+                                <span>280W±10% power consumption</span>
                             </li>
-                            <li class="flex items-center">
+<li class="flex items-center">
                                 <i data-feather="volume" class="w-4 h-4 mr-2 text-blue-400"></i>
                                 <span>≤ 40dB noise level</span>
                             </li>
                             <li class="flex items-center">
                                 <i data-feather="clock" class="w-4 h-4 mr-2 text-blue-400"></i>
-                                <span>1-year warranty</span>
+                                <span>6-month warranty</span>
                             </li>
                         </ul>
                         <div class="flex justify-between items-center">
                             <span class="text-2xl font-bold">€700</span>
-                            <a href="fluminer_L2.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition duration-300 inline-block">
+                            <button onclick="openPaymentPopup('Fluminer L2', 700)" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition duration-300">
                                 Buy Now
-                            </a>
+                            </button>
 </div>
                     </div>
-                    <!-- Fluminer T3 -->
+<!-- Fluminer T3 -->
                     <div class="product-card rounded-lg overflow-hidden p-6">
                         <div class="flex justify-center mb-6">
                             <img src="https://huggingface.co/spaces/rolandx/cryptomine-haven-professional-mining-hardware/resolve/main/images/Fluminer_T3%20(new).png" alt="Fluminer T3" class="rounded-lg h-48 w-full object-contain">
@@ -337,7 +337,7 @@
                             <select id="miner-select" class="w-full p-3 rounded-lg bg-slate-800 border border-slate-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                                 <option value="">-- Select a Miner --</option>
 <option value="l1pro" data-hashrate="6" data-power="1400" data-price="2500" data-algorithm="sha256">Fluminer L1 Pro (6 GH/s, 1400W, ≤45dB, SHA-256)</option>
-<option value="l2" data-hashrate="1.2" data-power="650" data-price="700" data-algorithm="scrypt">Fluminer L2 (1.2 GH/s, 650W, ≤40dB, Scrypt)</option>
+<option value="l2" data-hashrate="1.2" data-power="280" data-price="700" data-algorithm="scrypt">Fluminer L2 (1.2 GH/s, 280W±10%, ≤40dB, Scrypt)</option>
 <option value="t3" data-hashrate="115" data-power="1700" data-price="2200" data-algorithm="sha256">Fluminer T3 (115 TH/s, 1700W, 50dB, SHA-256)</option>
 </select>
 </div>
@@ -453,9 +453,50 @@
             </div>
         </div>
     </footer>
+
+    <!-- Payment Popup Modal -->
+    <div id="payment-popup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-slate-800 rounded-xl p-8 max-w-md w-full mx-4">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold">Select Payment Method</h3>
+                <button onclick="closePaymentPopup()" class="text-slate-400 hover:text-white">
+                    <i data-feather="x" class="w-6 h-6"></i>
+            </div>
+            <div class="space-y-4">
+                <a href="www.ideal.nl" target="_blank" class="flex items-center justify-between p-4 bg-slate-700 rounded-lg hover:bg-slate-600 transition duration-300">
+                        <div class="flex items-center">
+                            <i data-feather="credit-card" class="w-6 h-6 mr-3 text-blue-400"></i>
+                        <span>iDEAL</span>
+                    </a>
+                    <a href="www.banktransfer.nl" target="_blank" class="flex items-center justify-between p-4 bg-slate-700 rounded-lg hover:bg-slate-600 transition duration-300">
+                        <div class="flex items-center">
+                            <i data-feather="dollar-sign" class="w-6 h-6 mr-3 text-blue-400"></i>
+                        <span>Bank Transfer</span>
+                    </a>
+                    <a href="cash.html" class="flex items-center justify-between p-4 bg-slate-700 rounded-lg hover:bg-slate-600 transition duration-300">
+                        <div class="flex items-center">
+                            <i data-feather="map-pin" class="w-6 h-6 mr-3 text-blue-400"></i>
+                        <span>Cash (Pickup at Location)</span>
+                    </a>
+            </div>
+        </div>
+    </div>
+
 <script>
 // Initialize feather icons
         feather.replace();
+        
+        // Payment Popup Functions
+        function openPaymentPopup(productName, price) {
+            document.getElementById('payment-popup').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closePaymentPopup() {
+            document.getElementById('payment-popup').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+        
         // Filter coins based on miner algorithm
         function filterCoins(minerType) {
             const coinSelect = document.getElementById('coin-select');
