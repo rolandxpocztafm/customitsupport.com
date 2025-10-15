@@ -114,14 +114,14 @@
                     <i data-feather="cpu" class="mr-2"></i> ASIC Miners
                 </h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Fluminer L1 Pro (unchanged, assuming already implemented) -->
+                    <!-- Fluminer L1 Pro -->
                     <div class="product-card rounded-lg overflow-hidden p-6 relative">
                         <div onclick="window.location.href='fluminer_L1_pro.html'" class="clickable-overlay absolute inset-0 cursor-pointer"></div>
                         <div class="flex justify-center mb-6">
                             <img src="https://huggingface.co/spaces/rolandx/cryptomine-haven-professional-mining-hardware/resolve/main/images/Flumier_L1 horizontal.png" alt="Fluminer L1 Pro" class="rounded-lg h-48 object-contain">
                         </div>
                         <h4 class="text-xl font-bold mb-2">Fluminer L1 Pro</h4>
-                        <p class="text-slate-300 mb-4">6 GH/s SHA-256 algorithm for BTC</p>
+                        <p class="text-slate-300 mb-4">6 GH/s Scrypt algorithm for LTC/DOGE</p>
                         <ul class="mb-6 space-y-2">
                             <li class="flex items-center">
                                 <i data-feather="zap" class="w-4 h-4 mr-2 text-blue-400"></i>
@@ -237,6 +237,7 @@
                             </button>
                         </div>
                     </div>
+                    
                     <!-- AMD Rig -->
                     <div class="product-card rounded-lg overflow-hidden p-6">
                         <div class="flex justify-center mb-6">
@@ -267,6 +268,7 @@
                     </div>
                 </div>
             </div>
+            
             <!-- Accessories -->
             <div>
                 <h3 class="text-2xl font-semibold mb-8 flex items-center">
@@ -329,56 +331,62 @@
             </div>
         </div>
     </section>
+
     <!-- Profitability Calculator -->
     <section id="calculator" class="py-16 bg-slate-900">
         <div class="container mx-auto px-6">
             <div class="max-w-4xl mx-auto profitability-calculator rounded-xl p-8">
                 <h2 class="text-3xl font-bold mb-8 text-center">Mining Profitability Calculator</h2>
+                
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>
                         <div class="mb-6">
                             <label for="miner-select" class="block text-sm font-medium mb-2">Select Miner</label>
                             <select id="miner-select" class="w-full p-3 rounded-lg bg-slate-800 border border-slate-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                                 <option value="">-- Select a Miner --</option>
-                                <option value="l1pro" data-hashrate="6" data-power="1400" data-price="2500" data-algorithm="sha256">Fluminer L1 Pro (6 GH/s, 1400W, ≤45dB, SHA-256)</option>
-                                <option value="l2" data-hashrate="1.2" data-power="280" data-price="700" data-algorithm="scrypt">Fluminer L2 (1.2 GH/s, 280W±10%, ≤40dB, Scrypt)</option>
-                                <option value="t3" data-hashrate="115" data-power="1700" data-price="2200" data-algorithm="sha256">Fluminer T3 (115 TH/s, 1700W, 50dB, SHA-256)</option>
-                            </select>
-                        </div>
+<option value="l1pro" data-hashrate="6" data-power="1400" data-price="2500" data-algorithm="scrypt">Fluminer L1 Pro (6 GH/s, 1400W, ≤45dB, Scrypt)</option>
+<option value="l2" data-hashrate="1.2" data-power="280" data-price="700" data-algorithm="scrypt">Fluminer L2 (1.2 GH/s, 280W±10%, ≤40dB, Scrypt)</option>
+<option value="t3" data-hashrate="115000" data-power="1700" data-price="2200" data-algorithm="sha256">Fluminer T3 (115000 GH/s, 1700W, 50dB, SHA-256)</option>
+</select>
+</div>
+                        
                         <div class="mb-6">
                             <label for="coin-select" class="block text-sm font-medium mb-2">Select Coin</label>
                             <select id="coin-select" class="w-full p-3 rounded-lg bg-slate-800 border border-slate-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500" disabled>
                                 <option value="">-- Select a Miner first --</option>
-                            </select>
-                        </div>
+</select>
+</div>
+                        
                         <div class="mb-6">
-                            <label for="electricity-cost" class="block text-sm font-medium mb-2">Electricity Cost (€/kWh)</label>
+                            <label for="electricity-cost" class="block text-sm font-medium mb-2">Electricity Cost ($/kWh)</label>
                             <input type="number" id="electricity-cost" value="0.05" step="0.01" min="0" class="w-full p-3 rounded-lg bg-slate-800 border border-slate-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                        </div>
+</div>
+                        
                         <button id="calculate-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium transition duration-300">
                             Calculate Profitability
                         </button>
                     </div>
+                    
                     <div>
                         <div class="bg-slate-800 rounded-lg p-6">
                             <h3 class="text-xl font-semibold mb-4">Estimated Results</h3>
                             <div class="space-y-4">
                                 <div class="flex justify-between">
                                     <span class="text-slate-300">Daily Revenue:</span>
-                                    <span id="daily-revenue" class="font-medium">€0.00</span>
+                                    <span id="daily-revenue" class="font-medium">$0.00</span>
                                 </div>
                                 <div class="flex justify-between">
                                     <span class="text-slate-300">Daily Electricity Cost:</span>
-                                    <span id="daily-cost" class="font-medium">€0.00</span>
+                                    <span id="daily-cost" class="font-medium">$0.00</span>
                                 </div>
                                 <div class="flex justify-between">
                                     <span class="text-slate-300">Daily Profit:</span>
-                                    <span id="daily-profit" class="font-medium">€0.00</span>
+                                    <span id="daily-profit" class="font-medium">$0.00</span>
                                 </div>
                                 <div class="border-t border-slate-700 my-3"></div>
                                 <div class="flex justify-between">
                                     <span class="text-slate-300">Monthly Profit:</span>
-                                    <span id="monthly-profit" class="font-medium">€0.00</span>
+                                    <span id="monthly-profit" class="font-medium">$0.00</span>
                                 </div>
                                 <div class="flex justify-between">
                                     <span class="text-slate-300">ROI Period:</span>
@@ -386,6 +394,7 @@
                                 </div>
                             </div>
                         </div>
+                        
                         <div class="mt-6 text-sm text-slate-400">
                             <p>Note: These are estimates based on current network difficulty and market conditions. Actual results may vary significantly.</p>
                         </div>
@@ -394,6 +403,7 @@
             </div>
         </div>
     </section>
+
     <!-- Disclaimer Section -->
     <section class="py-12 bg-slate-950">
         <div class="container mx-auto px-6 max-w-4xl text-center">
@@ -412,7 +422,7 @@
             </p>
         </div>
     </section>
-    <!-- Footer -->
+<!-- Footer -->
     <footer style="background-color: var(--card-dark); border-top: 1px solid var(--border-dark); margin-top: 80px;">
         <div class="container mx-auto px-4 py-12">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -448,14 +458,14 @@
                             rp@customitsupport.com
                         </li>
                         <li class="flex items-center gap-2 text-gray-400">
-                            <i data-feather="phone" style="width: 16px; height: 16px;"></i>
+                                <i data-feather="phone" style="width: 16px; height: 16px;"></i>
                             +31 645485890
                         </li>
                         <li class="flex items-center gap-2 text-gray-400">
-                            <i data-feather="map-pin" style="width: 16px; height: 16px;"></i>
+                                <i data-feather="map-pin" style="width: 16px; height: 16px;"></i>
                             Zevenbergschen Hoek, Netherlands
                         </li>
-                    </ul>
+</ul>
                 </div>
             </div>
             <div style="border-top: 1px solid var(--border-dark); margin-top: 32px; padding-top: 32px;" class="text-center text-sm text-gray-400">
@@ -472,43 +482,45 @@
             <div class="flex justify-between items-center mb-6">
                 <h3 class="text-2xl font-bold">Choose Payment Method</h3>
                 <button onclick="closePaymentDialog()" class="text-slate-400 hover:text-white">
-                    <i data-feather="x" class="w-6 h-6"></i>
-                </button>
+                <i data-feather="x" class="w-6 h-6"></i>
+            </button>
             </div>
             <p class="text-slate-400 mb-6">Select your preferred payment option for the Fluminer L2</p>
+            
             <div class="space-y-3">
                 <button onclick="handlePaymentMethod('iDEAL')" class="w-full border border-slate-600 rounded-lg p-4 flex items-center justify-start gap-4 hover:bg-blue-600/10 hover:border-blue-500/50 transition duration-300">
-                    <div class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center">
-                        <i data-feather="credit-card" class="w-6 h-6 text-blue-500"></i>
-                    </div>
-                    <div class="text-left">
-                        <div class="font-semibold text-base">iDEAL Payment</div>
-                        <div class="text-sm text-slate-400">Instant Dutch bank transfer</div>
-                    </div>
-                </button>
-                <button onclick="handlePaymentMethod('Bank Transfer')" class="w-full border border-slate-600 rounded-lg p-4 flex items-center justify-start gap-4 hover:bg-blue-600/10 hover:border-blue-500/50 transition duration-300">
-                    <div class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center">
-                        <i data-feather="building" class="w-6 h-6 text-blue-500"></i>
-                    </div>
-                    <div class="text-left">
-                        <div class="font-semibold text-base">Bank Transfer</div>
-                        <div class="text-sm text-slate-400">Direct wire transfer</div>
-                    </div>
-                </button>
-                <button onclick="handlePaymentMethod('Cash')" class="w-full border border-slate-600 rounded-lg p-4 flex items-center justify-start gap-4 hover:bg-blue-600/10 hover:border-blue-500/50 transition duration-300">
-                    <div class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center">
-                        <i data-feather="dollar-sign" class="w-6 h-6 text-blue-500"></i>
-                    </div>
-                    <div class="text-left">
-                        <div class="font-semibold text-base">Cash Payment</div>
-                        <div class="text-sm text-slate-400">Pay in person</div>
-                    </div>
-                </button>
-            </div>
+                <div class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center">
+                    <i data-feather="credit-card" class="w-6 h-6 text-blue-500"></i>
+                </div>
+                <div class="text-left">
+                    <div class="font-semibold text-base">iDEAL Payment</div>
+                    <div class="text-sm text-slate-400">Instant Dutch bank transfer</div>
+                </div>
+            </button>
+
+            <button onclick="handlePaymentMethod('Bank Transfer')" class="w-full border border-slate-600 rounded-lg p-4 flex items-center justify-start gap-4 hover:bg-blue-600/10 hover:border-blue-500/50 transition duration-300">
+                <div class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center">
+                    <i data-feather="building" class="w-6 h-6 text-blue-500"></i>
+                </div>
+                <div class="text-left">
+                    <div class="font-semibold text-base">Bank Transfer</div>
+                    <div class="text-sm text-slate-400">Direct wire transfer</div>
+                </div>
+            </button>
+
+            <button onclick="handlePaymentMethod('Cash')" class="w-full border border-slate-600 rounded-lg p-4 flex items-center justify-start gap-4 hover:bg-blue-600/10 hover:border-blue-500/50 transition duration-300">
+                <div class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center">
+                    <i data-feather="dollar-sign" class="w-6 h-6 text-blue-500"></i>
+                </div>
+                <div class="text-left">
+                    <div class="font-semibold text-base">Cash Payment</div>
+                    <div class="text-sm text-slate-400">Pay in person</div>
+                </div>
+            </button>
         </div>
     </div>
-    <script>
-        // Initialize feather icons
+<script>
+// Initialize feather icons
         feather.replace();
         
         // Payment Dialog Functions
@@ -526,11 +538,10 @@
             alert(`${method} payment selected\nYou will be contacted with payment details shortly.`);
             closePaymentDialog();
         }
-
-        // Filter coins based on miner algorithm
+// Filter coins based on miner algorithm
         function filterCoins(minerType) {
             const coinSelect = document.getElementById('coin-select');
-            const algorithm = minerType === 't3' || minerType === 'l1pro' ? 'sha256' : 'scrypt';
+            const algorithm = minerType === 't3' ? 'sha256' : 'scrypt';
             
             // Clear previous options
             coinSelect.innerHTML = '<option value="">-- Select a Coin --</option>';
@@ -538,92 +549,92 @@
             // Add coins based on algorithm
             if (algorithm === 'sha256') {
                 coinSelect.innerHTML += `
-                    <option value="bitcoin" data-algorithm="sha256" data-reward-rate="0.0000065">Bitcoin (BTC)</option>
+                    <option value="bitcoin" data-algorithm="sha256" data-reward-rate="4.173913043478261e-10">Bitcoin (BTC)</option>
                 `;
             } else { // scrypt algorithm
                 coinSelect.innerHTML += `
-                    <option value="litecoin" data-algorithm="scrypt" data-reward-rate="0.015">Litecoin (LTC)</option>
-                    <option value="dogecoin" data-algorithm="scrypt" data-reward-rate="0.015">Dogecoin (DOGE)</option>
-                    <option value="bella-protocol" data-algorithm="scrypt" data-reward-rate="0.02">Bella Protocol (BEL)</option>
+                    <option value="litecoin" data-algorithm="scrypt" data-reward-rate="0.0011484675">Litecoin (LTC)</option>
+                    <option value="dogecoin" data-algorithm="scrypt" data-reward-rate="4.385141404166667">Dogecoin (DOGE)</option>
                 `;
             }
         }
-
-        // Fetch current coin price
+// Fetch current coin price
         async function fetchCoinPrice(coinId) {
             try {
-                const response = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${coinId}&vs_currencies=eur`);
+                const response = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${coinId}&vs_currencies=usd`);
                 const data = await response.json();
-                return data[coinId].eur;
+                return data[coinId].usd;
             } catch (error) {
                 console.error('Error fetching coin price:', error);
                 return 0;
             }
         }
-
         // Initialize event listeners
         document.getElementById('miner-select').addEventListener('change', function() {
             const coinSelect = document.getElementById('coin-select');
             if (this.value) {
                 filterCoins(this.value);
                 coinSelect.disabled = false;
+                // If only one coin option (besides default), preselect it
+                if (coinSelect.options.length === 2) {
+                    coinSelect.value = coinSelect.options[1].value;
+                }
             } else {
                 coinSelect.value = '';
                 coinSelect.disabled = true;
             }
         });
+// Profitability calculator logic
+document.getElementById('calculate-btn').addEventListener('click', async function() {
+    const minerSelect = document.getElementById('miner-select');
+    const coinSelect = document.getElementById('coin-select');
+    const electricityCost = parseFloat(document.getElementById('electricity-cost').value);
+    
+    if (!minerSelect.value || !coinSelect.value || isNaN(electricityCost)) {
+        alert('Please fill in all fields with valid values');
+        return;
+    }
+    const selectedMiner = minerSelect.options[minerSelect.selectedIndex];
+    const coinId = coinSelect.value;
+    const currentPrice = await fetchCoinPrice(coinId);
+    
+    const hashrate = parseFloat(selectedMiner.dataset.hashrate);
+    const powerUsage = parseFloat(selectedMiner.dataset.power);
+    const minerPrice = parseFloat(selectedMiner.dataset.price);
+    
+    if (!hashrate || !powerUsage || !currentPrice) {
+        alert('Could not get required data for calculation');
+        return;
+    }
+    
+    // Get reward rate from coin option
+    const selectedCoin = coinSelect.options[coinSelect.selectedIndex];
+    const rewardRate = parseFloat(selectedCoin.dataset.rewardRate || '0');
+    const dailyReward = hashrate * rewardRate;
+    const dailyRevenue = dailyReward * currentPrice;
+const dailyCost = (powerUsage * 24 / 1000) * electricityCost;
+    updateResults(dailyRevenue, dailyCost, minerPrice);
+});
 
-        // Profitability calculator logic
-        document.getElementById('calculate-btn').addEventListener('click', async function() {
-            const minerSelect = document.getElementById('miner-select');
-            const coinSelect = document.getElementById('coin-select');
-            const electricityCost = parseFloat(document.getElementById('electricity-cost').value);
-            
-            if (!minerSelect.value || !coinSelect.value || isNaN(electricityCost)) {
-                alert('Please fill in all fields with valid values');
-                return;
-            }
-            const selectedMiner = minerSelect.options[minerSelect.selectedIndex];
-            const coinId = coinSelect.value;
-            const currentPrice = await fetchCoinPrice(coinId);
-            
-            const hashrate = parseFloat(selectedMiner.dataset.hashrate);
-            const powerUsage = parseFloat(selectedMiner.dataset.power);
-            const minerPrice = parseFloat(selectedMiner.dataset.price);
-            
-            if (!hashrate || !powerUsage || !currentPrice) {
-                alert('Could not get required data for calculation');
-                return;
-            }
-            
-            // Get reward rate from coin option
-            const selectedCoin = coinSelect.options[coinSelect.selectedIndex];
-            const rewardRate = parseFloat(selectedCoin.dataset.rewardRate || '0');
-            const dailyReward = hashrate * rewardRate;
-            const dailyRevenue = dailyReward * currentPrice;
-            const dailyCost = (powerUsage * 24 / 1000) * electricityCost;
-            updateResults(dailyRevenue, dailyCost, minerPrice);
-        });
-
-        function updateResults(dailyRevenue, dailyCost, minerPrice) {
-            // Prevent negative values in case of calculation errors
-            dailyRevenue = Math.max(0, dailyRevenue);
-            dailyCost = Math.max(0, dailyCost);
-            
-            const dailyProfit = dailyRevenue - dailyCost;
-            const monthlyProfit = dailyProfit * 30;
-            
-            // ROI calculation
-            let roiPeriod = 'Not profitable';
-            if (dailyProfit > 0) {
-                roiPeriod = Math.ceil(minerPrice / (dailyProfit * 30)) + ' months';
-            }
-            document.getElementById('daily-revenue').textContent = '€' + dailyRevenue.toFixed(2);
-            document.getElementById('daily-cost').textContent = '€' + dailyCost.toFixed(2);
-            document.getElementById('daily-profit').textContent = '€' + dailyProfit.toFixed(2);
-            document.getElementById('monthly-profit').textContent = '€' + monthlyProfit.toFixed(2);
-            document.getElementById('roi-period').textContent = roiPeriod;
-        }
-    </script>
+function updateResults(dailyRevenue, dailyCost, minerPrice) {
+    // Prevent negative values in case of calculation errors
+    dailyRevenue = Math.max(0, dailyRevenue);
+    dailyCost = Math.max(0, dailyCost);
+    
+    const dailyProfit = dailyRevenue - dailyCost;
+    const monthlyProfit = dailyProfit * 30;
+    
+    // ROI calculation
+    let roiPeriod = 'Not profitable';
+    if (dailyProfit > 0) {
+        roiPeriod = Math.ceil(minerPrice / (dailyProfit * 30)) + ' months';
+    }
+    document.getElementById('daily-revenue').textContent = '$' + dailyRevenue.toFixed(2);
+    document.getElementById('daily-cost').textContent = '$' + dailyCost.toFixed(2);
+    document.getElementById('daily-profit').textContent = '$' + dailyProfit.toFixed(2);
+    document.getElementById('monthly-profit').textContent = '$' + monthlyProfit.toFixed(2);
+    document.getElementById('roi-period').textContent = roiPeriod;
+}
+</script>
 </body>
 </html>
