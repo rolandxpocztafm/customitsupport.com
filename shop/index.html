@@ -121,7 +121,7 @@
                             <img src="https://huggingface.co/spaces/rolandx/cryptomine-haven-professional-mining-hardware/resolve/main/images/Flumier_L1 horizontal.png" alt="Fluminer L1 Pro" class="rounded-lg h-48 object-contain">
                         </div>
                         <h4 class="text-xl font-bold mb-2">Fluminer L1 Pro</h4>
-                        <p class="text-slate-300 mb-4">6 GH/s Scrypt algorithm for LTC/DOGE</p>
+                        <p class="text-slate-300 mb-4">6000 MH/s Scrypt algorithm for LTC/DOGE</p>
                         <ul class="mb-6 space-y-2">
                             <li class="flex items-center">
                                 <i data-feather="zap" class="w-4 h-4 mr-2 text-blue-400"></i>
@@ -150,7 +150,7 @@
                             <img src="https://huggingface.co/spaces/rolandx/cryptomine-haven-professional-mining-hardware/resolve/main/images/Flumier_L2.png" alt="Fluminer L2" class="rounded-lg h-48 object-contain">
                         </div>
                         <h4 class="text-xl font-bold mb-2">Fluminer L2</h4>
-                        <p class="text-slate-300 mb-4">1.2 GH/s Scrypt algorithm for LTC/DOGE</p>
+                        <p class="text-slate-300 mb-4">1200 MH/s Scrypt algorithm for LTC/DOGE</p>
                         <ul class="mb-6 space-y-2">
                             <li class="flex items-center">
                                 <i data-feather="zap" class="w-4 h-4 mr-2 text-blue-400"></i>
@@ -345,7 +345,7 @@
                                 <option value="">-- Select a Miner --</option>
                                 <option value="l1pro" data-hashrate="6000" data-power="1400" data-price="2900" data-algorithm="scrypt">Fluminer L1 Pro (6000 MH/s, 1400W, ≤45dB, Scrypt)</option>
                                 <option value="l2" data-hashrate="1200" data-power="280" data-price="960" data-algorithm="scrypt">Fluminer L2 (1200 MH/s, 280W±10%, ≤40dB, Scrypt)</option>
-                                <option value="t3" data-hashrate="115" data-power="1700" data-price="2310" data-algorithm="sha256">Fluminer T3 (115 TH/s, 1700W, 50dB, SHA-256)</option>
+                                <option value="t3" data-hashrate="115000" data-power="1700" data-price="2310" data-algorithm="sha256">Fluminer T3 (115 TH/s, 1700W, 50dB, SHA-256)</option>
                                 <option value="l3" data-hashrate="9500" data-power="1700" data-price="3500" data-algorithm="scrypt">Fluminer L3 (9500 MH/s, 1700W, ≤45dB, Scrypt)</option>
                             </select>
                         </div>
@@ -357,7 +357,7 @@
                         </div>
                         <div class="mb-6">
                             <label for="electricity-cost" class="block text-sm font-medium mb-2">Electricity Cost ($/kWh)</label>
-                            <input type="number" id="electricity-cost" value="0.05" step="0.01" min="0" class="w-full p-3 rounded-lg bg-slate-800 border border-slate-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            <input type="number" id="electricity-cost" value="0.0" step="0.01" min="0" class="w-full p-3 rounded-lg bg-slate-800 border border-slate-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                         </div>
                         <button id="calculate-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium transition duration-300">
                             Calculate Profitability
@@ -538,16 +538,19 @@
             coinSelect.innerHTML = '<option value="">-- Select a Coin --</option>';
 
             // Add coins based on algorithm
-            if (minerType === 't3' || minerType === 'l1pro') {
+            if (minerType === 't3') {
                 coinSelect.innerHTML += `
-                    <option value="bitcoin" data-algorithm="sha256" data-reward-rate="4.347826086956522e-7">Bitcoin (BTC)</option>
+                    <option value="bitcoin" data-algorithm="sha256" data-reward-rate="4.173913043478261e-10">Bitcoin (BTC)</option>
                 `;
+                coinSelect.value = 'bitcoin';
             } else { // scrypt algorithm
                 coinSelect.innerHTML += `
-                    <option value="litecoin" data-algorithm="scrypt" data-reward-rate="0.0011484674">Litecoin (LTC)</option>
-                    <option value="dogecoin" data-algorithm="scrypt" data-reward-rate="4.3989593303">Dogecoin (DOGE)</option>
+                    <option value="litecoin" data-algorithm="scrypt" data-reward-rate="0.0000011484674">Litecoin (LTC)</option>
+                    <option value="dogecoin" data-algorithm="scrypt" data-reward-rate="0.0043851414">Dogecoin (DOGE)</option>
                 `;
+                coinSelect.value = 'dogecoin';
             }
+            coinSelect.disabled = false;
         }
         // Fetch current coin price
         async function fetchCoinPrice(coinId) {
@@ -565,15 +568,8 @@
             const coinSelect = document.getElementById('coin-select');
             if (this.value) {
                 filterCoins(this.value);
-                coinSelect.disabled = false;
-                // Set default coin based on algorithm
-                const selectedAlgorithm = this.options[this.selectedIndex].dataset.algorithm;
-                if (selectedAlgorithm === 'sha256') {
-                    coinSelect.value = 'bitcoin';
-                } else {
-                    coinSelect.value = 'dogecoin';
-                }
             } else {
+                coinSelect.innerHTML = '<option value="">-- Select a Miner first --</option>';
                 coinSelect.value = '';
                 coinSelect.disabled = true;
             }
