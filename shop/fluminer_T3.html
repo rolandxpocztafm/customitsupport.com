@@ -44,8 +44,8 @@
                 <div class="hidden md:flex space-x-6">
                     <a href="index.html" class="text-blue-400 hover:text-blue-300 transition duration-300">Shop</a>
                     <a href="index.html#products" class="text-slate-300 hover:text-white transition duration-300">Products</a>
-                    <a href="index.html#calculator" class="text-slate-300 hover:text-white transition duration-300">Calculator</a>
-                    <a href="#footer" class="text-slate-300 hover:text-white transition duration-300">Contact</a>
+                    <a href="#calculator" class="text-slate-300 hover:text-white transition duration-300">Calculator</a>
+                    <a href="index.html#contact" class="text-slate-300 hover:text-white transition duration-300">Contact</a>
                 </div>
                 <div class="flex items-center space-x-4">
                     <a href="index.html" class="text-slate-300 hover:text-white transition duration-300">
@@ -112,98 +112,15 @@
         </div>
     </section>
 
-    <!-- T3 Profitability Calculator -->
-    <section id="calculator" class="py-16 bg-slate-900">
-        <div class="container mx-auto px-6">
-            <div class="max-w-4xl mx-auto profitability-calculator rounded-xl p-8">
-                <h2 class="text-3xl font-bold mb-8 text-center">Fluminer T3 Profitability Calculator</h2>
-                
-                <!-- Live Price Display -->
-                <div class="grid grid-cols-1 gap-6 mb-8">
-                    <div class="bg-slate-800 rounded-lg p-4 text-center">
-                        <div class="text-sm text-slate-400 mb-2">Bitcoin (BTC) Price</div>
-                        <div id="btc-price" class="text-xl font-bold text-orange-400">Loading...</div>
-                    </div>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div>
-                        <div class="mb-6">
-                            <label for="electricity-cost" class="block text-sm font-medium mb-2">Electricity Cost ($/kWh)</label>
-                            <input type="number" id="electricity-cost" value="0.0" step="0.01" min="0" class="w-full p-3 rounded-lg bg-slate-800 border border-slate-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                        </div>
-                        <button id="calculate-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium transition duration-300">
-                            Calculate Profitability
-                        </button>
-                    </div>
-                    <div>
-                        <div class="bg-slate-800 rounded-lg p-6">
-                            <h3 class="text-xl font-semibold mb-4">Estimated Results</h3>
-                            <div class="space-y-4">
-                                <div class="flex justify-between">
-                                    <span class="text-slate-300">Daily Revenue:</span>
-                                    <span id="daily-revenue" class="font-medium">$0.00</span>
-                                </div>
-                                <div class="flex justify-between">
-                                    <span class="text-slate-300">Daily Electricity Cost:</span>
-                                    <span id="daily-cost" class="font-medium">$0.00</span>
-                                </div>
-                                <div class="flex justify-between">
-                                    <span class="text-slate-300">Daily Profit:</span>
-                                    <span id="daily-profit" class="font-medium">$0.00</span>
-                                </div>
-                                <div class="border-t border-slate-700 my-3"></div>
-                                <div class="flex justify-between">
-                                    <span class="text-slate-300">Monthly Profit:</span>
-                                    <span id="monthly-profit" class="font-medium">$0.00</span>
-                                </div>
-                                <div class="flex justify-between">
-                                    <span class="text-slate-300">ROI Period:</span>
-                                    <span id="roi-period" class="font-medium">0 months</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-6 text-sm text-slate-400">
-                            <p>Note: These are estimates based on current network difficulty and market conditions. Actual results may vary significantly.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Calculator Section Include -->
+    <div>
+        <!--#include virtual="calculator_T3.html" -->
+    </div>
 
-    <!-- Features Section -->
-    <section class="py-16 bg-slate-800">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold mb-12 text-center">Product Features</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                <div class="product-card rounded-lg p-6">
-                    <i data-feather="zap" class="w-12 h-12 text-blue-500 mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-3">High Performance</h3>
-                    <p class="text-slate-300">Optimized for Bitcoin mining with 115 TH/s hash rate capability.</p>
-                </div>
-                <div class="product-card rounded-lg p-6">
-                    <i data-feather="shield" class="w-12 h-12 text-blue-500 mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-3">Energy Efficient</h3>
-                    <p class="text-slate-300">Advanced power management system for optimal efficiency.</p>
-                </div>
-                <div class="product-card rounded-lg p-6">
-                    <i data-feather="settings" class="w-12 h-12 text-blue-500 mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-3">Easy Setup</h3>
-                    <p class="text-slate-300">Plug-and-play design with web interface for easy configuration.</p>
-                </div>
-                <div class="product-card rounded-lg p-6">
-                    <i data-feather="truck" class="w-12 h-12 text-blue-500 mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-3">EU Support</h3>
-                    <p class="text-slate-300">Dedicated technical support team based in the European Union.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer Placeholder -->
-    <div id="footer-container"></div>
+    <!-- Footer Include -->
+    <div>
+        <!--#include virtual="footer.html" -->
+    </div>
 
     <!-- Payment Dialog Modal -->
     <div id="payment-dialog" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
@@ -250,15 +167,6 @@
     <script>
         feather.replace();
         
-        // Load footer dynamically
-        fetch('footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer-container').innerHTML = data;
-                feather.replace(); // Re-initialize feather icons in the loaded footer
-            })
-            .catch(error => console.error('Error loading footer:', error));
-
         // Image slider for T3
         const imagesT3 = [
             'images/Fluminer_T3.png',
@@ -298,101 +206,6 @@
         function handlePaymentMethod(method) {
             alert(`${method} payment selected\nYou will be contacted with payment details shortly.`);
             closePaymentDialog();
-        }
-
-        // Fetch current Bitcoin price and network difficulty
-        async function fetchBitcoinData() {
-            try {
-                // Fetch BTC price
-                const priceResponse = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
-                const priceData = await priceResponse.json();
-                
-                // Fetch Bitcoin network difficulty
-                const btcResponse = await fetch('https://api.coingecko.com/api/v3/coins/bitcoin');
-                const btcData = await btcResponse.json();
-                
-                // Update price display
-                document.getElementById('btc-price').textContent = `$${priceData.bitcoin.usd.toLocaleString()}`;
-                
-                // Store data for calculations
-                window.bitcoinData = {
-                    btcPrice: priceData.bitcoin.usd,
-                    networkDifficulty: btcData.market_data?.current_price?.usd || 0
-                };
-                
-                // Update network difficulty display
-                document.getElementById('network-difficulty').textContent = `Difficulty: ${(btcData.market_data?.total_volume?.usd || 0).toLocaleString()}`;
-                
-            } catch (error) {
-                console.error('Error fetching Bitcoin data:', error);
-                document.getElementById('btc-price').textContent = 'Error loading price';
-                document.getElementById('network-difficulty').textContent = 'Error loading data';
-            }
-        }
-
-        // Calculate BTC mining profitability
-        function calculateBTCProfitability(electricityCost) {
-            // Fluminer T3 specifications
-            const hashrate = 115000; // TH/s (115,000 GH/s)
-            const powerUsage = 1700; // Watts
-            const minerPrice = 2310; // Euros
-            
-            // Current Bitcoin data
-            const btcPrice = window.bitcoinData?.btcPrice || 0;
-            const networkDifficulty = window.bitcoinData?.networkDifficulty || 1;
-            
-            // BTC mining calculation formula
-            // Daily BTC = (Hashrate * Seconds in day) / (Network Difficulty * 2^32)
-            const dailyBTC = (hashrate * 86400) / (networkDifficulty * Math.pow(2, 32));
-            const dailyRevenue = dailyBTC * btcPrice;
-            const dailyCost = (powerUsage * 24 / 1000) * electricityCost;
-            
-            return {
-                dailyRevenue: dailyRevenue,
-                dailyCost: dailyCost,
-                minerPrice: minerPrice
-            };
-        }
-
-        // Initialize event listeners and live data
-        document.addEventListener('DOMContentLoaded', function() {
-            fetchBitcoinData();
-            
-            // Update live data every 30 seconds
-            setInterval(fetchBitcoinData, 30000);
-            
-            // T3 Profitability calculator logic
-            document.getElementById('calculate-btn').addEventListener('click', function() {
-                const electricityCost = parseFloat(document.getElementById('electricity-cost').value);
-                
-                if (isNaN(electricityCost)) {
-                    alert('Please enter a valid electricity cost');
-                    return;
-                }
-                
-                const results = calculateBTCProfitability(electricityCost);
-                updateResults(results.dailyRevenue, results.dailyCost, results.minerPrice);
-            });
-        });
-
-        function updateResults(dailyRevenue, dailyCost, minerPrice) {
-            // Prevent negative values in case of calculation errors
-            dailyRevenue = Math.max(0, dailyRevenue);
-            dailyCost = Math.max(0, dailyCost);
-            
-            const dailyProfit = dailyRevenue - dailyCost;
-            const monthlyProfit = dailyProfit * 30;
-            
-            // ROI calculation
-            let roiPeriod = 'Not profitable';
-            if (dailyProfit > 0) {
-                roiPeriod = Math.ceil(minerPrice / (dailyProfit * 30)) + ' months';
-            }
-            document.getElementById('daily-revenue').textContent = '$' + dailyRevenue.toFixed(2);
-            document.getElementById('daily-cost').textContent = '$' + dailyCost.toFixed(2);
-            document.getElementById('daily-profit').textContent = '$' + dailyProfit.toFixed(2);
-            document.getElementById('monthly-profit').textContent = '$' + monthlyProfit.toFixed(2);
-            document.getElementById('roi-period').textContent = roiPeriod;
         }
     </script>
 </body>
