@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom IT Support Mining - Professional Mining Hardware for Home</title>
+    <title>Fluminer L1 Pro - Custom IT Support Mining</title>
     <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
         
@@ -21,30 +21,14 @@
         }
         
         .product-card {
-            transition: all 0.3s ease;
             background: rgba(15, 23, 42, 0.7);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            border-color: #3b82f6;
-        }
-        
-        .product-card .relative {
-            position: relative;
-            z-index: 10; /* Ensure button and price are above the overlay */
-        }
-        
         .profitability-calculator {
             background: rgba(15, 23, 42, 0.8);
             border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .product-card .clickable-overlay:hover {
-            background: rgba(59, 130, 246, 0.1); /* Subtle hover effect for overlay */
         }
     </style>
 </head>
@@ -59,300 +43,93 @@
                 </div>
                 <div class="hidden md:flex space-x-6">
                     <a href="index.html" class="text-blue-400 hover:text-blue-300 transition duration-300">Shop</a>
-                    <a href="#products" class="text-slate-300 hover:text-white transition duration-300">Products</a>
+                    <a href="index.html#products" class="text-slate-300 hover:text-white transition duration-300">Products</a>
                     <a href="#calculator" class="text-slate-300 hover:text-white transition duration-300">Calculator</a>
-                    <a href="#footer" class="text-slate-300 hover:text-white transition duration-300">Contact</a>
+                    <a href="index.html#contact" class="text-slate-300 hover:text-white transition duration-300">Contact</a>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <button class="text-slate-300 hover:text-white transition duration-300">
-                        <i data-feather="shopping-cart" class="w-5 h-5"></i>
-                    </button>
+                    <a href="index.html" class="text-slate-300 hover:text-white transition duration-300">
+                        <i data-feather="arrow-left" class="w-5 h-5"></i>
+                    </a>
                 </div>
             </div>
         </div>
     </nav>
-    <!-- Hero Section -->
-    <section class="gradient-bg py-20">
-        <div class="container mx-auto px-6 md:px-12 text-center">
-            <h1 class="text-4xl md:text-6xl font-bold mb-6 text-white">Professional Crypto Mining Hardware for Home</h1>
-            <p class="text-xl md:text-2xl text-blue-200 mb-10">High-performance ASIC miners, GPU rigs, and accessories with EU support</p>
-            <!-- Features Section -->
-            <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-                <div class="flex flex-col items-center">
-                    <i data-feather="truck" class="w-12 h-12 text-green-500 mb-4"></i>
-                    <h3 class="text-lg font-semibold mb-2">Fast EU Shipping</h3>
-                    <p class="text-blue-200 text-center">Delivery within 1-2 business days</p>
-                </div>
-                <div class="flex flex-col items-center">
-                    <i data-feather="headphones" class="w-12 h-12 text-blue-500 mb-4"></i>
-                    <h3 class="text-lg font-semibold mb-2">Dedicated Support</h3>
-                    <p class="text-blue-200 text-center">Nederland based technical assistance</p>
-                </div>
-                <div class="flex flex-col items-center">
-                    <i data-feather="shield" class="w-12 h-12 text-purple-500 mb-4"></i>
-                    <h3 class="text-lg font-semibold mb-2">MiCA Compliant</h3>
-                    <p class="text-blue-200 text-center">EU regulation compliant</p>
-                </div>
-            </div>
-            <div class="flex justify-center space-x-4">
-                <a href="#products" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition duration-300">
-                    Browse Products
-                </a>
-                <a href="#calculator" class="bg-gray-700 hover:bg-gray-600 text-white px-8 py-3 rounded-lg font-medium transition duration-300">
-                    Profit Calculator
-                </a>
-            </div>
-        </div>
-    </section>
-    <!-- Products Section -->
-    <section id="products" class="py-16">
+
+    <!-- Product Detail Section -->
+    <section class="py-16 gradient-bg">
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold mb-12 text-center">Our Mining Products</h2>
-            <!-- ASIC Miners -->
-            <div class="mb-16">
-                <h3 class="text-2xl font-semibold mb-8 flex items-center">
-                    <i data-feather="cpu" class="mr-2"></i> ASIC Miners
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Fluminer L1 Pro -->
-                    <div class="product-card rounded-lg overflow-hidden p-6 relative">
-                        <div onclick="window.location.href='fluminer_L1_pro.html'" class="clickable-overlay absolute inset-0 cursor-pointer"></div>
-                        <div class="flex justify-center mb-6">
-                            <img src="/shop/images/Flumier_L1 horizontal.png" alt="Fluminer L1 Pro" class="rounded-lg h-48 object-contain">
-                        </div>
-                        <h4 class="text-xl font-bold mb-2">Fluminer L1 Pro</h4>
-                        <p class="text-slate-300 mb-4">6000 MH/s Scrypt algorithm for LTC/DOGE</p>
-                        <ul class="mb-6 space-y-2">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+
+                
+ <!-- Product Image - SLIDER SECTION -->
+<div id="slider-L1" class="relative w-full max-w-md aspect-w-4 aspect-h-3">
+    <img id="slider-image-L1" src="images/Flumier_L1 horizontal.png" alt="Fluminer L1 Pro" class="rounded-lg w-full h-full object-contain">
+    <button id="prev-btn-L1" class="absolute left-0 top-1/2 transform -translate-y-1/2 text-3xl text-white bg-transparent px-0 py-0 focus:outline-none">&#8592;</button>
+    <button id="next-btn-L1" class="absolute right-0 top-1/2 transform -translate-y-1/2 text-3xl text-white bg-transparent px-0 py-0 focus:outline-none">&#8594;</button>
+</div>     
+ <!-- Product Image - SLIDER SECTION -->
+
+
+
+                
+                
+                <!-- Product Information -->
+                <div class="product-card rounded-lg p-8">
+                    <h1 class="text-4xl font-bold mb-4">Fluminer L1 Pro</h1>
+                    <p class="text-xl text-blue-200 mb-6">6000 MH/s Scrypt algorithm for LTC/DOGE</p>
+                    
+                    <div class="mb-6">
+                        <span class="text-3xl font-bold text-white">€2900</span>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold mb-4">Product Specifications</h3>
+                        <ul class="space-y-3">
                             <li class="flex items-center">
-                                <i data-feather="zap" class="w-4 h-4 mr-2 text-blue-400"></i>
-                                <span>1400W power consumption</span>
+                                <i data-feather="zap" class="w-5 h-5 mr-3 text-blue-400"></i>
+                                <span><strong>Hash Rate:</strong> 6000 MH/s</span>
                             </li>
                             <li class="flex items-center">
-                                <i data-feather="volume" class="w-4 h-4 mr-2 text-blue-400"></i>
-                                <span>≤ 45dB noise level</span>
+                                <i data-feather="cpu" class="w-5 h-5 mr-3 text-blue-400"></i>
+                                <span><strong>Algorithm:</strong> Scrypt</span>
                             </li>
                             <li class="flex items-center">
-                                <i data-feather="clock" class="w-4 h-4 mr-2 text-blue-400"></i>
-                                <span>6-month warranty</span>
+                                <i data-feather="battery" class="w-5 h-5 mr-3 text-blue-400"></i>
+                                <span><strong>Power Consumption:</strong> 1400W</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-feather="volume" class="w-5 h-5 mr-3 text-blue-400"></i>
+                                <span><strong>Noise Level:</strong> ≤ 45dB</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-feather="clock" class="w-5 h-5 mr-3 text-blue-400"></i>
+                                <span><strong>Warranty:</strong> 6 months</span>
                             </li>
                         </ul>
-                        <div class="flex justify-between items-center relative">
-                            <span class="text-2xl font-bold">€2900</span>
-                            <button onclick="openPaymentDialog('Fluminer L1 Pro', 2900)" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition duration-300">
-                                Buy Now
-                            </button>
-                        </div>
                     </div>
-                    <!-- Fluminer L2 -->
-                    <div class="product-card rounded-lg overflow-hidden p-6 relative">
-                        <div onclick="window.location.href='fluminer_L2.html'" class="clickable-overlay absolute inset-0 cursor-pointer"></div>
-                        <div class="flex justify-center mb-6">
-                            <img src="/shop/images/Flumier_L2.png" alt="Fluminer L2" class="rounded-lg h-48 object-contain">
-                        </div>
-                        <h4 class="text-xl font-bold mb-2">Fluminer L2</h4>
-                        <p class="text-slate-300 mb-4">1200 MH/s Scrypt algorithm for LTC/DOGE</p>
-                        <ul class="mb-6 space-y-2">
-                            <li class="flex items-center">
-                                <i data-feather="zap" class="w-4 h-4 mr-2 text-blue-400"></i>
-                                <span>280W±10% power consumption</span>
-                            </li>
-                            <li class="flex items-center">
-                                <i data-feather="volume" class="w-4 h-4 mr-2 text-blue-400"></i>
-                                <span>≤ 40dB noise level</span>
-                            </li>
-                            <li class="flex items-center">
-                                <i data-feather="clock" class="w-4 h-4 mr-2 text-blue-400"></i>
-                                <span>6-month warranty</span>
-                            </li>
-                        </ul>
-                        <div class="flex justify-between items-center relative">
-                            <span class="text-2xl font-bold">€960</span>
-                            <button onclick="openPaymentDialog('Fluminer L2', 960)" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition duration-300">
-                                Buy Now
+                    
+                    <button onclick="openPaymentDialog('Fluminer L1 Pro', 2900)" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-lg font-medium transition duration-300 text-lg">
+                                Complete Purchase
                             </button>
-                        </div>
-                    </div>
-                    <!-- Fluminer T3 -->
-                    <div class="product-card rounded-lg overflow-hidden p-6 relative">
-                        <div onclick="window.location.href='fluminer_T3.html'" class="clickable-overlay absolute inset-0 cursor-pointer"></div>
-                        <div class="flex justify-center mb-6">
-                            <img src="/shop/images/Fluminer_T3.png" alt="Fluminer T3" class="rounded-lg h-48 w-full object-contain">
-                        </div>
-                        <h4 class="text-xl font-bold mb-2">Fluminer T3</h4>
-                        <p class="text-slate-300 mb-4">115 TH/s SHA-256 algorithm for BTC</p>
-                        <ul class="mb-6 space-y-2">
-                            <li class="flex items-center">
-                                <i data-feather="zap" class="w-4 h-4 mr-2 text-blue-400"></i>
-                                <span>1700W power consumption</span>
-                            </li>
-                            <li class="flex items-center">
-                                <i data-feather="volume" class="w-4 h-4 mr-2 text-blue-400"></i>
-                                <span>40-55 dB noise level</span>
-                            </li>
-                            <li class="flex items-center">
-                                <i data-feather="clock" class="w-4 h-4 mr-2 text-blue-400"></i>
-                                <span>1-year warranty</span>
-                            </li>
-                        </ul>
-                        <div class="flex justify-between items-center relative">
-                            <span class="text-2xl font-bold">€2310</span>
-                            <button onclick="openPaymentDialog('Fluminer T3', 2310)" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition duration-300">
-                                Buy Now
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Newest ASIC Miners -->
-            <div class="mb-16">
-                <h3 class="text-2xl font-semibold mb-8 flex items-center">
-                    <i data-feather="box" class="mr-2"></i> Newest ASIC Miners
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <!-- Fluminer T3 -->
-                    <div class="product-card rounded-lg overflow-hidden p-6 relative">
-                        <div onclick="window.location.href='fluminer_T3.html'" class="clickable-overlay absolute inset-0 cursor-pointer"></div>
-                        <div class="flex justify-center mb-6">
-                            <img src="/shop/images/Fluminer_T3.png" alt="Fluminer T3" class="rounded-lg h-48 w-full object-contain">
-                        </div>
-                        <h4 class="text-xl font-bold mb-2">Fluminer T3</h4>
-                        <p class="text-slate-300 mb-4">115 TH/s SHA-256 algorithm for BTC</p>
-                        <ul class="mb-6 space-y-2">
-                            <li class="flex items-center">
-                                <i data-feather="zap" class="w-4 h-4 mr-2 text-blue-400"></i>
-                                <span>1700W power consumption</span>
-                            </li>
-                            <li class="flex items-center">
-                                <i data-feather="volume" class="w-4 h-4 mr-2 text-blue-400"></i>
-                                <span>40-55 dB noise level</span>
-                            </li>
-                            <li class="flex items-center">
-                                <i data-feather="clock" class="w-4 h-4 mr-2 text-blue-400"></i>
-                                <span>1-year warranty</span>
-                            </li>
-                        </ul>
-                        <div class="flex justify-between items-center relative">
-                            <span class="text-2xl font-bold">€2310</span>
-                            <button onclick="openPaymentDialog('Fluminer T3', 2310)" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition duration-300">
-                                Buy Now
-                            </button>
-                        </div>
-                    </div>
-                    <!-- Fluminer L3 -->
-                    <div class="product-card rounded-lg overflow-hidden p-6 relative">
-                        <div onclick="window.location.href='fluminer_L3.html'" class="clickable-overlay absolute inset-0 cursor-pointer"></div>
-                        <div class="flex justify-center mb-6">
-                            <img src="/shop/images/fluminer_L3.png" alt="Fluminer L3" class="rounded-lg h-48 w-full object-contain">
-                        </div>
-                        <h4 class="text-xl font-bold mb-2">Fluminer L3</h4>
-                        <p class="text-slate-300 mb-4">9500 MH/s Scrypt algorithm for LTC/DOGE</p>
-                        <ul class="mb-6 space-y-2">
-                            <li class="flex items-center">
-                                <i data-feather="zap" class="w-4 h-4 mr-2 text-blue-400"></i>
-                                <span>1700W power consumption</span>
-                            </li>
-                            <li class="flex items-center">
-                                <i data-feather="volume" class="w-4 h-4 mr-2 text-blue-400"></i>
-                                <span>≤ 45dB noise level</span>
-                            </li>
-                            <li class="flex items-center">
-                                <i data-feather="clock" class="w-4 h-4 mr-2 text-blue-400"></i>
-                                <span>1-year warranty</span>
-                            </li>
-                        </ul>
-                        <div class="flex justify-between items-center relative">
-                            <span class="text-2xl font-bold">€3500</span>
-                            <button onclick="openPaymentDialog('Fluminer L3', 3500)" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition duration-300">
-                                Buy Now
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Mining Accessories -->
-            <div>
-                <h3 class="text-2xl font-semibold mb-8 flex items-center">
-                    <i data-feather="tool" class="mr-2"></i> Mining Accessories
-                </h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div class="product-card rounded-lg overflow-hidden p-6">
-                        <div class="flex justify-center mb-4">
-                            <i data-feather="battery" class="w-12 h-12 text-blue-500"></i>
-                        </div>
-                        <h4 class="text-lg font-bold mb-2">2000W 80+ Gold PSU</h4>
-                        <p class="text-slate-300 mb-4">For ASIC miners</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-xl font-bold">€249</span>
-                            <button onclick="openPaymentDialog('2000W 80+ Gold PSU', 249)" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1 rounded-lg transition duration-300 text-sm">
-                                Buy Now
-                            </button>
-                        </div>
-                    </div>
-                    <div class="product-card rounded-lg overflow-hidden p-6">
-                        <div class="flex justify-center mb-4">
-                            <i data-feather="cpu" class="w-12 h-12 text-blue-500"></i>
-                        </div>
-                        <h4 class="text-lg font-bold mb-2">8-GPU Mining Frame</h4>
-                        <p class="text-slate-300 mb-4">Aluminum construction</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-xl font-bold">€129</span>
-                            <button onclick="openPaymentDialog('8-GPU Mining Frame', 129)" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1 rounded-lg transition duration-300 text-sm">
-                                Buy Now
-                            </button>
-                        </div>
-                    </div>
-                    <div class="product-card rounded-lg overflow-hidden p-6">
-                        <div class="flex justify-center mb-4">
-                            <i data-feather="wind" class="w-12 h-12 text-blue-500"></i>
-                        </div>
-                        <h4 class="text-lg font-bold mb-2">Silent Cooling Fan</h4>
-                        <p class="text-slate-300 mb-4">120mm, 18 dB</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-xl font-bold">€39</span>
-                            <button onclick="openPaymentDialog('Silent Cooling Fan', 39)" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1 rounded-lg transition duration-300 text-sm">
-                                Buy Now
-                            </button>
-                        </div>
-                    </div>
-                    <div class="product-card rounded-lg overflow-hidden p-6">
-                        <div class="flex justify-center mb-4">
-                            <i data-feather="package" class="w-12 h-12 text-blue-500"></i>
-                        </div>
-                        <h4 class="text-lg font-bold mb-2">Custom 3D Printed Case</h4>
-                        <p class="text-slate-300 mb-4">For Fluminer L2/T3</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-xl font-bold">€89</span>
-                            <button onclick="openPaymentDialog('Custom 3D Printed Case', 89)" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1 rounded-lg transition duration-300 text-sm">
-                                Buy Now
-                            </button>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Profitability Calculator -->
+
+    <!-- L1 Pro Profitability Calculator -->
     <section id="calculator" class="py-16 bg-slate-900">
         <div class="container mx-auto px-6">
             <div class="max-w-4xl mx-auto profitability-calculator rounded-xl p-8">
-                <h2 class="text-3xl font-bold mb-8 text-center">Mining Profitability Calculator</h2>
+                <h2 class="text-3xl font-bold mb-8 text-center">Fluminer L1 Pro Profitability Calculator</h2>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>
                         <div class="mb-6">
-                            <label for="miner-select" class="block text-sm font-medium mb-2">Select Miner</label>
-                            <select id="miner-select" class="w-full p-3 rounded-lg bg-slate-800 border border-slate-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                                <option value="">-- Select a Miner --</option>
-                                <option value="l1pro" data-hashrate="6000" data-power="1400" data-price="2900" data-algorithm="scrypt">Fluminer L1 Pro (6000 MH/s, 1400W, ≤45dB, Scrypt)</option>
-                                <option value="l2" data-hashrate="1200" data-power="280" data-price="960" data-algorithm="scrypt">Fluminer L2 (1200 MH/s, 280W±10%, ≤40dB, Scrypt)</option>
-                                <option value="t3" data-hashrate="115000" data-power="1700" data-price="2310" data-algorithm="sha256">Fluminer T3 (115 TH/s, 1700W, 50dB, SHA-256)</option>
-                                <option value="l3" data-hashrate="9500" data-power="1700" data-price="3500" data-algorithm="scrypt">Fluminer L3 (9500 MH/s, 1700W, ≤45dB, Scrypt)</option>
-                            </select>
-                        </div>
-                        <div class="mb-6">
                             <label for="coin-select" class="block text-sm font-medium mb-2">Select Coin</label>
-                            <select id="coin-select" class="w-full p-3 rounded-lg bg-slate-800 border border-slate-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500" disabled>
-                                <option value="">-- Select a Miner first --</option>
+                            <select id="coin-select" class="w-full p-3 rounded-lg bg-slate-800 border border-slate-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                <option value="litecoin" data-reward-rate="0.0000011484674">Litecoin (LTC)</option>
+                                <option value="dogecoin" data-reward-rate="0.0043851414">Dogecoin (DOGE)</option>
                             </select>
                         </div>
                         <div class="mb-6">
@@ -360,8 +137,8 @@
                             <input type="number" id="electricity-cost" value="0.0" step="0.01" min="0" class="w-full p-3 rounded-lg bg-slate-800 border border-slate-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                         </div>
                         <button id="calculate-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium transition duration-300">
-                            Calculate Profitability
-                        </button>
+                                    Calculate Profitability
+                                </button>
                     </div>
                     <div>
                         <div class="bg-slate-800 rounded-lg p-6">
@@ -398,79 +175,76 @@
             </div>
         </div>
     </section>
-    <!-- Disclaimer Section -->
-    <section class="py-12 bg-slate-950">
-        <div class="container mx-auto px-6 max-w-4xl text-center">
-            <div class="flex justify-center mb-4">
-                <i data-feather="alert-triangle" class="w-8 h-8 text-yellow-500"></i>
+
+    <!-- Features Section -->
+    <section class="py-16 bg-slate-800">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-12 text-center">Product Features</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="product-card rounded-lg p-6">
+                    <i data-feather="zap" class="w-12 h-12 text-blue-500 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-3">High Performance</h3>
+                    <p class="text-slate-300">Optimized for Litecoin and Dogecoin mining with 6000 MH/s hash rate capability.</p>
+                </div>
+                <div class="product-card rounded-lg p-6">
+                    <i data-feather="shield" class="w-12 h-12 text-blue-500 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-3">Energy Efficient</h3>
+                    <p class="text-slate-300">Advanced power management system for optimal efficiency.</p>
+                </div>
+                <div class="product-card rounded-lg p-6">
+                    <i data-feather="settings" class="w-12 h-12 text-blue-500 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-3">Easy Setup</h3>
+                    <p class="text-slate-300">Plug-and-play design with web interface for easy configuration.</p>
+                </div>
+                <div class="product-card rounded-lg p-6">
+                    <i data-feather="truck" class="w-12 h-12 text-blue-500 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-3">EU Support</h3>
+                    <p class="text-slate-300">Dedicated technical support team based in the European Union.</p>
+                </div>
             </div>
-            <h3 class="text-xl font-semibold mb-4">Important Notice</h3>
-            <p class="text-slate-400 mb-6">
-                Cryptocurrency mining carries risks due to market volatility and network difficulty changes. 
-                The profitability calculator provides estimates only. Past performance is not indicative of future results. 
-                Consult with a financial advisor before making any investment decisions.
-            </p>
-            <p class="text-slate-400">
-                All sales comply with the EU's Markets in Crypto-Assets (MiCA) regulation. 
-                Custom IT Support is not responsible for mining rewards or cryptocurrency market fluctuations.
-            </p>
         </div>
     </section>
+
     <!-- Footer -->
-    <footer id="footer" class="bg-slate-950 border-t border-slate-700 py-12">
-    <footer style="background-color: var(--card-dark); border-top: 1px solid var(--border-dark); margin-top: 80px;">
-        <div class="container mx-auto px-4 py-12">
+    <footer class="bg-slate-950 border-t border-slate-700 py-12">
+        <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
-                    <h3 class="font-bold text-lg mb-4">Custom IT Support</h3>
-                    <p class="text-gray-400 text-sm">
-                        Professional crypto mining hardware and IT solutions for the European Union.
-                    </p>
+                    <h4 class="text-lg font-semibold mb-4">Custom IT Support Mining</h4>
+                    <p class="text-slate-400">Professional crypto mining hardware with EU support and warranty.</p>
                 </div>
                 <div>
-                    <h4 class="font-semibold mb-4">Services</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li>ASIC Miners</li>
-                        <li>GPU Mining Rigs</li>
-                        <li>IT Support</li>
-                        <li>Custom Solutions</li>
+                    <h4 class="text-lg font-semibold mb-4">Products</h4>
+                    <ul class="space-y-2 text-slate-400">
+                        <li><a href="index.html#products" class="hover:text-white transition duration-300">ASIC Miners</a></li>
+                        <li><a href="index.html#products" class="hover:text-white transition duration-300">GPU Rigs</a></li>
+                        <li><a href="index.html#products" class="hover:text-white transition duration-300">Accessories</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-semibold mb-4">Company</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li>About Us</li>
-                        <li>Shipping Info</li>
-                        <li>Warranty</li>
-                        <li>MiCA Compliance</li>
+                    <h4 class="text-lg font-semibold mb-4">Support</h4>
+                    <ul class="space-y-2 text-slate-400">
+                        <li><a href="#" class="hover:text-white transition duration-300">Contact</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-300">Warranty</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-300">Shipping</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-semibold mb-4">Contact</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li class="flex items-center gap-2 text-gray-400">
-                            <i data-feather="mail" style="width: 16px; height: 16px;"></i>
-                            rp@customitsupport.com
-                        </li>
-                        <li class="flex items-center gap-2 text-gray-400">
-                            <i data-feather="phone" style="width: 16px; height: 16px;"></i>
-                            +31 645485890
-                        </li>
-                        <li class="flex items-center gap-2 text-gray-400">
-                            <i data-feather="map-pin" style="width: 16px; height: 16px;"></i>
-                            Zevenbergschen Hoek, Netherlands
-                        </li>
+                    <h4 class="text-lg font-semibold mb-4">Legal</h4>
+                    <ul class="space-y-2 text-slate-400">
+                        <li><a href="#" class="hover:text-white transition duration-300">Terms</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-300">Privacy</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-300">MiCA Compliance</a></li>
                     </ul>
                 </div>
             </div>
-            <div style="border-top: 1px solid var(--border-dark); margin-top: 32px; padding-top: 32px;" class="text-center text-sm text-gray-400">
-                <p>© 2025 Custom IT Support. All rights reserved.</p>
-                <p class="mt-2">
-                    Crypto mining involves risk. All sales comply with EU MiCA regulations. Consult a financial advisor before investing.
-                </p>
+            <div class="border-t border-slate-700 mt-8 pt-8 text-center text-slate-400">
+                <p>&copy; 2024 Custom IT Support Mining. All rights reserved.</p>
             </div>
         </div>
     </footer>
+
     <!-- Payment Dialog Modal -->
     <div id="payment-dialog" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
         <div class="bg-slate-800 rounded-xl p-8 max-w-md w-full mx-4">
@@ -480,7 +254,7 @@
                     <i data-feather="x" class="w-6 h-6"></i>
                 </button>
             </div>
-            <p class="text-slate-400 mb-6">Select your preferred payment option for the Fluminer L2</p>
+            <p class="text-slate-400 mb-6">Select your preferred payment option for the Fluminer L1 Pro</p>
             <div class="space-y-3">
                 <button onclick="handlePaymentMethod('iDEAL')" class="w-full border border-slate-600 rounded-lg p-4 flex items-center justify-start gap-4 hover:bg-blue-600/10 hover:border-blue-500/50 transition duration-300">
                     <div class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center">
@@ -512,10 +286,37 @@
             </div>
         </div>
     </div>
+
     <script>
-        // Initialize feather icons
         feather.replace();
         
+        // Image slider for L1 Pro
+        const imagesL1 = [
+            'images/Flumier_L1 horizontal.png',
+            'images/Flumier_L1 front.png',
+            'images/Flumier_L1 back.png',
+            'images/Flumier_L1.png'
+        ];
+        let indexL1 = 0;
+        const sliderImageL1 = document.getElementById('slider-image-L1');
+        const prevBtnL1 = document.getElementById('prev-btn-L1');
+        const nextBtnL1 = document.getElementById('next-btn-L1');
+
+        prevBtnL1.addEventListener('click', () => {
+            indexL1 = (indexL1 === 0) ? imagesL1.length - 1 : indexL1 - 1;
+            sliderImageL1.src = imagesL1[indexL1];
+        });
+
+        nextBtnL1.addEventListener('click', () => {
+            indexL1 = (indexL1 === imagesL1.length - 1) ? 0 : indexL1 + 1;
+            sliderImageL1.src = imagesL1[indexL1];
+        });
+
+        setInterval(() => {
+            indexL1 = (indexL1 === imagesL1.length - 1) ? 0 : indexL1 + 1;
+            sliderImageL1.src = imagesL1[indexL1];
+        }, 3000);
+
         // Payment Dialog Functions
         function openPaymentDialog(productName, price) {
             document.getElementById('payment-dialog').classList.remove('hidden');
@@ -531,28 +332,7 @@
             alert(`${method} payment selected\nYou will be contacted with payment details shortly.`);
             closePaymentDialog();
         }
-        // Filter coins based on miner algorithm
-        function filterCoins(minerType) {
-            const coinSelect = document.getElementById('coin-select');
-            
-            // Clear previous options
-            coinSelect.innerHTML = '<option value="">-- Select a Coin --</option>';
 
-            // Add coins based on algorithm
-            if (minerType === 't3') {
-                coinSelect.innerHTML += `
-                    <option value="bitcoin" data-algorithm="sha256" data-reward-rate="4.173913043478261e-10">Bitcoin (BTC)</option>
-                `;
-                coinSelect.value = 'bitcoin';
-            } else { // scrypt algorithm
-                coinSelect.innerHTML += `
-                    <option value="litecoin" data-algorithm="scrypt" data-reward-rate="0.0000011484674">Litecoin (LTC)</option>
-                    <option value="dogecoin" data-algorithm="scrypt" data-reward-rate="0.0043851414">Dogecoin (DOGE)</option>
-                `;
-                coinSelect.value = 'dogecoin';
-            }
-            coinSelect.disabled = false;
-        }
         // Fetch current coin price
         async function fetchCoinPrice(coinId) {
             try {
@@ -564,39 +344,24 @@
                 return 0;
             }
         }
-        // Initialize event listeners
-        document.getElementById('miner-select').addEventListener('change', function() {
-            const coinSelect = document.getElementById('coin-select');
-            if (this.value) {
-                filterCoins(this.value);
-            } else {
-                coinSelect.innerHTML = '<option value="">-- Select a Miner first --</option>';
-                coinSelect.value = '';
-                coinSelect.disabled = true;
-            }
-        });
-        // Profitability calculator logic
+
+        // L1 Pro Profitability calculator logic
         document.getElementById('calculate-btn').addEventListener('click', async function() {
-            const minerSelect = document.getElementById('miner-select');
             const coinSelect = document.getElementById('coin-select');
             const electricityCost = parseFloat(document.getElementById('electricity-cost').value);
             
-            if (!minerSelect.value || !coinSelect.value || isNaN(electricityCost)) {
+            if (!coinSelect.value || isNaN(electricityCost)) {
                 alert('Please fill in all fields with valid values');
                 return;
             }
-            const selectedMiner = minerSelect.options[minerSelect.selectedIndex];
+            
             const coinId = coinSelect.value;
             const currentPrice = await fetchCoinPrice(coinId);
             
-            const hashrate = parseFloat(selectedMiner.dataset.hashrate);
-            const powerUsage = parseFloat(selectedMiner.dataset.power);
-            const minerPrice = parseFloat(selectedMiner.dataset.price);
-            
-            if (!hashrate || !powerUsage || !currentPrice) {
-                alert('Could not get required data for calculation');
-                return;
-            }
+            // L1 Pro specifications
+            const hashrate = 6000; // MH/s
+            const powerUsage = 1400; // Watts
+            const minerPrice = 2900; // Euros
             
             // Get reward rate from coin option
             const selectedCoin = coinSelect.options[coinSelect.selectedIndex];
