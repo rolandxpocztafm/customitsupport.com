@@ -45,7 +45,7 @@
                     <a href="index.html" class="text-blue-400 hover:text-blue-300 transition duration-300">Shop</a>
                     <a href="index.html#products" class="text-slate-300 hover:text-white transition duration-300">Products</a>
                     <a href="index.html#calculator" class="text-slate-300 hover:text-white transition duration-300">Calculator</a>
-                    <a href="index.html#contact" class="text-slate-300 hover:text-white transition duration-300">Contact</a>
+                    <a href="#footer" class="text-slate-300 hover:text-white transition duration-300">Contact</a>
                 </div>
                 <div class="flex items-center space-x-4">
                     <a href="index.html" class="text-slate-300 hover:text-white transition duration-300">
@@ -178,44 +178,38 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-slate-950 border-t border-slate-700 py-12">
+    <!-- Features Section -->
+    <section class="py-16 bg-slate-800">
         <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Custom IT Support Mining</h4>
-                    <p class="text-slate-400">Professional crypto mining hardware with EU support and warranty.</p>
+            <h2 class="text-3xl font-bold mb-12 text-center">Product Features</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="product-card rounded-lg p-6">
+                    <i data-feather="zap" class="w-12 h-12 text-blue-500 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-3">High Performance</h3>
+                    <p class="text-slate-300">Optimized for Litecoin and Dogecoin mining with 9500 MH/s hash rate capability.</p>
                 </div>
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Products</h4>
-                    <ul class="space-y-2 text-slate-400">
-                        <li><a href="index.html#products" class="hover:text-white transition duration-300">ASIC Miners</a></li>
-                        <li><a href="index.html#products" class="hover:text-white transition duration-300">GPU Rigs</a></li>
-                        <li><a href="index.html#products" class="hover:text-white transition duration-300">Accessories</a></li>
-                    </ul>
+                <div class="product-card rounded-lg p-6">
+                    <i data-feather="shield" class="w-12 h-12 text-blue-500 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-3">Energy Efficient</h3>
+                    <p class="text-slate-300">Advanced power management system for optimal efficiency.</p>
                 </div>
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Support</h4>
-                    <ul class="space-y-2 text-slate-400">
-                        <li><a href="#" class="hover:text-white transition duration-300">Contact</a></li>
-                        <li><a href="#" class="hover:text-white transition duration-300">Warranty</a></li>
-                        <li><a href="#" class="hover:text-white transition duration-300">Shipping</a></li>
-                    </ul>
+                <div class="product-card rounded-lg p-6">
+                    <i data-feather="settings" class="w-12 h-12 text-blue-500 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-3">Easy Setup</h3>
+                    <p class="text-slate-300">Plug-and-play design with web interface for easy configuration.</p>
                 </div>
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Legal</h4>
-                    <ul class="space-y-2 text-slate-400">
-                        <li><a href="#" class="hover:text-white transition duration-300">Terms</a></li>
-                        <li><a href="#" class="hover:text-white transition duration-300">Privacy</a></li>
-                        <li><a href="#" class="hover:text-white transition duration-300">MiCA Compliance</a></li>
-                    </ul>
+                <div class="product-card rounded-lg p-6">
+                    <i data-feather="truck" class="w-12 h-12 text-blue-500 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-3">EU Support</h3>
+                    <p class="text-slate-300">Dedicated technical support team based in the European Union.</p>
                 </div>
-            </div>
-            <div class="border-t border-slate-700 mt-8 pt-8 text-center text-slate-400">
-                <p>&copy; 2024 Custom IT Support Mining. All rights reserved.</p>
             </div>
         </div>
-    </footer>
+    </section>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-container"></div>
 
     <!-- Payment Dialog Modal -->
     <div id="payment-dialog" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
@@ -262,6 +256,15 @@
     <script>
         feather.replace();
         
+        // Load footer dynamically
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+                feather.replace(); // Re-initialize feather icons in the loaded footer
+            })
+            .catch(error => console.error('Error loading footer:', error));
+
         // Image slider for L3
         const images = [
             'images/fluminer_L3.png',
