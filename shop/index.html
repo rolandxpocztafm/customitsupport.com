@@ -416,8 +416,8 @@
             </p>
         </div>
     </section>
-    <!-- Footer -->
-<div id="footer-container"></div>
+    <!-- Footer Placeholder -->
+    <div id="footer-container"></div>
         
     <!-- Payment Dialog Modal -->
     <div id="payment-dialog" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
@@ -464,6 +464,15 @@
         // Initialize feather icons
         feather.replace();
         
+        // Load footer dynamically
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+                feather.replace(); // Re-initialize feather icons in the loaded footer
+            })
+            .catch(error => console.error('Error loading footer:', error));
+
         // Payment Dialog Functions
         function openPaymentDialog(productName, price) {
             document.getElementById('payment-dialog').classList.remove('hidden');
