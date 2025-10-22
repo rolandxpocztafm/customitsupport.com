@@ -67,31 +67,41 @@
     async function fetchBitcoinData() {
         try {
             // Fetch BTC price from CoinGecko
-            const priceResponse = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
-            if (!priceResponse.ok) throw new Error('Failed to fetch BTC price');
+            const priceResponse = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd', {
+                headers: { 'Accept': 'application/json' }
+            });
+            if (!priceResponse.ok) throw new Error(`BTC price fetch failed: ${priceResponse.status}`);
             const priceData = await priceResponse.json();
-            
-            // Fetch Bitcoin network difficulty from Blockchain.com
-            const difficultyResponse = await fetch('https://api.blockchain.com/v3/exchange/tickers/difficulty');
-            if (!difficultyResponse.ok) throw new Error('Failed to fetch network difficulty');
-            const difficultyData = await difficultyResponse.json();
-            
+            if (!priceData.bitcoin?.usd) throw new Error('Invalid BTC price data');
+
+            // Fetch Bitcoin network difficulty from Blockchain.info
+            const difficultyResponse = await fetch('https://blockchain.info/q/getdifficulty');
+            if (!difficultyResponse.ok) throw new Error(`Difficulty fetch failed: ${difficultyResponse.status}`);
+            const difficultyData = await difficultyResponse.text(); // Blockchain.info returns plain text
+            const difficulty = parseFloat(difficultyData);
+            if (isNaN(difficulty)) throw new Error('Invalid difficulty data');
+
             // Update price display
-            document.getElementById('btc-price').textContent = `$${priceData.bitcoin.usd.toLocaleString()}`;
+            document.getElementById('btc-price').textContent = `$${parseFloat(priceData.bitcoin.usd).toLocaleString()}`;
             
             // Store data for calculations
             window.bitcoinData = {
                 btcPrice: priceData.bitcoin.usd,
-                networkDifficulty: difficultyData.difficulty || 1 // Fallback to avoid division by zero
+                networkDifficulty: difficulty || 1 // Fallback to avoid division by zero
             };
             
             // Update network difficulty display
-            document.getElementById('network-difficulty').textContent = `${difficultyData.difficulty.toLocaleString()}`;
+            document.getElementById('network-difficulty').textContent = `${difficulty.toLocaleString()}`;
             
         } catch (error) {
-            console.error('Error fetching Bitcoin data:', error);
+            console.error('Error fetching Bitcoin data:', error.message);
             document.getElementById('btc-price').textContent = 'Error loading price';
             document.getElementById('network-difficulty').textContent = 'Error loading difficulty';
+            // Set fallback values to allow calculations
+            window.bitcoinData = {
+                btcPrice: 0,
+                networkDifficulty: 1
+            };
         }
     }
 
@@ -100,7 +110,7 @@
         // Fluminer T3 specifications
         const hashrate = 115; // TH/s
         const powerUsage = 1700; // Watts
-        const minerPrice = 2310; // USD (converted from Euros for consistency)
+        const minerPrice = 2310; // USD
         
         // Current Bitcoin data
         const btcPrice = window.bitcoinData?.btcPrice || 0;
@@ -108,7 +118,7 @@
         
         // BTC mining calculation formula
         // Daily BTC = (Hashrate * Seconds in day * Block Reward) / (Network Difficulty * 2^32)
-        const blockReward = 3.125; // Current BTC block reward (as of 2025, post-halving)
+        const blockReward = 3.125; // Current BTC block reward (post-2024 halving)
         const dailyBTC = (hashrate * 1e12 * 86400 * blockReward) / (networkDifficulty * Math.pow(2, 32));
         const dailyRevenue = dailyBTC * btcPrice;
         const dailyCost = (powerUsage * 24 / 1000) * electricityCost;
@@ -145,8 +155,8 @@
     document.addEventListener('DOMContentLoaded', function() {
         fetchBitcoinData();
         
-        // Update live data every 60 seconds
-        setInterval(fetchBitcoinData, 60000);
+        // Update live data every 120 seconds
+        setInterval(fetchBitcoinData, 120000);
         
         // Profitability calculator logic
         document.getElementById('calculate-btn').addEventListener('click', function() {
