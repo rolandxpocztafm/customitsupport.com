@@ -63,8 +63,8 @@
 </section>
 
 <script>
-    // Fetch current Bitcoin price and network difficulty
-    async function fetchBitcoinData() {
+    // Fetch current Bitcoin price and network difficulty with retry
+    async function fetchBitcoinData(retryCount = 3, delay = 2000) {
         try {
             // Fetch BTC price from CoinGecko
             const priceResponse = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd', {
@@ -74,15 +74,26 @@
             const priceData = await priceResponse.json();
             if (!priceData.bitcoin?.usd) throw new Error('Invalid BTC price data');
 
-            // Fetch Bitcoin network difficulty from Blockchain.info
-            const difficultyResponse = await fetch('https://blockchain.info/q/getdifficulty');
-            if (!difficultyResponse.ok) throw new Error(`Difficulty fetch failed: ${difficultyResponse.status}`);
-            const difficultyData = await difficultyResponse.text(); // Blockchain.info returns plain text
-            const difficulty = parseFloat(difficultyData);
-            if (isNaN(difficulty)) throw new Error('Invalid difficulty data');
+            // Try Blockchain.info for network difficulty
+            let difficulty;
+            try {
+                const difficultyResponse = await fetch('https://blockchain.info/q/getdifficulty');
+                if (!difficultyResponse.ok) throw new Error(`Blockchain.info difficulty fetch failed: ${difficultyResponse.status}`);
+                difficulty = parseFloat(await difficultyResponse.text());
+                if (isNaN(difficulty)) throw new Error('Invalid Blockchain.info difficulty data');
+            } catch (error) {
+                console.warn('Blockchain.info failed, trying Blockchair:', error.message);
+                // Fallback to Blockchair API
+                const blockchairResponse = await fetch('https://api.blockchair.com/bitcoin/stats');
+                if (!blockchairResponse.ok) throw new Error(`Blockchair difficulty fetch failed: ${blockchairResponse.status}`);
+                const blockchairData = await blockchairResponse.json();
+                difficulty = parseFloat(blockchairData.data.difficulty);
+                if (isNaN(difficulty)) throw new Error('Invalid Blockchair difficulty data');
+            }
 
-            // Update price display
+            // Update UI
             document.getElementById('btc-price').textContent = `$${parseFloat(priceData.bitcoin.usd).toLocaleString()}`;
+            document.getElementById('network-difficulty').textContent = `${difficulty.toLocaleString()}`;
             
             // Store data for calculations
             window.bitcoinData = {
@@ -90,14 +101,15 @@
                 networkDifficulty: difficulty || 1 // Fallback to avoid division by zero
             };
             
-            // Update network difficulty display
-            document.getElementById('network-difficulty').textContent = `${difficulty.toLocaleString()}`;
-            
         } catch (error) {
+            if (retryCount > 0) {
+                console.warn(`Retrying fetch (${retryCount} attempts left)...`);
+                await new Promise(resolve => setTimeout(resolve, delay));
+                return fetchBitcoinData(retryCount - 1, delay * 2);
+            }
             console.error('Error fetching Bitcoin data:', error.message);
-            document.getElementById('btc-price').textContent = 'Error loading price';
-            document.getElementById('network-difficulty').textContent = 'Error loading difficulty';
-            // Set fallback values to allow calculations
+            document.getElementById('btc-price').textContent = 'Error: Unable to load price';
+            document.getElementById('network-difficulty').textContent = 'Error: Unable to load difficulty';
             window.bitcoinData = {
                 btcPrice: 0,
                 networkDifficulty: 1
@@ -155,8 +167,8 @@
     document.addEventListener('DOMContentLoaded', function() {
         fetchBitcoinData();
         
-        // Update live data every 120 seconds
-        setInterval(fetchBitcoinData, 120000);
+        // Update live data every 300 seconds
+        setInterval(fetchBitcoinData, 300000);
         
         // Profitability calculator logic
         document.getElementById('calculate-btn').addEventListener('click', function() {
