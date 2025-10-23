@@ -138,16 +138,32 @@
             })
             .catch(console.error);
 
-        // Load calculator
-        fetch('calculator_T3.html')
-            .then(r => r.text())
-            .then(d => { 
-                document.getElementById('calculator-container').innerHTML = d; 
-                feather.replace(); 
-            })
-            .catch(() => {
-                document.getElementById('calculator-container').innerHTML = '<p class="text-red-400">Failed to load calculator.</p>';
-            });
+
+// Load calculator and execute its scripts
+fetch('calculator_T3.html')
+  .then(r => r.text())
+  .then(d => {
+    const container = document.getElementById('calculator-container');
+    container.innerHTML = d;
+
+    // Extract and execute any <script> blocks inside calculator_T3.html
+    const scripts = container.querySelectorAll('script');
+    scripts.forEach(oldScript => {
+      const newScript = document.createElement('script');
+      if (oldScript.src) {
+        newScript.src = oldScript.src;
+      } else {
+        newScript.textContent = oldScript.textContent;
+      }
+      document.body.appendChild(newScript);
+    });
+  })
+  .catch(() => {
+    document.getElementById('calculator-container').innerHTML = 
+      '<p class="text-red-400">Failed to load calculator.</p>';
+  });
+
+       
 
         // Image slider
         const imagesT3 = ['images/Fluminer_T3.png', 'images/Fluminer_T3 BTC LOGO.png'];
