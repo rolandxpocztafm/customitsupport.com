@@ -25,11 +25,6 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
-        .profitability-calculator {
-            background: rgba(15, 23, 42, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
     </style>
 </head>
 <body>
@@ -44,7 +39,7 @@
                 <div class="hidden md:flex space-x-6">
                     <a href="index.html" class="text-blue-400 hover:text-blue-300 transition duration-300">Shop</a>
                     <a href="index.html#products" class="text-slate-300 hover:text-white transition duration-300">Products</a>
-                    <a href="#calculator" class="text-slate-300 hover:text-white transition duration-300">Calculator</a>
+                    <a href="calculator_T3.html" class="text-slate-300 hover:text-white transition duration-300">Calculator</a>
                     <a href="#footer" class="text-slate-300 hover:text-white transition duration-300">Contact</a>
                 </div>
                 <div class="flex items-center space-x-4">
@@ -92,40 +87,17 @@
         </div>
     </section>
 
-    <!-- Profitability Calculator -->
-    <section id="calculator" class="py-16 bg-slate-900">
-        <div class="container mx-auto px-6">
-            <div class="max-w-4xl mx-auto profitability-calculator rounded-xl p-8">
-                <h2 class="text-3xl font-bold mb-8 text-center">Fluminer T3 Profitability Calculator</h2>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div>
-                        <div class="mb-6">
-                            <label for="electricity-cost" class="block text-sm font-medium mb-2">Electricity Cost ($/kWh)</label>
-                            <input type="number" id="electricity-cost" value="0.0" step="0.01" min="0" class="w-full p-3 rounded-lg bg-slate-800 border border-slate-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                        </div>
-                        <button id="calculate-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium transition duration-300">
-                            Calculate Profitability
-                        </button>
-                    </div>
-                    <div>
-                        <div class="bg-slate-800 rounded-lg p-6">
-                            <h3 class="text-xl font-semibold mb-4">Estimated Results</h3>
-                            <div class="space-y-4">
-                                <div class="flex justify-between"><span>Daily Revenue:</span><span id="daily-revenue">$0.00</span></div>
-                                <div class="flex justify-between"><span>Daily Electricity Cost:</span><span id="daily-cost">$0.00</span></div>
-                                <div class="flex justify-between"><span>Daily Profit:</span><span id="daily-profit">$0.00</span></div>
-                                <div class="border-t border-slate-700 my-3"></div>
-                                <div class="flex justify-between"><span>Monthly Profit:</span><span id="monthly-profit">$0.00</span></div>
-                                <div class="flex justify-between"><span>ROI Period:</span><span id="roi-period">0 months</span></div>
-                            </div>
-                        </div>
-                        <div class="mt-6 text-sm text-slate-400">
-                            <p>Estimates based on current network difficulty and market conditions. Actual results may vary.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- Calculator Link Section -->
+    <section id="calculator-link" class="py-16 bg-slate-900 border-t border-slate-800">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold mb-4 text-white">Fluminer T3 Profitability Calculator</h2>
+            <p class="text-slate-400 mb-8 max-w-2xl mx-auto">
+                Check your expected mining revenue and ROI based on current Bitcoin prices and electricity rates.
+            </p>
+            <a href="calculator_T3.html" 
+               class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-lg font-medium text-lg transition duration-300">
+               Open Calculator
+            </a>
         </div>
     </section>
 
@@ -137,7 +109,9 @@
         <div class="bg-slate-800 rounded-xl p-8 max-w-md w-full mx-4">
             <div class="flex justify-between items-center mb-6">
                 <h3 class="text-2xl font-bold">Choose Payment Method</h3>
-                <button onclick="closePaymentDialog()" class="text-slate-400 hover:text-white"><i data-feather="x" class="w-6 h-6"></i></button>
+                <button onclick="closePaymentDialog()" class="text-slate-400 hover:text-white">
+                    <i data-feather="x" class="w-6 h-6"></i>
+                </button>
             </div>
             <p class="text-slate-400 mb-6">Select your preferred payment option for the Fluminer T3</p>
             <div class="space-y-3">
@@ -181,42 +155,9 @@
             document.body.style.overflow = 'auto';
         }
         function handlePaymentMethod(method) {
-            alert(`${method} payment selected\nYou will be contacted with payment details shortly.`);
+            alert(`${method} payment selected\\nYou will be contacted with payment details shortly.`);
             closePaymentDialog();
         }
-
-        async function fetchCoinPrice() {
-            try {
-                const r = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
-                const d = await r.json();
-                return d.bitcoin.usd;
-            } catch { return 0; }
-        }
-
-        document.getElementById('calculate-btn').addEventListener('click', async () => {
-            const electricityCost = parseFloat(document.getElementById('electricity-cost').value);
-            if (isNaN(electricityCost)) return alert('Enter valid electricity cost');
-
-            const btcPrice = await fetchCoinPrice();
-            const hashrate = 115000; // GH/s
-            const rewardRate = 4.173913043478261e-10; // same as index.html BTC
-            const powerUsage = 1700;
-            const minerPrice = 2310;
-
-            const dailyReward = hashrate * rewardRate;
-            const dailyRevenue = dailyReward * btcPrice;
-            const dailyCost = (powerUsage * 24 / 1000) * electricityCost;
-            const dailyProfit = dailyRevenue - dailyCost;
-            const monthlyProfit = dailyProfit * 30;
-            let roiPeriod = 'Not profitable';
-            if (dailyProfit > 0) roiPeriod = Math.ceil(minerPrice / (dailyProfit * 30)) + ' months';
-
-            document.getElementById('daily-revenue').textContent = '$' + dailyRevenue.toFixed(2);
-            document.getElementById('daily-cost').textContent = '$' + dailyCost.toFixed(2);
-            document.getElementById('daily-profit').textContent = '$' + dailyProfit.toFixed(2);
-            document.getElementById('monthly-profit').textContent = '$' + monthlyProfit.toFixed(2);
-            document.getElementById('roi-period').textContent = roiPeriod;
-        });
     </script>
 </body>
 </html>
