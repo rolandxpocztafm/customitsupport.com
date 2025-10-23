@@ -27,7 +27,7 @@
         }
         
         .profitability-calculator {
-            background: rgba(15, 23Coder, 42, 0.8);
+            background: rgba(15, 23, 42, 0.8);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
     </style>
@@ -60,7 +60,6 @@
     <section class="py-16 gradient-bg">
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <!-- Product Image -->
                 <div class="flex justify-center">
                     <div id="slider-T3" class="relative w-full max-w-lg flex items-center">
                         <button id="prev-btn-T3" class="absolute left-0 top-1/2 transform -translate-y-1/2 text-3xl text-white bg-transparent px-0 py-0 focus:outline-none">&#8592;</button>
@@ -69,41 +68,22 @@
                     </div>
                 </div>
                 
-                <!-- Product Information -->
                 <div class="product-card rounded-lg p-8">
                     <h1 class="text-4xl font-bold mb-4">Fluminer T3</h1>
                     <p class="text-xl text-blue-200 mb-6">115 TH/s SHA-256 algorithm for BTC</p>
-                    
                     <div class="mb-6">
                         <span class="text-3xl font-bold text-white">€2,310</span>
                     </div>
-                    
                     <div class="mb-8">
                         <h3 class="text-xl font-semibold mb-4">Product Specifications</h3>
                         <ul class="space-y-3">
-                            <li class="flex items-center">
-                                <i data-feather="zap" class="w-5 h-5 mr-3 text-blue-400"></i>
-                                <span><strong>Hash Rate:</strong> 115 TH/s</span>
-                            </li>
-                            <li class="flex items-center">
-                                <i data-feather="cpu" class="w-5 h-5 mr-3 text-blue-400"></i>
-                                <span><strong>Algorithm:</strong> SHA-256</span>
-                            </li>
-                            <li class="flex items-center">
-                                <i data-feather="battery" class="w-5 h-5 mr-3 text-blue-400"></i>
-                                <span><strong>Power Consumption:</strong> 1700W</span>
-                            </li>
-                            <li class="flex items-center">
-                                <i data-feather="volume" class="w-5 h-5 mr-3 text-blue-400"></i>
-                                <span><strong>Noise Level:</strong> 40-55 dB</span>
-                            </li>
-                            <li class="flex items-center">
-                                <i data-feather="clock" class="w-5 h-5 mr-3 text-blue-400"></i>
-                                <span><strong>Warranty:</strong> 1 year</span>
-                            </li>
+                            <li><i data-feather="zap" class="w-5 h-5 mr-3 text-blue-400"></i><strong>Hash Rate:</strong> 115 TH/s</li>
+                            <li><i data-feather="cpu" class="w-5 h-5 mr-3 text-blue-400"></i><strong>Algorithm:</strong> SHA-256</li>
+                            <li><i data-feather="battery" class="w-5 h-5 mr-3 text-blue-400"></i><strong>Power Consumption:</strong> 1700W</li>
+                            <li><i data-feather="volume" class="w-5 h-5 mr-3 text-blue-400"></i><strong>Noise Level:</strong> 40–55 dB</li>
+                            <li><i data-feather="clock" class="w-5 h-5 mr-3 text-blue-400"></i><strong>Warranty:</strong> 1 year</li>
                         </ul>
                     </div>
-                    
                     <button onclick="openPaymentDialog('Fluminer T3', 2310)" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-lg font-medium transition duration-300 text-lg">
                         Complete Purchase
                     </button>
@@ -112,17 +92,42 @@
         </div>
     </section>
 
-<!-- Calculator Section Include -->
-<div id="calculator-container"></div>
-<script>
-fetch('calculator_T3.html')
-  .then(response => response.text())
-  .then(html => {
-    document.getElementById('calculator-container').innerHTML = html;
-  })
-  .catch(error => console.error('Error loading calculator:', error));
-</script>
-
+    <!-- Profitability Calculator -->
+    <section id="calculator" class="py-16 bg-slate-900">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto profitability-calculator rounded-xl p-8">
+                <h2 class="text-3xl font-bold mb-8 text-center">Fluminer T3 Profitability Calculator</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <div class="mb-6">
+                            <label for="electricity-cost" class="block text-sm font-medium mb-2">Electricity Cost ($/kWh)</label>
+                            <input type="number" id="electricity-cost" value="0.0" step="0.01" min="0" class="w-full p-3 rounded-lg bg-slate-800 border border-slate-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <button id="calculate-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium transition duration-300">
+                            Calculate Profitability
+                        </button>
+                    </div>
+                    <div>
+                        <div class="bg-slate-800 rounded-lg p-6">
+                            <h3 class="text-xl font-semibold mb-4">Estimated Results</h3>
+                            <div class="space-y-4">
+                                <div class="flex justify-between"><span>Daily Revenue:</span><span id="daily-revenue">$0.00</span></div>
+                                <div class="flex justify-between"><span>Daily Electricity Cost:</span><span id="daily-cost">$0.00</span></div>
+                                <div class="flex justify-between"><span>Daily Profit:</span><span id="daily-profit">$0.00</span></div>
+                                <div class="border-t border-slate-700 my-3"></div>
+                                <div class="flex justify-between"><span>Monthly Profit:</span><span id="monthly-profit">$0.00</span></div>
+                                <div class="flex justify-between"><span>ROI Period:</span><span id="roi-period">0 months</span></div>
+                            </div>
+                        </div>
+                        <div class="mt-6 text-sm text-slate-400">
+                            <p>Estimates based on current network difficulty and market conditions. Actual results may vary.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer Placeholder -->
     <div id="footer-container"></div>
@@ -132,38 +137,21 @@ fetch('calculator_T3.html')
         <div class="bg-slate-800 rounded-xl p-8 max-w-md w-full mx-4">
             <div class="flex justify-between items-center mb-6">
                 <h3 class="text-2xl font-bold">Choose Payment Method</h3>
-                <button onclick="closePaymentDialog()" class="text-slate-400 hover:text-white">
-                    <i data-feather="x" class="w-6 h-6"></i>
-                </button>
+                <button onclick="closePaymentDialog()" class="text-slate-400 hover:text-white"><i data-feather="x" class="w-6 h-6"></i></button>
             </div>
             <p class="text-slate-400 mb-6">Select your preferred payment option for the Fluminer T3</p>
             <div class="space-y-3">
-                <button onclick="handlePaymentMethod('iDEAL')" class="w-full border border-slate-600 rounded-lg p-4 flex items-center justify-start gap-4 hover:bg-blue-600/10 hover:border-blue-500/50 transition duration-300">
-                    <div class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center">
-                        <i data-feather="credit-card" class="w-6 h-6 text-blue-500"></i>
-                    </div>
-                    <div class="text-left">
-                        <div class="font-semibold text-base">iDEAL Payment</div>
-                        <div class="text-sm text-slate-400">Instant Dutch bank transfer</div>
-                    </div>
+                <button onclick="handlePaymentMethod('iDEAL')" class="w-full border border-slate-600 rounded-lg p-4 flex items-center gap-4 hover:bg-blue-600/10 hover:border-blue-500/50 transition duration-300">
+                    <i data-feather="credit-card" class="w-6 h-6 text-blue-500"></i>
+                    <div><div class="font-semibold">iDEAL Payment</div><div class="text-sm text-slate-400">Instant Dutch bank transfer</div></div>
                 </button>
-                <button onclick="handlePaymentMethod('Bank Transfer')" class="w-full border border-slate-600 rounded-lg p-4 flex items-center justify-start gap-4 hover:bg-blue-600/10 hover:border-blue-500/50 transition duration-300">
-                    <div class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center">
-                        <i data-feather="building" class="w-6 h-6 text-blue-500"></i>
-                    </div>
-                    <div class="text-left">
-                        <div class="font-semibold text-base">Bank Transfer</div>
-                        <div class="text-sm text-slate-400">Direct wire transfer</div>
-                    </div>
+                <button onclick="handlePaymentMethod('Bank Transfer')" class="w-full border border-slate-600 rounded-lg p-4 flex items-center gap-4 hover:bg-blue-600/10 hover:border-blue-500/50 transition duration-300">
+                    <i data-feather="building" class="w-6 h-6 text-blue-500"></i>
+                    <div><div class="font-semibold">Bank Transfer</div><div class="text-sm text-slate-400">Direct wire transfer</div></div>
                 </button>
-                <button onclick="handlePaymentMethod('Cash')" class="w-full border border-slate-600 rounded-lg p-4 flex items-center justify-start gap-4 hover:bg-blue-600/10 hover:border-blue-500/50 transition duration-300">
-                    <div class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center">
-                        <i data-feather="dollar-sign" class="w-6 h-6 text-blue-500"></i>
-                    </div>
-                    <div class="text-left">
-                        <div class="font-semibold text-base">Cash Payment</div>
-                        <div class="text-sm text-slate-400">Pay in person</div>
-                    </div>
+                <button onclick="handlePaymentMethod('Cash')" class="w-full border border-slate-600 rounded-lg p-4 flex items-center gap-4 hover:bg-blue-600/10 hover:border-blue-500/50 transition duration-300">
+                    <i data-feather="dollar-sign" class="w-6 h-6 text-blue-500"></i>
+                    <div><div class="font-semibold">Cash Payment</div><div class="text-sm text-slate-400">Pay in person</div></div>
                 </button>
             </div>
         </div>
@@ -171,56 +159,64 @@ fetch('calculator_T3.html')
 
     <script>
         feather.replace();
-        
-        // Load footer dynamically
+
         fetch('footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer-container').innerHTML = data;
-                feather.replace(); // Re-initialize feather icons in the loaded footer
-            })
-            .catch(error => console.error('Error loading footer:', error));
-        
-        // Image slider for T3
-        const imagesT3 = [
-            'images/Fluminer_T3.png',
-            'images/Fluminer_T3 BTC LOGO.png'
-        ];
+            .then(r => r.text())
+            .then(d => { document.getElementById('footer-container').innerHTML = d; feather.replace(); })
+            .catch(console.error);
+
+        const imagesT3 = ['images/Fluminer_T3.png', 'images/Fluminer_T3 BTC LOGO.png'];
         let indexT3 = 0;
         const sliderImageT3 = document.getElementById('slider-image-T3');
-        const prevBtnT3 = document.getElementById('prev-btn-T3');
-        const nextBtnT3 = document.getElementById('next-btn-T3');
+        document.getElementById('prev-btn-T3').onclick = () => { indexT3 = (indexT3 === 0) ? imagesT3.length - 1 : indexT3 - 1; sliderImageT3.src = imagesT3[indexT3]; };
+        document.getElementById('next-btn-T3').onclick = () => { indexT3 = (indexT3 === imagesT3.length - 1) ? 0 : indexT3 + 1; sliderImageT3.src = imagesT3[indexT3]; };
+        setInterval(() => { indexT3 = (indexT3 + 1) % imagesT3.length; sliderImageT3.src = imagesT3[indexT3]; }, 3000);
 
-        prevBtnT3.addEventListener('click', () => {
-            indexT3 = (indexT3 === 0) ? imagesT3.length - 1 : indexT3 - 1;
-            sliderImageT3.src = imagesT3[indexT3];
-        });
-
-        nextBtnT3.addEventListener('click', () => {
-            indexT3 = (indexT3 === imagesT3.length - 1) ? 0 : indexT3 + 1;
-            sliderImageT3.src = imagesT3[indexT3];
-        });
-
-        setInterval(() => {
-            indexT3 = (indexT3 === imagesT3.length - 1) ? 0 : indexT3 + 1;
-            sliderImageT3.src = imagesT3[indexT3];
-        }, 3000);
-
-        // Payment Dialog Functions
-        function openPaymentDialog(productName, price) {
+        function openPaymentDialog() {
             document.getElementById('payment-dialog').classList.remove('hidden');
             document.body.style.overflow = 'hidden';
         }
-        
         function closePaymentDialog() {
             document.getElementById('payment-dialog').classList.add('hidden');
             document.body.style.overflow = 'auto';
         }
-        
         function handlePaymentMethod(method) {
             alert(`${method} payment selected\nYou will be contacted with payment details shortly.`);
             closePaymentDialog();
         }
+
+        async function fetchCoinPrice() {
+            try {
+                const r = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
+                const d = await r.json();
+                return d.bitcoin.usd;
+            } catch { return 0; }
+        }
+
+        document.getElementById('calculate-btn').addEventListener('click', async () => {
+            const electricityCost = parseFloat(document.getElementById('electricity-cost').value);
+            if (isNaN(electricityCost)) return alert('Enter valid electricity cost');
+
+            const btcPrice = await fetchCoinPrice();
+            const hashrate = 115000; // GH/s
+            const rewardRate = 4.173913043478261e-10; // same as index.html BTC
+            const powerUsage = 1700;
+            const minerPrice = 2310;
+
+            const dailyReward = hashrate * rewardRate;
+            const dailyRevenue = dailyReward * btcPrice;
+            const dailyCost = (powerUsage * 24 / 1000) * electricityCost;
+            const dailyProfit = dailyRevenue - dailyCost;
+            const monthlyProfit = dailyProfit * 30;
+            let roiPeriod = 'Not profitable';
+            if (dailyProfit > 0) roiPeriod = Math.ceil(minerPrice / (dailyProfit * 30)) + ' months';
+
+            document.getElementById('daily-revenue').textContent = '$' + dailyRevenue.toFixed(2);
+            document.getElementById('daily-cost').textContent = '$' + dailyCost.toFixed(2);
+            document.getElementById('daily-profit').textContent = '$' + dailyProfit.toFixed(2);
+            document.getElementById('monthly-profit').textContent = '$' + monthlyProfit.toFixed(2);
+            document.getElementById('roi-period').textContent = roiPeriod;
+        });
     </script>
 </body>
 </html>
