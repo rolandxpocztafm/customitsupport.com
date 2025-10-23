@@ -1,0 +1,273 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms and Conditions - Custom IT Support</title>
+</head>
+<body>
+    <div class="container mx-auto px-4 py-12">
+        <h1 class="text-3xl font-bold mb-6">General Terms and Conditions</h1>
+        <p class="mb-4">These General Terms and Conditions of Custom IT Support were developed in collaboration with the Dutch Consumers’ Association (Consumentenbond) under the Self-Regulation Coordination Group (CZ) of the Socioeconomic Council and are effective as of 1 June 2014.</p>
+
+        <h2 class="text-xl font-semibold mt-6 mb-2">Contents</h2>
+        <ul class="list-disc pl-6 mb-4">
+            <li>Article 1 - Definitions</li>
+            <li>Article 2 - The Entrepreneur’s Identity</li>
+            <li>Article 3 - Applicability</li>
+            <li>Article 4 - The Offer</li>
+            <li>Article 5 - The Agreement</li>
+            <li>Article 6 - Right of Withdrawal</li>
+            <li>Article 7 - Consumer’s Obligations During the Reflection Period</li>
+            <li>Article 8 - Exercising the Consumer’s Right of Withdrawal and Costs</li>
+            <li>Article 9 - Entrepreneur’s Obligations in Case of Withdrawal</li>
+            <li>Article 10 - Exclusion of the Right of Withdrawal</li>
+            <li>Article 11 - The Price</li>
+            <li>Article 12 - Compliance and Additional Guarantee</li>
+            <li>Article 13 - Delivery and Execution</li>
+            <li>Article 14 - Continuing Performance Contracts: Duration, Termination, and Extension</li>
+            <li>Article 15 - Payment</li>
+            <li>Article 16 - Complaints Procedure</li>
+            <li>Article 17 - Disputes</li>
+            <li>Article 18 - Additional or Deviating Provisions</li>
+            <li>Article 19 - Amendments to the General Terms and Conditions</li>
+        </ul>
+
+        <h2 class="text-xl font-semibold mt-6 mb-2">Article 1 – Definitions</h2>
+        <p>In these Terms and Conditions, the following definitions apply:</p>
+        <ol class="list-decimal pl-6 mb-4">
+            <li><strong>Additional Agreement</strong>: An agreement whereby the Consumer acquires products, digital content, and/or services in connection with a distance contract, and these are supplied by the Entrepreneur or a third party based on an arrangement between the third party and the Entrepreneur.</li>
+            <li><strong>Reflection Period</strong>: The period during which the Consumer may exercise their right of withdrawal.</li>
+            <li><strong>Consumer</strong>: A natural person not acting in the course of a trade, business, craft, or profession.</li>
+            <li><strong>Day</strong>: Calendar day.</li>
+            <li><strong>Digital Content</strong>: Data produced and supplied in digital form.</li>
+            <li><strong>Continuing Performance Contract</strong>: A contract for the regular delivery of goods, services, and/or digital content over a specified period.</li>
+            <li><strong>Sustainable Data Carrier</strong>: Any medium, including email, that enables the Consumer or Entrepreneur to store information addressed to them personally in a way that allows future consultation and unaltered reproduction.</li>
+            <li><strong>Right of Withdrawal</strong>: The Consumer’s ability to withdraw from a distance contract within the reflection period.</li>
+            <li><strong>Entrepreneur</strong>: The natural or legal person offering products, digital content, and/or services to Consumers at a distance.</li>
+            <li><strong>Distance Contract</strong>: A contract concluded within an organized system for distance selling, using one or more means of distance communication up to and including the moment the contract is concluded.</li>
+            <li><strong>Standard Form for Withdrawal</strong>: The European standard withdrawal form provided in Appendix 1.</li>
+            <li><strong>Technology for Distance Communication</strong>: Means used to conclude a contract without the Consumer and Entrepreneur being physically present in the same location.</li>
+        </ol>
+
+        <h2 class="text-xl font-semibold mt-6 mb-2">Article 2 – The Entrepreneur’s Identity</h2>
+        <p><strong>Name of Entrepreneur</strong>: Custom IT Support</p>
+        <p><strong>Business Address</strong>: Zevenbergschen Hoek, Netherlands</p>
+        <p><strong>Telephone Number</strong>: +31 645485890, available Monday to Friday, 9:00 AM to 5:00 PM</p>
+        <p><strong>Email Address</strong>: rp@customitsupport.com</p>
+        <p><strong>Chamber of Commerce Number</strong>: To be provided</p>
+        <p><strong>VAT Identification Number</strong>: To be provided</p>
+
+        <h2 class="text-xl font-semibold mt-6 mb-2">Article 3 – Applicability</h2>
+        <ol class="list-decimal pl-6 mb-4">
+            <li>These General Terms and Conditions apply to every offer made by the Entrepreneur and every distance contract concluded between the Entrepreneur and the Consumer.</li>
+            <li>The text of these General Terms and Conditions will be made available to the Consumer free of charge before the distance contract is concluded. If this is not reasonably possible, the Entrepreneur will indicate how the terms can be accessed and that they will be sent free of charge upon request.</li>
+            <li>If the distanceいい contract is concluded electronically, the terms may be provided electronically in a way that the Consumer can store them on a durable medium. If this is not feasible, the Entrepreneur will indicate where the terms can be viewed electronically and that they will be sent free of charge upon request.</li>
+            <li>In case specific product or service conditions apply in addition to these terms, the Consumer may invoke the provision most favorable to them in case of conflicting terms.</li>
+        </ol>
+
+        <h2 class="text-xl font-semibold mt-6 mb-2">Article 4 – The Offer</h2>
+        <ol class="list-decimal pl-6 mb-4">
+            <li>If an offer has a limited validity period or is subject to conditions, this will be explicitly stated in the offer.</li>
+            <li>The offer includes a complete and accurate description of the products, digital content, and/or services. The description is sufficiently detailed to allow the Consumer to make a proper assessment. Images used are accurate representations, and obvious errors or mistakes in the offer do not bind the Entrepreneur.</li>
+            <li>All offers include clear information about the Consumer’s rights and obligations upon acceptance.</li>
+        </ol>
+
+        <h2 class="text-xl font-semibold mt-6 mb-2">Article 5 – The Agreement</h2>
+        <ol class="list-decimal pl-6 mb-4">
+            <li>The agreement is concluded when the Consumer accepts the offer and meets the conditions set, subject to paragraph 4.</li>
+            <li>If the Consumer accepts the offer electronically, the Entrepreneur will immediately confirm receipt of the acceptance electronically. The Consumer may cancel the agreement until receipt is confirmed.</li>
+            <li>If the agreement is concluded electronically, the Entrepreneur will implement appropriate technical and organizational measures to secure data transfer and ensure a safe web environment. If electronic payment is possible, appropriate security measures will be observed.</li>
+            <li>Within legal limits, the Entrepreneur may investigate the Consumer’s ability to meet payment obligations and other relevant factors for responsibly entering the distance contract. The Entrepreneur may refuse an order or attach special conditions based on this investigation.</li>
+            <li>Before delivery, the Entrepreneur will provide the Consumer with written or digitally accessible information, including the business address for complaints, conditions for exercising the right of withdrawal, after-sales service information, price details, delivery costs, payment methods, and cancellation requirements.</li>
+            <li>For continuing performance contracts, the above applies only to the first delivery.</li>
+        </ol>
+
+        <h2 class="text-xl font-semibold mt-6 mb-2">Article 6 – Right of Withdrawal</h2>
+        <p><strong>For Products:</strong></p>
+        <ol class="list-decimal pl-6 mb-4">
+            <li>The Consumer may withdraw from a product purchase contract without giving reasons within at least 14 days. The Entrepreneur may ask for the reason but cannot require it.</li>
+            <li>The reflection period begins the day the Consumer or a designated third party (not the carrier) receives the product, or:
+                <ol class="list-loweralpha pl-6">
+                    <li>for multiple products in one order, the day the last product is received;</li>
+                    <li>for products delivered in batches, the day the last batch is received;</li>
+                    <li>for regular delivery contracts, the day the first product is received.</li>
+                </ol>
+            </li>
+        </ol>
+        <p><strong>For Services and Digital Content Not on a Physical Carrier:</strong></p>
+        <ol class="list-decimal pl-6 mb-4" start="3">
+            <li>The Consumer may terminate a service or digital content agreement without giving reasons within at least 14 days.</li>
+            <li>The reflection period starts the day after the agreement is concluded.</li>
+        </ol>
+        <p><strong>Extended Reflection Period:</strong></p>
+        <ol class="list-decimal pl-6 mb-4" start="5">
+            <li>If the Entrepreneur fails to provide required withdrawal information or the standard withdrawal form, the reflection period extends to 12 months after the original period.</li>
+            <li>If the information is provided within 12 months, the reflection period expires 14 days after receipt.</li>
+        </ol>
+
+        <h2 class="text-xl font-semibold mt-6 mb-2">Article 7 – Consumer’s Obligations During the Reflection Period</h2>
+        <ol class="list-decimal pl-6 mb-4">
+            <li>The Consumer must handle the product and packaging carefully, only unpacking or using it to assess its nature, characteristics, and functionality, as permitted in a physical store.</li>
+            <li>The Consumer is liable for any diminished value caused by handling beyond what is permitted.</li>
+            <li>The Consumer is not liable for diminished value if the Entrepreneur failed to provide required withdrawal information before concluding the agreement.</li>
+        </ol>
+
+        <h2 class="text-xl font-semibold mt-6 mb-2">Article 8 – Exercising the Right of Withdrawal and Costs</h2>
+        <ol class="list-decimal pl-6 mb-4">
+            <li>The Consumer must notify the Entrepreneur of withdrawal within the reflection period using the standard withdrawal form or another unambiguous method.</li>
+            <li>The Consumer must return the product within 14 days of notification, or as soon as possible, unless the Entrepreneur offers to collect it. The return period is met if the product is sent before the reflection period expires.</li>
+            <li>The Consumer must return the product with all accessories, in its original condition and packaging, following the Entrepreneur’s clear instructions.</li>
+            <li>The Consumer bears the risk and burden of proof for timely and correct exercise of the right of withdrawal.</li>
+            <li>The Consumer bears the direct costs of returning the product unless the Entrepreneur agrees to cover them.</li>
+            <li>If the Consumer withdraws after requesting service performance during the reflection period, they owe an amount proportional to the service provided.</li>
+            <li>The Consumer does not bear costs for services or utilities not made ready for sale if the Entrepreneur failed to provide required withdrawal information or the Consumer did not explicitly request performance during the reflection period.</li>
+            <li>The Consumer does not bear costs for digital content not on a physical carrier if they did not consent to performance before the reflection period or acknowledge the loss of withdrawal rights.</li>
+            <li>All additional agreements are terminated upon withdrawal.</li>
+        </ol>
+
+        <h2 class="text-xl font-semibold mt-6 mb-2">Article 9 – Entrepreneur’s Obligations in Case of Withdrawal</h2>
+        <ol class="list-decimal pl-6 mb-4">
+            <li>If withdrawal is notified electronically, the Entrepreneur will send a confirmation receipt promptly.</li>
+            <li>The Entrepreneur will reimburse all payments, including delivery costs, within 14 days of withdrawal notification, unless they offer to collect the product, in which case reimbursement may wait until the product is received or proof of return is provided.</li>
+            <li>Reimbursement will use the same payment method unless the Consumer agrees otherwise, free of charge.</li>
+            <li>If the Consumer chose a more expensive delivery method, the Entrepreneur is not required to reimburse the additional costs.</li>
+        </ol>
+
+        <h2 class="text-xl font-semibold mt-6 mb-2">Article 10 – Exclusion of the Right of Withdrawal</h2>
+        <p>The Entrepreneur may exclude the following from the right of withdrawal if clearly stated in the offer or before concluding the agreement:</p>
+        <ol class="list-decimal pl-6 mb-4">
+            <li>Products or services with prices subject to financial market fluctuations beyond the Entrepreneur’s control.</li>
+            <li>Agreements concluded at a public auction.</li>
+            <li>Service agreements fully performed with the Consumer’s prior consent, where the Consumer acknowledged losing the right of withdrawal upon completion.</li>
+            <li>Agreements for accommodation, transport, car rental, or catering with a specific performance period.</li>
+            <li>Leisure activity agreements with a specific performance date.</li>
+            <li>Custom-made products based on the Consumer’s specifications.</li>
+            <li>Perishable products or those with limited shelf life.</li>
+            <li>Sealed products unsuitable for return due to health or hygiene reasons, if unsealed.</li>
+            <li>Products irreversibly mixed with others.</li>
+            <li>Alcoholic beverages with prices agreed upon but delivered after 30 days, subject to market fluctuations.</li>
+            <li>Sealed audio, video, or software products with broken seals.</li>
+            <li>Newspapers, periodicals, or magazines, except subscriptions.</li>
+            <li>Digital content not on a physical carrier, if performance began with the Consumer’s consent and acknowledgment of losing withdrawal rights.</li>
+        </ol>
+
+        <h2 class="text-xl font-semibold mt-6 mb-2">Article 11 – The Price</h2>
+        <ol class="list-decimal pl-6 mb-4">
+            <li>Prices for products and services will not increase during the offer’s validity period, except due to changes in VAT rates.</li>
+            <li>Products or services subject to financial market fluctuations may have variable prices, as stated in the offer.</li>
+            <li>Price increases within 3 months of the contract are allowed only due to legal changes.</li>
+            <li>Price increases after 3 months are permitted if stipulated and due to legal regulations or if the Consumer can cancel the contract before the increase takes effect.</li>
+            <li>All prices include VAT.</li>
+        </ol>
+
+        <h2 class="text-xl font-semibold mt-6 mb-2">Article 12 – Compliance and Additional Guarantee</h2>
+        <ol class="list-decimal pl-6 mb-4">
+            <li>The Entrepreneur guarantees that products and services comply with the agreement, offer specifications, reasonable usability/reliability requirements, and legal provisions on the agreement date. If agreed, the product is suitable for non-standard use.</li>
+            <li>Any additional guarantee offered by the Entrepreneur or its suppliers does not affect the Consumer’s legal rights if the Entrepreneur fails to fulfill the agreement.</li>
+            <li>An additional guarantee refers to obligations exceeding legal requirements assigned to the Consumer.</li>
+        </ol>
+
+        <h2 class="text-xl font-semibold mt-6 mb-2">Article 13 – Delivery and Execution</h2>
+        <ol class="list-decimal pl-6 mb-4">
+            <li>The Entrepreneur will exercise utmost care in receiving and executing orders and assessing service requests.</li>
+            <li>The delivery address is that provided by the Consumer.</li>
+            <li>Orders will be executed promptly, within 30 days unless otherwise agreed. If delayed or partially fulfillable, the Consumer will be informed within 30 days of ordering and may cancel the contract free of charge with possible compensation.</li>
+            <li>Upon cancellation, the Entrepreneur will refund payments within 30 days.</li>
+            <li>The risk of loss or damage to products lies with the Entrepreneur until delivery to the Consumer or a designated representative, unless otherwise agreed.</li>
+        </ol>
+
+        <h2 class="text-xl font-semibold mt-6 mb-2">Article 14 – Continuing Performance Contracts: Duration, Termination, and Extension</h2>
+        <p><strong>Termination</strong></p>
+        <ol class="list-decimal pl-6 mb-4">
+            <li>The Consumer may terminate an indefinite-term contract for regular delivery of products or services at any time with up to one month’s notice, following agreed termination rules.</li>
+            <li>A fixed-term contract for regular delivery may be terminated at the end of the term with up to one month’s notice.</li>
+            <li>The Consumer may terminate contracts as described above at any time, in the same manner as concluded, and with the same notice period as the Entrepreneur.</li>
+        </ol>
+        <p><strong>Extension</strong></p>
+        <ol class="list-decimal pl-6 mb-4" start="4">
+            <li>Fixed-term contracts for regular delivery may not be automatically renewed for a fixed period.</li>
+            <li>Contracts for regular delivery of newspapers or magazines may be renewed for up to three months, terminable with one month’s notice.</li>
+            <li>Fixed-term contracts may be extended indefinitely if terminable with one month’s notice, or three months for less frequent newspaper/magazine deliveries.</li>
+            <li>Trial or introductory subscriptions end automatically after the trial period.</li>
+        </ol>
+        <p><strong>Duration</strong></p>
+        <ol class="list-decimal pl-6 mb-4" start="8">
+            <li>Contracts exceeding one year may be terminated after one year with up to one month’s notice, unless termination before the agreed term is unreasonable.</li>
+        </ol>
+
+        <h2 class="text-xl font-semibold mt-6 mb-2">Article 15 – Payment</h2>
+        <ol class="list-decimal pl-6 mb-4">
+            <li>Unless otherwise agreed, payments must be made within 14 days of the reflection period or agreement conclusion (for services).</li>
+            <li>Advance payments for products may not exceed 50%. The Consumer cannot assert rights until the advance payment is made.</li>
+            <li>The Consumer must promptly report inaccuracies in payment details to the Entrepreneur.</li>
+            <li>If the Consumer fails to pay on time, after a 14-day reminder, statutory interest and extrajudicial collection costs (up to 15% for €2,500, 10% for the next €2,500, 5% for the next €5,000, minimum €40) apply, unless more favorable terms are offered.</li>
+        </ol>
+
+        <h2 class="text-xl font-semibold mt-6 mb-2">Article 16 – Complaints Procedure</h2>
+        <ol class="list-decimal pl-6 mb-4">
+            <li>The Entrepreneur has a publicized complaints procedure and handles complaints accordingly.</li>
+            <li>Complaints must be submitted fully and clearly described within a reasonable time after discovering defects.</li>
+            <li>Complaints will be answered within 14 days of receipt, or with an indication of further processing time if needed.</li>
+            <li>Complaints can be submitted via the Stichting Webshop Keurmerk website (https://www.keurmerk.info/nl/consumenten/klacht/), sent to both the Entrepreneur and Webshop Keurmerk.</li>
+            <li>Webshop Keurmerk will not handle disputes if the Entrepreneur is bankrupt, has suspended payments, or has ceased business, or if the webshop is suspended or canceled.</li>
+            <li>Disputes must be submitted to Webshop Keurmerk in writing within 12 months of arising.</li>
+            <li>Complaints can also be registered via the European ODR platform (https://ec.europa.eu/consumers/odr/main/index.cfm?event=main.home.chooseLanguage).</li>
+        </ol>
+
+        <h2 class="text-xl font-semibold mt-6 mb-2">Article 17 – Disputes</h2>
+        <ol class="list-decimal pl-6 mb-4">
+            <li>Dutch law applies to all agreements, regardless of the Consumer’s residence.</li>
+            <li>The Vienna Sales Convention does not apply.</li>
+        </ol>
+
+        <h2 class="text-xl font-semibold mt-6 mb-2">Article 18 – Additional or Deviating Provisions</h2>
+        <p>Additional or deviating provisions must not disadvantage the Consumer and must be recorded in writing or on a durable medium accessible to the Consumer.</p>
+
+        <h2 class="text-xl font-semibold mt-6 mb-2">Article 19 – Amendments to the General Terms and Conditions</h2>
+        <ol class="list-decimal pl-6 mb-4">
+            <li>Amendments will be communicated via the Custom IT Support newsletter and published on our website.</li>
+            <li>Amendments take effect after appropriate publication, with the most favorable provision for the Consumer prevailing during an offer’s term.</li>
+        </ol>
+    </div>
+</body>
+</html>
