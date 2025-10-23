@@ -39,7 +39,7 @@
                 <div class="hidden md:flex space-x-6">
                     <a href="index.html" class="text-blue-400 hover:text-blue-300 transition duration-300">Shop</a>
                     <a href="index.html#products" class="text-slate-300 hover:text-white transition duration-300">Products</a>
-                    <a href="calculator_T3.html" class="text-slate-300 hover:text-white transition duration-300">Calculator</a>
+                    <a href="#calculator-container" class="text-slate-300 hover:text-white transition duration-300">Calculator</a>
                     <a href="#footer" class="text-slate-300 hover:text-white transition duration-300">Contact</a>
                 </div>
                 <div class="flex items-center space-x-4">
@@ -87,17 +87,12 @@
         </div>
     </section>
 
-    <!-- Calculator Link Section -->
-    <section id="calculator-link" class="py-16 bg-slate-900 border-t border-slate-800">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl font-bold mb-4 text-white">Fluminer T3 Profitability Calculator</h2>
-            <p class="text-slate-400 mb-8 max-w-2xl mx-auto">
-                Check your expected mining revenue and ROI based on current Bitcoin prices and electricity rates.
-            </p>
-            <a href="calculator_T3.html" 
-               class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-lg font-medium text-lg transition duration-300">
-               Open Calculator
-            </a>
+    <!-- Embedded Calculator Section -->
+    <section id="calculator-section" class="py-16 bg-slate-900 border-t border-slate-800">
+        <div class="container mx-auto px-6">
+            <div id="calculator-container" class="text-center text-slate-400">
+                Loading calculator...
+            </div>
         </div>
     </section>
 
@@ -134,17 +129,42 @@
     <script>
         feather.replace();
 
+        // Load footer
         fetch('footer.html')
             .then(r => r.text())
-            .then(d => { document.getElementById('footer-container').innerHTML = d; feather.replace(); })
+            .then(d => { 
+                document.getElementById('footer-container').innerHTML = d; 
+                feather.replace(); 
+            })
             .catch(console.error);
 
+        // Load calculator
+        fetch('calculator_T3.html')
+            .then(r => r.text())
+            .then(d => { 
+                document.getElementById('calculator-container').innerHTML = d; 
+                feather.replace(); 
+            })
+            .catch(() => {
+                document.getElementById('calculator-container').innerHTML = '<p class="text-red-400">Failed to load calculator.</p>';
+            });
+
+        // Image slider
         const imagesT3 = ['images/Fluminer_T3.png', 'images/Fluminer_T3 BTC LOGO.png'];
         let indexT3 = 0;
         const sliderImageT3 = document.getElementById('slider-image-T3');
-        document.getElementById('prev-btn-T3').onclick = () => { indexT3 = (indexT3 === 0) ? imagesT3.length - 1 : indexT3 - 1; sliderImageT3.src = imagesT3[indexT3]; };
-        document.getElementById('next-btn-T3').onclick = () => { indexT3 = (indexT3 === imagesT3.length - 1) ? 0 : indexT3 + 1; sliderImageT3.src = imagesT3[indexT3]; };
-        setInterval(() => { indexT3 = (indexT3 + 1) % imagesT3.length; sliderImageT3.src = imagesT3[indexT3]; }, 3000);
+        document.getElementById('prev-btn-T3').onclick = () => { 
+            indexT3 = (indexT3 === 0) ? imagesT3.length - 1 : indexT3 - 1; 
+            sliderImageT3.src = imagesT3[indexT3]; 
+        };
+        document.getElementById('next-btn-T3').onclick = () => { 
+            indexT3 = (indexT3 === imagesT3.length - 1) ? 0 : indexT3 + 1; 
+            sliderImageT3.src = imagesT3[indexT3]; 
+        };
+        setInterval(() => { 
+            indexT3 = (indexT3 + 1) % imagesT3.length; 
+            sliderImageT3.src = imagesT3[indexT3]; 
+        }, 3000);
 
         function openPaymentDialog() {
             document.getElementById('payment-dialog').classList.remove('hidden');
