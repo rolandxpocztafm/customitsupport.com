@@ -112,8 +112,17 @@
         </div>
     </section>
 
-    <!-- Calculator Section Container -->
-    <div id="calculator-container"></div>
+<!-- Calculator Section Include -->
+<div id="calculator-container"></div>
+<script>
+fetch('calculator_T3.html')
+  .then(response => response.text())
+  .then(html => {
+    document.getElementById('calculator-container').innerHTML = html;
+  })
+  .catch(error => console.error('Error loading calculator:', error));
+</script>
+
 
     <!-- Footer Placeholder -->
     <div id="footer-container"></div>
