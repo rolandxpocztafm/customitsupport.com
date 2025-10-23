@@ -1,157 +1,227 @@
-<!-- T3 Profitability Calculator -->
-<section id="calculator" class="py-16 bg-slate-900">
-    <div class="container mx-auto px-6">
-        <div class="max-w-4xl mx-auto profitability-calculator rounded-xl p-8">
-            <h2 class="text-3xl font-bold mb-8 text-center">Fluminer T3 Profitability Calculator</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div>
-                    <div class="mb-6">
-                        <label for="coin-select" class="block text-sm font-medium mb-2">Select Coin</label>
-                        <select id="coin-select" class="w-full p-3 rounded-lg bg-slate-800 border border-slate-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                            <option value="bitcoin" data-reward-rate="0.0000000001">Bitcoin (BTC)</option>
-                        </select>
-                    </div>
-                    <div class="mb-6">
-                        <label for="electricity-cost" class="block text-sm font-medium mb-2">Electricity Cost ($/kWh)</label>
-                        <input type="number" id="electricity-cost" value="0.0" step="0.01" min="0" class="w-full p-3 rounded-lg bg-slate-800 border border-slate-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-                    <button id="calculate-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium transition duration-300">
-                        Calculate Profitability
-                    </button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fluminer T3 - Custom IT Support Mining</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        }
+        
+        .product-card {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .profitability-calculator {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="bg-slate-900 border-b border-slate-700">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <i data-feather="cpu" class="w-8 h-8 text-blue-500 mr-3"></i>
+                    <a href="index.html" class="text-xl font-bold text-white">Custom IT Support Mining</a>
                 </div>
-                <div>
-                    <div class="bg-slate-800 rounded-lg p-6">
-                        <h3 class="text-xl font-semibold mb-4">Estimated Results</h3>
-                        <div class="space-y-4">
-                            <div class="flex justify-between">
-                                <span class="text-slate-300">Daily Revenue:</span>
-                                <span id="daily-revenue" class="font-medium">$0.00</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="text-slate-300">Daily Electricity Cost:</span>
-                                <span id="daily-cost" class="font-medium">$0.00</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="text-slate-300">Daily Profit:</span>
-                                <span id="daily-profit" class="font-medium">$0.00</span>
-                            </div>
-                            <div class="border-t border-slate-700 my-3"></div>
-                            <div class="flex justify-between">
-                                <span class="text-slate-300">Monthly Profit:</span>
-                                <span id="monthly-profit" class="font-medium">$0.00</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="text-slate-300">ROI Period:</span>
-                                <span id="roi-period" class="font-medium">0 months</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-6 text-sm text-slate-400">
-                        <p>Note: These are estimates based on current market conditions. Actual results may vary significantly.</p>
-                    </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html" class="text-blue-400 hover:text-blue-300 transition duration-300">Shop</a>
+                    <a href="index.html#products" class="text-slate-300 hover:text-white transition duration-300">Products</a>
+                    <a href="#calculator" class="text-slate-300 hover:text-white transition duration-300">Calculator</a>
+                    <a href="#footer" class="text-slate-300 hover:text-white transition duration-300">Contact</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="index.html" class="text-slate-300 hover:text-white transition duration-300">
+                        <i data-feather="arrow-left" class="w-5 h-5"></i>
+                    </a>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </nav>
 
+    <!-- Product Detail Section -->
+    <section class="py-16 gradient-bg">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Product Image -->
+                <div class="flex justify-center">
+                    <div id="slider-T3" class="relative w-full max-w-lg flex items-center">
+                        <button id="prev-btn-T3" class="absolute left-0 top-1/2 transform -translate-y-1/2 text-3xl text-white bg-transparent px-0 py-0 focus:outline-none">&#8592;</button>
+                        <img id="slider-image-T3" src="images/Fluminer_T3.png" alt="Fluminer T3" class="rounded-lg max-w-lg w-auto max-h-96 mx-auto">
+                        <button id="next-btn-T3" class="absolute right-0 top-1/2 transform -translate-y-1/2 text-3xl text-white bg-transparent px-0 py-0 focus:outline-none">&#8594;</button>
+                    </div>
+                </div>
+                
+                <!-- Product Information -->
+                <div class="product-card rounded-lg p-8">
+                    <h1 class="text-4xl font-bold mb-4">Fluminer T3</h1>
+                    <p class="text-xl text-blue-200 mb-6">115 TH/s SHA-256 algorithm for BTC</p>
+                    
+                    <div class="mb-6">
+                        <span class="text-3xl font-bold text-white">€2,310</span>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold mb-4">Product Specifications</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-center">
+                                <i data-feather="zap" class="w-5 h-5 mr-3 text-blue-400"></i>
+                                <span><strong>Hash Rate:</strong> 115 TH/s</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-feather="cpu" class="w-5 h-5 mr-3 text-blue-400"></i>
+                                <span><strong>Algorithm:</strong> SHA-256</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-feather="battery" class="w-5 h-5 mr-3 text-blue-400"></i>
+                                <span><strong>Power Consumption:</strong> 1700W</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-feather="volume" class="w-5 h-5 mr-3 text-blue-400"></i>
+                                <span><strong>Noise Level:</strong> 40-55 dB</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-feather="clock" class="w-5 h-5 mr-3 text-blue-400"></i>
+                                <span><strong>Warranty:</strong> 1 year</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <button onclick="openPaymentDialog('Fluminer T3', 2310)" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-lg font-medium transition duration-300 text-lg">
+                        Complete Purchase
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+ 
+<!-- Calculator Section Include -->
+<div id="calculator-container"></div>
 <script>
-    // Utility function for retrying API calls
-    async function fetchWithRetry(url, retries = 3, delay = 1000) {
-        for (let i = 0; i < retries; i++) {
-            try {
-                const response = await fetch(url);
-                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-                return await response.json();
-            } catch (error) {
-                if (i < retries - 1) {
-                    console.warn(`Retrying fetch for ${url} (${i + 1}/${retries})...`);
-                    await new Promise(resolve => setTimeout(resolve, delay));
-                    continue;
-                }
-                throw error;
-            }
-        }
-    }
+fetch('calculator_T3.html')
+  .then(response => response.text())
+  .then(html => {
+    document.getElementById('calculator-container').innerHTML = html;
+  })
+  .catch(error => console.error('Error loading calculator:', error));
+</script>
 
-    // Fetch current coin price
-    async function fetchCoinPrice(coinId) {
-        try {
-            const data = await fetchWithRetry(`https://api.coingecko.com/api/v3/simple/price?ids=${coinId}&vs_currencies=usd`);
-            const price = data[coinId]?.usd || 0;
-            console.log(`Fetched ${coinId} Price:`, price);
-            return price;
-        } catch (error) {
-            console.error(`Error fetching ${coinId} price:`, error.message);
-            return 0;
-        }
-    }
 
-    // Profitability calculator logic
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('calculate-btn').addEventListener('click', async function() {
-            const coinSelect = document.getElementById('coin-select');
-            const electricityCost = parseFloat(document.getElementById('electricity-cost').value);
-            
-            if (!coinSelect.value || isNaN(electricityCost) || electricityCost < 0) {
-                alert('Please fill in all fields with valid non-negative values');
-                return;
-            }
-            
-            const coinId = coinSelect.value;
-            const currentPrice = await fetchCoinPrice(coinId);
-            if (currentPrice === 0) {
-                alert('Unable to fetch Bitcoin price. Please try again later.');
-                updateResults(0, 0, 2310);
-                return;
-            }
-            
-            // Fluminer T3 specifications
-            const hashrate = 115000; // TH/s
-            const powerUsage = 1700; // Watts
-            const minerPrice = 2310; // Euros
-            
-            // Get reward rate from coin option
-            const selectedCoin = coinSelect.options[coinSelect.selectedIndex];
-            const rewardRate = parseFloat(selectedCoin.dataset.rewardRate || '0');
-            console.log('Reward Rate:', rewardRate);
-            
-            const dailyReward = hashrate * rewardRate;
-            console.log('Daily Reward (BTC):', dailyReward);
-            
-            const dailyRevenue = dailyReward * currentPrice;
-            console.log('Daily Revenue:', dailyRevenue);
-            
-            const dailyCost = (powerUsage * 24 / 1000) * Math.max(0, electricityCost);
-            console.log('Daily Cost:', dailyCost);
-            
-            updateResults(dailyRevenue, dailyCost, minerPrice);
+    <!-- Footer Placeholder -->
+    <div id="footer-container"></div>
+
+    <!-- Payment Dialog Modal -->
+    <div id="payment-dialog" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-slate-800 rounded-xl p-8 max-w-md w-full mx-4">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold">Choose Payment Method</h3>
+                <button onclick="closePaymentDialog()" class="text-slate-400 hover:text-white">
+                    <i data-feather="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <p class="text-slate-400 mb-6">Select your preferred payment option for the Fluminer T3</p>
+            <div class="space-y-3">
+                <button onclick="handlePaymentMethod('iDEAL')" class="w-full border border-slate-600 rounded-lg p-4 flex items-center justify-start gap-4 hover:bg-blue-600/10 hover:border-blue-500/50 transition duration-300">
+                    <div class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center">
+                        <i data-feather="credit-card" class="w-6 h-6 text-blue-500"></i>
+                    </div>
+                    <div class="text-left">
+                        <div class="font-semibold text-base">iDEAL Payment</div>
+                        <div class="text-sm text-slate-400">Instant Dutch bank transfer</div>
+                    </div>
+                </button>
+                <button onclick="handlePaymentMethod('Bank Transfer')" class="w-full border border-slate-600 rounded-lg p-4 flex items-center justify-start gap-4 hover:bg-blue-600/10 hover:border-blue-500/50 transition duration-300">
+                    <div class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center">
+                        <i data-feather="building" class="w-6 h-6 text-blue-500"></i>
+                    </div>
+                    <div class="text-left">
+                        <div class="font-semibold text-base">Bank Transfer</div>
+                        <div class="text-sm text-slate-400">Direct wire transfer</div>
+                    </div>
+                </button>
+                <button onclick="handlePaymentMethod('Cash')" class="w-full border border-slate-600 rounded-lg p-4 flex items-center justify-start gap-4 hover:bg-blue-600/10 hover:border-blue-500/50 transition duration-300">
+                    <div class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center">
+                        <i data-feather="dollar-sign" class="w-6 h-6 text-blue-500"></i>
+                    </div>
+                    <div class="text-left">
+                        <div class="font-semibold text-base">Cash Payment</div>
+                        <div class="text-sm text-slate-400">Pay in person</div>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        feather.replace();
+        
+        // Load footer dynamically
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+                feather.replace(); // Re-initialize feather icons in the loaded footer
+            })
+            .catch(error => console.error('Error loading footer:', error));
+
+        // Image slider for T3
+        const imagesT3 = [
+            'images/Fluminer_T3.png',
+            'images/Fluminer_T3 BTC LOGO.png'
+        ];
+        let indexT3 = 0;
+        const sliderImageT3 = document.getElementById('slider-image-T3');
+        const prevBtnT3 = document.getElementById('prev-btn-T3');
+        const nextBtnT3 = document.getElementById('next-btn-T3');
+
+        prevBtnT3.addEventListener('click', () => {
+            indexT3 = (indexT3 === 0) ? imagesT3.length - 1 : indexT3 - 1;
+            sliderImageT3.src = imagesT3[indexT3];
         });
 
-        function updateResults(dailyRevenue, dailyCost, minerPrice) {
-            // Prevent negative values
-            dailyRevenue = Math.max(0, dailyRevenue);
-            dailyCost = Math.max(0, dailyCost);
-            
-            const dailyProfit = dailyRevenue - dailyCost;
-            const monthlyProfit = dailyProfit * 30;
-            
-            // ROI calculation
-            let roiPeriod = 'Not profitable';
-            if (dailyProfit > 0) {
-                roiPeriod = Math.ceil(minerPrice / (dailyProfit * 30)) + ' months';
-            } else if (dailyProfit === 0) {
-                roiPeriod = 'No profit (break-even)';
-            }
-            
-            console.log('Results:', { dailyRevenue, dailyCost, dailyProfit, monthlyProfit, roiPeriod });
-            
-            document.getElementById('daily-revenue').textContent = '$' + dailyRevenue.toFixed(2);
-            document.getElementById('daily-cost').textContent = '$' + dailyCost.toFixed(2);
-            document.getElementById('daily-profit').textContent = '$' + dailyProfit.toFixed(2);
-            document.getElementById('monthly-profit').textContent = '$' + monthlyProfit.toFixed(2);
-            document.getElementById('roi-period').textContent = roiPeriod;
+        nextBtnT3.addEventListener('click', () => {
+            indexT3 = (indexT3 === imagesT3.length - 1) ? 0 : indexT3 + 1;
+            sliderImageT3.src = imagesT3[indexT3];
+        });
+
+        setInterval(() => {
+            indexT3 = (indexT3 === imagesT3.length - 1) ? 0 : indexT3 + 1;
+            sliderImageT3.src = imagesT3[indexT3];
+        }, 3000);
+
+        // Payment Dialog Functions
+        function openPaymentDialog(productName, price) {
+            document.getElementById('payment-dialog').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
         }
-    });
-</script>
+        
+        function closePaymentDialog() {
+            document.getElementById('payment-dialog').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+        
+        function handlePaymentMethod(method) {
+            alert(`${method} payment selected\nYou will be contacted with payment details shortly.`);
+            closePaymentDialog();
+        }
+    </script>
+</body>
+</html>
