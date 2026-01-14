@@ -7,6 +7,7 @@
     <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/feather-icons"></script>
+    <script src="cart.js" defer></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
         
@@ -39,14 +40,20 @@
                 <div class="hidden md:flex space-x-6">
                     <a href="index.html" class="text-blue-400 hover:text-blue-300 transition duration-300">Shop</a>
                     <a href="index.html#products" class="text-slate-300 hover:text-white transition duration-300">Products</a>
-                    <a href="#calculator-container" class="text-slate-300 hover:text-white transition duration-300">Calculator</a>
+                    <a href="index.html#calculator" class="text-slate-300 hover:text-white transition duration-300">Calculator</a>
                     <a href="#footer" class="text-slate-300 hover:text-white transition duration-300">Contact</a>
                 </div>
                 <div class="flex items-center space-x-4">
+
+                    <a href="cart.html">
+                        <button class="text-slate-300 hover:text-white transition duration-300">
+                            <i data-feather="shopping-cart" class="w-5 h-5"></i>
+                        </button>
+                    </a>
                     <a href="index.html" class="text-slate-300 hover:text-white transition duration-300">
                         <i data-feather="arrow-left" class="w-5 h-5"></i>
                     </a>
-                </div>
+                 </div>
             </div>
         </div>
     </nav>
@@ -79,8 +86,10 @@
                             <li><i data-feather="clock" class="w-5 h-5 mr-3 text-blue-400"></i><strong>Warranty:</strong> 1 year</li>
                         </ul>
                     </div>
-                    <button onclick="openPaymentDialog('Fluminer T3', 2310)" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-lg font-medium transition duration-300 text-lg">
-                        Complete Purchase
+                    <button onclick="addToCart(101, 'Fluminer T3', 2310)" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-lg font-medium transition duration-300 text-lg">
+                        Add to Cart
+                        <!-- OLD PAYMENT DIALOG:  <button onclick="openPaymentDialog('Fluminer T3', 2310)" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-lg font-medium transition duration-300 text-lg"> --> 
+                        <!-- OLD PAYMENT DIALOG:  Complete Purchase -->
                     </button>
                 </div>
             </div>
