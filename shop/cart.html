@@ -88,20 +88,6 @@
   
     <!-- Footer Placeholder -->
     <div id="footer-container"></div>
-       
-        // Initialize feather icons
-        feather.replace();
-       
-        // Load footer dynamically
-        fetch('footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer-container').innerHTML = data;
-                feather.replace(); // Re-initialize feather icons in the loaded footer
-            })
-            .catch(error => console.error('Error loading footer:', error));
-       
-
-
+     
 </body>
 </html>
