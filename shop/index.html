@@ -7,42 +7,43 @@
     <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="cart.js" defer></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
-        
+       
         body {
             font-family: 'Space Grotesk', sans-serif;
             background-color: #0f172a;
             color: #e2e8f0;
         }
-        
+       
         .gradient-bg {
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
         }
-        
+       
         .product-card {
             transition: all 0.3s ease;
             background: rgba(15, 23, 42, 0.7);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
+       
         .product-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
             border-color: #3b82f6;
         }
-        
+       
         .product-card .relative {
             position: relative;
             z-index: 10; /* Ensure button and price are above the overlay */
         }
-        
+       
         .profitability-calculator {
             background: rgba(15, 23, 42, 0.8);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
+       
         .product-card .clickable-overlay:hover {
             background: rgba(59, 130, 246, 0.1); /* Subtle hover effect for overlay */
         }
@@ -140,8 +141,8 @@
                         </ul>
                         <div class="flex justify-between items-center relative">
                             <span class="text-2xl font-bold">€2900</span>
-                            <button onclick="openPaymentDialog('Fluminer L1 Pro', 2900)" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition duration-300">
-                                Buy Now
+                            <button onclick="addToCart(100, 'Fluminer L1 Pro', 2900)" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition duration-300">
+                                Add to Cart
                             </button>
                         </div>
                     </div>
@@ -169,8 +170,8 @@
                         </ul>
                         <div class="flex justify-between items-center relative">
                             <span class="text-2xl font-bold">€960</span>
-                            <button onclick="openPaymentDialog('Fluminer L2', 960)" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition duration-300">
-                                Buy Now
+                            <button onclick="addToCart(101, 'Fluminer L2', 960)" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition duration-300">
+                                Add to Cart
                             </button>
                         </div>
                     </div>
@@ -198,8 +199,8 @@
                         </ul>
                         <div class="flex justify-between items-center relative">
                             <span class="text-2xl font-bold">€2310</span>
-                            <button onclick="openPaymentDialog('Fluminer T3', 2310)" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition duration-300">
-                                Buy Now
+                            <button onclick="addToCart(102, 'Fluminer T3', 2310)" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition duration-300">
+                                Add to Cart
                             </button>
                         </div>
                     </div>
@@ -235,8 +236,8 @@
                         </ul>
                         <div class="flex justify-between items-center relative">
                             <span class="text-2xl font-bold">€2310</span>
-                            <button onclick="openPaymentDialog('Fluminer T3', 2310)" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition duration-300">
-                                Buy Now
+                            <button onclick="addToCart(102, 'Fluminer T3', 2310)" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition duration-300">
+                                Add to Cart
                             </button>
                         </div>
                     </div>
@@ -264,8 +265,8 @@
                         </ul>
                         <div class="flex justify-between items-center relative">
                             <span class="text-2xl font-bold">€3500</span>
-                            <button onclick="openPaymentDialog('Fluminer L3', 3500)" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition duration-300">
-                                Buy Now
+                            <button onclick="addToCart(103, 'Fluminer L3', 3500)" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition duration-300">
+                                Add to Cart
                             </button>
                         </div>
                     </div>
@@ -338,7 +339,7 @@
         <div class="container mx-auto px-6">
             <div class="max-w-4xl mx-auto profitability-calculator rounded-xl p-8">
                 <h2 class="text-3xl font-bold mb-8 text-center">Mining Profitability Calculator</h2>
-                
+               
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>
                         <div class="mb-6">
@@ -408,19 +409,19 @@
             </div>
             <h3 class="text-xl font-semibold mb-4">Important Notice</h3>
             <p class="text-slate-400 mb-6">
-                Cryptocurrency mining carries risks due to market volatility and network difficulty changes. 
-                The profitability calculator provides estimates only. Past performance is not indicative of future results. 
+                Cryptocurrency mining carries risks due to market volatility and network difficulty changes.
+                The profitability calculator provides estimates only. Past performance is not indicative of future results.
                 Consult with a financial advisor before making any investment decisions.
             </p>
             <p class="text-slate-400">
-                All sales comply with the EU's Markets in Crypto-Assets (MiCA) regulation. 
+                All sales comply with the EU's Markets in Crypto-Assets (MiCA) regulation.
                 Custom IT Support is not responsible for mining rewards or cryptocurrency market fluctuations.
             </p>
         </div>
     </section>
     <!-- Footer Placeholder -->
     <div id="footer-container"></div>
-        
+       
     <!-- Payment Dialog Modal -->
     <div id="payment-dialog" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
         <div class="bg-slate-800 rounded-xl p-8 max-w-md w-full mx-4">
@@ -465,7 +466,7 @@
     <script>
         // Initialize feather icons
         feather.replace();
-        
+       
         // Load footer dynamically
         fetch('footer.html')
             .then(response => response.text())
@@ -474,18 +475,17 @@
                 feather.replace(); // Re-initialize feather icons in the loaded footer
             })
             .catch(error => console.error('Error loading footer:', error));
-
         // Payment Dialog Functions
         function openPaymentDialog(productName, price) {
             document.getElementById('payment-dialog').classList.remove('hidden');
             document.body.style.overflow = 'hidden';
         }
-        
+       
         function closePaymentDialog() {
             document.getElementById('payment-dialog').classList.add('hidden');
             document.body.style.overflow = 'auto';
         }
-        
+       
         function handlePaymentMethod(method) {
             alert(`${method} payment selected\nYou will be contacted with payment details shortly.`);
             closePaymentDialog();
@@ -493,10 +493,9 @@
         // Filter coins based on miner algorithm
         function filterCoins(minerType) {
             const coinSelect = document.getElementById('coin-select');
-            
+           
             // Clear previous options
             coinSelect.innerHTML = '<option value="">-- Select a Coin --</option>';
-
             // Add coins based on algorithm
             if (minerType === 't3') {
                 coinSelect.innerHTML += `
@@ -539,7 +538,7 @@
             const minerSelect = document.getElementById('miner-select');
             const coinSelect = document.getElementById('coin-select');
             const electricityCost = parseFloat(document.getElementById('electricity-cost').value);
-            
+           
             if (!minerSelect.value || !coinSelect.value || isNaN(electricityCost)) {
                 alert('Please fill in all fields with valid values');
                 return;
@@ -547,16 +546,16 @@
             const selectedMiner = minerSelect.options[minerSelect.selectedIndex];
             const coinId = coinSelect.value;
             const currentPrice = await fetchCoinPrice(coinId);
-            
+           
             const hashrate = parseFloat(selectedMiner.dataset.hashrate);
             const powerUsage = parseFloat(selectedMiner.dataset.power);
             const minerPrice = parseFloat(selectedMiner.dataset.price);
-            
+           
             if (!hashrate || !powerUsage || !currentPrice) {
                 alert('Could not get required data for calculation');
                 return;
             }
-            
+           
             // Get reward rate from coin option
             const selectedCoin = coinSelect.options[coinSelect.selectedIndex];
             const rewardRate = parseFloat(selectedCoin.dataset.rewardRate || '0');
@@ -565,15 +564,14 @@
             const dailyCost = (powerUsage * 24 / 1000) * electricityCost;
             updateResults(dailyRevenue, dailyCost, minerPrice);
         });
-
         function updateResults(dailyRevenue, dailyCost, minerPrice) {
             // Prevent negative values in case of calculation errors
             dailyRevenue = Math.max(0, dailyRevenue);
             dailyCost = Math.max(0, dailyCost);
-            
+           
             const dailyProfit = dailyRevenue - dailyCost;
             const monthlyProfit = dailyProfit * 30;
-            
+           
             // ROI calculation
             let roiPeriod = 'Not profitable';
             if (dailyProfit > 0) {
@@ -588,4 +586,3 @@
     </script>
 </body>
 </html>
-
