@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Warranty Information - Custom IT Support Mining</title>
+    <title>Your Cart - Custom IT Support Mining</title>
     <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/feather-icons"></script>
-    <script src="cart.js" defer></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
         
@@ -59,10 +58,11 @@
         <div class="container mx-auto px-4 py-8">
         <h1 class="text-3xl font-bold mb-4">Your Cart</h1>
         <ul id="cart-items" class="space-y-2"></ul>
+        <p id="item-count" class="text-xl mt-4">Items: 0</p>
         <p id="cart-total" class="text-xl font-bold mt-4">Total: €0.00</p>
-        <button class="bg-green-600 text-white px-6 py-3 rounded-lg mt-4 hover:bg-green-700">
+        <a href="payment.html" class="bg-green-600 text-white px-6 py-3 rounded-lg mt-4 hover:bg-green-700 inline-block">
             Proceed to Checkout
-        </button>
+        </a>
     </div>        
     </section>
 
@@ -80,6 +80,25 @@
                 feather.replace(); // Re-initialize feather icons in the loaded footer
             })
             .catch(error => console.error('Error loading footer:', error));
-    </script>
-</body>
-</html>
+
+        // Cart functionality (replacing or updating cart.js logic inline)
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        function renderCart() {
+            const cartItemsEl = document.getElementById('cart-items');
+            cartItemsEl.innerHTML = '';
+            let total = 0;
+            let itemCount = 0;
+
+            cart.forEach((item, index) => {
+                const li = document.createElement('li');
+                li.className = 'flex justify-between items-center bg-slate-800 p-4 rounded-lg';
+                li.innerHTML = `
+                    <span>${item.name} - €${item.price.toFixed(2)}</span>
+                    <div class="flex items-center">
+                        <input type="number" value="${item.quantity}" min="1" class="w-16 mr-4 bg-slate-700 text-white p-1 rounded" data-index="${index}">
+                        <button class="text-red-500 hover:text-red-400" data-index="${index}"><i data-feather="trash-2"></i></button>
+                    </div>
+                `;
+                cartItemsEl.appendChild(li);
+                total
