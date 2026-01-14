@@ -7,25 +7,26 @@
     <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/feather-icons"></script>
+    <script src="cart.js" defer></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
-        
+       
         body {
             font-family: 'Space Grotesk', sans-serif;
             background-color: #0f172a;
             color: #e2e8f0;
         }
-        
+       
         .gradient-bg {
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
         }
-        
+       
         .product-card {
             background: rgba(15, 23, 42, 0.7);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
+       
         .profitability-calculator {
             background: rgba(15, 23, 42, 0.8);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -45,6 +46,7 @@
                     <a href="index.html" class="text-blue-400 hover:text-blue-300 transition duration-300">Shop</a>
                     <a href="index.html#products" class="text-slate-300 hover:text-white transition duration-300">Products</a>
                     <a href="index.html#calculator" class="text-slate-300 hover:text-white transition duration-300">Calculator</a>
+                    <a href="cart.html" class="text-slate-300 hover:text-white transition duration-300">Cart</a>
                     <a href="#footer" class="text-slate-300 hover:text-white transition duration-300">Contact</a>
                 </div>
                 <div class="flex items-center space-x-4">
@@ -55,15 +57,12 @@
             </div>
         </div>
     </nav>
-
     <!-- Product Detail Section -->
     <section class="py-16 gradient-bg">
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-              
-                <!-- Product Image  SLIDER  -->
-
-
+             
+                <!-- Product Image SLIDER -->
 <div class="flex justify-center">
     <div id="slider" class="relative w-full max-w-md aspect-w-4 aspect-h-3">
         <img id="slider-image" src="images/Flumier_L2.png" alt="Fluminer L2" class="rounded-lg w-full h-full object-contain">
@@ -71,20 +70,17 @@
         <button id="next-btn" class="absolute right-0 top-1/2 transform -translate-y-1/2 text-3xl text-white bg-transparent px-0 py-0 focus:outline-none">&#8594;</button>
     </div>
 </div>
-
-                <!-- END OF Product Image  SLIDER  -->
-
-
-                
+                <!-- END OF Product Image SLIDER -->
+               
                 <!-- Product Information -->
                 <div class="product-card rounded-lg p-8">
                     <h1 class="text-4xl font-bold mb-4">Fluminer L2</h1>
                     <p class="text-xl text-blue-200 mb-6">1.2 GH/s Scrypt algorithm for LTC/DOGE</p>
-                    
+                   
                     <div class="mb-6">
                         <span class="text-3xl font-bold text-white">€960</span>
                     </div>
-                    
+                   
                     <div class="mb-8">
                         <h3 class="text-xl font-semibold mb-4">Product Specifications</h3>
                         <ul class="space-y-3">
@@ -110,22 +106,19 @@
                             </li>
                         </ul>
                     </div>
- <!-- copy old button <button onclick="openPaymentDialog('Fluminer L2', 700)" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-lg font-medium transition duration-300 text-lg">  --> 
-                    <a href="payment.html?product=Fluminer%20L2&price=700" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-lg font-medium transition duration-300 text-lg text-center block">
-                    Complete Purchase
-                    </a>
+                    <button onclick="addToCart(101, 'Fluminer L2', 960)" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-lg font-medium transition duration-300 text-lg">
+                        Add to Cart
                     </button>
                 </div>
             </div>
         </div>
     </section>
-
     <!-- L2 Profitability Calculator -->
     <section id="calculator" class="py-16 bg-slate-900">
         <div class="container mx-auto px-6">
             <div class="max-w-4xl mx-auto profitability-calculator rounded-xl p-8">
                 <h2 class="text-3xl font-bold mb-8 text-center">Fluminer L2 Profitability Calculator</h2>
-                
+               
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>
                         <div class="mb-6">
@@ -178,12 +171,11 @@
             </div>
         </div>
     </section>
-
     <!-- Features Section -->
     <section class="py-16 bg-slate-800">
         <div class="container mx-auto px-6">
             <h2 class="text-3xl font-bold mb-12 text-center">Product Features</h2>
-            
+           
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                 <div class="product-card rounded-lg p-6">
                     <i data-feather="zap" class="w-12 h-12 text-blue-500 mb-4"></i>
@@ -208,55 +200,11 @@
             </div>
         </div>
     </section>
-
     <!-- Footer Placeholder -->
     <div id="footer-container"></div>
-
-    <!-- Payment Dialog Modal -->
-    <div id="payment-dialog" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-slate-800 rounded-xl p-8 max-w-md w-full mx-4">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="text-2xl font-bold">Choose Payment Method</h3>
-                <button onclick="closePaymentDialog()" class="text-slate-400 hover:text-white">
-                    <i data-feather="x" class="w-6 h-6"></i>
-                </button>
-            </div>
-            <p class="text-slate-400 mb-6">Select your preferred payment option for the Fluminer L2</p>
-            <div class="space-y-3">
-                <button onclick="handlePaymentMethod('iDEAL')" class="w-full border border-slate-600 rounded-lg p-4 flex items-center justify-start gap-4 hover:bg-blue-600/10 hover:border-blue-500/50 transition duration-300">
-                    <div class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center">
-                        <i data-feather="credit-card" class="w-6 h-6 text-blue-500"></i>
-                    </div>
-                    <div class="text-left">
-                        <div class="font-semibold text-base">iDEAL Payment</div>
-                        <div class="text-sm text-slate-400">Instant Dutch bank transfer</div>
-                    </div>
-                </button>
-                <button onclick="handlePaymentMethod('Bank Transfer')" class="w-full border border-slate-600 rounded-lg p-4 flex items-center justify-start gap-4 hover:bg-blue-600/10 hover:border-blue-500/50 transition duration-300">
-                    <div class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center">
-                        <i data-feather="building" class="w-6 h-6 text-blue-500"></i>
-                    </div>
-                    <div class="text-left">
-                        <div class="font-semibold text-base">Bank Transfer</div>
-                        <div class="text-sm text-slate-400">Direct wire transfer</div>
-                    </div>
-                </button>
-                <button onclick="handlePaymentMethod('Cash')" class="w-full border border-slate-600 rounded-lg p-4 flex items-center justify-start gap-4 hover:bg-blue-600/10 hover:border-blue-500/50 transition duration-300">
-                    <div class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center">
-                        <i data-feather="dollar-sign" class="w-6 h-6 text-blue-500"></i>
-                    </div>
-                    <div class="text-left">
-                        <div class="font-semibold text-base">Cash Payment</div>
-                        <div class="text-sm text-slate-400">Pay in person</div>
-                    </div>
-                </button>
-            </div>
-        </div>
-    </div>
-
     <script>
         feather.replace();
-        
+       
         // Load footer dynamically
         fetch('footer.html')
             .then(response => response.text())
@@ -265,7 +213,6 @@
                 feather.replace(); // Re-initialize feather icons in the loaded footer
             })
             .catch(error => console.error('Error loading footer:', error));
-
         // Image slider for L2
         const images = [
             'images/Flumier_L2.png',
@@ -277,38 +224,18 @@
         const sliderImage = document.getElementById('slider-image');
         const prevBtn = document.getElementById('prev-btn');
         const nextBtn = document.getElementById('next-btn');
-
         prevBtn.addEventListener('click', () => {
             index = (index === 0) ? images.length - 1 : index - 1;
             sliderImage.src = images[index];
         });
-
         nextBtn.addEventListener('click', () => {
             index = (index === images.length - 1) ? 0 : index + 1;
             sliderImage.src = images[index];
         });
-
         setInterval(() => {
             index = (index === images.length - 1) ? 0 : index + 1;
             sliderImage.src = images[index];
         }, 3000);
-
-        // Payment Dialog Functions
-        function openPaymentDialog(productName, price) {
-            document.getElementById('payment-dialog').classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-        
-        function closePaymentDialog() {
-            document.getElementById('payment-dialog').classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
-        
-        function handlePaymentMethod(method) {
-            alert(`${method} payment selected\nYou will be contacted with payment details shortly.`);
-            closePaymentDialog();
-        }
-
         // Fetch current coin price
         async function fetchCoinPrice(coinId) {
             try {
@@ -320,25 +247,24 @@
                 return 0;
             }
         }
-
         // L2 Profitability calculator logic
         document.getElementById('calculate-btn').addEventListener('click', async function() {
             const coinSelect = document.getElementById('coin-select');
             const electricityCost = parseFloat(document.getElementById('electricity-cost').value);
-            
+           
             if (!coinSelect.value || isNaN(electricityCost)) {
                 alert('Please fill in all fields with valid values');
                 return;
             }
-            
+           
             const coinId = coinSelect.value;
             const currentPrice = await fetchCoinPrice(coinId);
-            
+           
             // L2 specifications
             const hashrate = 1200; // MH/s (1.2 GH/s)
             const powerUsage = 650; // Watts
-            const minerPrice = 700; // Euros
-            
+            const minerPrice = 960; // Euros
+           
             // Get reward rate from coin option
             const selectedCoin = coinSelect.options[coinSelect.selectedIndex];
             const rewardRate = parseFloat(selectedCoin.dataset.rewardRate || '0');
@@ -347,15 +273,14 @@
             const dailyCost = (powerUsage * 24 / 1000) * electricityCost;
             updateResults(dailyRevenue, dailyCost, minerPrice);
         });
-
         function updateResults(dailyRevenue, dailyCost, minerPrice) {
             // Prevent negative values in case of calculation errors
             dailyRevenue = Math.max(0, dailyRevenue);
             dailyCost = Math.max(0, dailyCost);
-            
+           
             const dailyProfit = dailyRevenue - dailyCost;
             const monthlyProfit = dailyProfit * 30;
-            
+           
             // ROI calculation
             let roiPeriod = 'Not profitable';
             if (dailyProfit > 0) {
