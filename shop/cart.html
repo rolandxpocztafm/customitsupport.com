@@ -4,10 +4,79 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart - Custom IT Support</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <script src="cart.js" defer></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+       
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+        }
+       
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        }
+       
+        .product-card {
+            transition: all 0.3s ease;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+       
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: #3b82f6;
+        }
+       
+        .product-card .relative {
+            position: relative;
+            z-index: 10; /* Ensure button and price are above the overlay */
+        }
+       
+        .profitability-calculator {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+       
+        .product-card .clickable-overlay:hover {
+            background: rgba(59, 130, 246, 0.1); /* Subtle hover effect for overlay */
+        }
+    </style>
 </head>
 <body>
-    <div class="container mx-auto px-4 py-8">
+    <!-- Navigation -->
+    <nav class="bg-slate-900 border-b border-slate-700">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <i data-feather="cpu" class="w-8 h-8 text-blue-500 mr-3"></i>
+                    <a href="index.html" class="text-xl font-bold text-white">Custom IT Support Mining</a>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html" class="text-blue-400 hover:text-blue-300 transition duration-300">Shop</a>
+                    <a href="#products" class="text-slate-300 hover:text-white transition duration-300">Products</a>
+                    <a href="#calculator" class="text-slate-300 hover:text-white transition duration-300">Calculator</a>
+                    <a href="#footer" class="text-slate-300 hover:text-white transition duration-300">Contact</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="cart.html">
+                    <button class="text-slate-300 hover:text-white transition duration-300">
+                    <i data-feather="shopping-cart" class="w-5 h-5"></i>
+                    </button>
+</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CART -->
+        <div class="container mx-auto px-4 py-8">
         <h1 class="text-3xl font-bold mb-4">Your Cart</h1>
         <ul id="cart-items" class="space-y-2"></ul>
         <p id="cart-total" class="text-xl font-bold mt-4">Total: €0.00</p>
@@ -15,5 +84,24 @@
             Proceed to Checkout
         </button>
     </div>
+    
+  
+    <!-- Footer Placeholder -->
+    <div id="footer-container"></div>
+       
+        // Initialize feather icons
+        feather.replace();
+       
+        // Load footer dynamically
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+                feather.replace(); // Re-initialize feather icons in the loaded footer
+            })
+            .catch(error => console.error('Error loading footer:', error));
+       
+
+
 </body>
 </html>
