@@ -91,6 +91,9 @@
             let itemCount = 0;
 
             cart.forEach((item, index) => {
+                if (!item.quantity) {
+                    item.quantity = 1;
+                }
                 const li = document.createElement('li');
                 li.className = 'flex justify-between items-center bg-slate-800 p-4 rounded-lg';
                 li.innerHTML = `
@@ -101,4 +104,52 @@
                     </div>
                 `;
                 cartItemsEl.appendChild(li);
-                total
+                total += item.price * item.quantity;
+                itemCount += item.quantity;
+            });
+
+            document.getElementById('cart-total').textContent = `Total: €${total.toFixed(2)}`;
+            document.getElementById('item-count').textContent = `Items: ${itemCount}`;
+            feather.replace(); // Re-initialize icons
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize quantities if missing
+            cart.forEach(item => {
+                if (!item.quantity) {
+                    item.quantity = 1;
+                }
+            });
+            localStorage.setItem('cart', JSON.stringify(cart));
+            renderCart();
+
+            const cartItemsEl = document.getElementById('cart-items');
+
+            // Change quantity
+            cartItemsEl.addEventListener('change', (e) => {
+                if (e.target.type === 'number') {
+                    const index = parseInt(e.target.dataset.index);
+                    cart[index].quantity = parseInt(e.target.value);
+                    if (cart[index].quantity < 1) {
+                        cart[index].quantity = 1;
+                        e.target.value = 1;
+                    }
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    renderCart();
+                }
+            });
+
+            // Remove item
+            cartItemsEl.addEventListener('click', (e) => {
+                const button = e.target.closest('button');
+                if (button) {
+                    const index = parseInt(button.dataset.index);
+                    cart.splice(index, 1);
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    renderCart();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
