@@ -55,13 +55,11 @@
                         <i data-feather="check-circle" class="w-10 h-10 text-green-500"></i>
                     </div>
                 </div>
-                
-                <h1 class="text-3xl font-bold mb-4">Order Confirmed!</h1>
-                <p class="text-lg text-slate-300 mb-6">
-                    Thank you for your purchase. Your order has been received and is being processed.
+                <h1 class="text-3xl font-bold mb-4" id="order-status-title">Processing Your Order</h1>
+                <p class="text-lg text-slate-300 mb-6" id="order-status-message">
+                    Verifying your payment status...
                 </p>
-                
-                <div class="bg-slate-800 rounded-lg p-6 mb-8 text-left">
+<div class="bg-slate-800 rounded-lg p-6 mb-8 text-left">
                     <h2 class="text-xl font-semibold mb-4 flex items-center">
                         <i data-feather="info" class="w-5 h-5 mr-2"></i>
                         What's Next?
@@ -93,7 +91,6 @@
 
     <!-- Footer Placeholder -->
     <div id="footer-container"></div>
-
     <script>
         feather.replace();
         
@@ -105,6 +102,57 @@
                 feather.replace();
             })
             .catch(error => console.error('Error loading footer:', error));
+
+        // Check payment status
+        async function checkPaymentStatus() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const orderId = urlParams.get('order');
+            
+            if (!orderId) {
+                showPaymentError();
+                return;
+            }
+            
+            try {
+                const response = await fetch(`/payment-status/${orderId}`);
+                const result = await response.json();
+                
+                if (response.ok) {
+                    if (result.status === 'paid' || result.status === 'pending') {
+                        showPaymentSuccess();
+                        localStorage.removeItem('cart');
+                    } else {
+                        showPaymentError();
+                    }
+                } else {
+                    showPaymentError();
+                }
+            } catch (error) {
+                console.error('Payment check failed:', error);
+                showPaymentError();
+            }
+        }
+        
+        function showPaymentSuccess() {
+            document.getElementById('order-status-title').textContent = 'Order Confirmed!';
+            document.getElementById('order-status-message').textContent = 
+                'Thank you for your purchase. Your order has been received and is being processed.';
+            document.querySelector('.w-20').classList.replace('bg-green-500/20', 'bg-green-500/20');
+            document.querySelector('.w-10').classList.replace('text-green-500', 'text-green-500');
+        }
+        
+        function showPaymentError() {
+            document.getElementById('order-status-title').textContent = 'Payment Unsuccessful';
+            document.getElementById('order-status-message').textContent = 
+                'Your payment was not completed. Please try again.';
+            document.querySelector('.w-20').classList.replace('bg-green-500/20', 'bg-red-500/20');
+            document.querySelector('.w-10').classList.replace('text-green-500', 'text-red-500');
+            document.querySelector('i').setAttribute('data-feather', 'x-circle');
+            feather.replace();
+        }
+        
+        // Initial check
+        document.addEventListener('DOMContentLoaded', checkPaymentStatus);
     </script>
 </body>
 </html>
