@@ -51,22 +51,64 @@
             </div>
         </div>
     </nav>
-
     <!-- Main Content -->
     <section class="py-16">
-    <!-- CART -->
-        <div class="container mx-auto px-4 py-8">
-        <h1 class="text-3xl font-bold mb-4">Your Cart</h1>
-        <ul id="cart-items" class="space-y-2"></ul>
-        <p id="item-count" class="text-xl mt-4">Items: 0</p>
-        <p id="cart-total" class="text-xl font-bold mt-4">Total: €0.00</p>
-        <a href="payment.html" class="bg-green-600 text-white px-6 py-3 rounded-lg mt-4 hover:bg-green-700 inline-block">
-            Proceed to Checkout
-        </a>
-    </div>        
-    </section>
+        <div class="container mx-auto px-4 py-8 max-w-4xl">
+            <h1 class="text-3xl font-bold mb-8 text-center">Your Shopping Cart</h1>
+            
+            <div class="content-card p-6">
+                <div id="empty-cart" class="text-center py-12 hidden">
+                    <i data-feather="shopping-cart" class="w-16 h-16 mx-auto text-blue-500 mb-4"></i>
+                    <h2 class="text-2xl font-semibold mb-2">Your cart is empty</h2>
+                    <p class="text-slate-400 mb-6">Browse our products to add items to your cart</p>
+                    <a href="index.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg inline-block">
+                        Continue Shopping
+                    </a>
+                </div>
 
-    <!-- Footer Placeholder -->
+                <div id="cart-content">
+                    <div class="grid grid-cols-12 gap-4 font-semibold border-b border-slate-700 pb-4 mb-4">
+                        <div class="col-span-6">Product</div>
+                        <div class="col-span-2 text-center">Price</div>
+                        <div class="col-span-2 text-center">Quantity</div>
+                        <div class="col-span-2 text-right">Total</div>
+                    </div>
+                    
+                    <ul id="cart-items" class="space-y-4"></ul>
+                    
+                    <div class="border-t border-slate-700 pt-6 mt-6">
+                        <div class="flex justify-end">
+                            <div class="w-full max-w-xs">
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-slate-400">Subtotal:</span>
+                                    <span id="cart-subtotal" class="font-medium">€0.00</span>
+                                </div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-slate-400">Shipping:</span>
+                                    <span id="shipping-cost" class="font-medium">Calculated at checkout</span>
+                                </div>
+                                <div class="flex justify-between text-lg font-bold mt-4 pt-4 border-t border-slate-700">
+                                    <span>Total:</span>
+                                    <span id="cart-total">€0.00</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between mt-8">
+                            <a href="index.html" class="text-blue-400 hover:text-blue-300 flex items-center">
+                                <i data-feather="arrow-left" class="w-4 h-4 mr-2"></i>
+                                Continue Shopping
+                            </a>
+                            <a href="checkout.html" id="checkout-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg">
+                                Proceed to Checkout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- Footer Placeholder -->
     <div id="footer-container"></div>
 
     <script>
