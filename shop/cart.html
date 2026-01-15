@@ -68,12 +68,12 @@
 
                 <div id="cart-content">
                     <div class="grid grid-cols-12 gap-4 font-semibold border-b border-slate-700 pb-4 mb-4">
-                        <div class="col-span-5">Product</div>
+                        <div class="col-span-6">Product</div>
                         <div class="col-span-2 text-right">Price</div>
                         <div class="col-span-2 text-center">Quantity</div>
-                        <div class="col-span-3 text-right">Total</div>
+                        <div class="col-span-2 text-right">Total</div>
                     </div>
-<ul id="cart-items" class="space-y-4"></ul>
+                    <ul id="cart-items" class="space-y-4"></ul>
                     
                     <div class="border-t border-slate-700 pt-6 mt-6">
                         <div class="flex justify-end">
@@ -86,11 +86,22 @@
                                     <span class="text-slate-400">VAT (21%):</span>
                                     <span id="cart-vat" class="font-medium">€0.00</span>
                                 </div>
-                                <div class="flex justify-between mb-2">
+                                <div class="flex justify-between items-center mb-2">
                                     <span class="text-slate-400">Shipping:</span>
-                                    <span id="shipping-cost" class="font-medium">Calculated at checkout</span>
+                                    <div class="flex flex-col items-end">
+                                        <select id="shipping-country" class="bg-slate-800 text-white p-1 rounded text-sm mb-1">
+                                            <option value="">Select Country</option>
+                                            <option value="NL">Netherlands - €15</option>
+                                            <option value="DE">Germany - €20</option>
+                                            <option value="BE">Belgium - €15</option>
+                                            <option value="FR">France - €25</option>
+                                            <option value="ES">Spain - €30</option>
+                                            <option value="IT">Italy - €30</option>
+                                        </select>
+                                        <span id="shipping-cost" class="font-medium">€0.00</span>
+                                    </div>
                                 </div>
-                                <div class="flex justify-between text-lg font-bold mt-4 pt-4 border-t border-slate-700">
+<div class="flex justify-between text-lg font-bold mt-4 pt-4 border-t border-slate-700">
                                     <span>Total:</span>
                                     <span id="cart-total">€0.00</span>
                                 </div>
@@ -125,76 +136,105 @@
                 feather.replace(); // Re-initialize feather icons in the loaded footer
             })
             .catch(error => console.error('Error loading footer:', error));
-
-        // Cart functionality (replacing or updating cart.js logic inline)
+        // Cart functionality
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let shippingCost = 0;
 
         function renderCart() {
             const cartItemsEl = document.getElementById('cart-items');
             cartItemsEl.innerHTML = '';
+            let subtotal = 0;
+            let vat = 0;
             let total = 0;
-            let itemCount = 0;
+
+            if (cart.length === 0) {
+                document.getElementById('empty-cart').classList.remove('hidden');
+                document.getElementById('cart-content').classList.add('hidden');
+                return;
+            }
 
             cart.forEach((item, index) => {
-                if (!item.quantity) {
-                    item.quantity = 1;
-                }
+                if (!item.quantity) item.quantity = 1;
+                
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+                
                 const li = document.createElement('li');
-                li.className = 'flex justify-between items-center bg-slate-800 p-4 rounded-lg';
+                li.className = 'grid grid-cols-12 gap-4 items-center bg-slate-800 p-4 rounded-lg';
                 li.innerHTML = `
-                    <span>${item.name} - €${item.price.toFixed(2)}</span>
-                    <div class="flex items-center">
-                        <input type="number" value="${item.quantity}" min="1" class="w-16 mr-4 bg-slate-700 text-white p-1 rounded" data-index="${index}">
-                        <button class="text-red-500 hover:text-red-400" data-index="${index}"><i data-feather="trash-2"></i></button>
+                    <div class="col-span-6">${item.name}</div>
+                    <div class="col-span-2 text-right">€${item.price.toFixed(2)}</div>
+                    <div class="col-span-2 flex justify-center">
+                        <input type="number" value="${item.quantity}" min="1" 
+                            class="w-16 bg-slate-700 text-white p-1 rounded text-center" 
+                            data-index="${index}" onchange="updateQuantity(this)">
+                    </div>
+                    <div class="col-span-2 text-right flex justify-between items-center">
+                        <span class="font-medium">€${itemTotal.toFixed(2)}</span>
+                        <button onclick="removeItem(${index})" class="text-red-500 hover:text-red-400 ml-2">
+                            <i data-feather="trash-2" class="w-4 h-4"></i>
+                        </button>
                     </div>
                 `;
                 cartItemsEl.appendChild(li);
-                total += item.price * item.quantity;
-                itemCount += item.quantity;
             });
 
-            document.getElementById('cart-total').textContent = `Total: €${total.toFixed(2)}`;
-            document.getElementById('item-count').textContent = `Items: ${itemCount}`;
-            feather.replace(); // Re-initialize icons
+            vat = subtotal * 0.21;
+            total = subtotal + vat + shippingCost;
+
+            document.getElementById('cart-subtotal').textContent = `€${subtotal.toFixed(2)}`;
+            document.getElementById('cart-vat').textContent = `€${vat.toFixed(2)}`;
+            document.getElementById('shipping-cost').textContent = `€${shippingCost.toFixed(2)}`;
+            document.getElementById('cart-total').textContent = `€${total.toFixed(2)}`;
+            
+            feather.replace();
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            // Initialize quantities if missing
-            cart.forEach(item => {
-                if (!item.quantity) {
-                    item.quantity = 1;
-                }
-            });
+        function updateQuantity(input) {
+            const index = parseInt(input.dataset.index);
+            const newQuantity = parseInt(input.value);
+            
+            if (newQuantity < 1) {
+                input.value = 1;
+                return;
+            }
+            
+            cart[index].quantity = newQuantity;
             localStorage.setItem('cart', JSON.stringify(cart));
             renderCart();
+        }
 
-            const cartItemsEl = document.getElementById('cart-items');
+        function removeItem(index) {
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            renderCart();
+        }
 
-            // Change quantity
-            cartItemsEl.addEventListener('change', (e) => {
-                if (e.target.type === 'number') {
-                    const index = parseInt(e.target.dataset.index);
-                    cart[index].quantity = parseInt(e.target.value);
-                    if (cart[index].quantity < 1) {
-                        cart[index].quantity = 1;
-                        e.target.value = 1;
-                    }
-                    localStorage.setItem('cart', JSON.stringify(cart));
-                    renderCart();
-                }
-            });
-
-            // Remove item
-            cartItemsEl.addEventListener('click', (e) => {
-                const button = e.target.closest('button');
-                if (button) {
-                    const index = parseInt(button.dataset.index);
-                    cart.splice(index, 1);
-                    localStorage.setItem('cart', JSON.stringify(cart));
-                    renderCart();
-                }
-            });
+        // Shipping country change handler
+        document.getElementById('shipping-country').addEventListener('change', function() {
+            const shippingPrices = {
+                'NL': 15,
+                'DE': 20,
+                'BE': 15,
+                'FR': 25,
+                'ES': 30,
+                'IT': 30
+            };
+            
+            shippingCost = this.value ? shippingPrices[this.value] || 0 : 0;
+            document.getElementById('shipping-cost').textContent = `€${shippingCost.toFixed(2)}`;
+            renderCart();
         });
-    </script>
+        // Initialize cart on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            cart.forEach(item => { if (!item.quantity) item.quantity = 1; });
+            localStorage.setItem('cart', JSON.stringify(cart));
+            renderCart();
+        });
+
+        // Expose functions to global scope
+        window.updateQuantity = updateQuantity;
+        window.removeItem = removeItem;
+</script>
 </body>
 </html>
