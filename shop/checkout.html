@@ -210,11 +210,12 @@
             let subtotal = 0;
             
             cart.forEach(item => {
+                if (!item.quantity) item.quantity = 1;
                 const itemTotal = item.price * item.quantity;
                 subtotal += itemTotal;
                 
                 const li = document.createElement('li');
-                li.className = 'flex justify-between items-center';
+                li.className = 'flex justify-between items-center py-2 border-b border-slate-700';
                 li.innerHTML = `
                     <div>
                         <div class="font-medium">${item.name}</div>
@@ -225,50 +226,75 @@
                 checkoutItemsEl.appendChild(li);
             });
             
-            // Calculate shipping (flat rate for now)
-            const shipping = subtotal > 1000 ? 0 : 50; // Free shipping for orders over €1000
-            const vat = subtotal * 0.21;
-            const total = subtotal + shipping + vat;
-            
-            document.getElementById('checkout-subtotal').textContent = `€${subtotal.toFixed(2)}`;
-            document.getElementById('checkout-shipping').textContent = shipping === 0 ? 'Free' : `€${shipping.toFixed(2)}`;
-            document.getElementById('checkout-vat').textContent = `€${vat.toFixed(2)}`;
-            document.getElementById('checkout-total').textContent = `€${total.toFixed(2)}`;
-// Handle form submission
-            document.getElementById('checkout-form').addEventListener('submit', (e) => {
-                e.preventDefault();
-            const formData = {
-              fullName: document.getElementById('full-name').value,
-              email: document.getElementById('email').value,
-              phone: document.getElementById('phone').value,
-              address: document.getElementById('address').value,
-              country: document.getElementById('country').value,
-              postalCode: document.getElementById('postal-code').value,
-              city: document.getElementById('city').value,
-              paymentMethod: document.querySelector('input[name="payment-method"]:checked').value
-            };
-            
-            try {
-              const response = await fetch('/create-payment', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                  customer: formData,
-                  cart: cart,
-                  total: total,
-                  paymentMethod: formData.paymentMethod
-                })
-              });
-              
-              const result = await response.json();
-              if (response.ok) {
-                window.location.href = result.redirectUrl + (result.orderId ? `?order=${result.orderId}` : '');
-              } else {
-                throw new Error(result.error || 'Payment failed');
-              }
-            } catch (error) {
-              alert('Payment error: ' + error.message);
+            // Calculate shipping based on selected country
+            function updateTotals() {
+                const countrySelect = document.getElementById('country');
+                const shippingPrices = {
+                    'NL': 15,
+                    'DE': 20,
+                    'BE': 15,
+                    'FR': 25,
+                    'ES': 30,
+                    'IT': 30,
+                    'other': 50
+                };
+                
+                const shipping = countrySelect.value ? 
+                    (subtotal > 1000 ? 0 : shippingPrices[countrySelect.value] || 50) : 0;
+                const vat = subtotal * 0.21;
+                const total = subtotal + shipping + vat;
+                
+                document.getElementById('checkout-subtotal').textContent = `€${subtotal.toFixed(2)}`;
+                document.getElementById('checkout-shipping').textContent = shipping === 0 ? 'Free' : `€${shipping.toFixed(2)}`;
+                document.getElementById('checkout-vat').textContent = `€${vat.toFixed(2)}`;
+                document.getElementById('checkout-total').textContent = `€${total.toFixed(2)}`;
+                
+                return { shipping, vat, total };
             }
+            
+            // Initial update
+            const totals = updateTotals();
+            
+            // Update when country changes
+            document.getElementById('country').addEventListener('change', updateTotals);
+            // Handle form submission
+            document.getElementById('checkout-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const totals = updateTotals();
+                const formData = {
+                    fullName: document.getElementById('full-name').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    address: document.getElementById('address').value,
+                    country: document.getElementById('country').value,
+                    postalCode: document.getElementById('postal-code').value,
+                    city: document.getElementById('city').value,
+                    paymentMethod: document.querySelector('input[name="payment-method"]:checked').value
+                };
+                
+                try {
+                    const response = await fetch('/create-payment', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            customer: formData,
+                            cart: cart,
+                            total: totals.total,
+                            paymentMethod: formData.paymentMethod,
+                            shippingCost: totals.shipping,
+                            vat: totals.vat
+                        })
+                    });
+                    
+                    const result = await response.json();
+                    if (response.ok) {
+                        window.location.href = result.redirectUrl + (result.orderId ? `?order=${result.orderId}` : '');
+                    } else {
+                        throw new Error(result.error || 'Payment failed');
+                    }
+                } catch (error) {
+                    alert('Payment error: ' + error.message);
+                }
 });
         });
     </script>
