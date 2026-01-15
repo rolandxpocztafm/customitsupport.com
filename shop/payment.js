@@ -3,7 +3,7 @@ const router = express.Router();
 const Mollie = require('@mollie/api-client');
 const nodemailer = require('nodemailer');
 
-const mollieClient = Mollie({ apiKey: process.env.MOLLIE_API_KEY });
+const mollieClient = Mollie({ apiKey: 'test_BFhEExFFf6rRchUqgQhwmdRwVrs3Fm' });
 
 // In-memory storage for demo (replace with database in production)
 const orders = {};
