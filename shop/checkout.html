@@ -70,7 +70,6 @@
                         <i data-feather="shopping-cart" class="w-5 h-5 mr-2"></i>
                         Order Summary
                     </h2>
-                    
                     <ul id="checkout-items" class="space-y-4 mb-6"></ul>
                     
                     <div class="border-t border-slate-700 pt-4">
@@ -82,12 +81,16 @@
                             <span class="text-slate-400">Shipping:</span>
                             <span id="checkout-shipping" class="font-medium">€0.00</span>
                         </div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-slate-400">VAT (21%):</span>
+                            <span id="checkout-vat" class="font-medium">€0.00</span>
+                        </div>
                         <div class="flex justify-between text-lg font-bold mt-4 pt-4 border-t border-slate-700">
                             <span>Total:</span>
                             <span id="checkout-total">€0.00</span>
                         </div>
                     </div>
-                </div>
+</div>
                 
                 <!-- Payment Form -->
                 <div class="content-card p-6">
@@ -194,7 +197,6 @@
                 feather.replace();
             })
             .catch(error => console.error('Error loading footer:', error));
-
         // Load cart data and render checkout
         document.addEventListener('DOMContentLoaded', () => {
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -225,13 +227,14 @@
             
             // Calculate shipping (flat rate for now)
             const shipping = subtotal > 1000 ? 0 : 50; // Free shipping for orders over €1000
-            const total = subtotal + shipping;
+            const vat = subtotal * 0.21;
+            const total = subtotal + shipping + vat;
             
             document.getElementById('checkout-subtotal').textContent = `€${subtotal.toFixed(2)}`;
             document.getElementById('checkout-shipping').textContent = shipping === 0 ? 'Free' : `€${shipping.toFixed(2)}`;
+            document.getElementById('checkout-vat').textContent = `€${vat.toFixed(2)}`;
             document.getElementById('checkout-total').textContent = `€${total.toFixed(2)}`;
-            
-            // Handle form submission
+// Handle form submission
             document.getElementById('checkout-form').addEventListener('submit', (e) => {
                 e.preventDefault();
             const formData = {
