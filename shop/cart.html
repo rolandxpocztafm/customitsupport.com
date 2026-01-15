@@ -68,13 +68,12 @@
 
                 <div id="cart-content">
                     <div class="grid grid-cols-12 gap-4 font-semibold border-b border-slate-700 pb-4 mb-4">
-                        <div class="col-span-6">Product</div>
-                        <div class="col-span-2 text-center">Price</div>
+                        <div class="col-span-5">Product</div>
+                        <div class="col-span-2 text-right">Price</div>
                         <div class="col-span-2 text-center">Quantity</div>
-                        <div class="col-span-2 text-right">Total</div>
+                        <div class="col-span-3 text-right">Total</div>
                     </div>
-                    
-                    <ul id="cart-items" class="space-y-4"></ul>
+<ul id="cart-items" class="space-y-4"></ul>
                     
                     <div class="border-t border-slate-700 pt-6 mt-6">
                         <div class="flex justify-end">
@@ -84,6 +83,10 @@
                                     <span id="cart-subtotal" class="font-medium">€0.00</span>
                                 </div>
                                 <div class="flex justify-between mb-2">
+                                    <span class="text-slate-400">VAT (21%):</span>
+                                    <span id="cart-vat" class="font-medium">€0.00</span>
+                                </div>
+                                <div class="flex justify-between mb-2">
                                     <span class="text-slate-400">Shipping:</span>
                                     <span id="shipping-cost" class="font-medium">Calculated at checkout</span>
                                 </div>
@@ -91,7 +94,7 @@
                                     <span>Total:</span>
                                     <span id="cart-total">€0.00</span>
                                 </div>
-                            </div>
+</div>
                         </div>
                         
                         <div class="flex justify-between mt-8">
