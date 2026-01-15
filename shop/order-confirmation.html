@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation - Custom IT Support Mining</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        }
+        
+        .content-card {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="bg-slate-900 border-b border-slate-700">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <i data-feather="cpu" class="w-8 h-8 text-blue-500 mr-3"></i>
+                    <a href="index.html" class="text-xl font-bold text-white">Custom IT Support Mining</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="index.html" class="text-slate-300 hover:text-white transition duration-300">
+                        <i data-feather="home" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <section class="py-16">
+        <div class="container mx-auto px-4 max-w-2xl">
+            <div class="content-card p-8 text-center">
+                <div class="flex justify-center mb-6">
+                    <div class="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center">
+                        <i data-feather="check-circle" class="w-10 h-10 text-green-500"></i>
+                    </div>
+                </div>
+                
+                <h1 class="text-3xl font-bold mb-4">Order Confirmed!</h1>
+                <p class="text-lg text-slate-300 mb-6">
+                    Thank you for your purchase. Your order has been received and is being processed.
+                </p>
+                
+                <div class="bg-slate-800 rounded-lg p-6 mb-8 text-left">
+                    <h2 class="text-xl font-semibold mb-4 flex items-center">
+                        <i data-feather="info" class="w-5 h-5 mr-2"></i>
+                        What's Next?
+                    </h2>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i data-feather="mail" class="w-5 h-5 mr-3 text-blue-400 flex-shrink-0"></i>
+                            <span>You'll receive an order confirmation email with details shortly</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i data-feather="truck" class="w-5 h-5 mr-3 text-blue-400 flex-shrink-0"></i>
+                            <span>Your order will be shipped within 1-2 business days</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i data-feather="headphones" class="w-5 h-5 mr-3 text-blue-400 flex-shrink-0"></i>
+                            <span>Our support team is available if you have any questions</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="flex justify-center">
+                    <a href="index.html" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium inline-block">
+                        Back to Shop
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-container"></div>
+
+    <script>
+        feather.replace();
+        
+        // Load footer dynamically
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+                feather.replace();
+            })
+            .catch(error => console.error('Error loading footer:', error));
+    </script>
+</body>
+</html>
