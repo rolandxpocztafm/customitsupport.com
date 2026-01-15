@@ -1,240 +1,143 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Cart - Custom IT Support Mining</title>
-    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/feather-icons"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
-        
-        body {
-            font-family: 'Space Grotesk', sans-serif;
-            background-color: #0f172a;
-            color: #e2e8f0;
-        }
-        
-        .gradient-bg {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-        }
-        
-        .content-card {
-            background: rgba(15, 23, 42, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 0.5rem;
-        }
-    </style>
-</head>
-<body>
-    <!-- Navigation -->
-    <nav class="bg-slate-900 border-b border-slate-700">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center">
-                    <i data-feather="cpu" class="w-8 h-8 text-blue-500 mr-3"></i>
-                    <a href="index.html" class="text-xl font-bold text-white">Custom IT Support Mining</a>
-                </div>
-                <div class="hidden md:flex space-x-6">
-                    <a href="index.html" class="text-blue-400 hover:text-blue-300 transition duration-300">Shop</a>
-                    <a href="index.html#products" class="text-slate-300 hover:text-white transition duration-300">Products</a>
-                    <a href="index.html#calculator" class="text-slate-300 hover:text-white transition duration-300">Calculator</a>
-                    <a href="#footer" class="text-slate-300 hover:text-white transition duration-300">Contact</a>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <a href="index.html" class="text-slate-300 hover:text-white transition duration-300">
-                        <i data-feather="arrow-left" class="w-5 h-5"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </nav>
-    <!-- Main Content -->
-    <section class="py-16">
-        <div class="container mx-auto px-4 py-8 max-w-4xl">
-            <h1 class="text-3xl font-bold mb-8 text-center">Your Shopping Cart</h1>
-            
-            <div class="content-card p-6">
-                <div id="empty-cart" class="text-center py-12 hidden">
-                    <i data-feather="shopping-cart" class="w-16 h-16 mx-auto text-blue-500 mb-4"></i>
-                    <h2 class="text-2xl font-semibold mb-2">Your cart is empty</h2>
-                    <p class="text-slate-400 mb-6">Browse our products to add items to your cart</p>
-                    <a href="index.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg inline-block">
-                        Continue Shopping
-                    </a>
-                </div>
 
-                <div id="cart-content">
-                    <div class="grid grid-cols-12 gap-4 font-semibold border-b border-slate-700 pb-4 mb-4">
-                        <div class="col-span-6">Product</div>
-                        <div class="col-span-2 text-right">Price</div>
-                        <div class="col-span-2 text-center">Quantity</div>
-                        <div class="col-span-2 text-right">Total</div>
-                    </div>
-                    <ul id="cart-items" class="space-y-4"></ul>
-                    
-                    <div class="border-t border-slate-700 pt-6 mt-6">
-                        <div class="flex justify-end">
-                            <div class="w-full max-w-xs">
-                                <div class="flex justify-between mb-2">
-                                    <span class="text-slate-400">Subtotal:</span>
-                                    <span id="cart-subtotal" class="font-medium">€0.00</span>
-                                </div>
-                                <div class="flex justify-between mb-2">
-                                    <span class="text-slate-400">VAT (21%):</span>
-                                    <span id="cart-vat" class="font-medium">€0.00</span>
-                                </div>
-                                <div class="flex justify-between items-center mb-2">
-                                    <span class="text-slate-400">Shipping:</span>
-                                    <div class="flex flex-col items-end">
-                                        <select id="shipping-country" class="bg-slate-800 text-white p-1 rounded text-sm mb-1">
-                                            <option value="">Select Country</option>
-                                            <option value="NL">Netherlands - €15</option>
-                                            <option value="DE">Germany - €20</option>
-                                            <option value="BE">Belgium - €15</option>
-                                            <option value="FR">France - €25</option>
-                                            <option value="ES">Spain - €30</option>
-                                            <option value="IT">Italy - €30</option>
-                                        </select>
-                                        <span id="shipping-cost" class="font-medium">€0.00</span>
-                                    </div>
-                                </div>
-<div class="flex justify-between text-lg font-bold mt-4 pt-4 border-t border-slate-700">
-                                    <span>Total:</span>
-                                    <span id="cart-total">€0.00</span>
-                                </div>
-</div>
-                        </div>
-                        
-                        <div class="flex justify-between mt-8">
-                            <a href="index.html" class="text-blue-400 hover:text-blue-300 flex items-center">
-                                <i data-feather="arrow-left" class="w-4 h-4 mr-2"></i>
-                                Continue Shopping
-                            </a>
-                            <a href="checkout.html" id="checkout-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg">
-                                Proceed to Checkout
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-<!-- Footer Placeholder -->
-    <div id="footer-container"></div>
+// Cart management functionality
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-    <script>
+function addToCart(productId, productName, price, quantity = 1) {
+    let existingItem = cart.find(item => item.id === productId);
+    if (existingItem) {
+        existingItem.quantity += quantity;
+    } else {
+        cart.push({ id: productId, name: productName, price: price, quantity: quantity });
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartDisplay();
+    
+    // Show notification
+    const notification = document.createElement('div');
+    notification.className = 'fixed bottom-4 right-4 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg flex items-center';
+    notification.innerHTML = `
+        <i data-feather="check-circle" class="w-5 h-5 mr-2"></i>
+        <span>${productName} added to cart</span>
+    `;
+    document.body.appendChild(notification);
+    feather.replace();
+    
+    setTimeout(() => {
+        notification.classList.add('opacity-0', 'transition-opacity', 'duration-300');
+        setTimeout(() => notification.remove(), 300);
+    }, 3000);
+}
+
+function removeFromCart(index) {
+    const removedItem = cart[index].name;
+    cart.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartDisplay();
+    
+    // Show notification
+    const notification = document.createElement('div');
+    notification.className = 'fixed bottom-4 right-4 bg-red-600 text-white px-4 py-2 rounded-lg shadow-lg flex items-center';
+    notification.innerHTML = `
+        <i data-feather="trash-2" class="w-5 h-5 mr-2"></i>
+        <span>${removedItem} removed from cart</span>
+    `;
+    document.body.appendChild(notification);
+    feather.replace();
+    
+    setTimeout(() => {
+        notification.classList.add('opacity-0', 'transition-opacity', 'duration-300');
+        setTimeout(() => notification.remove(), 300);
+    }, 3000);
+}
+
+function updateCartItemQuantity(index, newQuantity) {
+    if (newQuantity < 1) newQuantity = 1;
+    cart[index].quantity = newQuantity;
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartDisplay();
+}
+
+function clearCart() {
+    cart = [];
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartDisplay();
+}
+
+function getCartTotal() {
+    return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+}
+
+function getCartItemCount() {
+    return cart.reduce((count, item) => count + item.quantity, 0);
+}
+
+function updateCartDisplay() {
+    const cartItemsEl = document.getElementById('cart-items');
+    const cartContentEl = document.getElementById('cart-content');
+    const emptyCartEl = document.getElementById('empty-cart');
+    const subtotalEl = document.getElementById('cart-subtotal');
+    const totalEl = document.getElementById('cart-total');
+    const checkoutBtn = document.getElementById('checkout-btn');
+    
+    if (cart.length === 0) {
+        if (cartContentEl) cartContentEl.classList.add('hidden');
+        if (emptyCartEl) emptyCartEl.classList.remove('hidden');
+        if (checkoutBtn) checkoutBtn.classList.add('hidden');
+        return;
+    }
+    
+    if (cartContentEl) cartContentEl.classList.remove('hidden');
+    if (emptyCartEl) emptyCartEl.classList.add('hidden');
+    if (checkoutBtn) checkoutBtn.classList.remove('hidden');
+    
+    if (cartItemsEl) {
+        cartItemsEl.innerHTML = '';
+        
+        cart.forEach((item, index) => {
+            const itemTotal = item.price * item.quantity;
+            const li = document.createElement('li');
+            li.className = 'grid grid-cols-12 gap-4 items-center';
+            li.innerHTML = `
+                <div class="col-span-6 flex items-center">
+                    <button onclick="removeFromCart(${index})" class="text-red-500 hover:text-red-400 mr-4">
+                        <i data-feather="trash-2" class="w-4 h-4"></i>
+                    </button>
+                    <span>${item.name}</span>
+                </div>
+                <div class="col-span-2 text-center">€${item.price.toFixed(2)}</div>
+                <div class="col-span-2 flex justify-center">
+                    <input type="number" value="${item.quantity}" min="1" 
+                        class="w-20 p-2 rounded-lg form-input text-center" 
+                        onchange="updateCartItemQuantity(${index}, parseInt(this.value))">
+                </div>
+                <div class="col-span-2 text-right font-medium">€${itemTotal.toFixed(2)}</div>
+            `;
+            cartItemsEl.appendChild(li);
+        });
+    }
+    
+    const subtotal = getCartTotal();
+    if (subtotalEl) subtotalEl.textContent = `€${subtotal.toFixed(2)}`;
+    if (totalEl) totalEl.textContent = `€${subtotal.toFixed(2)}`;
+    
+    if (window.feather) {
         feather.replace();
-        
-        // Load footer dynamically
-        fetch('footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer-container').innerHTML = data;
-                feather.replace(); // Re-initialize feather icons in the loaded footer
-            })
-            .catch(error => console.error('Error loading footer:', error));
-        // Cart functionality
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        let shippingCost = 0;
+    }
+}
 
-        function renderCart() {
-            const cartItemsEl = document.getElementById('cart-items');
-            cartItemsEl.innerHTML = '';
-            let subtotal = 0;
-            let vat = 0;
-            let total = 0;
-
-            if (cart.length === 0) {
-                document.getElementById('empty-cart').classList.remove('hidden');
-                document.getElementById('cart-content').classList.add('hidden');
-                return;
-            }
-
-            cart.forEach((item, index) => {
-                if (!item.quantity) item.quantity = 1;
-                
-                const itemTotal = item.price * item.quantity;
-                subtotal += itemTotal;
-                
-                const li = document.createElement('li');
-                li.className = 'grid grid-cols-12 gap-4 items-center bg-slate-800 p-4 rounded-lg';
-                li.innerHTML = `
-                    <div class="col-span-6">${item.name}</div>
-                    <div class="col-span-2 text-right">€${item.price.toFixed(2)}</div>
-                    <div class="col-span-2 flex justify-center">
-                        <input type="number" value="${item.quantity}" min="1" 
-                            class="w-16 bg-slate-700 text-white p-1 rounded text-center" 
-                            data-index="${index}" onchange="updateQuantity(this)">
-                    </div>
-                    <div class="col-span-2 text-right flex justify-between items-center">
-                        <span class="font-medium">€${itemTotal.toFixed(2)}</span>
-                        <button onclick="removeItem(${index})" class="text-red-500 hover:text-red-400 ml-2">
-                            <i data-feather="trash-2" class="w-4 h-4"></i>
-                        </button>
-                    </div>
-                `;
-                cartItemsEl.appendChild(li);
-            });
-
-            vat = subtotal * 0.21;
-            total = subtotal + vat + shippingCost;
-
-            document.getElementById('cart-subtotal').textContent = `€${subtotal.toFixed(2)}`;
-            document.getElementById('cart-vat').textContent = `€${vat.toFixed(2)}`;
-            document.getElementById('shipping-cost').textContent = `€${shippingCost.toFixed(2)}`;
-            document.getElementById('cart-total').textContent = `€${total.toFixed(2)}`;
-            
-            feather.replace();
+// Initialize cart on page load
+document.addEventListener('DOMContentLoaded', () => {
+    // Ensure all cart items have quantity
+    cart.forEach(item => {
+        if (!item.quantity) {
+            item.quantity = 1;
         }
+    });
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartDisplay();
+});
 
-        function updateQuantity(input) {
-            const index = parseInt(input.dataset.index);
-            const newQuantity = parseInt(input.value);
-            
-            if (newQuantity < 1) {
-                input.value = 1;
-                return;
-            }
-            
-            cart[index].quantity = newQuantity;
-            localStorage.setItem('cart', JSON.stringify(cart));
-            renderCart();
-        }
-
-        function removeItem(index) {
-            cart.splice(index, 1);
-            localStorage.setItem('cart', JSON.stringify(cart));
-            renderCart();
-        }
-
-        // Shipping country change handler
-        document.getElementById('shipping-country').addEventListener('change', function() {
-            const shippingPrices = {
-                'NL': 15,
-                'DE': 20,
-                'BE': 15,
-                'FR': 25,
-                'ES': 30,
-                'IT': 30
-            };
-            
-            shippingCost = this.value ? shippingPrices[this.value] || 0 : 0;
-            document.getElementById('shipping-cost').textContent = `€${shippingCost.toFixed(2)}`;
-            renderCart();
-        });
-        // Initialize cart on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            cart.forEach(item => { if (!item.quantity) item.quantity = 1; });
-            localStorage.setItem('cart', JSON.stringify(cart));
-            renderCart();
-        });
-
-        // Expose functions to global scope
-        window.updateQuantity = updateQuantity;
-        window.removeItem = removeItem;
-</script>
-</body>
-</html>
+// Expose functions to global scope
+window.addToCart = addToCart;
+window.removeFromCart = removeFromCart;
+window.updateCartItemQuantity = updateCartItemQuantity;
