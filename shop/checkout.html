@@ -244,13 +244,12 @@
                     'other': 50
                 };
                 
-                const shipping = countrySelect.value ? 
-                    (subtotal > 1000 ? 0 : shippingPrices[countrySelect.value] || 50) : 0;
+                const shipping = countrySelect.value ? shippingPrices[countrySelect.value] || 50 : 0;
                 const vat = subtotal * 0.21;
                 const total = subtotal + shipping + vat;
                 
                 document.getElementById('checkout-subtotal').textContent = `€${subtotal.toFixed(2)}`;
-                document.getElementById('checkout-shipping').textContent = shipping === 0 ? 'Free' : `€${shipping.toFixed(2)}`;
+                document.getElementById('checkout-shipping').textContent = `€${shipping.toFixed(2)}`;
                 document.getElementById('checkout-vat').textContent = `€${vat.toFixed(2)}`;
                 document.getElementById('checkout-total').textContent = `€${total.toFixed(2)}`;
                 
