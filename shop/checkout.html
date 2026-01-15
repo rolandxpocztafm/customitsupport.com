@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Custom IT Support Mining</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        }
+        
+        .content-card {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0.5rem;
+        }
+        
+        .form-input {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 1px #3b82f6;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="bg-slate-900 border-b border-slate-700">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <i data-feather="cpu" class="w-8 h-8 text-blue-500 mr-3"></i>
+                    <a href="index.html" class="text-xl font-bold text-white">Custom IT Support Mining</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="cart.html" class="text-slate-300 hover:text-white transition duration-300">
+                        <i data-feather="shopping-cart" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <section class="py-16">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <h1 class="text-3xl font-bold mb-8 text-center">Checkout</h1>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Order Summary -->
+                <div class="content-card p-6">
+                    <h2 class="text-xl font-bold mb-6 flex items-center">
+                        <i data-feather="shopping-cart" class="w-5 h-5 mr-2"></i>
+                        Order Summary
+                    </h2>
+                    
+                    <ul id="checkout-items" class="space-y-4 mb-6"></ul>
+                    
+                    <div class="border-t border-slate-700 pt-4">
+                        <div class="flex justify-between mb-2">
+                            <span class="text-slate-400">Subtotal:</span>
+                            <span id="checkout-subtotal" class="font-medium">€0.00</span>
+                        </div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-slate-400">Shipping:</span>
+                            <span id="checkout-shipping" class="font-medium">€0.00</span>
+                        </div>
+                        <div class="flex justify-between text-lg font-bold mt-4 pt-4 border-t border-slate-700">
+                            <span>Total:</span>
+                            <span id="checkout-total">€0.00</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Payment Form -->
+                <div class="content-card p-6">
+                    <h2 class="text-xl font-bold mb-6 flex items-center">
+                        <i data-feather="user" class="w-5 h-5 mr-2"></i>
+                        Customer Information
+                    </h2>
+                    
+                    <form id="checkout-form" class="space-y-4">
+                        <div>
+                            <label for="full-name" class="block text-sm font-medium mb-2">Full Name</label>
+                            <input type="text" id="full-name" class="w-full p-3 rounded-lg form-input" required>
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block text-sm font-medium mb-2">Email Address</label>
+                            <input type="email" id="email" class="w-full p-3 rounded-lg form-input" required>
+                        </div>
+                        
+                        <div>
+                            <label for="phone" class="block text-sm font-medium mb-2">Phone Number</label>
+                            <input type="tel" id="phone" class="w-full p-3 rounded-lg form-input" required>
+                        </div>
+                        
+                        <div>
+                            <label for="address" class="block text-sm font-medium mb-2">Shipping Address</label>
+                            <textarea id="address" rows="3" class="w-full p-3 rounded-lg form-input" required></textarea>
+                        </div>
+                        
+                        <div>
+                            <label for="country" class="block text-sm font-medium mb-2">Country</label>
+                            <select id="country" class="w-full p-3 rounded-lg form-input" required>
+                                <option value="">Select Country</option>
+                                <option value="NL">Netherlands</option>
+                                <option value="BE">Belgium</option>
+                                <option value="DE">Germany</option>
+                                <option value="FR">France</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label for="postal-code" class="block text-sm font-medium mb-2">Postal Code</label>
+                                <input type="text" id="postal-code" class="w-full p-3 rounded-lg form-input" required>
+                            </div>
+                            <div>
+                                <label for="city" class="block text-sm font-medium mb-2">City</label>
+                                <input type="text" id="city" class="w-full p-3 rounded-lg form-input" required>
+                            </div>
+                        </div>
+                        
+                        <h2 class="text-xl font-bold mt-8 mb-6 flex items-center">
+                            <i data-feather="credit-card" class="w-5 h-5 mr-2"></i>
+                            Payment Method
+                        </h2>
+                        
+                        <div class="space-y-3">
+                            <div class="flex items-center">
+                                <input type="radio" id="payment-ideal" name="payment-method" value="ideal" class="mr-3" checked>
+                                <label for="payment-ideal" class="flex items-center">
+                                    <i data-feather="credit-card" class="w-5 h-5 mr-2"></i>
+                                    iDEAL
+                                </label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="radio" id="payment-bank" name="payment-method" value="bank" class="mr-3">
+                                <label for="payment-bank" class="flex items-center">
+                                    <i data-feather="bank" class="w-5 h-5 mr-2"></i>
+                                    Bank Transfer
+                                </label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="radio" id="payment-cash" name="payment-method" value="cash" class="mr-3">
+                                <label for="payment-cash" class="flex items-center">
+                                    <i data-feather="dollar-sign" class="w-5 h-5 mr-2"></i>
+                                    Cash on Delivery
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium">
+                                Complete Order
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-container"></div>
+
+    <script>
+        feather.replace();
+        
+        // Load footer dynamically
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+                feather.replace();
+            })
+            .catch(error => console.error('Error loading footer:', error));
+
+        // Load cart data and render checkout
+        document.addEventListener('DOMContentLoaded', () => {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            if (cart.length === 0) {
+                window.location.href = 'cart.html';
+                return;
+            }
+            
+            const checkoutItemsEl = document.getElementById('checkout-items');
+            let subtotal = 0;
+            
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+                
+                const li = document.createElement('li');
+                li.className = 'flex justify-between items-center';
+                li.innerHTML = `
+                    <div>
+                        <div class="font-medium">${item.name}</div>
+                        <div class="text-sm text-slate-400">Qty: ${item.quantity}</div>
+                    </div>
+                    <div class="font-medium">€${itemTotal.toFixed(2)}</div>
+                `;
+                checkoutItemsEl.appendChild(li);
+            });
+            
+            // Calculate shipping (flat rate for now)
+            const shipping = subtotal > 1000 ? 0 : 50; // Free shipping for orders over €1000
+            const total = subtotal + shipping;
+            
+            document.getElementById('checkout-subtotal').textContent = `€${subtotal.toFixed(2)}`;
+            document.getElementById('checkout-shipping').textContent = shipping === 0 ? 'Free' : `€${shipping.toFixed(2)}`;
+            document.getElementById('checkout-total').textContent = `€${total.toFixed(2)}`;
+            
+            // Handle form submission
+            document.getElementById('checkout-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                // In a real app, you would process payment here
+                alert('Order placed successfully! You will receive a confirmation email shortly.');
+                
+                // Clear cart and redirect
+                localStorage.removeItem('cart');
+                window.location.href = 'order-confirmation.html';
+            });
+        });
+    </script>
+</body>
+</html>
