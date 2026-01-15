@@ -234,14 +234,39 @@
             // Handle form submission
             document.getElementById('checkout-form').addEventListener('submit', (e) => {
                 e.preventDefault();
-                
-                // In a real app, you would process payment here
-                alert('Order placed successfully! You will receive a confirmation email shortly.');
-                
-                // Clear cart and redirect
-                localStorage.removeItem('cart');
-                window.location.href = 'order-confirmation.html';
-            });
+            const formData = {
+              fullName: document.getElementById('full-name').value,
+              email: document.getElementById('email').value,
+              phone: document.getElementById('phone').value,
+              address: document.getElementById('address').value,
+              country: document.getElementById('country').value,
+              postalCode: document.getElementById('postal-code').value,
+              city: document.getElementById('city').value,
+              paymentMethod: document.querySelector('input[name="payment-method"]:checked').value
+            };
+            
+            try {
+              const response = await fetch('/create-payment', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  customer: formData,
+                  cart: cart,
+                  total: total,
+                  paymentMethod: formData.paymentMethod
+                })
+              });
+              
+              const result = await response.json();
+              if (response.ok) {
+                window.location.href = result.redirectUrl + (result.orderId ? `?order=${result.orderId}` : '');
+              } else {
+                throw new Error(result.error || 'Payment failed');
+              }
+            } catch (error) {
+              alert('Payment error: ' + error.message);
+            }
+});
         });
     </script>
 </body>
