@@ -178,6 +178,10 @@ Complete Order
 </div>
 </section>
 
+
+
+
+    
 <script>
 feather.replace();
 
@@ -185,59 +189,105 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const cart = JSON.parse(localStorage.getItem("cart")) || [];
 if (cart.length === 0) {
-window.location.href = "cart.html";
-return;
+    window.location.href = "cart.html";
+    return;
 }
 
 const itemsEl = document.getElementById("checkout-items");
 let subtotal = 0;
 
 cart.forEach(item => {
-const qty = item.quantity || 1;
-const totalItem = item.price * qty;
-subtotal += totalItem;
+    const qty = item.quantity || 1;
+    const totalItem = item.price * qty;
+    subtotal += totalItem;
 
-const li = document.createElement("li");
-li.className = "flex justify-between border-b border-slate-700 pb-2";
-li.innerHTML = `<span>${item.name} (x${qty})</span>
-<span>€${totalItem.toFixed(2)}</span>`;
-itemsEl.appendChild(li);
+    const li = document.createElement("li");
+    li.className = "flex justify-between border-b border-slate-700 pb-2";
+    li.innerHTML = `
+        <span>${item.name} (x${qty})</span>
+        <span>€${totalItem.toFixed(2)}</span>
+    `;
+    itemsEl.appendChild(li);
 });
 
-// Shipping linked to previously selected country
 const savedCountry = localStorage.getItem("shippingCountry");
 if (savedCountry) {
-document.getElementById("country").value = savedCountry;
+    document.getElementById("country").value = savedCountry;
 }
 
 function updateTotals() {
 
-const shippingPrices = {
-NL: 15,
-BE: 15,
-DE: 20,
-FR: 25,
-ES: 30,
-IT: 30,
-other: 50
-};
+    const shippingPrices = {
+        NL: 15,
+        BE: 15,
+        DE: 20,
+        FR: 25,
+        ES: 30,
+        IT: 30,
+        other: 50
+    };
 
-const country = document.getElementById("country").value;
-const shipping = shippingPrices[country] || 0;
-const vat = subtotal * 0.21;
-const total = subtotal + shipping + vat;
+    const country = document.getElementById("country").value;
+    const shipping = shippingPrices[country] || 0;
+    const vat = subtotal * 0.21;
+    const total = subtotal + shipping + vat;
 
-document.getElementById("subtotal").textContent = `€${subtotal.toFixed(2)}`;
-document.getElementById("shipping").textContent = `€${shipping.toFixed(2)}`;
-document.getElementById("vat").textContent = `€${vat.toFixed(2)}`;
-document.getElementById("total").textContent = `€${total.toFixed(2)}`;
+    document.getElementById("subtotal").textContent = `€${subtotal.toFixed(2)}`;
+    document.getElementById("shipping").textContent = `€${shipping.toFixed(2)}`;
+    document.getElementById("vat").textContent = `€${vat.toFixed(2)}`;
+    document.getElementById("total").textContent = `€${total.toFixed(2)}`;
+
+    return { shipping, vat, total };
 }
 
 document.getElementById("country").addEventListener("change", updateTotals);
 updateTotals();
 
+
+// 🔥 FIXED SUBMIT HANDLER
+document.getElementById("checkout-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const totals = updateTotals();
+
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const form = this;
+
+    // Build order details
+    let itemsList = cart.map(item =>
+        `${item.name} x ${item.quantity} - €${(item.price * item.quantity).toFixed(2)}`
+    ).join("\n");
+
+    const orderDetails = `
+Items:
+${itemsList}
+
+Subtotal: €${subtotal.toFixed(2)}
+Shipping: €${totals.shipping.toFixed(2)}
+VAT: €${totals.vat.toFixed(2)}
+Total: €${totals.total.toFixed(2)}
+    `;
+
+    // Inject hidden field
+    const hidden = document.createElement("input");
+    hidden.type = "hidden";
+    hidden.name = "Order Details";
+    hidden.value = orderDetails;
+
+    form.appendChild(hidden);
+
+    // Clear cart BEFORE submit
+    localStorage.removeItem("cart");
+    localStorage.removeItem("shippingCountry");
+
+    // Submit form
+    form.submit();
+});
 });
 </script>
+
+
+    
 
 </body>
 </html>
