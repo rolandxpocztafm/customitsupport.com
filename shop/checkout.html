@@ -72,17 +72,17 @@ Order Summary
 
 <div class="border-t border-slate-700 pt-4">
 <div class="flex justify-between mb-2">
-<span class="text-slate-400">Subtotal:</span>
+<span>Subtotal:</span>
 <span id="subtotal">€0.00</span>
 </div>
 
 <div class="flex justify-between mb-2">
-<span class="text-slate-400">Shipping:</span>
+<span>Shipping:</span>
 <span id="shipping">€0.00</span>
 </div>
 
 <div class="flex justify-between mb-2">
-<span class="text-slate-400">VAT (21%):</span>
+<span>VAT (21%):</span>
 <span id="vat">€0.00</span>
 </div>
 
@@ -107,8 +107,9 @@ method="POST"
 class="space-y-4">
 
 <input type="hidden" name="_subject" value="New Order - Custom IT Support Mining">
-<input type="hidden" name="_next" value="order-confirmation.html">
-<input type="hidden" name="_captcha" value="true">
+<input type="hidden" name="_captcha" value="false">
+<input type="hidden" name="Cart Items" id="cart-data">
+<input type="hidden" name="Order Summary" id="order-summary">
 
 <div>
 <label class="block text-sm mb-2">Full Name</label>
@@ -144,7 +145,6 @@ class="space-y-4">
 </select>
 </div>
 
-<!-- PAYMENT -->
 <h2 class="text-xl font-bold mt-8 mb-6 flex items-center">
 <i data-feather="credit-card" class="w-5 h-5 mr-2"></i>
 Payment Method
@@ -152,18 +152,13 @@ Payment Method
 
 <div class="space-y-3">
 <label class="flex items-center">
-<input type="radio" name="Payment Method" value="iDEAL" class="mr-3" checked>
-<i data-feather="credit-card" class="w-4 h-4 mr-2"></i> iDEAL
+<input type="radio" name="Payment Method" value="iDEAL" class="mr-3" checked> iDEAL
 </label>
-
 <label class="flex items-center">
-<input type="radio" name="Payment Method" value="Bank Transfer" class="mr-3">
-<i data-feather="bank" class="w-4 h-4 mr-2"></i> Bank Transfer
+<input type="radio" name="Payment Method" value="Bank Transfer" class="mr-3"> Bank Transfer
 </label>
-
 <label class="flex items-center">
-<input type="radio" name="Payment Method" value="Cash on Delivery" class="mr-3">
-<i data-feather="dollar-sign" class="w-4 h-4 mr-2"></i> Cash on Delivery
+<input type="radio" name="Payment Method" value="Cash on Delivery" class="mr-3"> Cash on Delivery
 </label>
 </div>
 
@@ -204,14 +199,6 @@ li.innerHTML = `<span>${item.name} (x${qty})</span>
 itemsEl.appendChild(li);
 });
 
-// Shipping linked to previously selected country
-const savedCountry = localStorage.getItem("shippingCountry");
-if (savedCountry) {
-document.getElementById("country").value = savedCountry;
-}
-
-function updateTotals() {
-
 const shippingPrices = {
 NL: 15,
 BE: 15,
@@ -222,6 +209,7 @@ IT: 30,
 other: 50
 };
 
+function calculateTotals() {
 const country = document.getElementById("country").value;
 const shipping = shippingPrices[country] || 0;
 const vat = subtotal * 0.21;
@@ -231,10 +219,37 @@ document.getElementById("subtotal").textContent = `€${subtotal.toFixed(2)}`;
 document.getElementById("shipping").textContent = `€${shipping.toFixed(2)}`;
 document.getElementById("vat").textContent = `€${vat.toFixed(2)}`;
 document.getElementById("total").textContent = `€${total.toFixed(2)}`;
+
+return { shipping, vat, total };
 }
 
-document.getElementById("country").addEventListener("change", updateTotals);
-updateTotals();
+document.getElementById("country").addEventListener("change", calculateTotals);
+calculateTotals();
+
+document.getElementById("checkout-form").addEventListener("submit", function() {
+
+const totals = calculateTotals();
+
+let cartText = "";
+cart.forEach(item => {
+cartText += `${item.name} | Qty: ${item.quantity || 1} | €${item.price}\n`;
+});
+
+document.getElementById("cart-data").value = cartText;
+document.getElementById("order-summary").value =
+`Subtotal: €${subtotal.toFixed(2)}
+Shipping: €${totals.shipping.toFixed(2)}
+VAT: €${totals.vat.toFixed(2)}
+Total: €${totals.total.toFixed(2)}`;
+
+localStorage.removeItem("cart");
+localStorage.removeItem("shippingCountry");
+
+setTimeout(() => {
+window.location.href = "shop/order-confirmation.html";
+}, 500);
+
+});
 
 });
 </script>
