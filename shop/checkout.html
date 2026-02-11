@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Checkout - Custom IT Support Mining</title>
 
+<link rel="icon" type="image/x-icon" href="/static/favicon.ico">
 <script src="https://cdn.tailwindcss.com"></script>
 
 <style>
@@ -14,10 +15,6 @@ body {
     font-family: 'Space Grotesk', sans-serif;
     background-color: #0f172a;
     color: #e2e8f0;
-}
-
-.gradient-bg {
-    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
 }
 
 .content-card {
@@ -45,6 +42,7 @@ body {
 
 <section class="py-16">
 <div class="container mx-auto px-4 max-w-6xl">
+
 <h1 class="text-3xl font-bold mb-8 text-center">Checkout</h1>
 
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -83,31 +81,41 @@ body {
 
 <h2 class="text-xl font-bold mb-6">Customer Information</h2>
 
-<form id="checkout-form" class="space-y-4">
+<form 
+action="https://formsubmit.co/youremail@example.com" 
+method="POST"
+class="space-y-4">
+
+<!-- Redirect after submission -->
+<input type="hidden" name="_next" value="order-confirmation.html">
+<input type="hidden" name="_captcha" value="false">
+
+<!-- Hidden order summary field -->
+<textarea name="Order Details" id="order-details" hidden></textarea>
 
 <div>
 <label class="block text-sm mb-2">Full Name</label>
-<input type="text" id="full-name" class="w-full p-3 rounded-lg form-input" required>
+<input type="text" name="Full Name" class="w-full p-3 rounded-lg form-input" required>
 </div>
 
 <div>
 <label class="block text-sm mb-2">Email Address</label>
-<input type="email" id="email" class="w-full p-3 rounded-lg form-input" required>
+<input type="email" name="Email" class="w-full p-3 rounded-lg form-input" required>
 </div>
 
 <div>
-<label class="block text-sm mb-2">Phone Number</label>
-<input type="tel" id="phone" class="w-full p-3 rounded-lg form-input" required>
+<label class="block text-sm mb-2">Phone</label>
+<input type="tel" name="Phone" class="w-full p-3 rounded-lg form-input" required>
 </div>
 
 <div>
 <label class="block text-sm mb-2">Shipping Address</label>
-<textarea id="address" rows="3" class="w-full p-3 rounded-lg form-input" required></textarea>
+<textarea name="Address" rows="3" class="w-full p-3 rounded-lg form-input" required></textarea>
 </div>
 
 <div>
 <label class="block text-sm mb-2">Country</label>
-<select id="country" class="w-full p-3 rounded-lg form-input" required>
+<select name="Country" id="country" class="w-full p-3 rounded-lg form-input" required>
 <option value="">Select Country</option>
 <option value="NL">Netherlands</option>
 <option value="BE">Belgium</option>
@@ -120,14 +128,8 @@ body {
 </div>
 
 <div class="grid grid-cols-2 gap-4">
-<div>
-<label class="block text-sm mb-2">Postal Code</label>
-<input type="text" id="postal" class="w-full p-3 rounded-lg form-input" required>
-</div>
-<div>
-<label class="block text-sm mb-2">City</label>
-<input type="text" id="city" class="w-full p-3 rounded-lg form-input" required>
-</div>
+<input type="text" name="Postal Code" placeholder="Postal Code" class="p-3 rounded-lg form-input" required>
+<input type="text" name="City" placeholder="City" class="p-3 rounded-lg form-input" required>
 </div>
 
 <!-- PAYMENT METHOD -->
@@ -135,17 +137,17 @@ body {
 
 <div class="space-y-3">
 <label class="flex items-center">
-<input type="radio" name="payment-method" value="ideal" class="mr-3" checked>
+<input type="radio" name="Payment Method" value="iDEAL" class="mr-3" checked>
 iDEAL
 </label>
 
 <label class="flex items-center">
-<input type="radio" name="payment-method" value="bank" class="mr-3">
+<input type="radio" name="Payment Method" value="Bank Transfer" class="mr-3">
 Bank Transfer
 </label>
 
 <label class="flex items-center">
-<input type="radio" name="payment-method" value="cash" class="mr-3">
+<input type="radio" name="Payment Method" value="Cash on Delivery" class="mr-3">
 Cash on Delivery
 </label>
 </div>
@@ -156,8 +158,8 @@ Complete Order
 </button>
 
 </form>
-</div>
 
+</div>
 </div>
 </div>
 </section>
@@ -174,11 +176,14 @@ return;
 
 const itemsEl = document.getElementById("checkout-items");
 let subtotal = 0;
+let orderText = "";
 
 cart.forEach(item => {
 const qty = item.quantity || 1;
 const itemTotal = item.price * qty;
 subtotal += itemTotal;
+
+orderText += `${item.name} (x${qty}) - €${itemTotal.toFixed(2)}\n`;
 
 const li = document.createElement("li");
 li.className = "flex justify-between items-center py-2 border-b border-slate-700";
@@ -213,16 +218,17 @@ document.getElementById("subtotal").textContent = "€" + subtotal.toFixed(2);
 document.getElementById("shipping").textContent = "€" + shipping.toFixed(2);
 document.getElementById("vat").textContent = "€" + vat.toFixed(2);
 document.getElementById("total").textContent = "€" + total.toFixed(2);
+
+document.getElementById("order-details").value =
+orderText +
+`\nSubtotal: €${subtotal.toFixed(2)}
+Shipping: €${shipping.toFixed(2)}
+VAT: €${vat.toFixed(2)}
+Total: €${total.toFixed(2)}`;
 }
 
 document.getElementById("country").addEventListener("change", updateTotals);
 updateTotals();
-
-document.getElementById("checkout-form").addEventListener("submit", function(e) {
-e.preventDefault();
-localStorage.removeItem("cart");
-window.location.href = "order-confirmation.html";
-});
 
 });
 </script>
