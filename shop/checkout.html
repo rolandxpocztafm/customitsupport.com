@@ -3,291 +3,163 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Checkout - Custom IT Support Mining</title>
-
-<link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+<title>Checkout</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<script src="https://unpkg.com/feather-icons"></script>
-
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
-
 body {
-    font-family: 'Space Grotesk', sans-serif;
-    background-color: #0f172a;
+    background: #0f172a;
     color: #e2e8f0;
+    font-family: sans-serif;
 }
-
-.content-card {
-    background: rgba(15, 23, 42, 0.7);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 0.5rem;
+.card {
+    background: #1e293b;
+    border-radius: 10px;
+    padding: 20px;
 }
-
-.form-input {
-    background: rgba(15, 23, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: white;
+.input {
+    background: #0f172a;
+    border: 1px solid #334155;
+    padding: 10px;
+    border-radius: 6px;
+    width: 100%;
 }
-
-.form-input:focus {
+.input:focus {
     outline: none;
     border-color: #3b82f6;
-    box-shadow: 0 0 0 1px #3b82f6;
 }
 </style>
 </head>
+<body class="p-6">
 
-<body>
-
-<nav class="bg-slate-900 border-b border-slate-700">
-<div class="container mx-auto px-6 py-4 flex justify-between items-center">
-<div class="flex items-center">
-<i data-feather="cpu" class="w-8 h-8 text-blue-500 mr-3"></i>
-<a href="index.html" class="text-xl font-bold text-white">
-Custom IT Support Mining
-</a>
-</div>
-<a href="cart.html" class="text-slate-300 hover:text-white">
-<i data-feather="arrow-left"></i>
-</a>
-</div>
-</nav>
-
-<section class="py-16">
-<div class="container mx-auto px-4 max-w-6xl">
 <h1 class="text-3xl font-bold mb-8 text-center">Checkout</h1>
 
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
 
-<!-- ORDER SUMMARY -->
-<div class="content-card p-6">
-<h2 class="text-xl font-bold mb-6 flex items-center">
-<i data-feather="shopping-cart" class="w-5 h-5 mr-2"></i>
-Order Summary
-</h2>
+    <!-- ORDER SUMMARY -->
+    <div class="card">
+        <h2 class="text-xl font-bold mb-4">Order Summary</h2>
+        <ul id="checkout-items" class="space-y-2 mb-4"></ul>
 
-<ul id="checkout-items" class="space-y-4 mb-6"></ul>
+        <div class="border-t border-slate-600 pt-4 space-y-2">
+            <div class="flex justify-between">
+                <span>Subtotal</span>
+                <span id="subtotal">€0.00</span>
+            </div>
+            <div class="flex justify-between">
+                <span>Shipping</span>
+                <span id="shipping">€0.00</span>
+            </div>
+            <div class="flex justify-between">
+                <span>VAT (21%)</span>
+                <span id="vat">€0.00</span>
+            </div>
+            <div class="flex justify-between font-bold text-lg border-t border-slate-600 pt-2">
+                <span>Total</span>
+                <span id="total">€0.00</span>
+            </div>
+        </div>
+    </div>
 
-<div class="border-t border-slate-700 pt-4">
-<div class="flex justify-between mb-2">
-<span class="text-slate-400">Subtotal:</span>
-<span id="subtotal">€0.00</span>
+    <!-- CUSTOMER FORM -->
+    <div class="card">
+        <h2 class="text-xl font-bold mb-4">Customer Information</h2>
+
+        <form id="checkout-form" class="space-y-4">
+
+            <input type="text" id="full-name" placeholder="Full Name" class="input" required>
+            <input type="email" id="email" placeholder="Email Address" class="input" required>
+            <input type="tel" id="phone" placeholder="Phone Number" class="input" required>
+            <textarea id="address" placeholder="Shipping Address" class="input" required></textarea>
+
+            <select id="country" class="input" required>
+                <option value="">Select Country</option>
+                <option value="NL">Netherlands</option>
+                <option value="BE">Belgium</option>
+                <option value="DE">Germany</option>
+                <option value="FR">France</option>
+                <option value="ES">Spain</option>
+                <option value="IT">Italy</option>
+                <option value="other">Other</option>
+            </select>
+
+            <div class="grid grid-cols-2 gap-4">
+                <input type="text" id="postal" placeholder="Postal Code" class="input" required>
+                <input type="text" id="city" placeholder="City" class="input" required>
+            </div>
+
+            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 py-3 rounded-lg font-bold">
+                Complete Order
+            </button>
+
+        </form>
+    </div>
 </div>
 
-<div class="flex justify-between mb-2">
-<span class="text-slate-400">Shipping:</span>
-<span id="shipping">€0.00</span>
-</div>
-
-<div class="flex justify-between mb-2">
-<span class="text-slate-400">VAT (21%):</span>
-<span id="vat">€0.00</span>
-</div>
-
-<div class="flex justify-between text-lg font-bold mt-4 pt-4 border-t border-slate-700">
-<span>Total:</span>
-<span id="total">€0.00</span>
-</div>
-</div>
-</div>
-
-<!-- FORM -->
-<div class="content-card p-6">
-
-<h2 class="text-xl font-bold mb-6 flex items-center">
-<i data-feather="user" class="w-5 h-5 mr-2"></i>
-Customer Information
-</h2>
-
-<form id="checkout-form"
-action="https://formsubmit.co/rp@customitsupport.com"
-method="POST"
-class="space-y-4">
-
-<input type="hidden" name="_subject" value="New Order - Custom IT Support Mining">
-<input type="hidden" name="_next" value="order-confirmation.html">
-<input type="hidden" name="_captcha" value="true">
-
-<div>
-<label class="block text-sm mb-2">Full Name</label>
-<input type="text" name="Full Name" class="w-full p-3 rounded-lg form-input" required>
-</div>
-
-<div>
-<label class="block text-sm mb-2">Email</label>
-<input type="email" name="Email" class="w-full p-3 rounded-lg form-input" required>
-</div>
-
-<div>
-<label class="block text-sm mb-2">Phone</label>
-<input type="tel" name="Phone" class="w-full p-3 rounded-lg form-input" required>
-</div>
-
-<div>
-<label class="block text-sm mb-2">Address</label>
-<textarea name="Address" rows="3" class="w-full p-3 rounded-lg form-input" required></textarea>
-</div>
-
-<div>
-<label class="block text-sm mb-2">Country</label>
-<select id="country" name="Country" class="w-full p-3 rounded-lg form-input" required>
-<option value="">Select Country</option>
-<option value="NL">Netherlands</option>
-<option value="BE">Belgium</option>
-<option value="DE">Germany</option>
-<option value="FR">France</option>
-<option value="ES">Spain</option>
-<option value="IT">Italy</option>
-<option value="other">Other</option>
-</select>
-</div>
-
-<!-- PAYMENT -->
-<h2 class="text-xl font-bold mt-8 mb-6 flex items-center">
-<i data-feather="credit-card" class="w-5 h-5 mr-2"></i>
-Payment Method
-</h2>
-
-<div class="space-y-3">
-<label class="flex items-center">
-<input type="radio" name="Payment Method" value="iDEAL" class="mr-3" checked>
-<i data-feather="credit-card" class="w-4 h-4 mr-2"></i> iDEAL
-</label>
-
-<label class="flex items-center">
-<input type="radio" name="Payment Method" value="Bank Transfer" class="mr-3">
-<i data-feather="bank" class="w-4 h-4 mr-2"></i> Bank Transfer
-</label>
-
-<label class="flex items-center">
-<input type="radio" name="Payment Method" value="Cash on Delivery" class="mr-3">
-<i data-feather="dollar-sign" class="w-4 h-4 mr-2"></i> Cash on Delivery
-</label>
-</div>
-
-<button type="submit"
-class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium mt-8 transition">
-Complete Order
-</button>
-
-</form>
-</div>
-</div>
-</div>
-</section>
-
-
-
-
-    
 <script>
-feather.replace();
-
 document.addEventListener("DOMContentLoaded", () => {
 
-const cart = JSON.parse(localStorage.getItem("cart")) || [];
-if (cart.length === 0) {
-    window.location.href = "cart.html";
-    return;
-}
-
-const itemsEl = document.getElementById("checkout-items");
-let subtotal = 0;
-
-cart.forEach(item => {
-    const qty = item.quantity || 1;
-    const totalItem = item.price * qty;
-    subtotal += totalItem;
-
-    const li = document.createElement("li");
-    li.className = "flex justify-between border-b border-slate-700 pb-2";
-    li.innerHTML = `
-        <span>${item.name} (x${qty})</span>
-        <span>€${totalItem.toFixed(2)}</span>
-    `;
-    itemsEl.appendChild(li);
-});
-
-const savedCountry = localStorage.getItem("shippingCountry");
-if (savedCountry) {
-    document.getElementById("country").value = savedCountry;
-}
-
-function updateTotals() {
-
-    const shippingPrices = {
-        NL: 15,
-        BE: 15,
-        DE: 20,
-        FR: 25,
-        ES: 30,
-        IT: 30,
-        other: 50
-    };
-
-    const country = document.getElementById("country").value;
-    const shipping = shippingPrices[country] || 0;
-    const vat = subtotal * 0.21;
-    const total = subtotal + shipping + vat;
-
-    document.getElementById("subtotal").textContent = `€${subtotal.toFixed(2)}`;
-    document.getElementById("shipping").textContent = `€${shipping.toFixed(2)}`;
-    document.getElementById("vat").textContent = `€${vat.toFixed(2)}`;
-    document.getElementById("total").textContent = `€${total.toFixed(2)}`;
-
-    return { shipping, vat, total };
-}
-
-document.getElementById("country").addEventListener("change", updateTotals);
-updateTotals();
-
-
-// 🔥 FIXED SUBMIT HANDLER
-document.getElementById("checkout-form").addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    const totals = updateTotals();
-
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const form = this;
+    const itemsEl = document.getElementById("checkout-items");
 
-    // Build order details
-    let itemsList = cart.map(item =>
-        `${item.name} x ${item.quantity} - €${(item.price * item.quantity).toFixed(2)}`
-    ).join("\n");
+    if (cart.length === 0) {
+        window.location.href = "cart.html";
+        return;
+    }
 
-    const orderDetails = `
-Items:
-${itemsList}
+    let subtotal = 0;
 
-Subtotal: €${subtotal.toFixed(2)}
-Shipping: €${totals.shipping.toFixed(2)}
-VAT: €${totals.vat.toFixed(2)}
-Total: €${totals.total.toFixed(2)}
-    `;
+    cart.forEach(item => {
+        const qty = item.quantity || 1;
+        const itemTotal = item.price * qty;
+        subtotal += itemTotal;
 
-    // Inject hidden field
-    const hidden = document.createElement("input");
-    hidden.type = "hidden";
-    hidden.name = "Order Details";
-    hidden.value = orderDetails;
+        const li = document.createElement("li");
+        li.className = "flex justify-between border-b border-slate-600 pb-2";
+        li.innerHTML = `
+            <span>${item.name} (x${qty})</span>
+            <span>€${itemTotal.toFixed(2)}</span>
+        `;
+        itemsEl.appendChild(li);
+    });
 
-    form.appendChild(hidden);
+    function updateTotals() {
+        const country = document.getElementById("country").value;
 
-    // Clear cart BEFORE submit
-    localStorage.removeItem("cart");
-    localStorage.removeItem("shippingCountry");
+        const shippingPrices = {
+            NL: 15,
+            BE: 15,
+            DE: 20,
+            FR: 25,
+            ES: 30,
+            IT: 30,
+            other: 50
+        };
 
-    // Submit form
-    form.submit();
-});
+        const shipping = shippingPrices[country] || 0;
+        const vat = subtotal * 0.21;
+        const total = subtotal + shipping + vat;
+
+        document.getElementById("subtotal").textContent = "€" + subtotal.toFixed(2);
+        document.getElementById("shipping").textContent = "€" + shipping.toFixed(2);
+        document.getElementById("vat").textContent = "€" + vat.toFixed(2);
+        document.getElementById("total").textContent = "€" + total.toFixed(2);
+    }
+
+    document.getElementById("country").addEventListener("change", updateTotals);
+    updateTotals();
+
+    document.getElementById("checkout-form").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        // Clear cart
+        localStorage.removeItem("cart");
+
+        // Redirect to confirmation page
+        window.location.href = "order-confirmation.html";
+    });
+
 });
 </script>
-
-
-    
 
 </body>
 </html>
