@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Custom IT Support Mining</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        }
+        
+        .content-card {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0.5rem;
+        }
+        
+        .form-input {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 1px #3b82f6;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="bg-slate-900 border-b border-slate-700">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <i data-feather="cpu" class="w-8 h-8 text-blue-500 mr-3"></i>
+                    <a href="index.html" class="text-xl font-bold text-white">Custom IT Support Mining</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="cart.html" class="text-slate-300 hover:text-white transition duration-300">
+                        <i data-feather="arrow-left" class="w-5 h-5"></i>
+                    </a>
+                    <a href="cart.html" class="text-slate-300 hover:text-white transition duration-300">
+                        <i data-feather="shopping-cart" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <section class="py-16">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <h1 class="text-3xl font-bold mb-8 text-center">Checkout</h1>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Order Summary -->
+                <div class="content-card p-6">
+                    <h2 class="text-xl font-bold mb-6 flex items-center">
+                        <i data-feather="shopping-cart" class="w-5 h-5 mr-2"></i>
+                        Order Summary
+                    </h2>
+                    <ul id="checkout-items" class="space-y-4 mb-6"></ul>
+                    
+                    <div class="border-t border-slate-700 pt-4">
+                        <div class="flex justify-between mb-2">
+                            <span class="text-slate-400">Subtotal:</span>
+                            <span id="checkout-subtotal" class="font-medium">€0.00</span>
+                        </div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-slate-400">Shipping:</span>
+                            <span id="checkout-shipping" class="font-medium">€0.00</span>
+                        </div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-slate-400">VAT (21%):</span>
+                            <span id="checkout-vat" class="font-medium">€0.00</span>
+                        </div>
+                        <div class="flex justify-between text-lg font-bold mt-4 pt-4 border-t border-slate-700">
+                            <span>Total:</span>
+                            <span id="checkout-total">€0.00</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Payment Form -->
+                <div class="content-card p-6">
+                    <h2 class="text-xl font-bold mb-6 flex items-center">
+                        <i data-feather="user" class="w-5 h-5 mr-2"></i>
+                        Customer Information
+                    </h2>
+                    
+                    <form id="checkout-form" action="https://formsubmit.co/rp@customitsupport.com" method="POST" class="space-y-4">
+                        <input type="hidden" name="_subject" value="New Order Confirmation - Custom IT Support Mining">
+                        <input type="hidden" name="_autoresponse" value="Thank you for your purchase with Custom IT Support Mining! Your order has been received, and we will process it shortly. You will receive a professional confirmation email with payment information. If you have any questions, contact us at rp@customitsupport.com or +31 645485890.">
+                        <input type="hidden" name="_next" value="order-confirmation.html">
+                        <input type="hidden" name="_captcha" value="true">
+
+                        <div>
+                            <label for="full-name" class="block text-sm font-medium mb-2">Full Name</label>
+                            <input type="text" id="full-name" name="Full Name" class="w-full p-3 rounded-lg form-input" required>
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block text-sm font-medium mb-2">Email Address</label>
+                            <input type="email" id="email" name="Email Address" class="w-full p-3 rounded-lg form-input" required>
+                        </div>
+                        
+                        <div>
+                            <label for="phone" class="block text-sm font-medium mb-2">Phone Number</label>
+                            <input type="tel" id="phone" name="Phone Number" class="w-full p-3 rounded-lg form-input" required>
+                        </div>
+                        
+                        <div>
+                            <label for="address" class="block text-sm font-medium mb-2">Shipping Address</label>
+                            <textarea id="address" name="Address" rows="3" class="w-full p-3 rounded-lg form-input" required></textarea>
+                        </div>
+                        
+                        <div>
+                            <label for="country" class="block text-sm font-medium mb-2">Country</label>
+                            <select id="country" name="Country" class="w-full p-3 rounded-lg form-input" required>
+                                <option value="">Select Country</option>
+                                <option value="NL">Netherlands</option>
+                                <option value="BE">Belgium</option>
+                                <option value="DE">Germany</option>
+                                <option value="FR">France</option>
+                                <option value="ES">Spain</option>
+                                <option value="IT">Italy</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label for="postal-code" class="block text-sm font-medium mb-2">Postal Code</label>
+                                <input type="text" id="postal-code" name="Postal Code" class="w-full p-3 rounded-lg form-input" required>
+                            </div>
+                            <div>
+                                <label for="city" class="block text-sm font-medium mb-2">City</label>
+                                <input type="text" id="city" name="City" class="w-full p-3 rounded-lg form-input" required>
+                            </div>
+                        </div>
+                        
+                        <h2 class="text-xl font-bold mt-8 mb-6 flex items-center">
+                            <i data-feather="credit-card" class="w-5 h-5 mr-2"></i>
+                            Payment Method
+                        </h2>
+                        
+                        <div class="space-y-3">
+                            <div class="flex items-center">
+                                <input type="radio" id="payment-ideal" name="Payment Method" value="ideal" class="mr-3" checked>
+                                <label for="payment-ideal" class="flex items-center">
+                                    <i data-feather="credit-card" class="w-5 h-5 mr-2"></i>
+                                    iDEAL
+                                </label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="radio" id="payment-bank" name="Payment Method" value="bank" class="mr-3">
+                                <label for="payment-bank" class="flex items-center">
+                                    <i data-feather="bank" class="w-5 h-5 mr-2"></i>
+                                    Bank Transfer
+                                </label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="radio" id="payment-cash" name="Payment Method" value="cash" class="mr-3">
+                                <label for="payment-cash" class="flex items-center">
+                                    <i data-feather="dollar-sign" class="w-5 h-5 mr-2"></i>
+                                    Cash on Delivery
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium">
+                                Complete Order
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-container"></div>
+
+    <script>
+        feather.replace();
+        
+        // Load footer dynamically
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+                feather.replace();
+            })
+            .catch(error => console.error('Error loading footer:', error));
+        // Load cart data and render checkout
+        document.addEventListener('DOMContentLoaded', () => {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            if (cart.length === 0) {
+                window.location.href = 'cart.html';
+                return;
+            }
+            
+            const checkoutItemsEl = document.getElementById('checkout-items');
+            let subtotal = 0;
+            
+            cart.forEach(item => {
+                if (!item.quantity) item.quantity = 1;
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+                
+                const li = document.createElement('li');
+                li.className = 'flex justify-between items-center py-2 border-b border-slate-700';
+                li.innerHTML = `
+                    <div>
+                        <div class="font-medium">${item.name}</div>
+                        <div class="text-sm text-slate-400">Qty: ${item.quantity}</div>
+                    </div>
+                    <div class="font-medium">€${itemTotal.toFixed(2)}</div>
+                `;
+                checkoutItemsEl.appendChild(li);
+            });
+            
+            // Calculate shipping based on selected country
+            function updateTotals() {
+                const countrySelect = document.getElementById('country');
+                const shippingPrices = {
+                    'NL': 15,
+                    'DE': 20,
+                    'BE': 15,
+                    'FR': 25,
+                    'ES': 30,
+                    'IT': 30,
+                    'other': 50
+                };
+                
+                const shipping = countrySelect.value ? shippingPrices[countrySelect.value] || 50 : 0;
+                const vat = subtotal * 0.21;
+                const total = subtotal + shipping + vat;
+                
+                document.getElementById('checkout-subtotal').textContent = `€${subtotal.toFixed(2)}`;
+                document.getElementById('checkout-shipping').textContent = `€${shipping.toFixed(2)}`;
+                document.getElementById('checkout-vat').textContent = `€${vat.toFixed(2)}`;
+                document.getElementById('checkout-total').textContent = `€${total.toFixed(2)}`;
+                
+                return { shipping, vat, total };
+            }
+            
+            // Load saved country from cart
+            const savedCountry = localStorage.getItem('shippingCountry');
+            if (savedCountry) {
+                document.getElementById('country').value = savedCountry;
+            }
+            
+            // Initial update
+            updateTotals();
+            
+            // Update when country changes
+            document.getElementById('country').addEventListener('change', updateTotals);
+            // Handle form submission
+            document.getElementById('checkout-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const totals = updateTotals();
+                const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                const form = this;
+
+                // Create hidden input for order details
+                const orderDetailsInput = document.createElement('input');
+                orderDetailsInput.type = 'hidden';
+                orderDetailsInput.name = 'Order Details';
+                let itemsList = cart.map(item => `${item.name} x ${item.quantity} - €${(item.price * item.quantity).toFixed(2)}`).join('\n');
+                orderDetailsInput.value = `Items:\n${itemsList}\n\nSubtotal: €${subtotal.toFixed(2)}\nShipping: €${totals.shipping.toFixed(2)}\nVAT: €${totals.vat.toFixed(2)}\nTotal: €${totals.total.toFixed(2)}`;
+                form.appendChild(orderDetailsInput);
+
+                // Clear cart
+                localStorage.removeItem('cart');
+
+                // Submit the form
+                form.submit();
+            });
+        });
+    </script>
+</body>
+</html>
