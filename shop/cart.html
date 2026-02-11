@@ -91,7 +91,7 @@
                                     <div class="flex flex-col items-end">
                                         <select id="shipping-country" class="bg-slate-800 text-white p-1 rounded text-sm mb-1">
                                             <option value="">Select Country</option>
-                                            <option value="NL">Pick up at store - €0</option>
+                                            <option value="STORE">Pick up at store - €0</option>
                                             <option value="NL">Netherlands - €25</option>
                                             <option value="DE">Germany - €40</option>
                                             <option value="BE">Belgium - €40</option>
@@ -224,12 +224,13 @@
         // Shipping country change handler
         document.getElementById('shipping-country').addEventListener('change', function() {
             const shippingPrices = {
-                'NL': 15,
-                'DE': 20,
-                'BE': 15,
-                'FR': 25,
-                'ES': 30,
-                'IT': 30
+                'STORE': 0,
+                'NL': 25,
+                'DE': 40,
+                'BE': 40,
+                'FR': 40,
+                'ES': 40,
+                'IT': 40
             };
             
             shippingCost = this.value ? shippingPrices[this.value] || 0 : 0;
@@ -246,12 +247,13 @@
             if (savedCountry) {
                 document.getElementById('shipping-country').value = savedCountry;
                 const shippingPrices = {
-                    'NL': 15,
-                    'DE': 20,
-                    'BE': 15,
-                    'FR': 25,
-                    'ES': 30,
-                    'IT': 30
+                'STORE': 0,
+                'NL': 25,
+                'DE': 40,
+                'BE': 40,
+                'FR': 40,
+                'ES': 40,
+                'IT': 40
                 };
                 shippingCost = shippingPrices[savedCountry] || 0;
                 document.getElementById('shipping-cost').textContent = `€${shippingCost.toFixed(2)}`;
