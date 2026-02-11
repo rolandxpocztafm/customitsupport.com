@@ -108,6 +108,7 @@ class="space-y-4">
 
 <input type="hidden" name="_subject" value="New Order - Custom IT Support Mining">
 <input type="hidden" name="_captcha" value="false">
+<input type="hidden" name="_next" value="https://customitsupport.com/shop/order-confirmation.html">
 <input type="hidden" name="Cart Items" id="cart-data">
 <input type="hidden" name="Order Summary" id="order-summary">
 
@@ -244,10 +245,6 @@ Total: €${totals.total.toFixed(2)}`;
 
 localStorage.removeItem("cart");
 localStorage.removeItem("shippingCountry");
-
-setTimeout(() => {
-window.location.href = "shop/order-confirmation.html";
-}, 500);
 
 });
 
