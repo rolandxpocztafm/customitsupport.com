@@ -7,6 +7,7 @@
 
 <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/feather-icons"></script>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
@@ -40,31 +41,47 @@ body {
 
 <body>
 
+<nav class="bg-slate-900 border-b border-slate-700">
+<div class="container mx-auto px-6 py-4 flex justify-between items-center">
+<div class="flex items-center">
+<i data-feather="cpu" class="w-8 h-8 text-blue-500 mr-3"></i>
+<a href="index.html" class="text-xl font-bold text-white">
+Custom IT Support Mining
+</a>
+</div>
+<a href="cart.html" class="text-slate-300 hover:text-white">
+<i data-feather="arrow-left"></i>
+</a>
+</div>
+</nav>
+
 <section class="py-16">
 <div class="container mx-auto px-4 max-w-6xl">
-
 <h1 class="text-3xl font-bold mb-8 text-center">Checkout</h1>
 
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
 <!-- ORDER SUMMARY -->
 <div class="content-card p-6">
-<h2 class="text-xl font-bold mb-6">Order Summary</h2>
+<h2 class="text-xl font-bold mb-6 flex items-center">
+<i data-feather="shopping-cart" class="w-5 h-5 mr-2"></i>
+Order Summary
+</h2>
 
 <ul id="checkout-items" class="space-y-4 mb-6"></ul>
 
-<div class="border-t border-slate-700 pt-4 space-y-2">
-<div class="flex justify-between">
+<div class="border-t border-slate-700 pt-4">
+<div class="flex justify-between mb-2">
 <span class="text-slate-400">Subtotal:</span>
 <span id="subtotal">€0.00</span>
 </div>
 
-<div class="flex justify-between">
+<div class="flex justify-between mb-2">
 <span class="text-slate-400">Shipping:</span>
 <span id="shipping">€0.00</span>
 </div>
 
-<div class="flex justify-between">
+<div class="flex justify-between mb-2">
 <span class="text-slate-400">VAT (21%):</span>
 <span id="vat">€0.00</span>
 </div>
@@ -76,22 +93,22 @@ body {
 </div>
 </div>
 
-<!-- CUSTOMER FORM -->
+<!-- FORM -->
 <div class="content-card p-6">
 
-<h2 class="text-xl font-bold mb-6">Customer Information</h2>
+<h2 class="text-xl font-bold mb-6 flex items-center">
+<i data-feather="user" class="w-5 h-5 mr-2"></i>
+Customer Information
+</h2>
 
-<form 
-action="https://formsubmit.co/rp@customitsupport.com" 
+<form id="checkout-form"
+action="https://formsubmit.co/rp@customitsupport.com"
 method="POST"
 class="space-y-4">
 
-<!-- Redirect after submission -->
+<input type="hidden" name="_subject" value="New Order - Custom IT Support Mining">
 <input type="hidden" name="_next" value="order-confirmation.html">
-<input type="hidden" name="_captcha" value="false">
-
-<!-- Hidden order summary field -->
-<textarea name="Order Details" id="order-details" hidden></textarea>
+<input type="hidden" name="_captcha" value="true">
 
 <div>
 <label class="block text-sm mb-2">Full Name</label>
@@ -99,7 +116,7 @@ class="space-y-4">
 </div>
 
 <div>
-<label class="block text-sm mb-2">Email Address</label>
+<label class="block text-sm mb-2">Email</label>
 <input type="email" name="Email" class="w-full p-3 rounded-lg form-input" required>
 </div>
 
@@ -109,13 +126,13 @@ class="space-y-4">
 </div>
 
 <div>
-<label class="block text-sm mb-2">Shipping Address</label>
+<label class="block text-sm mb-2">Address</label>
 <textarea name="Address" rows="3" class="w-full p-3 rounded-lg form-input" required></textarea>
 </div>
 
 <div>
 <label class="block text-sm mb-2">Country</label>
-<select name="Country" id="country" class="w-full p-3 rounded-lg form-input" required>
+<select id="country" name="Country" class="w-full p-3 rounded-lg form-input" required>
 <option value="">Select Country</option>
 <option value="NL">Netherlands</option>
 <option value="BE">Belgium</option>
@@ -127,28 +144,26 @@ class="space-y-4">
 </select>
 </div>
 
-<div class="grid grid-cols-2 gap-4">
-<input type="text" name="Postal Code" placeholder="Postal Code" class="p-3 rounded-lg form-input" required>
-<input type="text" name="City" placeholder="City" class="p-3 rounded-lg form-input" required>
-</div>
-
-<!-- PAYMENT METHOD -->
-<h2 class="text-xl font-bold mt-8 mb-6">Payment Method</h2>
+<!-- PAYMENT -->
+<h2 class="text-xl font-bold mt-8 mb-6 flex items-center">
+<i data-feather="credit-card" class="w-5 h-5 mr-2"></i>
+Payment Method
+</h2>
 
 <div class="space-y-3">
 <label class="flex items-center">
 <input type="radio" name="Payment Method" value="iDEAL" class="mr-3" checked>
-iDEAL
+<i data-feather="credit-card" class="w-4 h-4 mr-2"></i> iDEAL
 </label>
 
 <label class="flex items-center">
 <input type="radio" name="Payment Method" value="Bank Transfer" class="mr-3">
-Bank Transfer
+<i data-feather="bank" class="w-4 h-4 mr-2"></i> Bank Transfer
 </label>
 
 <label class="flex items-center">
 <input type="radio" name="Payment Method" value="Cash on Delivery" class="mr-3">
-Cash on Delivery
+<i data-feather="dollar-sign" class="w-4 h-4 mr-2"></i> Cash on Delivery
 </label>
 </div>
 
@@ -158,17 +173,17 @@ Complete Order
 </button>
 
 </form>
-
 </div>
 </div>
 </div>
 </section>
 
 <script>
+feather.replace();
+
 document.addEventListener("DOMContentLoaded", () => {
 
 const cart = JSON.parse(localStorage.getItem("cart")) || [];
-
 if (cart.length === 0) {
 window.location.href = "cart.html";
 return;
@@ -176,26 +191,24 @@ return;
 
 const itemsEl = document.getElementById("checkout-items");
 let subtotal = 0;
-let orderText = "";
 
 cart.forEach(item => {
 const qty = item.quantity || 1;
-const itemTotal = item.price * qty;
-subtotal += itemTotal;
-
-orderText += `${item.name} (x${qty}) - €${itemTotal.toFixed(2)}\n`;
+const totalItem = item.price * qty;
+subtotal += totalItem;
 
 const li = document.createElement("li");
-li.className = "flex justify-between items-center py-2 border-b border-slate-700";
-li.innerHTML = `
-<div>
-<div class="font-medium">${item.name}</div>
-<div class="text-sm text-slate-400">Qty: ${qty}</div>
-</div>
-<div class="font-medium">€${itemTotal.toFixed(2)}</div>
-`;
+li.className = "flex justify-between border-b border-slate-700 pb-2";
+li.innerHTML = `<span>${item.name} (x${qty})</span>
+<span>€${totalItem.toFixed(2)}</span>`;
 itemsEl.appendChild(li);
 });
+
+// Shipping linked to previously selected country
+const savedCountry = localStorage.getItem("shippingCountry");
+if (savedCountry) {
+document.getElementById("country").value = savedCountry;
+}
 
 function updateTotals() {
 
@@ -214,17 +227,10 @@ const shipping = shippingPrices[country] || 0;
 const vat = subtotal * 0.21;
 const total = subtotal + shipping + vat;
 
-document.getElementById("subtotal").textContent = "€" + subtotal.toFixed(2);
-document.getElementById("shipping").textContent = "€" + shipping.toFixed(2);
-document.getElementById("vat").textContent = "€" + vat.toFixed(2);
-document.getElementById("total").textContent = "€" + total.toFixed(2);
-
-document.getElementById("order-details").value =
-orderText +
-`\nSubtotal: €${subtotal.toFixed(2)}
-Shipping: €${shipping.toFixed(2)}
-VAT: €${vat.toFixed(2)}
-Total: €${total.toFixed(2)}`;
+document.getElementById("subtotal").textContent = `€${subtotal.toFixed(2)}`;
+document.getElementById("shipping").textContent = `€${shipping.toFixed(2)}`;
+document.getElementById("vat").textContent = `€${vat.toFixed(2)}`;
+document.getElementById("total").textContent = `€${total.toFixed(2)}`;
 }
 
 document.getElementById("country").addEventListener("change", updateTotals);
