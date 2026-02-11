@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+body {
+    background: #0f172a;
+    color: #e2e8f0;
+    font-family: sans-serif;
+}
+.card {
+    background: #1e293b;
+    border-radius: 10px;
+    padding: 20px;
+}
+.input {
+    background: #0f172a;
+    border: 1px solid #334155;
+    padding: 10px;
+    border-radius: 6px;
+    width: 100%;
+}
+.input:focus {
+    outline: none;
+    border-color: #3b82f6;
+}
+</style>
+</head>
+<body class="p-6">
+
+<h1 class="text-3xl font-bold mb-8 text-center">Checkout</h1>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+
+    <!-- ORDER SUMMARY -->
+    <div class="card">
+        <h2 class="text-xl font-bold mb-4">Order Summary</h2>
+        <ul id="checkout-items" class="space-y-2 mb-4"></ul>
+
+        <div class="border-t border-slate-600 pt-4 space-y-2">
+            <div class="flex justify-between">
+                <span>Subtotal</span>
+                <span id="subtotal">€0.00</span>
+            </div>
+            <div class="flex justify-between">
+                <span>Shipping</span>
+                <span id="shipping">€0.00</span>
+            </div>
+            <div class="flex justify-between">
+                <span>VAT (21%)</span>
+                <span id="vat">€0.00</span>
+            </div>
+            <div class="flex justify-between font-bold text-lg border-t border-slate-600 pt-2">
+                <span>Total</span>
+                <span id="total">€0.00</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- CUSTOMER FORM -->
+    <div class="card">
+        <h2 class="text-xl font-bold mb-4">Customer Information</h2>
+
+        <form id="checkout-form" class="space-y-4">
+
+            <input type="text" id="full-name" placeholder="Full Name" class="input" required>
+            <input type="email" id="email" placeholder="Email Address" class="input" required>
+            <input type="tel" id="phone" placeholder="Phone Number" class="input" required>
+            <textarea id="address" placeholder="Shipping Address" class="input" required></textarea>
+
+            <select id="country" class="input" required>
+                <option value="">Select Country</option>
+                <option value="NL">Netherlands</option>
+                <option value="BE">Belgium</option>
+                <option value="DE">Germany</option>
+                <option value="FR">France</option>
+                <option value="ES">Spain</option>
+                <option value="IT">Italy</option>
+                <option value="other">Other</option>
+            </select>
+
+            <div class="grid grid-cols-2 gap-4">
+                <input type="text" id="postal" placeholder="Postal Code" class="input" required>
+                <input type="text" id="city" placeholder="City" class="input" required>
+            </div>
+
+            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 py-3 rounded-lg font-bold">
+                Complete Order
+            </button>
+
+        </form>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const itemsEl = document.getElementById("checkout-items");
+
+    if (cart.length === 0) {
+        window.location.href = "cart.html";
+        return;
+    }
+
+    let subtotal = 0;
+
+    cart.forEach(item => {
+        const qty = item.quantity || 1;
+        const itemTotal = item.price * qty;
+        subtotal += itemTotal;
+
+        const li = document.createElement("li");
+        li.className = "flex justify-between border-b border-slate-600 pb-2";
+        li.innerHTML = `
+            <span>${item.name} (x${qty})</span>
+            <span>€${itemTotal.toFixed(2)}</span>
+        `;
+        itemsEl.appendChild(li);
+    });
+
+    function updateTotals() {
+        const country = document.getElementById("country").value;
+
+        const shippingPrices = {
+            NL: 15,
+            BE: 15,
+            DE: 20,
+            FR: 25,
+            ES: 30,
+            IT: 30,
+            other: 50
+        };
+
+        const shipping = shippingPrices[country] || 0;
+        const vat = subtotal * 0.21;
+        const total = subtotal + shipping + vat;
+
+        document.getElementById("subtotal").textContent = "€" + subtotal.toFixed(2);
+        document.getElementById("shipping").textContent = "€" + shipping.toFixed(2);
+        document.getElementById("vat").textContent = "€" + vat.toFixed(2);
+        document.getElementById("total").textContent = "€" + total.toFixed(2);
+    }
+
+    document.getElementById("country").addEventListener("change", updateTotals);
+    updateTotals();
+
+    document.getElementById("checkout-form").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        // Clear cart
+        localStorage.removeItem("cart");
+
+        // Redirect to confirmation page
+        window.location.href = "order-confirmation.html";
+    });
+
+});
+</script>
+
+</body>
+</html>
