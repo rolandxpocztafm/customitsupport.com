@@ -106,6 +106,7 @@ class="space-y-4">
 <input type="hidden" name="_next" value="https://customitsupport.com/shop/order-confirmation.html">
 <input type="hidden" name="Cart Items" id="cart-data">
 <input type="hidden" name="Order Summary" id="order-summary">
+<input type="hidden" name="Order ID" id="order-id">
 
 <div>
 <label class="block text-sm mb-2">Full Name</label>
@@ -234,10 +235,37 @@ document.getElementById("vat").textContent = `€${vat.toFixed(2)}`;
 document.getElementById("total").textContent = `€${total.toFixed(2)}`;
 }
 
+function generateOrderID() {
+const now = new Date();
+const day = String(now.getDate()).padStart(2, "0");
+const month = String(now.getMonth() + 1).padStart(2, "0");
+const year = now.getFullYear();
+
+const todayKey = day + month + year;
+
+let counter = parseInt(localStorage.getItem("dailyOrderCounter")) || 0;
+const lastDate = localStorage.getItem("lastOrderDate");
+
+if (lastDate !== todayKey) {
+counter = 0;
+}
+
+counter += 1;
+
+localStorage.setItem("dailyOrderCounter", counter);
+localStorage.setItem("lastOrderDate", todayKey);
+
+return todayKey + "-" + String(counter).padStart(2, "0");
+}
+
 document.getElementById("country").addEventListener("change", updateTotals);
 updateTotals();
 
 document.getElementById("checkout-form").addEventListener("submit", function() {
+
+const orderID = generateOrderID();
+document.getElementById("order-id").value = orderID;
+localStorage.setItem("lastOrderID", orderID);
 
 let cartText = "";
 cart.forEach(item => {
