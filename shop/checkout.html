@@ -7,6 +7,7 @@
 
 <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/feather-icons"></script>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
@@ -40,31 +41,47 @@ body {
 
 <body>
 
+<nav class="bg-slate-900 border-b border-slate-700">
+<div class="container mx-auto px-6 py-4 flex justify-between items-center">
+<div class="flex items-center">
+<i data-feather="cpu" class="w-8 h-8 text-blue-500 mr-3"></i>
+<a href="index.html" class="text-xl font-bold text-white">
+Custom IT Support Mining
+</a>
+</div>
+<a href="cart.html" class="text-slate-300 hover:text-white">
+<i data-feather="arrow-left"></i>
+</a>
+</div>
+</nav>
+
 <section class="py-16">
 <div class="container mx-auto px-4 max-w-6xl">
-
 <h1 class="text-3xl font-bold mb-8 text-center">Checkout</h1>
 
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
 <!-- ORDER SUMMARY -->
 <div class="content-card p-6">
-<h2 class="text-xl font-bold mb-6">Order Summary</h2>
+<h2 class="text-xl font-bold mb-6 flex items-center">
+<i data-feather="shopping-cart" class="w-5 h-5 mr-2"></i>
+Order Summary
+</h2>
 
 <ul id="checkout-items" class="space-y-4 mb-6"></ul>
 
-<div class="border-t border-slate-700 pt-4 space-y-2">
-<div class="flex justify-between">
+<div class="border-t border-slate-700 pt-4">
+<div class="flex justify-between mb-2">
 <span class="text-slate-400">Subtotal:</span>
 <span id="subtotal">€0.00</span>
 </div>
 
-<div class="flex justify-between">
+<div class="flex justify-between mb-2">
 <span class="text-slate-400">Shipping:</span>
 <span id="shipping">€0.00</span>
 </div>
 
-<div class="flex justify-between">
+<div class="flex justify-between mb-2">
 <span class="text-slate-400">VAT (21%):</span>
 <span id="vat">€0.00</span>
 </div>
@@ -76,22 +93,22 @@ body {
 </div>
 </div>
 
-<!-- CUSTOMER FORM -->
+<!-- FORM -->
 <div class="content-card p-6">
 
-<h2 class="text-xl font-bold mb-6">Customer Information</h2>
+<h2 class="text-xl font-bold mb-6 flex items-center">
+<i data-feather="user" class="w-5 h-5 mr-2"></i>
+Customer Information
+</h2>
 
-<form 
-action="https://formsubmit.co/rp@customitsupport.com" 
+<form id="checkout-form"
+action="https://formsubmit.co/rp@customitsupport.com"
 method="POST"
 class="space-y-4">
 
-<!-- Redirect after submission -->
+<input type="hidden" name="_subject" value="New Order - Custom IT Support Mining">
 <input type="hidden" name="_next" value="order-confirmation.html">
-<input type="hidden" name="_captcha" value="false">
-
-<!-- Hidden order summary field -->
-<textarea name="Order Details" id="order-details" hidden></textarea>
+<input type="hidden" name="_captcha" value="true">
 
 <div>
 <label class="block text-sm mb-2">Full Name</label>
@@ -99,7 +116,7 @@ class="space-y-4">
 </div>
 
 <div>
-<label class="block text-sm mb-2">Email Address</label>
+<label class="block text-sm mb-2">Email</label>
 <input type="email" name="Email" class="w-full p-3 rounded-lg form-input" required>
 </div>
 
@@ -109,13 +126,13 @@ class="space-y-4">
 </div>
 
 <div>
-<label class="block text-sm mb-2">Shipping Address</label>
+<label class="block text-sm mb-2">Address</label>
 <textarea name="Address" rows="3" class="w-full p-3 rounded-lg form-input" required></textarea>
 </div>
 
 <div>
 <label class="block text-sm mb-2">Country</label>
-<select name="Country" id="country" class="w-full p-3 rounded-lg form-input" required>
+<select id="country" name="Country" class="w-full p-3 rounded-lg form-input" required>
 <option value="">Select Country</option>
 <option value="NL">Netherlands</option>
 <option value="BE">Belgium</option>
@@ -127,28 +144,26 @@ class="space-y-4">
 </select>
 </div>
 
-<div class="grid grid-cols-2 gap-4">
-<input type="text" name="Postal Code" placeholder="Postal Code" class="p-3 rounded-lg form-input" required>
-<input type="text" name="City" placeholder="City" class="p-3 rounded-lg form-input" required>
-</div>
-
-<!-- PAYMENT METHOD -->
-<h2 class="text-xl font-bold mt-8 mb-6">Payment Method</h2>
+<!-- PAYMENT -->
+<h2 class="text-xl font-bold mt-8 mb-6 flex items-center">
+<i data-feather="credit-card" class="w-5 h-5 mr-2"></i>
+Payment Method
+</h2>
 
 <div class="space-y-3">
 <label class="flex items-center">
 <input type="radio" name="Payment Method" value="iDEAL" class="mr-3" checked>
-iDEAL
+<i data-feather="credit-card" class="w-4 h-4 mr-2"></i> iDEAL
 </label>
 
 <label class="flex items-center">
 <input type="radio" name="Payment Method" value="Bank Transfer" class="mr-3">
-Bank Transfer
+<i data-feather="bank" class="w-4 h-4 mr-2"></i> Bank Transfer
 </label>
 
 <label class="flex items-center">
 <input type="radio" name="Payment Method" value="Cash on Delivery" class="mr-3">
-Cash on Delivery
+<i data-feather="dollar-sign" class="w-4 h-4 mr-2"></i> Cash on Delivery
 </label>
 </div>
 
@@ -158,7 +173,6 @@ Complete Order
 </button>
 
 </form>
-
 </div>
 </div>
 </div>
@@ -171,103 +185,59 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const cart = JSON.parse(localStorage.getItem("cart")) || [];
 if (cart.length === 0) {
-    window.location.href = "cart.html";
-    return;
+window.location.href = "cart.html";
+return;
 }
 
 const itemsEl = document.getElementById("checkout-items");
 let subtotal = 0;
 
 cart.forEach(item => {
-    const qty = item.quantity || 1;
-    const totalItem = item.price * qty;
-    subtotal += totalItem;
+const qty = item.quantity || 1;
+const totalItem = item.price * qty;
+subtotal += totalItem;
 
-    const li = document.createElement("li");
-    li.className = "flex justify-between border-b border-slate-700 pb-2";
-    li.innerHTML = `
-        <span>${item.name} (x${qty})</span>
-        <span>€${totalItem.toFixed(2)}</span>
-    `;
-    itemsEl.appendChild(li);
+const li = document.createElement("li");
+li.className = "flex justify-between border-b border-slate-700 pb-2";
+li.innerHTML = `<span>${item.name} (x${qty})</span>
+<span>€${totalItem.toFixed(2)}</span>`;
+itemsEl.appendChild(li);
 });
 
+// Shipping linked to previously selected country
 const savedCountry = localStorage.getItem("shippingCountry");
 if (savedCountry) {
-    document.getElementById("country").value = savedCountry;
+document.getElementById("country").value = savedCountry;
 }
 
 function updateTotals() {
 
-    const shippingPrices = {
-        NL: 15,
-        BE: 15,
-        DE: 20,
-        FR: 25,
-        ES: 30,
-        IT: 30,
-        other: 50
-    };
+const shippingPrices = {
+NL: 15,
+BE: 15,
+DE: 20,
+FR: 25,
+ES: 30,
+IT: 30,
+other: 50
+};
 
-    const country = document.getElementById("country").value;
-    const shipping = shippingPrices[country] || 0;
-    const vat = subtotal * 0.21;
-    const total = subtotal + shipping + vat;
+const country = document.getElementById("country").value;
+const shipping = shippingPrices[country] || 0;
+const vat = subtotal * 0.21;
+const total = subtotal + shipping + vat;
 
-    document.getElementById("subtotal").textContent = `€${subtotal.toFixed(2)}`;
-    document.getElementById("shipping").textContent = `€${shipping.toFixed(2)}`;
-    document.getElementById("vat").textContent = `€${vat.toFixed(2)}`;
-    document.getElementById("total").textContent = `€${total.toFixed(2)}`;
-
-    return { shipping, vat, total };
+document.getElementById("subtotal").textContent = `€${subtotal.toFixed(2)}`;
+document.getElementById("shipping").textContent = `€${shipping.toFixed(2)}`;
+document.getElementById("vat").textContent = `€${vat.toFixed(2)}`;
+document.getElementById("total").textContent = `€${total.toFixed(2)}`;
 }
 
 document.getElementById("country").addEventListener("change", updateTotals);
 updateTotals();
 
-
-// 🔥 FIXED SUBMIT HANDLER
-document.getElementById("checkout-form").addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    const totals = updateTotals();
-
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const form = this;
-
-    // Build order details
-    let itemsList = cart.map(item =>
-        `${item.name} x ${item.quantity} - €${(item.price * item.quantity).toFixed(2)}`
-    ).join("\n");
-
-    const orderDetails = `
-Items:
-${itemsList}
-
-Subtotal: €${subtotal.toFixed(2)}
-Shipping: €${totals.shipping.toFixed(2)}
-VAT: €${totals.vat.toFixed(2)}
-Total: €${totals.total.toFixed(2)}
-    `;
-
-    // Inject hidden field
-    const hidden = document.createElement("input");
-    hidden.type = "hidden";
-    hidden.name = "Order Details";
-    hidden.value = orderDetails;
-
-    form.appendChild(hidden);
-
-    // Clear cart BEFORE submit
-    localStorage.removeItem("cart");
-    localStorage.removeItem("shippingCountry");
-
-    // Submit form
-    form.submit();
-});
 });
 </script>
-
 
 </body>
 </html>
